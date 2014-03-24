@@ -39,12 +39,12 @@ require('./app/routes.js')(app, passport);
 
 //sockets
 
-var Post = require('./app/models/message');
+var Message = require('./app/models/message');
 
 app.io.route('connect', function(req){
   console.log('yay online!');
   var fetch = [];
-  Post.find({}, {meta: 1, _id: 0}, function(err, posts) {
+  Message.find({}, {meta: 1, _id: 0}, function(err, posts) {
     if(err) {
       return err;
     } else {
@@ -68,19 +68,19 @@ app.io.route('send-post', function(req){
   req.io.broadcast('update-tiles', req.data);
   req.io.emit('update-tiles', req.data);
   var postMeta = new Meta();
-  var newPost = new Post();
+  var newMessage = new Message();
 
-  console.log(newPost);
+  console.log(newMessage);
 
-  newPost.meta.timePassed = postMeta.getDate();
-  newPost.meta.timePosted = postMeta.getTime();
-  newPost.meta.content = req.data.message;
-  newPost.meta.user = req.data.uid;
-  newPost.meta.location = postMeta.getLocation();
+  newMessage.meta.timePassed = postMeta.getDate();
+  newMessage.meta.timePosted = postMeta.getTime();
+  newMessage.meta.content = req.data.message;
+  newMessage.meta.user = req.data.uid;
+  newMessage.meta.location = postMeta.getLocation();
 
-  console.log(newPost);
+  console.log(newMessage);
 
-  newPost.save(function (err) {
+  newMessage.save(function (err) {
     if (!err) {
       return console.log('new post saved to DB');
     } else {

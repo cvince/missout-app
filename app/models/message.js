@@ -4,7 +4,7 @@
 
 var mongoose = require('mongoose');
 
-var postSchema = mongoose.Schema({
+var msgSchema = mongoose.Schema({
   meta          : {
     time        : String,
     content     : String,
@@ -12,4 +12,4 @@ var postSchema = mongoose.Schema({
   }
 })
 
-module.exports = mongoose.model('Post', postSchema);
+module.exports = mongoose.model('Message', msgSchema);
