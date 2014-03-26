@@ -1,0 +1,14 @@
+gesturebar {
+  padding: 10rem;
+  border-top: 1rem solid #eaeaea;
+}
+gesturebar vote {
+  display: inline;
+  float: left;
+}
+gesturebar vote button:first-child {
+  margin-right: 10rem;
+}
+gesturebar button.comment {
+  float: right;
+}
