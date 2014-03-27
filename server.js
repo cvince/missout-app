@@ -1,57 +1,96 @@
-/* Import node modules */
-var express = require('express'),
-    mongoose = require('mongoose'), 
-    app = express();
+'use strict';
 
-/* Configuration */
-app.configure(function () {
+var express     = require('express.io');
+var cons        = require('consolidate');
+var app         = express().http().io();
+var port        = process.env.PORT || 8888;
+var mongoose    = require('mongoose');
+var passport    = require('passport');
+var flash       = require('connect-flash');
+var configDB    = require('./config/database.js');
+
+
+//helper modules
+var Meta        = require('./app/helpers/meta');
+
+mongoose.connect(configDB.url);
+
+require('./config/passport')(passport);
+
+app.configure(function(){
+
+  app.use(express.logger('dev'));
+  app.use(express.cookieParser());
   app.use(express.bodyParser());
-  app.use('/public', express.static(__dirname + '/public'));
+
+  app.engine('html', cons.handlebars);
+  app.set('view engine', 'html');
+
+  app.use(express.session({secret: process.env.CHAT_APP_SECRET}));
+  app.use(passport.initialize());
+  app.use(passport.session());
+  app.use(flash());
+
 });
 
-/* Connect to db */
-mongoose.connect('localhost', 'missout');
 
-/* Render the index */
-app.get('/', function (req, res) {
-  res.sendfile('app/views/index.html');
+//routes
+require('./app/routes.js')(app, passport);
+
+//sockets
+
+var Message = require('./app/models/message');
+
+app.io.route('connect', function(req){
+  console.log('yay online!');
+  var fetch = [];
+  Message.find({}, {meta: 1, _id: 0}, function(err, posts) {
+    if(err) {
+      return err;
+    } else {
+      fetch = posts;
+      for(var i in fetch){
+          if(fetch[i].meta.user&&fetch[i].meta.content){
+          var update = { uid: String, message: String};
+          update.uid = fetch[i].meta.user;
+          update.message = fetch[i].meta.content;
+          req.io.emit('update-tiles', update);
+        }
+      }
+    }
+  });
+  // req.io.emit('update-tiles')
 });
 
 
+app.io.route('send-post', function(req){
+  console.log(req.data);
+  req.io.broadcast('update-tiles', req.data);
+  req.io.emit('update-tiles', req.data);
+  var postMeta = new Meta();
+  var newMessage = new Message();
 
+  console.log(newMessage);
 
-///* Save a new geoMessage from form */
-//app.post('/', function (req, res) {
-//  var msg = new Message({
-//    body: req.body.msg,
-//    loc: {
-//      type: 'Point',
-//      coordinates: [ parseFloat(req.body.lon), parseFloat(req.body.lat) ]
-//    }
-//  });
-//  msg.save(function (err, msg) {
-//    if (err) {
-//      res.send(err);
-//    } else {
-//      //res.send(msg);
-//      Message.find({
-//        loc: {
-//          $nearSphere: msg.loc.coordinates,
-//          $maxDistance: 0.01
-//        }
-//      },
-//      function (err, docs) {
-//        if (err) {
-//          res.send(err);
-//        }
-//        res.send(docs);
-//      });
-//    }
-//  });
-//});
+  newMessage.meta.timePassed = postMeta.getDate();
+  newMessage.meta.timePosted = postMeta.getTime();
+  newMessage.meta.content = req.data.message;
+  newMessage.meta.user = req.data.uid;
+  newMessage.meta.location = postMeta.getLocation();
 
-/* Hey! Listen! */
-var port = process.env.PORT || 5000;
-app.listen(port, function () {
-  console.log('Listening on ' + port);
+  console.log(newMessage);
+
+  newMessage.save(function (err) {
+    if (!err) {
+      return console.log('new post saved to DB');
+    } else {
+      return console.log(err);
+    }
+  });
+
 });
+
+
+//listen
+app.listen(port);
+console.log('online at port '+port);

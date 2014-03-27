@@ -1,10 +1,4 @@
-Mongoose Geolocation Example
-============================
+user-auth
+=========
 
-A simple demonstration of a nearby search on a Mongo database where documents are indexed by their geolocation.
-
-You know the drill.
-
-`npm install`
-
-`node server.js`
+first user authentication for nodejs
