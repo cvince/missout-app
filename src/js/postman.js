@@ -22,8 +22,12 @@ function Postman (endpoint) {
       } else {
         return false;
       }
+    };
+    if (data) {
+      req.send(data);
+    } else {
+      req.send();
     }
-    req.send();
   };
   constructor.prototype.fetch = function () {
     return this.XHR('GET', null, url, true, function (data) {
