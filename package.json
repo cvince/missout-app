@@ -1,0 +1,36 @@
+{
+  "name": "user-authentication",
+  "version": "0.0.1",
+  "description": "User Authentication with Chat App",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cvince/user-auth.git"
+  },
+  "author": "Vincent Chan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cvince/user-auth/issues"
+  },
+  "homepage": "https://github.com/cvince/user-auth",
+  "dependencies": {
+    "ejs": "~0.8.5",
+    "mongoose": "~3.8.1",
+    "passport": "~0.1.17",
+    "passport-local": "~0.1.6",
+    "passport-facebook": "~1.0.2",
+    "passport-twitter": "~1.0.2",
+    "passport-google-oauth": "~0.1.5",
+    "connect-flash": "~0.1.1",
+    "bcrypt-nodejs": "latest"
+  },
+  "devDependencies": {
+    "consolidate": "^0.10.0",
+    "handlebars": "^2.0.0-alpha.2",
+    "express.io": "^1.1.13"
+  }
+}
