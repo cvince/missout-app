@@ -1,20 +1,20 @@
 module.exports = function (Schema, mongoose) {
   var UserSchema = new Schema({
     local         : {
-      email       : String,
-      password    : String
+      email       : { type: String },
+      password    : { type: String }
     },
     facebook      : {
-      id          : String,
-      token       : String,
-      email       : String,
-      name        : String
+      id          : { type: String },
+      token       : { type: String },
+      email       : { type: String },
+      name        : { type: String }
     },
     twitter       : {
-      id          : String,
-      token       : String,
-      displayName : String,
-      username    : String
+      id          : { type: String },
+      token       : { type: String },
+      displayName : { type: String },
+      username    : { type: String }
     },
     org           : { type: Schema.ObjectId },
     loc           : { type: {type: String}, coordinates: [] },
