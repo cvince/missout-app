@@ -79,6 +79,17 @@ module.exports = function (grunt) {
           'test/casper-results.xml' : ['test/casper/*.js']
         }
       }
+    },
+    simplemocha: {
+      test: {
+        src: ['test/mocha/**'],
+        options: {
+          reporter: 'spec',
+          slow: 200,
+          timeout: 1000,
+          node_env: 'test'
+        }
+      }
     }
   });
   grunt.loadNpmTasks('grunt-contrib-watch');
@@ -87,6 +98,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-casper');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-express-server');
+  grunt.loadNpmTasks('grunt-simple-mocha');
   grunt.registerTask('default', ['express:dev', 'watch', 'env:dev']);
   grunt.registerTask('test', ['env:test', 'express:test', 'casper:all']);
 };

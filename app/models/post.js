@@ -9,7 +9,6 @@ module.exports = function (Schema, mongoose) {
   var PostSchema = new Schema({
     timestamp : { type: Date },
     loc       : { type: Point, coordinates: [] },
-    org       : { type: Schema.ObjectID },
     author    : { type: Schema.ObjectID },
     body      : { type: String },
     comments  : [ Comment ],
