@@ -1,0 +1,119 @@
+MongoDB has the ability to store geoJSON and to make queries based on location. The possible applications for this are practically infinite. How can we take advantage of these features using the Mongoose ORM for Node.js? Let's look at a simple example application to experiment with storing and querying MongoDB documents based on geolocation.
+<br />
+<br />
+Our app is going to allow the user to post a message attached to a specific location, and also to view messages that have been posted near their current location. I'm starting out with a very minimal boilerplate server using the popular Express framework.
+<br />
+<pre class="prettyprint">
+/* Import node modules */
+var express = require('express'),
+    mongoose = require('mongoose'), 
+    app = express();
+
+/* Configuration */
+app.configure(function () {
+  app.use(express.bodyParser());
+  app.use('/public', express.static(__dirname + '/public'));
+});
+
+/* Render the message form */
+app.get('/', function (req, res) {
+  res.send('views/index.html');
+});
+
+/* Hey! Listen! */
+var port = process.env.PORT || 5000;
+app.listen(port, function () {
+  console.log('Listening on ' + port);
+});
+</pre>
+<br />
+Index.html is simply a web form with the following fields: msg (the message body), lon (longitude), and lat (latitude). The form will trigger a POST request to '/'. The Express body parser will allow us to capture these traditional web form params as JSON. We're going to use the HTML5 geolocation API on the client side to get the user's location and fill in the lon and lat form fields for them. Doing so only takes a few lines of code:
+<br />
+<pre class="prettyprint">
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(success, error);
+} else {
+  alert('Your browser does not support geolocation.');
+}
+function success (position) {
+  console.log(position);
+  var lat = document.getElementById('lat'),
+      lon = document.getElementById('lon');
+  lat.value = position.coords.latitude;
+  lon.value = position.coords.longitude;
+}
+function error (err) {
+  alert(err);
+}
+</pre>
+<br />
+Now, let's create our Mongoose model for our messages. We need to make sure it includes a location field that takes coordinates, and to index it using Mongo's 2dsphere API to ensure it is saved as a coordinate pair. I am saving the following in a file called models/message.js:
+<br />
+<pre class="prettyprint">
+module.exports = function (Schema, mongoose) {
+  var MessageSchema = new Schema({
+    body: { type: String },
+    loc: { type: { type: String }, coordinates: [ ] }
+  });
+  MessageSchema.index({ loc: '2dsphere' });
+  return mongoose.model('Message', MessageSchema);
+};
+</pre>
+<br />
+I can then set up the MongoDB database in my server file using the following syntax:
+<br />
+<pre class="prettyprint">
+/* Connect to db */
+mongoose.connect('localhost', 'geoJSON');
+var Schema = mongoose.Schema,
+    ObjectId = Schema.ObjectId,
+    Message = require('./models/message.js')(Schema, mongoose);
+</pre>
+<br />
+Now, all we need in order to save the user's messages is to define our POST route that will receive the form data and save a new geo-tagged message to the database. The coordinates come in from the form as strings, so it is necessary to parse them into numbers for proper storage.
+<br />
+<pre class="prettyprint">
+/* Save a new geoMessage from form */
+app.post('/', function (req, res) {
+  var msg = new Message({
+    body: req.body.msg,
+    loc: {
+      type: 'Point',
+      coordinates: [ parseFloat(req.body.lon), parseFloat(req.body.lat) ]
+    }
+  });
+  msg.save(function (err, msg) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(msg);
+    }
+  });
+});
+</pre>
+<br />
+If the data is persisted successfully, we will receive it as a response in JSON form. Now that our user is able to create a geo-tagged message, all that's left to do is to write the Mongoose query that will fetch nearby messages. To keep things simple, we're going to make this the response to our existing form post, since the user is already sending us their geolocation. Let's replace that 'res.send(msg);' with our Mongoose query:
+<br />
+<pre class="prettyprint">
+msg.save(function (err, msg) {
+  if (err) {
+    res.send(err);
+  } else {
+    //res.send(msg);
+    Message.find({ 
+      loc: { 
+        $nearSphere: msg.loc.coordinates,
+        $maxDistance: 0.01
+      }
+    }, 
+    function (err, docs) {
+      if (err) {
+        res.send(err);
+      }
+      res.send(docs);
+    });
+  }
+});
+</pre>
+<br />
+Now, we should be getting back a list of nearby message as a response to our post. And that's it! Try logging messages from a variety of locations and playing with the $maxDistance parameter to test this code. You can clone down a (slightly different) version of the project from my GitHub profile: <a href="https://github.com/tmlbl/mongoose-geolocation-example">https://github.com/tmlbl/mongoose-geolocation-example</a>

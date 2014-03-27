@@ -1,0 +1,34 @@
+div, h1, h3 {
+  padding-left: 10%;
+  padding-top: 2%;
+}
+
+body {
+  font-family: 'Comic Sans MS';
+  background-color: blue;
+}
+
+h1 {
+  color: yellow;
+}
+
+h3 {
+  color: white;
+}
+
+textarea, input {
+  border: 1px solid green;
+  background-color: black;
+  color: white;
+  padding: 2%;
+  font-family: 'Comic Sans MS';
+  width: 50%;
+}
+
+button {
+  border: 1px solid green;
+  background-color: black;
+  color: white;
+  padding: 2%;
+  font-family: 'Comic Sans MS';
+}
