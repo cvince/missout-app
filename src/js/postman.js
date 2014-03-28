@@ -1,4 +1,5 @@
 'use strict';
+/*global App*/
 
 /*
 -- App.postman --
@@ -9,8 +10,8 @@ argument when it is initialized.
 function Postman (endpoint) {
   var url = document.URL + endpoint,
     models;
-  function constructor () { }
-  constructor.prototype.XHR = function (method, data, url, async, cb) {
+  function Constructor () { }
+  Constructor.prototype.XHR = function (method, data, url, async, cb) {
     var req = new XMLHttpRequest();
     req.open(method, url, async);
     req.responseType = '';
@@ -27,15 +28,18 @@ function Postman (endpoint) {
     };
     req.send();
   };
-  constructor.prototype.fetch = function () {
+
+  Constructor.prototype.fetch = function () {
     return this.XHR('GET', null, url, true, function (data) {
       models = JSON.parse(data);
     });
   };
-  constructor.prototype.show = function () {
+
+  Constructor.prototype.show = function () {
     return models;
   };
-  return new constructor();
+
+  return new Constructor();
 }
 App.postman = new Postman('api/v1/posts');
 
