@@ -12,7 +12,8 @@ module.exports = function (Schema, mongoose) {
     author    : { type: Schema.ObjectID },
     body      : { type: String },
     comments  : [ Comment ],
-    tempname  : { type: String }
+    tempname  : { type: String },
+    tempnames : [{ type: String }]
   });
   return mongoose.model('Post', PostSchema);
 };
