@@ -1,21 +1,36 @@
 /* Import node modules */
 var express = require('express'),
-    mongoose = require('mongoose'), 
+    mongoose = require('mongoose'),
+    cons = require('consolidate'),
+    passport = require('passport'),
+    flash = require('connect-flash'),
     app = express();
 
 /* Configuration */
 app.configure(function () {
   app.use(express.bodyParser());
+  app.set('views', __dirname + '/app/views');
   app.use('/public', express.static(__dirname + '/public'));
+
+  //handlebars engine
+  app.engine('html', cons.handlebars);
+  app.set('view engine', 'html');
+
 });
 
 /* Connect to db */
 mongoose.connect('localhost', 'missout');
 
+/* Passport Strategies */
+require('./app/passport/passport')(passport);
+
+/* Get Routes */
+require('./app/routes/authenticate')(app, passport);
+
 /* Render the index */
-app.get('/', function (req, res) {
-  res.sendfile('app/views/index.html');
-});
+// app.get('/', function (req, res) {
+//   res.sendfile('app/views/index.html');
+// });
 
 
 
