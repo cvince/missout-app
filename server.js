@@ -16,6 +16,15 @@ app.configure(function () {
   app.engine('html', cons.handlebars);
   app.set('view engine', 'html');
 
+
+  //authentication uses
+  app.use(express.logger('dev'));
+  app.use(express.cookieParser());
+  app.use(express.bodyParser());
+  app.use(express.session({secret: process.env.CHAT_APP_SECRET}));
+  app.use(passport.initialize());
+  app.use(passport.session());
+  app.use(flash());
 });
 
 /* Connect to db */
