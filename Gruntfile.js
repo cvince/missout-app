@@ -76,7 +76,7 @@ module.exports = function (grunt) {
           test: true
         },
         files: {
-          'test/casper-results.xml' : ['test/casper/*.js']
+          'test/casper/results.xml' : ['test/casper/*.js']
         }
       }
     },

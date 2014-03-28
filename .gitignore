@@ -13,4 +13,8 @@ results
 
 npm-debug.log
 node_modules
+<<<<<<< HEAD
+=======
+test/casper/results.xml
+>>>>>>> e786d17b877d00ae04a4edb64288b1ea9c8c0cb4
 .idea/
