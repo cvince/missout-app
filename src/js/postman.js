@@ -28,14 +28,17 @@ function Postman (endpoint) {
     };
     req.send();
   };
+
   Constructor.prototype.fetch = function () {
     return this.XHR('GET', null, url, true, function (data) {
       models = JSON.parse(data);
     });
   };
+
   Constructor.prototype.show = function () {
     return models;
   };
+
   return new Constructor();
 }
 App.postman = new Postman('api/v1/posts');

@@ -7,7 +7,9 @@ module.exports = function (Schema, mongoose) {
     timestamp : { type: Date },
     tempname  : { type: String }
   });
-  var Comment = mongoose.model('Comment', CommentSchema);
+
+  var Comment = mongoose.model ('Comment', CommentSchema);
+
   var PostSchema = new Schema({
     timestamp : { type: Date },
     loc       : { type: Point, coordinates: [] },
@@ -16,5 +18,6 @@ module.exports = function (Schema, mongoose) {
     comments  : [ Comment ],
     tempname  : { type: String }
   });
+
   return mongoose.model('Post', PostSchema);
 };
