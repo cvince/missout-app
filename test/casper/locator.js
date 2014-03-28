@@ -1,4 +1,5 @@
 'use strict';
+/*global casper*/
 
 casper.test.begin('Locator', 3, function suite (test) {
 

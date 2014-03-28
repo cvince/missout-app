@@ -1,3 +1,5 @@
+'use strict';
+
 /*
 -- App.postman --
 Handles the fetching, storing and rendering of
@@ -22,7 +24,7 @@ function Postman (endpoint) {
       } else {
         return false;
       }
-    }
+    };
     req.send();
   };
   constructor.prototype.fetch = function () {
@@ -32,7 +34,7 @@ function Postman (endpoint) {
   };
   constructor.prototype.show = function () {
     return models;
-  }
+  };
   return new constructor();
 }
 App.postman = new Postman('api/v1/posts');

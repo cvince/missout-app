@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = function (Schema, mongoose) {
   var UserSchema = new Schema({
     local         : {

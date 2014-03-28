@@ -1,6 +1,8 @@
+'use strict';
+
 /* Import node modules */
 var express = require('express'),
-    mongoose = require('mongoose'), 
+    mongoose = require('mongoose'),
     app = express();
 
 /* Configuration */

@@ -1,3 +1,6 @@
+'use strict';
+/*global alert*/
+
 /*
 -- App.locator --
 Keeps track of the user's last known position.
@@ -43,6 +46,6 @@ function Locator () {
     return userLoc;
   };
   return new constructor();
-};
+}
 App.locator = new Locator();
 App.locator.getLoc();

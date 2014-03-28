@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = function (Schema, mongoose) {
   var CommentSchema = new Schema({
     author    : { type: Schema.ObjectID },

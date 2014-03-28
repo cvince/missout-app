@@ -1,3 +1,6 @@
+'use strict';
+/*global alert*/
+
 var App = {};
 /*
 -- App.locator --
