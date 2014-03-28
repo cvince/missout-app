@@ -1,23 +1,21 @@
 'use strict';
 
-var flash = require('connect-flash');
-
 module.exports = function(app, passport) {
 
 // normal routes ===============================================================
 
   // show the home page (will also have our login links)
-  app.get('/', function(req, res) {
-    res.render('login.html', {
-      partials: {
-        header: 'partials/header',
-        footer: 'partials/footer'
-      }
-    });
-  });
+  // app.get('/login', function(req, res) {
+  //   res.render('index.html', {
+  //     partials: {
+  //       header: 'partials/header',
+  //       footer: 'partials/footer'
+  //     }
+  //   });
+  // });
 
   // APP SECTION =========================
-  app.get('/app', isLoggedIn, function(req, res) {
+  app.get('/', isLoggedIn, function(req, res) {
     res.render('index.html', {
       user : req.user,
       partials: {
@@ -38,7 +36,7 @@ module.exports = function(app, passport) {
 // =============================================================================
 
   app.get('/login', function(req, res) {
-    res.render('login.html', { message: req.flash('loginMessage') ,
+    res.render('login.html', { message: 'asdf' ,
     partials:
     {
       header: 'partials/header',
@@ -48,7 +46,7 @@ module.exports = function(app, passport) {
 
   // process the login form
   app.post('/login', passport.authenticate('local-login', {
-    successRedirect : '/app', // redirect to the secure profile section
+    successRedirect : '/', // redirect to the secure profile section
     failureRedirect : '/login', // redirect back to the signup page if there is an error
     failureFlash : true // allow flash messages
   }));
@@ -66,7 +64,7 @@ module.exports = function(app, passport) {
 
   // process the signup form
   app.post('/signup', passport.authenticate('local-signup', {
-    successRedirect : '/app', // redirect to the secure profile section
+    successRedirect : '/', // redirect to the secure profile section
     failureRedirect : '/signup', // redirect back to the signup page if there is an error
     failureFlash : true // allow flash messages
   }));
@@ -79,8 +77,8 @@ module.exports = function(app, passport) {
   // handle the callback after facebook has authenticated the user
   app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
-      successRedirect : '/app',
-      failureRedirect : '/'
+      successRedirect : '/',
+      failureRedirect : '/login'
     }));
 
 // twitter --------------------------------
@@ -91,8 +89,8 @@ module.exports = function(app, passport) {
   // handle the callback after twitter has authenticated the user
   app.get('/auth/twitter/callback',
     passport.authenticate('twitter', {
-      successRedirect : '/app',
-      failureRedirect : '/'
+      successRedirect : '/',
+      failureRedirect : '/login'
     }));
 
 };
@@ -102,6 +100,6 @@ function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()){
     return next();
   }else{
-    res.redirect('/');
+    res.redirect('/login');
   }
 }

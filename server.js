@@ -1,3 +1,5 @@
+'use strict';
+
 /* Import node modules */
 var express = require('express'),
     mongoose = require('mongoose'),
@@ -34,7 +36,7 @@ mongoose.connect('localhost', 'missout');
 require('./app/passport/passport')(passport);
 
 /* Get Routes */
-require('./app/routes/authenticate')(app, passport);
+require('./app/routes/authenticate')(app, passport) ;
 
 /* Render the index */
 // app.get('/', function (req, res) {
