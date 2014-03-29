@@ -5,8 +5,9 @@ var express = require('express'),
     mongoose = require('mongoose'),
     cons = require('consolidate'),
     passport = require('passport'),
-    flash = require('connect-flash'),
     app = express();
+
+var     flash = require('connect-flash')
 
 /* Configuration */
 app.configure(function () {
@@ -24,8 +25,8 @@ app.configure(function () {
   app.use(express.session({secret: process.env.CHAT_APP_SECRET}));
   app.use(passport.initialize());
   app.use(passport.session());
-  app.use(flash());
   app.use(app.router);
+  app.use(flash());
 });
 
 /* Connect to db */
