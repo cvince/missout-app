@@ -7,6 +7,7 @@ var TwitterStrategy     = require('passport-twitter').Strategy;
 var User                = require('../models/user');
 var configAuth          = require('./auth');
 
+
 // expose this function to our app using module.exports
 module.exports = function(passport) {
   passport.serializeUser(function(user, done){
@@ -31,7 +32,7 @@ module.exports = function(passport) {
         if(err)
           return done(err);
         if(user){
-          return done(null, false);
+          return done(null, false, req.flash('signupMessage', 'that email is already taken'));
         }else{
           var newUser = new User();
           newUser.local.email = email;
@@ -56,10 +57,10 @@ module.exports = function(passport) {
         return done(err);
       }
       if(!user){
-        return done(null, false);
+        return done(null, false, req.flash('loginMessage', 'No user found.'));
       }
       if(!user.validPassword(password)){
-        return done(null, false);
+        return done(null, false, req.flash('loginMessage', 'oops! Wrong Password'));
       }
       return done(null, user);
     });
