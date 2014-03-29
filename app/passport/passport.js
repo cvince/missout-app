@@ -4,8 +4,8 @@
 var LocalStrategy       = require('passport-local').Strategy;
 var FacebookStrategy    = require('passport-facebook').Strategy;
 var TwitterStrategy     = require('passport-twitter').Strategy;
-var User                = require('../app/models/user');
-
+var User                = require('../models/user');
+var flash               = require('connect-flash');
 var configAuth          = require('./auth');
 
 // expose this function to our app using module.exports

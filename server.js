@@ -1,19 +1,34 @@
 'use strict';
 
 /* Import node modules */
-var express = require('express');
-var mongoose = require('mongoose');
-var app = express();
-var passport = require('passport');
+var express = require('express'),
+    mongoose = require('mongoose'),
+    cons = require('consolidate'),
+    passport = require('passport'),
+    flash = require('connect-flash'),
+    app = express();
 
 /* Configuration */
 app.configure(function () {
   app.use(express.json());
   app.use(express.cookieParser());
+  app.set('views', __dirname + '/app/views');
   app.use('/public', express.static(__dirname + '/public'));
+
+  //handlebars engine
+  app.engine('html', cons.handlebars);
+  app.set('view engine', 'html');
+
+  //authentication uses
+  app.use(express.logger('dev'));
+  app.use(express.session({secret: process.env.CHAT_APP_SECRET}));
+  app.use(passport.initialize());
+  app.use(passport.session());
+  app.use(flash());
   app.use(app.router);
 });
 
+/* Connect to db */
 app.configure('production', function(){
   mongoose.connect('localhost', 'missout');
 });
@@ -26,10 +41,16 @@ app.configure('test', function(){
   mongoose.connect('localhose', 'missout-test');
 });
 
+/* Passport Strategies */
+require('./app/passport/passport')(passport);
+
+/* Get Routes */
+require('./app/routes/authenticate')(app, passport);
+
 /* Render the index */
-app.get('/', function (req, res) {
-  res.sendfile('app/views/index.html');
-});
+// app.get('/', function (req, res) {
+//   res.sendfile('app/views/index.html');
+// });
 
 
 

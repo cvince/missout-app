@@ -1,12 +1,14 @@
 'use strict';
 
+var flash = require('connect-flash');
+
 module.exports = function(app, passport) {
 
 // normal routes ===============================================================
 
   // show the home page (will also have our login links)
   app.get('/', function(req, res) {
-    res.render('index.html', {
+    res.render('login.html', {
       partials: {
         header: 'partials/header',
         footer: 'partials/footer'
@@ -16,7 +18,7 @@ module.exports = function(app, passport) {
 
   // APP SECTION =========================
   app.get('/app', isLoggedIn, function(req, res) {
-    res.render('app.html', {
+    res.render('index.html', {
       user : req.user,
       partials: {
         header: 'partials/header',

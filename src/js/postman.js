@@ -26,7 +26,11 @@ function Postman (endpoint) {
         return false;
       }
     };
-    req.send();
+    if (data) {
+      req.send(data);
+    } else {
+      req.send();
+    }
   };
 
   Constructor.prototype.fetch = function () {
