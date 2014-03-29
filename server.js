@@ -11,6 +11,7 @@ var express = require('express'),
 /* Configuration */
 app.configure(function () {
   app.use(express.json());
+  app.use(express.urlencoded());
   app.use(express.cookieParser());
   app.set('views', __dirname + '/app/views');
   app.use('/public', express.static(__dirname + '/public'));
