@@ -1,4 +1,10 @@
+'use strict';
+
 var App = {};
+'use strict';
+/*global alert*/
+/*global App*/
+
 /*
 -- App.locator --
 Keeps track of the user's last known position.
@@ -17,10 +23,12 @@ Functions:
     lookup
  */
 function Locator () {
-  var userLoc = [],
-    lastLoc;
-  function constructor () { }
-  constructor.prototype.getLoc = function (cb) {
+  var userLoc = [];
+  var lastLoc;
+
+  function Constructor () { }
+
+  Constructor.prototype.getLoc = function (cb) {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function (position) {
         userLoc = [ position.coords.longitude,
@@ -37,16 +45,23 @@ function Locator () {
       alert('Your browser does not support geolocation.');
     }
   };
-  constructor.prototype.locAge = function () {
+
+  Constructor.prototype.locAge = function () {
     return Date.now() - lastLoc;
   };
-  constructor.prototype.showLoc = function () {
+
+  Constructor.prototype.showLoc = function () {
     return userLoc;
   };
-  return new constructor();
-};
+
+  return new Constructor();
+}
+
 App.locator = new Locator();
 App.locator.getLoc();
+'use strict';
+/*global App*/
+
 /*
 -- App.postman --
 Handles the fetching, storing and rendering of
@@ -56,8 +71,8 @@ argument when it is initialized.
 function Postman (endpoint) {
   var url = document.URL + endpoint,
     models;
-  function constructor () { }
-  constructor.prototype.XHR = function (method, data, url, async, cb) {
+  function Constructor () { }
+  Constructor.prototype.XHR = function (method, data, url, async, cb) {
     var req = new XMLHttpRequest();
     req.open(method, url, async);
     req.responseType = '';
@@ -71,20 +86,28 @@ function Postman (endpoint) {
       } else {
         return false;
       }
+    };
+    if (data) {
+      req.send(data);
+    } else {
+      req.send();
     }
-    req.send();
   };
-  constructor.prototype.fetch = function () {
+
+  Constructor.prototype.fetch = function () {
     return this.XHR('GET', null, url, true, function (data) {
       models = JSON.parse(data);
     });
   };
-  constructor.prototype.show = function () {
+
+  Constructor.prototype.show = function () {
     return models;
-  }
-  return new constructor();
+  };
+
+  return new Constructor();
 }
 App.postman = new Postman('api/v1/posts');
+
 
 // function microAjax(url, callbackFunction)
 // {

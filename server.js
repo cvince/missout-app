@@ -1,21 +1,57 @@
+'use strict';
+
 /* Import node modules */
 var express = require('express'),
-    mongoose = require('mongoose'), 
+    mongoose = require('mongoose'),
+    cons = require('consolidate'),
+    passport = require('passport'),
     app = express();
+
+var     flash = require('connect-flash')
 
 /* Configuration */
 app.configure(function () {
-  app.use(express.bodyParser());
+  app.use(express.json());
+  app.use(express.urlencoded());
+  app.use(express.cookieParser());
+  app.set('views', __dirname + '/app/views');
   app.use('/public', express.static(__dirname + '/public'));
+
+  //handlebars engine
+  app.engine('html', cons.handlebars);
+  app.set('view engine', 'html');
+
+  //authentication uses
+  app.use(express.session({secret: process.env.CHAT_APP_SECRET}));
+  app.use(passport.initialize());
+  app.use(passport.session());
+  app.use(app.router);
+  app.use(flash());
 });
 
 /* Connect to db */
-mongoose.connect('localhost', 'missout');
+app.configure('production', function(){
+  mongoose.connect('localhost', 'missout');
+});
+app.configure('development', function(){
+  mongoose.connect('localhost', 'missout-dev');
+  app.use(express.logger('dev'));
+  app.use(express.errorHandler());
+});
+app.configure('test', function(){
+  mongoose.connect('localhose', 'missout-test');
+});
+
+/* Passport Strategies */
+require('./app/passport/passport')(passport);
+
+/* Get Routes */
+require('./app/routes/authenticate')(app, passport) ;
 
 /* Render the index */
-app.get('/', function (req, res) {
-  res.sendfile('app/views/index.html');
-});
+// app.get('/', function (req, res) {
+//   res.sendfile('app/views/index.html');
+// });
 
 
 
@@ -51,7 +87,7 @@ app.get('/', function (req, res) {
 //});
 
 /* Hey! Listen! */
-var port = process.env.PORT || 5000;
+var port = process.env.PORT || process.argv[2] || 5000;
 app.listen(port, function () {
   console.log('Listening on ' + port);
 });

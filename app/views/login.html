@@ -1,0 +1,25 @@
+<!-- LOGIN FORM -->
+{{>header}}
+
+<div id="alert">
+  <span class="alert message">{{message}}</span>
+</div>
+
+<form action="/login" method="post">
+    <label>Email</label>
+    <input type="text" name="email">
+    <label>Password</label>
+    <input type="password" name="password">
+  <button type="submit">Login</button>
+</form>
+
+<h1>MissOut Authentication</h1>
+
+<p>Login or Register with:</p>
+
+<a href="/signup">Local Signup</a>
+<a href="/auth/facebook">Facebook</a>
+<a href="/auth/twitter">Twitter</a>
+
+
+{{>footer}}
