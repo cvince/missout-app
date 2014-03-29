@@ -1,3 +1,7 @@
+'use strict';
+/*global alert*/
+/*global App*/
+
 /*
 -- App.locator --
 Keeps track of the user's last known position.
@@ -16,10 +20,12 @@ Functions:
     lookup
  */
 function Locator () {
-  var userLoc = [],
-    lastLoc;
-  function constructor () { }
-  constructor.prototype.getLoc = function (cb) {
+  var userLoc = [];
+  var lastLoc;
+
+  function Constructor () { }
+
+  Constructor.prototype.getLoc = function (cb) {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function (position) {
         userLoc = [ position.coords.longitude,
@@ -36,13 +42,17 @@ function Locator () {
       alert('Your browser does not support geolocation.');
     }
   };
-  constructor.prototype.locAge = function () {
+
+  Constructor.prototype.locAge = function () {
     return Date.now() - lastLoc;
   };
-  constructor.prototype.showLoc = function () {
+
+  Constructor.prototype.showLoc = function () {
     return userLoc;
   };
-  return new constructor();
-};
+
+  return new Constructor();
+}
+
 App.locator = new Locator();
 App.locator.getLoc();

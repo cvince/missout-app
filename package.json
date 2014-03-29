@@ -21,8 +21,12 @@
     "superagent": "^0.17.0",
     "connect-flash": "^0.1.1",
     "consolidate": "^0.10.0",
+    "passport": "^0.2.0",
     "handlebars": "^2.0.0-alpha.2",
-    "passport": "^0.2.0"
+    "passport-local": "^1.0.0",
+    "passport-facebook": "^1.0.3",
+    "passport-twitter": "^1.0.2",
+    "bcrypt-nodejs": "0.0.3"
   },
   "devDependencies": {
     "grunt": "^0.4.4",
