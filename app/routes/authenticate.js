@@ -4,16 +4,6 @@ module.exports = function(app, passport) {
 
 // normal routes ===============================================================
 
-  // show the home page (will also have our login links)
-  // app.get('/login', function(req, res) {
-  //   res.render('index.html', {
-  //     partials: {
-  //       header: 'partials/header',
-  //       footer: 'partials/footer'
-  //     }
-  //   });
-  // });
-
   // APP SECTION =========================
   app.get('/', isLoggedIn, function(req, res) {
     res.render('index.html', {
@@ -54,6 +44,9 @@ module.exports = function(app, passport) {
   // SIGNUP =================================
   // show the signup form
   app.get('/signup', function(req, res) {
+
+    console.log(req.flash('signupMessage'))
+
     res.render('signup.html', { message: req.flash('signupMessage') ,
     partials:
     {
