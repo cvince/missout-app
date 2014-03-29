@@ -26,7 +26,9 @@ module.exports = function(app, passport) {
 // =============================================================================
 
   app.get('/login', function(req, res) {
-    res.render('login.html', { partials:
+
+    res.render('login.html', { message: req.flash('loginMessage') ,
+    partials:
     {
       header: 'partials/header',
       footer: 'partials/footer'
@@ -37,14 +39,15 @@ module.exports = function(app, passport) {
   app.post('/login', passport.authenticate('local-login', {
     successRedirect : '/', // redirect to the secure profile section
     failureRedirect : '/login', // redirect back to the signup page if there is an error
-    failureFlash : false // allow flash messages
+    failureFlash : true // allow flash messages
   }));
 
   // SIGNUP =================================
   // show the signup form
   app.get('/signup', function(req, res) {
 
-    res.render('signup.html', { partials:
+    res.render('signup.html', { message: req.flash('signupMessage') ,
+    partials:
     {
       header: 'partials/header',
       footer: 'partials/footer'
@@ -55,7 +58,7 @@ module.exports = function(app, passport) {
   app.post('/signup', passport.authenticate('local-signup', {
     successRedirect : '/', // redirect to the secure profile section
     failureRedirect : '/signup', // redirect back to the signup page if there is an error
-    failureFlash : false // allow flash messages
+    failureFlash : true // allow flash messages
   }));
 
 // facebook -------------------------------
