@@ -10,6 +10,11 @@ deltas for other behavior to fire them.
 Currently updates App.locator.getLoc(cb)
 depending on the geolocation mode
 
+Functions:
+  * startBeat() starts the setInterval beat
+  function
+  * stopBeat() stops the currently running
+  beat function
 */
 
 /*
@@ -31,7 +36,7 @@ Functions:
  */
 function Heartbeat () {
   var beatHandle;
-  var mode = '';
+  var geolocMode = 'rapid';
 
   var beat = function(){
     //console.log('beat');
@@ -41,12 +46,16 @@ function Heartbeat () {
   function Constructor() {}
 
   Constructor.prototype.startBeat = function(){
-    beatHandle = setInterval(beat, 1000);
+    if(!beatHandle){
+      beatHandle = setInterval(beat, 1000);
+      console.log('beat function started');
+    }
   };
 
   Constructor.prototype.stopBeat = function(){
     if(beatHandle){
       clearInterval(beatHandle);
+      beatHandle = null;
     }
   };
 
