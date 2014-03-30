@@ -2,6 +2,60 @@
 
 var App = {};
 'use strict';
+/*global App*/
+
+/*
+-- App.heartbeat --
+Acts as a controller for update behavior.
+Responsible for all periodic front-end behavior.
+Runs 1 second setTimeout loop and checks time
+deltas for other behavior to fire them.
+Currently updates App.locator.getLoc(cb)
+depending on the geolocation mode
+
+Functions:
+  * startBeat() starts the setInterval beat
+  function
+  * stopBeat() stops the currently running
+  beat function
+*/
+function Heartbeat () {
+  var beatHandle;
+  var geolocMode = 'rapid';
+  var rapidGeolocFreq = 5000;
+
+  var beat = function(){
+    //geoloc handler
+    if(geolocMode === 'rapid'){
+      var locAge = App.locator.locAge();
+      if(!(locAge > 0 && locAge <= rapidGeolocFreq)){
+        //App.locator.getLoc(function(loc){console.log(loc);});
+      }
+    }
+  };
+
+  function Constructor() {}
+
+  Constructor.prototype.startBeat = function(){
+    if(!beatHandle){
+      beatHandle = setInterval(beat, 1000);
+      console.log('beat function started');
+    }
+  };
+
+  Constructor.prototype.stopBeat = function(){
+    if(beatHandle){
+      clearInterval(beatHandle);
+      beatHandle = null;
+    }
+  };
+
+  return new Constructor();
+}
+
+App.heartbeat = new Heartbeat();
+App.heartbeat.startBeat();
+'use strict';
 /*global alert*/
 /*global App*/
 
@@ -21,37 +75,67 @@ Functions:
   * showLoc() Simply returns the stored
     coordinates without performing another
     lookup
+  * locStatus() returns object with bool of
+    location validity and the location accuracy
  */
 function Locator () {
-  var userLoc = [];
-  var lastLoc;
+  var userLoc = {
+    lat: null,
+    lon: null,
+    accuracy: null,
+    timestamp: null
+  };
+  var lastGoodLoc;
+  var maximumAccuracy = 1000;
+  var positionOptions = {
+    enableHighAccuracy: false,
+    timeout: 3000,
+    maximumAge: 10000
+  };
 
   function Constructor () { }
 
-  Constructor.prototype.getLoc = function (cb) {
+  Constructor.prototype.getLoc = function (cb, maxAge, maxAccuracy) {
+    if(maxAge){ positionOptions.maximumAge = maxAge; }
+    if(maxAccuracy){ maximumAccuracy = maxAccuracy; }
+
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        userLoc = [ position.coords.longitude,
-          position.coords.latitude ];
-        lastLoc = position.timestamp;
-        if (cb) {
-          cb(userLoc);
-        }
-      }, function (error) {
-        console.log(error);
-        alert('There was an error getting your location.');
-      });
+      navigator.geolocation.getCurrentPosition(getPositionData, getPositionError, positionOptions);
     } else {
       alert('Your browser does not support geolocation.');
+    }
+
+    function getPositionData (position){
+      console.log(position);
+      userLoc = {
+        lat: position.coords.lattitude,
+        lon: position.coords.longitude,
+        accuracy: position.coords.accuracy,
+        timestamp: position.timestamp
+      };
+      if(userLoc.accuracy < maximumAccuracy){
+        //cache the last userLoc of sufficient accuracy
+        lastGoodLoc = userLoc;
+      }
+      if (cb) {
+        cb(userLoc);
+      }
+    }
+
+    function getPositionError (error){
+      console.log(error);
     }
   };
 
   Constructor.prototype.locAge = function () {
-    return Date.now() - lastLoc;
+    return Date.now() - userLoc.timestamp;
   };
 
   Constructor.prototype.showLoc = function () {
-    return userLoc;
+    return {
+      userLoc: userLoc,
+      lastGoodLoc: lastGoodLoc
+    };
   };
 
   return new Constructor();

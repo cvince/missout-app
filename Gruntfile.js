@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -50,9 +52,7 @@ module.exports = function (grunt) {
     concat: {
       dev: {
         src: [
-          'src/js/app.js',
-          'src/js/locator.js',
-          'src/js/postman.js'
+          'src/js/**/*'
         ],
         dest: 'public/app.js'
       }
