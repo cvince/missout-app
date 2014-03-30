@@ -16,31 +16,19 @@ Functions:
   * stopBeat() stops the currently running
   beat function
 */
-
-/*
--- App.locator --
-Keeps track of the user's last known position.
-Coordinates are stored in an array as follows:
-[ longitude, latitude ]
-A timestamp is also kept denoting the last
-time a geolocation was successfully fetched.
-Functions:
-  * getLoc(cb) Updates the user's geolocation
-    and takes a callback function which receives
-    the coordinates
-  * locAge() Returns time since last lookup in
-    seconds
-  * showLoc() Simply returns the stored
-    coordinates without performing another
-    lookup
- */
 function Heartbeat () {
   var beatHandle;
   var geolocMode = 'rapid';
+  var rapidGeolocFreq = 5000;
 
   var beat = function(){
-    //console.log('beat');
-
+    //geoloc handler
+    if(geolocMode === 'rapid'){
+      var locAge = App.locator.locAge();
+      if(!(locAge > 0 && locAge <= rapidGeolocFreq)){
+        //App.locator.getLoc(function(loc){console.log(loc);});
+      }
+    }
   };
 
   function Constructor() {}
