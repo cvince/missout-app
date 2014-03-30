@@ -16,7 +16,7 @@ module.exports = function (Schema, mongoose) {
     author    : { type: Schema.ObjectID },
     body      : { type: String },
     comments  : [ Comment ],
-    authname  : { type: String },
+    tempname  : { type: String },
     tempnames : [{ type: String }]
   });
 
