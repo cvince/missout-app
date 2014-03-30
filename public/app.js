@@ -154,35 +154,32 @@ all posts. The REST endpoint is passed as an
 argument when it is initialized.
  */
 function Postman (endpoint) {
-  var url = document.URL + endpoint,
-    models;
+  var url = endpoint,
+      models;
   function Constructor () { }
   Constructor.prototype.XHR = function (method, data, url, async, cb) {
     var req = new XMLHttpRequest();
     req.open(method, url, async);
+    req.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
     req.responseType = '';
     req.onload = function () {
       if (req.status >= 200 && req.status < 400) {
-        if (req.responseText) {
-          cb(req.responseText);
-        } else {
-          cb();
-        }
+        models = JSON.parse(req.responseText);
+        cb(models);
       } else {
         return false;
       }
     };
     if (data) {
-      req.send(data);
+      console.log(data);
+      req.send(JSON.stringify(data));
     } else {
       req.send();
     }
   };
 
-  Constructor.prototype.fetch = function () {
-    return this.XHR('GET', null, url, true, function (data) {
-      models = JSON.parse(data);
-    });
+  Constructor.prototype.fetch = function (cb) {
+    return this.XHR('GET', null, url, true, cb);
   };
 
   Constructor.prototype.show = function () {
@@ -191,7 +188,7 @@ function Postman (endpoint) {
 
   return new Constructor();
 }
-App.postman = new Postman('api/v1/posts');
+App.postman = new Postman('http://localhost:3000/api/v1/posts');
 
 
 // function microAjax(url, callbackFunction)

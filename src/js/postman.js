@@ -9,11 +9,12 @@ argument when it is initialized.
  */
 function Postman (endpoint) {
   var url = endpoint,
-    models;
+      models;
   function Constructor () { }
   Constructor.prototype.XHR = function (method, data, url, async, cb) {
     var req = new XMLHttpRequest();
     req.open(method, url, async);
+    req.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
     req.responseType = '';
     req.onload = function () {
       if (req.status >= 200 && req.status < 400) {
@@ -24,7 +25,8 @@ function Postman (endpoint) {
       }
     };
     if (data) {
-      req.send(data);
+      console.log(data);
+      req.send(JSON.stringify(data));
     } else {
       req.send();
     }
