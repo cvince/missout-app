@@ -47,6 +47,10 @@ require('./app/passport/passport')(passport);
 /* Get Routes */
 require('./app/routes/authenticate')(app, passport) ;
 
+var routeFactory = require('./app/routes/routeGenerator').routeFactory;
+routeFactory('/api/v1/users', '../models/user', app);
+routeFactory('/api/v1/posts', '../models/post', app);
+
 /* Render the index */
 // app.get('/', function (req, res) {
 //   res.sendfile('app/views/index.html');
