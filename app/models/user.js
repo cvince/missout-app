@@ -25,7 +25,7 @@ var userSchema = mongoose.Schema({
     username     : String
   },
   org: { type: Schema.ObjectId },
-  loc: { type: {type: String}, coordinates: {} },
+  loc: { type: {type: String}, coordinates: [] },
   lastloc: { type: Date },
   session: { type: String }
 

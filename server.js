@@ -39,7 +39,7 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 app.configure('test', function(){
-  mongoose.connect('localhose', 'missout-test');
+  mongoose.connect('localhost', 'missout-test');
 });
 
 /* Passport Strategies */
@@ -47,6 +47,9 @@ require('./app/passport/passport')(passport);
 
 /* Get Routes */
 require('./app/routes/authenticate')(app, passport) ;
+
+/* Post routes */
+require('./app/controllers/post.js')(app);
 
 /* Render the index */
 // app.get('/', function (req, res) {
