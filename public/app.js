@@ -1,6 +1,7 @@
 'use strict';
 
 var App = {};
+
 'use strict';
 /*global App*/
 
