@@ -38,7 +38,7 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 app.configure('test', function(){
-  mongoose.connect('localhose', 'missout-test');
+  mongoose.connect('localhost', 'missout-test');
 });
 
 /* Passport Strategies */

@@ -49,13 +49,15 @@ exports.routeFactory = function(route, objectPath, app, methodArray){
     if(!req.isAuthenticated()){
       res.send(403);
     }
+
     //needs validation
     var dbObject = new DbObject(req.body);
+
     dbObject.save(function(err, retObject){
       if(err){
         res.send(500, {'error': err});
       } else {
-        res.send(retObject);
+        res.send(200, retObject);
       }
     });
   };
