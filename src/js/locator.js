@@ -85,4 +85,3 @@ function Locator () {
 }
 
 App.locator = new Locator();
-App.locator.getLoc();
