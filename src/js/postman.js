@@ -40,6 +40,12 @@ function Postman (endpoint) {
     return models;
   };
 
+  Constructor.prototype.post = function(data, cb){
+    /* location functionality */
+    return this.XHR('POST', data, url, true, cb);
+
+  }
+
   return new Constructor();
 }
 App.postman = new Postman('http://localhost:3000/api/v1/posts');
