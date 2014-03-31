@@ -11,23 +11,19 @@ var data =  {
   // tempnames : [{ type: String }]
 }
 
-submit.addEventListener('click', function() {
-  data.body = messageOut.value.toString();
+submit.disabled = true;
 
+App.locator.getLoc(function (loc) {
 
-  App.locator.getLoc(function (loc) {
-    data.loc = loc;
-    App.postman.post(data, function (res) {
-      console.log('post ok to ' + res);
-    })
-  });
+  submit.disabled = false;
+  submit.addEventListener('click', function() {
+    data.body = messageOut.value.toString();
 
-}, false);
+      data.loc = loc;
+      App.postman.post(data, function (res) {
+        console.log('post ok, contents - ' + JSON.stringify(res));
+      })
 
+  }, false);
 
-messageOut.addEventListener('keypress', function (e) {
-  var key = e.which || e.keyCode;
-  if (key == 13) { // 13 is enter
-    submit.click();
-  }
 });
