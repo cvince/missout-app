@@ -2,6 +2,12 @@
 
 var App = {};
 
+/* location functionality */
+
+App.postman.XHR('POST', {}, 'api/v1/posts',function(){
+  console.log('posted');
+})
+
 'use strict';
 /*global App*/
 
