@@ -32,7 +32,7 @@ function Locator () {
   var maximumAccuracy = 1000;
   var positionOptions = {
     enableHighAccuracy: false,
-    timeout: 3000,
+    timeout: 10000,
     maximumAge: 10000
   };
 
