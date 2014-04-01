@@ -24,8 +24,11 @@ function Postman (endpoint) {
         return false;
       }
     };
+    req.onerror = function (err) {
+      console.log('XHR Error: ' + JSON.stringify(err));
+    };
     if (data) {
-      console.log(data);
+      console.log("bad data: " + JSON.stringify(data));
       req.send(JSON.stringify(data));
     } else {
       req.send();
@@ -40,15 +43,27 @@ function Postman (endpoint) {
     return models;
   };
 
-  Constructor.prototype.post = function(data, cb){
+  Constructor.prototype.post = function (data, cb) {
     /* location functionality */
     return this.XHR('POST', data, url, true, cb);
+  };
 
-  }
+  Constructor.prototype.newFeed = function (loc) {
+    console.log('data to newFeed function: ' + console.log(loc));
+    this.XHR('GET', [loc.lon, loc.lat], 'localhost:3000/api/v1/feed', true, function (posts) {
+        console.log('Received feed:' + JSON.stringify(posts));
+    });
+  };
 
   return new Constructor();
 }
 App.postman = new Postman('http://localhost:3000/api/v1/posts');
+// Receive the DOM event 'feed-location' and query the
+// feed endpoint
+document.addEventListener('new-location', function (e) {
+  console.log('data to new loc event ' + JSON.stringify(e.detail));
+  App.postman.newFeed(e.detail);
+});
 
 
 // function microAjax(url, callbackFunction)

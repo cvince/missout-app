@@ -15,8 +15,8 @@ A timestamp is also kept denoting the last
 time a geolocation was successfully fetched.
 Functions:
   * getLoc(cb) Updates the user's geolocation
-    and takes a callback function which receives
-    the coordinates
+    and fires the DOM event 'new-location' with
+    user's location
   * locAge() Returns time since last lookup in
     seconds
   * showLoc() Simply returns the stored
@@ -42,9 +42,15 @@ function Locator () {
 
   function Constructor () { }
 
-  Constructor.prototype.getLoc = function (cb, maxAge, maxAccuracy) {
-    if(maxAge){ positionOptions.maximumAge = maxAge; }
-    if(maxAccuracy){ maximumAccuracy = maxAccuracy; }
+  Constructor.prototype.getLoc = function (maxAge, maxAccuracy, cb) {
+    if (typeof arguments[0] === "function") {
+      cb = arguments[0];
+      maxAccuracy = 5000;
+      maxAge = 600000;
+    }
+    if (maxAge) {
+      positionOptions.maximumAge = maxAge;
+    }
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(getPositionData, getPositionError, positionOptions);
@@ -52,15 +58,17 @@ function Locator () {
       alert('Your browser does not support geolocation.');
     }
 
-    function getPositionData (position){
-      console.log(position);
+    function getPositionData (position) {
       userLoc = {
-        lat: position.coords.lattitude,
+        lat: position.coords.latitude,
         lon: position.coords.longitude,
         accuracy: position.coords.accuracy,
         timestamp: position.timestamp
       };
-      if(userLoc.accuracy < maximumAccuracy){
+      var event = new CustomEvent('new-location', { detail: userLoc });
+      document.dispatchEvent(event);
+      console.log(position);
+      if(userLoc.accuracy < maxAccuracy){
         //cache the last userLoc of sufficient accuracy
         lastGoodLoc = userLoc;
       }
@@ -116,8 +124,11 @@ function Postman (endpoint) {
         return false;
       }
     };
+    req.onerror = function (err) {
+      console.log('XHR Error: ' + JSON.stringify(err));
+    };
     if (data) {
-      console.log(data);
+      console.log("bad data: " + JSON.stringify(data));
       req.send(JSON.stringify(data));
     } else {
       req.send();
@@ -132,15 +143,27 @@ function Postman (endpoint) {
     return models;
   };
 
-  Constructor.prototype.post = function(data, cb){
+  Constructor.prototype.post = function (data, cb) {
     /* location functionality */
     return this.XHR('POST', data, url, true, cb);
+  };
 
-  }
+  Constructor.prototype.newFeed = function (loc) {
+    console.log('data to newFeed function: ' + console.log(loc));
+    this.XHR('GET', [loc.lon, loc.lat], 'localhost:3000/api/v1/feed', true, function (posts) {
+        console.log('Received feed:' + JSON.stringify(posts));
+    });
+  };
 
   return new Constructor();
 }
 App.postman = new Postman('http://localhost:3000/api/v1/posts');
+// Receive the DOM event 'feed-location' and query the
+// feed endpoint
+document.addEventListener('new-location', function (e) {
+  console.log('data to new loc event ' + JSON.stringify(e.detail));
+  App.postman.newFeed(e.detail);
+});
 
 
 // function microAjax(url, callbackFunction)
@@ -216,28 +239,31 @@ var messageOut = document.getElementById('message-out');
 var posts = document.getElementById('post-display');
 var submit = document.getElementById('submit-post');
 
+submit.addEventListener(function (e) {
+  console.log(e);
+});
+
 var data =  {
-  timestamp : new Date(),
+  timestamp : new Date()
   // author    : { type: Schema.ObjectId },
   // body      : {  },
   // comments  : [ Comment ],
   // tempname  : { type: String },
   // tempnames : [{ type: String }]
-}
+};
 
 submit.disabled = true;
 
 App.locator.getLoc(function (loc) {
-
+  console.log('data to page: ' + JSON.stringify(loc));
   submit.disabled = false;
   submit.addEventListener('click', function() {
+    var data = {};
     data.body = messageOut.value.toString();
-
-      data.loc = loc;
-      App.postman.post(data, function (res) {
-        console.log('post ok, contents - ' + JSON.stringify(res));
-      })
-
+    data.loc = { type: "Point", coordinates: [ loc.lon, loc.lat ] };
+    App.postman.post(data, function (res) {
+      console.log('post ok, contents - ' + JSON.stringify(res));
+    })
   }, false);
 
 });
