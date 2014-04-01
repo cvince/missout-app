@@ -52,12 +52,25 @@ exports.routeFactory = function(route, objectPath, app, methodArray){
 
     //needs validation
     var dbObject = new DbObject(req.body);
+<<<<<<< HEAD
+    console.log(req.body);
+    console.log(dbObject);
+=======
 
+>>>>>>> 010d98942c1218c06204ccc97afbffc879c53454
     dbObject.save(function(err, retObject){
       if(err){
+        console.log('err');
+        console.log(err);
         res.send(500, {'error': err});
       } else {
+<<<<<<< HEAD
+        console.log('retObject');
+        console.log(retObject);
+        res.send(retObject);
+=======
         res.send(200, retObject);
+>>>>>>> 010d98942c1218c06204ccc97afbffc879c53454
       }
     });
   };
@@ -98,5 +111,10 @@ exports.routeFactory = function(route, objectPath, app, methodArray){
     });
   };
   //set up the delete route
+<<<<<<< HEAD
   app.delete(route + '/:id', destroy);
 };
+=======
+  app.delete(route, destroy);
+};
+>>>>>>> 010d98942c1218c06204ccc97afbffc879c53454
