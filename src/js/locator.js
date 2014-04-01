@@ -9,6 +9,9 @@ Coordinates are stored in an array as follows:
 [ longitude, latitude ]
 A timestamp is also kept denoting the last
 time a geolocation was successfully fetched.
+Events:
+  * dispatches 'new-location' when a new geo
+    object is received
 Functions:
   * getLoc(cb) Updates the user's geolocation
     and fires the DOM event 'new-location' with

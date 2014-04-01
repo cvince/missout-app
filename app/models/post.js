@@ -14,7 +14,7 @@ var Comment = mongoose.model('Comment', CommentSchema);
 
 var PostSchema = new Schema({
   timestamp : { type: Date },
-  loc       : { type: { type: String }, coordinates: [] },
+  loc       : { type: { type: String, default: "Point" }, coordinates: [] },
   author    : { type: Schema.ObjectId },
   body      : { type: String },
   comments  : [ Comment ],
