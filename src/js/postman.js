@@ -8,8 +8,8 @@ all posts. The REST endpoint is passed as an
 argument when it is initialized.
  */
 function Postman (endpoint) {
-  var url = document.URL + endpoint,
-    models;
+  var url = endpoint,
+      models;
   function Constructor () { }
   Constructor.prototype.XHR = function (method, data, url, async, cb) {
     var req = new XMLHttpRequest();
@@ -18,35 +18,52 @@ function Postman (endpoint) {
     //req.responseType = '';
     req.onload = function () {
       if (req.status >= 200 && req.status < 400) {
-        if (req.responseText) {
-          cb(req.responseText);
-        } else {
-          cb();
-        }
+        models = JSON.parse(req.responseText);
+        cb(models);
       } else {
         return false;
       }
     };
+    req.onerror = function (err) {
+      console.log('XHR Error: ' + JSON.stringify(err));
+    };
     if (data) {
+      console.log("bad data: " + JSON.stringify(data));
       req.send(JSON.stringify(data));
     } else {
       req.send();
     }
   };
 
-  Constructor.prototype.fetch = function () {
-    return this.XHR('GET', null, url, true, function (data) {
-      models = JSON.parse(data);
-    });
+  Constructor.prototype.fetch = function (cb) {
+    return this.XHR('GET', null, url, true, cb);
   };
 
   Constructor.prototype.show = function () {
     return models;
   };
 
+  Constructor.prototype.post = function (data, cb) {
+    /* location functionality */
+    return this.XHR('POST', data, url, true, cb);
+  };
+
+  Constructor.prototype.newFeed = function (loc) {
+    console.log('data to newFeed function: ' + console.log(loc));
+    this.XHR('GET', [loc.lon, loc.lat], 'localhost:3000/api/v1/feed', true, function (posts) {
+        console.log('Received feed:' + JSON.stringify(posts));
+    });
+  };
+
   return new Constructor();
 }
-App.postman = new Postman('api/v1/posts');
+App.postman = new Postman('http://localhost:3000/api/v1/posts');
+// Receive the DOM event 'feed-location' and query the
+// feed endpoint
+document.addEventListener('new-location', function (e) {
+  console.log('data to new loc event ' + JSON.stringify(e.detail));
+  App.postman.newFeed(e.detail);
+});
 
 
 // function microAjax(url, callbackFunction)

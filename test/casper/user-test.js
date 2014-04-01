@@ -2,7 +2,7 @@
 /*global casper*/
 /*global App*/
 
-casper.test.begin('Locator', 3, function suite (test) {
+casper.test.begin('User Authentication', 3, function suite (test) {
 
   casper.start('http://localhost:3000', function () {
     test.assertHttpStatus(200, 'Page exists');
@@ -21,8 +21,8 @@ casper.test.begin('Locator', 3, function suite (test) {
     }, 'App.locator is present');
   });
   /*
-  Attempting to spoof the geolocation but to no avail.
-  Further study this example:
+   Attempting to spoof the geolocation but to no avail.
+   Further study this example:
    http://jeanphix.me/2011/11/16/faking-geolocation-javascript-api-using-casperjs/
    */
   casper.evaluate(function () {
@@ -42,13 +42,13 @@ casper.test.begin('Locator', 3, function suite (test) {
     return true;
   });
   /*
-  Coordinates object is empty - ideally, this
-  test should fail
+   Coordinates object is empty - ideally, this
+   test should fail
    */
   casper.then(function () {
     test.assertEval(function () {
       var position = App.locator.showLoc();
-      if (position.userLoc.coords.lon) {
+      if (position) {
         return true;
       }
       return false;

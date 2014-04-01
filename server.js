@@ -33,7 +33,7 @@ app.configure('production', function(){
   mongoose.connect('localhost', 'missout');
 });
 app.configure('development', function(){
-  mongoose.connect('localhost', 'missout-dev');
+  mongoose.connect('localhost', 'missout-test');
   app.use(express.logger('dev'));
   app.use(express.errorHandler());
 });
@@ -45,11 +45,15 @@ app.configure('test', function(){
 require('./app/passport/passport')(passport);
 
 /* Get Routes */
-require('./app/routes/authenticate')(app, passport) ;
+require('./app/routes/authenticate')(app, passport);
+
+/* Feed update API route */
+require('./app/controllers/feed.js')(app);
 
 var routeFactory = require('./app/routes/routeGenerator').routeFactory;
 routeFactory('/api/v1/users', '../models/user', app);
 routeFactory('/api/v1/posts', '../models/post', app);
+
 
 /* Render the index */
 // app.get('/', function (req, res) {
