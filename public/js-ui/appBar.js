@@ -1,16 +1,16 @@
 function AppBar() {
-	this.element = document.createElement("div");
-	this.element.setAttribute("class", "appBar");
+	this.element = document.createElement('div');
+	this.element.setAttribute('class', 'appBar');
 	this.displayContentItems();
 }
 
 AppBar.prototype.displayContentItems = function() {
-	this.backgroundImage = document.createElement("img");
-	this.backgroundImage.setAttribute("class", "appBarBackground");
-	this.backgroundImage.setAttribute("img", "/public/images/close_button.png");
+	this.backgroundImage = document.createElement('img');
+	this.backgroundImage.setAttribute('class', 'appBarBackground');
+	this.backgroundImage.setAttribute('img', '/public/images/close_button.png');
 	this.element.appendChild(this.backgroundImage);
-	this.buttonContainer = document.createElement("div");
-	this.buttonContainer.setAttribute("class", "appBarButtonContainer");
+	this.buttonContainer = document.createElement('div');
+	this.buttonContainer.setAttribute('class', 'appBarButtonContainer');
 	this.element.appendChild(this.buttonContainer);
 }
 

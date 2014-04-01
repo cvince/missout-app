@@ -5,15 +5,19 @@
   width: 95%;
   border: 1rem solid #eaeaea;
   overflow: hidden;
+  visibility: hidden;
   position: relative;
-  font-smoothing: subpixel-antialiased;
+  /*font-smoothing: subpixel-antialiased;*/
   transform: translate3d(0,0,0);
 }
 .post-wrap {
   position: relative;
+  overflow: hidden;
 }
 .post-wrap > li {
   float: left;
+  width: 100%;
+  position: relative;
   padding: 10rem;
   font: 16rem/24rem normal 'Dosis', sans-serif;
 }

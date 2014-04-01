@@ -1,19 +1,19 @@
 UtilityBar.prototype.drawerOpen = false;
 
 function UtilityBar() {
-	this.element = document.createElement("div");
-	this.element.setAttribute("id", "utilityBar");
-	this.element.setAttribute("class", "utilityBar");
+	this.element = document.createElement('div');
+	this.element.setAttribute('id', 'utilityBar');
+	this.element.setAttribute('class', 'utilityBar');
 	this.displayContentItems();
 }
 
 UtilityBar.prototype.displayContentItems = function() {
 	//drawer button
-	this.drawerButton = new ImageButton("/public/images/x.png");
-	this.drawerButton.element.setAttribute("class", "utilityBarDrawerButton");
+	this.drawerButton = new ImageButton('/public/images/x.png');
+	this.drawerButton.element.setAttribute('class', 'utilityBarDrawerButton');
 	this.element.appendChild(this.drawerButton.element);
-	this.drawerButton.normalStyle = "utilityBarDrawerButton";
-	this.drawerButton.mouseDownStyle = "utilityBarDrawerButton";
+	this.drawerButton.normalStyle = 'utilityBarDrawerButton';
+	this.drawerButton.mouseDownStyle = 'utilityBarDrawerButton';
 	this.drawerButton.onClicked = this.drawerButtonClicked;
 	addElementToDict(this.drawerButton.element, this.drawerButton);
 
@@ -47,9 +47,9 @@ UtilityBar.prototype.setTitle = function(title) {
 }
 
 UtilityBar.prototype.showBackButton = function() {
-	this.drawerButton.imageElement.setAttribute("src", "/public/images/back_button.png");
+	this.drawerButton.imageElement.setAttribute('src', '/public/images/back_button.png');
 }
 
 UtilityBar.prototype.showDrawerButton = function() {
-	this.drawerButton.imageElement.setAttribute("src", "/public/images/x.png");
+	this.drawerButton.imageElement.setAttribute('src', '/public/images/x.png');
 }

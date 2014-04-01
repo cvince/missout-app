@@ -3,7 +3,7 @@ Companion.prototype = new ContentPage();
 
 function Companion(url) {
 	ContentPage.call(this);
-	this.element.setAttribute("class", "companionPage");
+	this.element.setAttribute('class', 'companionPage');
 	// the request for the content to display the contents of the navigation drawer
 	ajax.makeRequest(url, this);
 }

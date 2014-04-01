@@ -213,9 +213,9 @@ button {
   bottom: 0rem;
   z-index: 100;
   width: 100%;
-  height: 60rem;
+  height: 40rem;
   background: #fff;
-  box-shadow: 0rem 0rem 5rem 1rem rgba(0, 0, 0, 0.25); }
+  box-shadow: 0rem 0rem 3rem 0rem rgba(0, 0, 0, 0.15); }
 
 .appBarBackground {
   position: absolute;
@@ -225,15 +225,15 @@ button {
 .appBarButton {
   position: absolute;
   display: block;
-  height: 50rem;
-  width: 50rem; }
+  height: 30rem;
+  width: 30rem; }
 
 .appBarButton .image {
   position: absolute;
   top: 5rem;
   left: 5rem;
-  height: 50rem;
-  width: 50rem; }
+  height: 30rem;
+  width: 30rem; }
 
 .appBarButtonContainer {
   position: absolute;
@@ -365,15 +365,19 @@ button {
   width: 95%;
   border: 1rem solid #eaeaea;
   overflow: hidden;
+  visibility: hidden;
   position: relative;
-  font-smoothing: subpixel-antialiased;
+  /*font-smoothing: subpixel-antialiased;*/
   transform: translate3d(0, 0, 0); }
 
 .post-wrap {
-  position: relative; }
+  position: relative;
+  overflow: hidden; }
 
 .post-wrap > li {
   float: left;
+  width: 100%;
+  position: relative;
   padding: 10rem;
   font: 16rem/24rem normal 'Dosis', sans-serif; }
 
@@ -531,8 +535,10 @@ nav[id^="pagination"] ul li.on {
 
 .utilityBarDrawerButton .image {
   position: absolute;
-  width: 40rem;
-  height: 40rem; }
+  top: 5rem;
+  left: 5rem;
+  width: 30rem;
+  height: 30rem; }
 
 .utilityBar .button {
   position: absolute;

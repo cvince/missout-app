@@ -1,11 +1,11 @@
-Button.prototype.normalStyle = "button";
-Button.prototype.mouseDownStyle = "buttonClicked";
+Button.prototype.normalStyle = 'button';
+Button.prototype.mouseDownStyle = 'buttonClicked';
 Button.prototype.onClicked;
 Button.prototype.x;
 
 function Button() {
-	this.element = document.createElement("div");
-	this.element.setAttribute("class", "button");
+	this.element = document.createElement('div');
+	this.element.setAttribute('class', 'button');
 	// addElementToDict(this.element, this);
 	// this.element.onclick = function()
 	// {
@@ -22,12 +22,12 @@ Button.prototype.onMouseDown = function(element, e) {
 	this.isMouseDown = true;
 	listeningForScrolling = true;
 	scrolling = false;
-	this.element.setAttribute("class", this.mouseDownStyle);
+	this.element.setAttribute('class', this.mouseDownStyle);
 	activeButton = this;
 }
 
 Button.prototype.onMouseUp = function(element, e) {
-	this.element.setAttribute("class", this.normalStyle);
+	this.element.setAttribute('class', this.normalStyle);
 	if (this.isMouseDown) {
 		if (this.onClicked) {
 			this.onClicked(this);
@@ -37,16 +37,16 @@ Button.prototype.onMouseUp = function(element, e) {
 }
 
 Button.prototype.onMouseOut = function(element, e) {
-	this.element.setAttribute("class", this.normalStyle);
+	this.element.setAttribute('class', this.normalStyle);
 }
 
 Button.prototype.onMouseOver = function(element, e) {
 	if (this.isMouseDown) {
-		this.element.setAttribute("class", this.mouseDownStyle);
+		this.element.setAttribute('class', this.mouseDownStyle);
 	}
 }
 
 Button.prototype.setLeft = function(left) {
 	this.x = left;
-	this.element.style.left = left + "rem";
+	this.element.style.left = left + 'rem';
 }

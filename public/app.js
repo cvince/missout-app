@@ -31,9 +31,9 @@ function drawPageElements() {
   appCanvas = new AppCanvas();
   navigationDrawer = new NavigationDrawer();
 
-  page = document.getElementById("body");
-  mainContentContainer = document.createElement("div");
-  mainContentContainer.setAttribute("id", "mainContentContainer");
+  page = document.getElementById('body');
+  mainContentContainer = document.createElement('div');
+  mainContentContainer.setAttribute('id', 'mainContentContainer');
   page.appendChild(mainContentContainer);
 
   utilityBar = new UtilityBar();
@@ -46,15 +46,20 @@ function drawPageElements() {
   feedPage = new FeedPage();
   appCanvas.pushContent(feedPage);
 
-  splashImage = document.createElement("img");
-  splashImage.setAttribute("class", "splashOpen");
-  splashImage.setAttribute("src", "/public/images/splash.png");
-  page.appendChild(this.splashImage);
-  setTimeout(splashFadeOut, 500);
+  splashImage = document.createElement('img');
+  splashImage.setAttribute('class', 'splashOpen');
+  splashImage.setAttribute('src', '/public/images/splash.png');
+  setTimeout(function(){
+    page.appendChild(this.splashImage);
+    setTimeout(splashFadeOut, 1500);
+    document.body.addEventListener('touchmove', function(e) { e.preventDefault(); }, false);
+    document.getElementById('navigationDrawer').addEventListener('touchmove', function(e) { e.stopPropagation(); }, false);
+    document.getElementById('appCanvas').addEventListener('touchmove', function(event){ event.stopPropagation(); }, false);
+  }, 100);
 }
 
 function addElementToDict(element, jsObject) {
-  element.setAttribute("guid", elementCount);
+  element.setAttribute('guid', elementCount);
   elements[elementCount] = jsObject;
   elementCount++;
 }
@@ -66,7 +71,7 @@ function initialize() {
 }
 
 function splashFadeOut() {
-  splashImage.setAttribute("class", "splashHide");
+  splashImage.setAttribute('class', 'splashHide');
   setTimeout(splashKill, 700);
 }
 
@@ -75,13 +80,13 @@ function splashKill() {
 }
 
 function clicked(element) {
-  elements[element.getAttribute("guid")].clicked();
+  elements[element.getAttribute('guid')].clicked();
 }
 
 function onMouseDown(element, event) {
   if (element != document) {
-      if (elements[element.getAttribute("guid")] != null) {
-          elements[element.getAttribute("guid")].onMouseDown(event);
+      if (elements[element.getAttribute('guid')] != null) {
+          elements[element.getAttribute('guid')].onMouseDown(event);
       }
   }
   else {
@@ -95,7 +100,7 @@ function onMouseUp(element, event)
       scrollView.onMouseUp(event);
   }
   else {
-    elements[element.getAttribute("guid")].onMouseUp(event);
+    elements[element.getAttribute('guid')].onMouseUp(event);
   }
 
   for (var item in elements) {
@@ -119,23 +124,23 @@ function onMouseMove(element, event) {
     }
   }
   else {
-    elements[element.getAttribute("guid")].onMouseMove(event);
+    elements[element.getAttribute('guid')].onMouseMove(event);
   }
 }
 
 function onMouseOut(element)
 {
-  elements[element.getAttribute("guid")].onMouseOut();
+  elements[element.getAttribute('guid')].onMouseOut();
 }
 
 function transitionCompleted()
 {
-  elements[this.getAttribute("guid")].transitionCompleted();
+  elements[this.getAttribute('guid')].transitionCompleted();
 }
 
 function onMouseOver(element)
 {
-  elements[element.getAttribute("guid")].onMouseOver();
+  elements[element.getAttribute('guid')].onMouseOver();
 }
 
 // document.addEventListener( 'touchstart' , function stopScrolling( touchEvent ) { touchEvent.preventDefault(); } , false );
@@ -143,11 +148,11 @@ function onMouseOver(element)
 
 var BrowserDetect = {
   init: function () {
-    this.browser = this.searchString(this.dataBrowser) || "An unknown browser";
+    this.browser = this.searchString(this.dataBrowser) || 'An unknown browser';
     this.version = this.searchVersion(navigator.userAgent)
       || this.searchVersion(navigator.appVersion)
-      || "an unknown version";
-    this.OS = this.searchString(this.dataOS) || "an unknown OS";
+      || 'an unknown version';
+    this.OS = this.searchString(this.dataOS) || 'an unknown OS';
   },
   searchString: function (data) {
     for (var i=0;i<data.length;i++) {
@@ -170,95 +175,95 @@ var BrowserDetect = {
   dataBrowser: [
     {
       string: navigator.userAgent,
-      subString: "Chrome",
-      identity: "Chrome"
+      subString: 'Chrome',
+      identity: 'Chrome'
     },
     {   string: navigator.userAgent,
-      subString: "OmniWeb",
-      versionSearch: "OmniWeb/",
-      identity: "OmniWeb"
+      subString: 'OmniWeb',
+      versionSearch: 'OmniWeb/',
+      identity: 'OmniWeb'
     },
     {
       string: navigator.vendor,
-      subString: "Apple",
-      identity: "Safari",
-      versionSearch: "Version"
+      subString: 'Apple',
+      identity: 'Safari',
+      versionSearch: 'Version'
     },
     {
       prop: window.opera,
-      identity: "Opera",
-      versionSearch: "Version"
+      identity: 'Opera',
+      versionSearch: 'Version'
     },
     {
       string: navigator.vendor,
-      subString: "iCab",
-      identity: "iCab"
+      subString: 'iCab',
+      identity: 'iCab'
     },
     {
       string: navigator.vendor,
-      subString: "KDE",
-      identity: "Konqueror"
+      subString: 'KDE',
+      identity: 'Konqueror'
     },
     {
       string: navigator.userAgent,
-      subString: "Firefox",
-      identity: "Firefox"
+      subString: 'Firefox',
+      identity: 'Firefox'
     },
     {
       string: navigator.vendor,
-      subString: "Camino",
-      identity: "Camino"
+      subString: 'Camino',
+      identity: 'Camino'
     },
     {   // for newer Netscapes (6+)
       string: navigator.userAgent,
-      subString: "Netscape",
-      identity: "Netscape"
+      subString: 'Netscape',
+      identity: 'Netscape'
     },
     {
       string: navigator.userAgent,
-      subString: "MSIE",
-      identity: "Explorer",
-      versionSearch: "MSIE"
+      subString: 'MSIE',
+      identity: 'Explorer',
+      versionSearch: 'MSIE'
     },
     {
       string: navigator.userAgent,
-      subString: "Gecko",
-      identity: "Mozilla",
-      versionSearch: "rv"
+      subString: 'Gecko',
+      identity: 'Mozilla',
+      versionSearch: 'rv'
     },
     {     // for older Netscapes (4-)
       string: navigator.userAgent,
-      subString: "Mozilla",
-      identity: "Netscape",
-      versionSearch: "Mozilla"
+      subString: 'Mozilla',
+      identity: 'Netscape',
+      versionSearch: 'Mozilla'
     }
   ],
   dataOS : [
     {
       string: navigator.platform,
-      subString: "Win",
-      identity: "Windows"
+      subString: 'Win',
+      identity: 'Windows'
     },
     {
       string: navigator.platform,
-      subString: "Mac",
-      identity: "Mac"
+      subString: 'Mac',
+      identity: 'Mac'
     },
     {
          string: navigator.userAgent,
-         subString: "iPhone",
-         identity: "iPhone/iPod"
+         subString: 'iPhone',
+         identity: 'iPhone/iPod'
       },
     {
       string: navigator.platform,
-      subString: "Linux",
-      identity: "Linux"
+      subString: 'Linux',
+      identity: 'Linux'
     }
   ]
 };
 BrowserDetect.init();
 
-isChromeOrSafari = BrowserDetect.browser == "Safari" || BrowserDetect.browser == "Chrome";
+isChromeOrSafari = BrowserDetect.browser == 'Safari' || BrowserDetect.browser == 'Chrome';
 
 setTimeout(function(){
   var elem = document.querySelector('[id^=post-]');

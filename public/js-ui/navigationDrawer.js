@@ -1,14 +1,14 @@
 function NavigationDrawer() {
-	this.element = document.createElement("div");
-	this.element.setAttribute("class", "navigationDrawerClosed");
-
+	this.element = document.createElement('div');
+	this.element.setAttribute('id', 'navigationDrawer');
+	this.element.setAttribute('class', 'navigationDrawerClosed');
 	this.drawerOpen = false;
 	this.getContentItems();
 }
 
 NavigationDrawer.prototype.getContentItems = function() {
 	// the request for the content to display the contents of the navigation drawer
-	ajax.makeRequest("/public/views/navigationDrawer.html", this);
+	ajax.makeRequest('/public/views/navigationDrawer.html', this);
 }
 
 NavigationDrawer.prototype.displayContentItems = function(innerHTML) {
@@ -23,18 +23,18 @@ NavigationDrawer.prototype.homeButtonClicked = function() {
 
 NavigationDrawer.prototype.open = function()
 {
-	navigationDrawer.element.style.left = "";
-	mainContentContainer.style.left = "";
-	navigationDrawer.element.setAttribute("class", "navigationDrawerOpen scrollable");
-	mainContentContainer.setAttribute("id", "mainContentContainerWithDrawerOpen");
+	navigationDrawer.element.style.left = '';
+	mainContentContainer.style.left = '';
+	navigationDrawer.element.setAttribute('class', 'navigationDrawerOpen scrollable');
+	mainContentContainer.setAttribute('id', 'mainContentContainerWithDrawerOpen');
 	this.drawerOpen = true;
 }
 
 NavigationDrawer.prototype.close = function()
 {
-	navigationDrawer.element.style.left = "";
-	mainContentContainer.style.left = "";
-	navigationDrawer.element.setAttribute("class", "navigationDrawerClosed");
-	mainContentContainer.setAttribute("id", "mainContentContainer");
+	navigationDrawer.element.style.left = '';
+	mainContentContainer.style.left = '';
+	navigationDrawer.element.setAttribute('class', 'navigationDrawerClosed');
+	mainContentContainer.setAttribute('id', 'mainContentContainer');
 	this.drawerOpen = false;
 }

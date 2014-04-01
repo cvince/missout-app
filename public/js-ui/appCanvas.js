@@ -7,16 +7,16 @@ AppCanvas.prototype.stackCount = 0;
 AppCanvas.prototype.readyForChange = true;
 
 function AppCanvas() {
-	this.element = document.createElement("div");
-	this.element.setAttribute("class", "appCanvas");
+	this.element = document.createElement('div');
+	this.element.setAttribute('id', 'appCanvas');
+	this.element.setAttribute('class', 'appCanvas scrollable');
+	this.contentA = document.createElement('div');
+	this.contentB = document.createElement('div');
+	this.modalContentA = document.createElement('div');
 
-	this.contentA = document.createElement("div");
-	this.contentB = document.createElement("div");
-	this.modalContentA = document.createElement("div");
-
-	this.contentA.setAttribute("class", "contentAreaCurrent");
-	this.contentB.setAttribute("class", "contentArea");
-	this.modalContentA.setAttribute("class", "contentAreaModalDown");
+	this.contentA.setAttribute('class', 'contentAreaCurrent scrollable');
+	this.contentB.setAttribute('class', 'contentArea');
+	this.modalContentA.setAttribute('class', 'contentAreaModalDown');
 
 	this.element.appendChild(this.contentA);
 	this.element.appendChild(this.contentB);
@@ -35,7 +35,7 @@ AppCanvas.prototype.presentModal = function(content) {
 	if (this.readyForChange) {
 		this.readyForChange = false;
 		this.modalContentA.appendChild(content.element);
-		this.modalContentA.setAttribute("class", "contentAreaModalUp");
+		this.modalContentA.setAttribute('class', 'contentAreaModalUp');
 		setTimeout(appCanvas.modalChange, 650);
 		this.modal = content;
 		this.hasModal = true;
@@ -45,7 +45,7 @@ AppCanvas.prototype.presentModal = function(content) {
 AppCanvas.prototype.dismissModal = function() {
 	if (this.readyForChange) {
 		this.readyForChange = false;
-		this.modalContentA.setAttribute("class", "contentAreaModalDown");
+		this.modalContentA.setAttribute('class', 'contentAreaModalDown');
 		setTimeout(appCanvas.modalChange, 650);
 		this.hasModal = false;
 	}
@@ -71,10 +71,10 @@ AppCanvas.prototype.pushContent = function(content) {
 		this.stackCount++;
 
 		if (this.currentContentArea == this.contentA) {
-			this.contentB.setAttribute("class", "contentAreaQueueForward");
+			this.contentB.setAttribute('class', 'contentAreaQueueForward');
 		}
 		else {
-			this.contentA.setAttribute("class", "contentAreaQueueForward");
+			this.contentA.setAttribute('class', 'contentAreaQueueForward');
 		}
 
 		setTimeout(appCanvas.internalPushContent, 100);
@@ -85,17 +85,17 @@ AppCanvas.prototype.internalPushContent = function() {
 	var content = appCanvas.stack[appCanvas.stackCount - 1];
 	appCanvas.topContent = content;
 	if (appCanvas.currentContentArea == appCanvas.contentA) {
-		// alert("pushingToB");
+		// alert('pushingToB');
 		appCanvas.contentB.appendChild(content.element);
-		appCanvas.contentB.setAttribute("class", "contentAreaCurrent");
-		appCanvas.contentA.setAttribute("class", "contentAreaForwardOut");
+		appCanvas.contentB.setAttribute('class', 'contentAreaCurrent');
+		appCanvas.contentA.setAttribute('class', 'contentAreaForwardOut');
 		appCanvas.currentContentArea = appCanvas.contentB;
 	}
 	else {
-		// alert("pushingToA");
+		// alert('pushingToA');
 		appCanvas.contentA.appendChild(content.element);
-		appCanvas.contentA.setAttribute("class", "contentAreaCurrent");
-		appCanvas.contentB.setAttribute("class", "contentAreaForwardOut");
+		appCanvas.contentA.setAttribute('class', 'contentAreaCurrent');
+		appCanvas.contentB.setAttribute('class', 'contentAreaForwardOut');
 		appCanvas.currentContentArea = appCanvas.contentA;
 	}
 
@@ -106,10 +106,10 @@ AppCanvas.prototype.popContent = function() {
 	if (this.readyForChange && 	appCanvas.stackCount > 1) {
 		this.readyForChange = false;
 		if (this.currentContentArea == this.contentA) {
-			this.contentB.setAttribute("class", "contentAreaQueueBackward");
+			this.contentB.setAttribute('class', 'contentAreaQueueBackward');
 		}
 		else {
-			this.contentA.setAttribute("class", "contentAreaQueueBackward");
+			this.contentA.setAttribute('class', 'contentAreaQueueBackward');
 		}
 
 		setTimeout(appCanvas.internalPopContent, 100);
@@ -122,10 +122,10 @@ AppCanvas.prototype.popToHome = function() {
 		this.poppingToHome = true;
 		this.readyForChange = false;
 		if (this.currentContentArea == this.contentA) {
-			this.contentB.setAttribute("class", "contentAreaQueueBackward");
+			this.contentB.setAttribute('class', 'contentAreaQueueBackward');
 		}
 		else {
-			this.contentA.setAttribute("class", "contentAreaQueueBackward");
+			this.contentA.setAttribute('class', 'contentAreaQueueBackward');
 		}
 
 		setTimeout(appCanvas.internalPopContent, 100);
@@ -150,14 +150,14 @@ AppCanvas.prototype.internalPopContent = function() {
 
 		if (appCanvas.currentContentArea == appCanvas.contentA) {
 			appCanvas.contentB.appendChild(contentToShow.element);
-			appCanvas.contentB.setAttribute("class", "contentAreaCurrent");
-			appCanvas.contentA.setAttribute("class", "contentAreaBackOut");
+			appCanvas.contentB.setAttribute('class', 'contentAreaCurrent');
+			appCanvas.contentA.setAttribute('class', 'contentAreaBackOut');
 			appCanvas.currentContentArea = appCanvas.contentB;
 		}
 		else {
 			appCanvas.contentA.appendChild(contentToShow.element);
-			appCanvas.contentA.setAttribute("class", "contentAreaCurrent");
-			appCanvas.contentB.setAttribute("class", "contentAreaBackOut");
+			appCanvas.contentA.setAttribute('class', 'contentAreaCurrent');
+			appCanvas.contentB.setAttribute('class', 'contentAreaBackOut');
 			appCanvas.currentContentArea = appCanvas.contentA;
 		}
 
@@ -171,19 +171,19 @@ function contentChanged() {
 	appCanvas.topContent.updateUtilityBar();
 	if (appCanvas.stack.length > 1) {
 		if (appCanvas.currentContentArea == appCanvas.contentA) {
-			appCanvas.contentB.setAttribute("class", "contentAreaOffScreen");
+			appCanvas.contentB.setAttribute('class', 'contentAreaOffScreen');
 			if (appCanvas.contentB.children.length > 0) {
 				appCanvas.contentB.removeChild(appCanvas.contentB.lastChild);
 			}
-			// alert("removeBContent");
+			// alert('removeBContent');
 
 		}
 		else {
-			appCanvas.contentA.setAttribute("class", "contentAreaOffScreen");
+			appCanvas.contentA.setAttribute('class', 'contentAreaOffScreen');
 			if (appCanvas.contentA.children.length > 0) {
 				appCanvas.contentA.removeChild(appCanvas.contentA.lastChild);
 			}
-			// alert("removeAContent");
+			// alert('removeAContent');
 
 		}
 	}
