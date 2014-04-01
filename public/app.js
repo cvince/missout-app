@@ -232,7 +232,6 @@ App.locator.getLoc(function (loc) {
   submit.disabled = false;
   submit.addEventListener('click', function() {
     data.body = messageOut.value.toString();
-
       data.loc = loc;
       App.postman.post(data, function (res) {
         console.log('post ok, contents - ' + JSON.stringify(res));
@@ -241,3 +240,5 @@ App.locator.getLoc(function (loc) {
   }, false);
 
 });
+
+

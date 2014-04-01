@@ -15,11 +15,15 @@ var Comment = mongoose.model('Comment', CommentSchema);
 var PostSchema = mongoose.Schema({
   timestamp : { type: Date },
   loc       : { type: { type: String }, coordinates: [] },
-  author    : { type: Schema.ObjectId },
+  author    : { type: Object },
   body      : { type: String },
   comments  : [ Comment ],
   tempname  : { type: String },
   tempnames : [{ type: String }]
 });
+
+PostSchema.methods.makeAuthor = function(id){
+  this.author = id;
+};
 
 module.exports = mongoose.model('Post', PostSchema);
