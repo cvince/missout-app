@@ -20,8 +20,8 @@ var PostSchema = mongoose.Schema({
   author    : { type: String },
   body      : { type: String },
   comments  : [ Comment ],
-  tempname  : { type: String },
-  tempnames : [{ type: String }]
+  tempname  : { type: String }
+  //tempnames : [{ type: String }]
 });
 
 module.exports = mongoose.model('Post', PostSchema);

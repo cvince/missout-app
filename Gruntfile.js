@@ -90,6 +90,40 @@ module.exports = function (grunt) {
           node_env: 'test'
         }
       }
+    },
+    mongoimport: {
+      options: {
+        db : 'oaa-test',
+        //optional
+        //host : 'localhost',
+        //port: '27017',
+        //username : 'username',
+        //password : 'password',
+        //stopOnError : false,
+        collections : [
+          {
+            name : 'users',
+            type : 'json',
+            file : 'app/db/seeds/user.json',
+            jsonArray : true,  //optional
+            upsert : true,  //optional
+            drop : true  //optional
+          },
+          {
+            name : 'meetings',
+            type :'json',
+            file : 'app/db/seeds/post.json',
+            jsonArray : true,
+            upsert : true,
+            drop : true
+          }
+        ]
+      }
+    },
+    mongo_drop: {
+      test: {
+        'uri' : 'mongodb://localhost/oaa-test'
+      }
     }
   });
   grunt.loadNpmTasks('grunt-contrib-watch');
@@ -99,6 +133,9 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-express-server');
   grunt.loadNpmTasks('grunt-simple-mocha');
+  grunt.loadNpmTasks('grunt-mongoimport');
+  grunt.loadNpmTasks('grunt-mongo-drop');
+  grunt.registerTask('test:db', ['mongo_drop', 'mongoimport']);
   grunt.registerTask('default', ['express:dev', 'watch', 'env:dev']);
-  grunt.registerTask('test', ['env:test', 'express:test', 'casper:all']);
+  grunt.registerTask('test', ['test:db','env:test', 'express:test'/*, 'casper:all'*/]);
 };

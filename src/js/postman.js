@@ -14,7 +14,8 @@ function Postman (endpoint) {
   Constructor.prototype.XHR = function (method, data, url, async, cb) {
     var req = new XMLHttpRequest();
     req.open(method, url, async);
-    req.responseType = '';
+    req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    //req.responseType = '';
     req.onload = function () {
       if (req.status >= 200 && req.status < 400) {
         if (req.responseText) {
@@ -27,7 +28,7 @@ function Postman (endpoint) {
       }
     };
     if (data) {
-      req.send(data);
+      req.send(JSON.stringify(data));
     } else {
       req.send();
     }
@@ -46,6 +47,29 @@ function Postman (endpoint) {
   return new Constructor();
 }
 App.postman = new Postman('api/v1/posts');
+
+App.foo = function() {
+  var url = document.URL + 'api/v1/posts';
+  var req = new XMLHttpRequest();
+  var cb = function(data){
+    console.log(JSON.parse(data));
+    return JSON.parse(data);
+  };
+  req.open('POST', url, true);
+  req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+  req.send(JSON.stringify({name:'John Rambo', time:'2pm'}));
+  req.onload = function () {
+    if (req.status >= 200 && req.status < 400) {
+      if (req.responseText) {
+        cb(req.responseText);
+      } else {
+        cb();
+      }
+    } else {
+      return false;
+    }
+  };
+};
 
 
 // function microAjax(url, callbackFunction)

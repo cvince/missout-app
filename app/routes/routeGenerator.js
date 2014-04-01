@@ -43,7 +43,7 @@ exports.routeFactory = function(route, objectPath, app, methodArray){
     });
   };
   //set up the get by id route
-  app.get(route + ':id', findById);
+  app.get(route + '/:id', findById);
 
   var create = function(req, res){
     if(!req.isAuthenticated()){
@@ -51,10 +51,16 @@ exports.routeFactory = function(route, objectPath, app, methodArray){
     }
     //needs validation
     var dbObject = new DbObject(req.body);
+    console.log(req.body);
+    console.log(dbObject);
     dbObject.save(function(err, retObject){
       if(err){
+        console.log('err');
+        console.log(err);
         res.send(500, {'error': err});
       } else {
+        console.log('retObject');
+        console.log(retObject);
         res.send(retObject);
       }
     });
@@ -80,7 +86,7 @@ exports.routeFactory = function(route, objectPath, app, methodArray){
     });
   };
   //sets up the update route
-  app.put(route, update);
+  app.put(route + '/:id', update);
 
   var destroy = function(req, res){
     if(!req.isAuthenticated()){
@@ -96,5 +102,5 @@ exports.routeFactory = function(route, objectPath, app, methodArray){
     });
   };
   //set up the delete route
-  app.delete(route, destroy);
+  app.delete(route + '/:id', destroy);
 };
