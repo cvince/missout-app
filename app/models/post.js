@@ -4,7 +4,7 @@ var mongoose    = require('mongoose');
 var Schema      = mongoose.Schema;
 
 var CommentSchema = mongoose.Schema({
-  author    : { type: Schema.ObjectId },
+  author    : { type: Object },
   body      : { type: String },
   timestamp : { type: Date },
   tempname  : { type: String }
