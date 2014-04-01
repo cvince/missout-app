@@ -64,7 +64,7 @@ var fooTemp = "Im a template \
 var ractive = new Ractive({
     el: "#container",
     template: fooTemp,
-    data: { list: App.output }
+    data: { list: ['a', 'b', 'c'] }
 });
 
 console.log(App.output);
