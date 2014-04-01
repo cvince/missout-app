@@ -12,8 +12,3 @@ Companion.prototype.displayContentItems = function(innerHTML) {
 	// EPG content response from the above ajax.makeRequest();
 	this.element.innerHTML = innerHTML;
 }
-
-Companion.prototype.hitAreaClicked = function() {
-	var activity = new ActivityPage();
-	appCanvas.presentModal(activity);
-}
