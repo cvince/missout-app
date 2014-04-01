@@ -42,12 +42,31 @@ function UI () {
 
   }
 
-  Constructor.prototype.refreshPosts = function(){
+  Constructor.prototype.refreshPosts = function(endpoint){
     App.postman.fetch(function(endpoint){
       App.output = endpoint;
     });
   }
 
+  return new Constructor();
+
 }
 
 App.ui = new UI();
+
+App.ui.refreshPosts('api/v1/posts');
+
+var fooTemp = "Im a template \
+    {{#list}} \
+        {{.}} \
+    {{/list}}";
+
+var ractive = new Ractive({
+    el: "#container",
+    template: fooTemp,
+    data: { list: App.output }
+});
+
+console.log(App.output);
+
+

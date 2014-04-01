@@ -8,20 +8,14 @@ You are user: {{ user._id }}
   Your details are: {{ user }}
 
 
-
-    <script id='myTemplate' type='text/ractive'>
-    <ul>
-      {{#list}}
-        <li>{{.}}</li>
-      {{/list}}
-    </ul>
-
-    </script>
-
   <div id="post-display">
 
 
   </div>
+
+<div id="container">
+    foo
+</div>
 
 <br>
 
@@ -32,17 +26,6 @@ You are user: {{ user._id }}
     <textarea id="message-out"></textarea>
     <button id="submit-post" type="button" value="send-post">Post</button>
 </form>
-
-<script>
-  var list = [ 'a', 'b', 'c' ];
-
-  var ractive = new Ractive({
-    el: 'post-display',
-    template: myTemplate,
-    data: { list: list }
-  });
-
-</script>
-
 <script src='public/app.js'></script>
+
 {{>footer}}
