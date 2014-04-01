@@ -16,5 +16,8 @@ results
 npm-debug.log
 node_modules
 test/casper/results.xml
-.idea/
+<<<<<<< HEAD
 public/
+=======
+.idea/
+>>>>>>> auth

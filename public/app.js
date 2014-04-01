@@ -67,10 +67,13 @@ Coordinates are stored in an array as follows:
 [ longitude, latitude ]
 A timestamp is also kept denoting the last
 time a geolocation was successfully fetched.
+Events:
+  * dispatches 'new-location' when a new geo
+    object is received
 Functions:
   * getLoc(cb) Updates the user's geolocation
-    and takes a callback function which receives
-    the coordinates
+    and fires the DOM event 'new-location' with
+    user's location
   * locAge() Returns time since last lookup in
     seconds
   * showLoc() Simply returns the stored
@@ -109,7 +112,7 @@ function Locator () {
     function getPositionData (position){
       console.log(position);
       userLoc = {
-        lat: position.coords.lattitude,
+        lat: position.coords.latitude,
         lon: position.coords.longitude,
         accuracy: position.coords.accuracy,
         timestamp: position.timestamp
@@ -152,6 +155,17 @@ App.locator.getLoc();
 Handles the fetching, storing and rendering of
 all posts. The REST endpoint is passed as an
 argument when it is initialized.
+Events:
+  * listens for 'new-location' and fetches a new
+    feed
+  * dispatches 'feedJSON' once the data for the
+    new feed is obtained
+Functions:
+  * newFeed(loc) expects a point in the format
+    { lon: Num, lat: Num } and sends the request
+    to the feed endpoint
+  * post(data, cb) creates a new post with the
+    JSON in data param, and takes a callback
  */
 function Postman (endpoint) {
   var url = document.URL + endpoint,
@@ -184,10 +198,8 @@ function Postman (endpoint) {
     }
   };
 
-  Constructor.prototype.fetch = function () {
-    return this.XHR('GET', null, url, true, function (data) {
-      models = JSON.parse(data);
-    });
+  Constructor.prototype.fetch = function (cb) {
+    return this.XHR('GET', null, url, true, cb);
   };
 
   Constructor.prototype.show = function () {
@@ -208,7 +220,13 @@ function Postman (endpoint) {
 
   return new Constructor();
 }
-App.postman = new Postman('api/v1/posts');
+App.postman = new Postman('http://localhost:3000/api/v1/posts');
+// Receive the DOM event 'feed-location' and query the
+// feed endpoint
+document.addEventListener('new-location', function (e) {
+  console.log('data to new loc event ' + JSON.stringify(e.detail));
+  App.postman.newFeed(e.detail);
+});
 
 
 // function microAjax(url, callbackFunction)
