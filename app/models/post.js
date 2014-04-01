@@ -3,8 +3,9 @@
 var mongoose    = require('mongoose');
 var Schema      = mongoose.Schema;
 
-var CommentSchema = mongoose.Schema({
-  author    : { type: Object },
+
+var CommentSchema = new Schema({
+  author    : { type: Schema.ObjectId },
   body      : { type: String },
   timestamp : { type: Date },
   tempname  : { type: String }
@@ -12,18 +13,21 @@ var CommentSchema = mongoose.Schema({
 
 var Comment = mongoose.model('Comment', CommentSchema);
 
-var PostSchema = mongoose.Schema({
+var PostSchema = new Schema({
   timestamp : { type: Date },
-  loc       : { type: { type: String }, coordinates: [] },
-  author    : { type: Object },
+  loc       : { type: { type: String, default: "Point" }, coordinates: [] },
+  author    : { type: Schema.ObjectId },
   body      : { type: String },
   comments  : [ Comment ],
   tempname  : { type: String },
   tempnames : [{ type: String }]
 });
 
+
 PostSchema.methods.makeAuthor = function(id){
   this.author = id;
 };
+
+PostSchema.index({ loc: '2dsphere' });
 
 module.exports = mongoose.model('Post', PostSchema);

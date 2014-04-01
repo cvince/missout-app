@@ -4,7 +4,7 @@ module.exports = function (grunt) {
     watch: {
       js: {
         files: [ 'src/js/**', 'app/**/*.js' ],
-        tasks: ['concat:dev'],
+        tasks: ['concat:all'],
         options: {
           livereload: true
         }
@@ -48,7 +48,7 @@ module.exports = function (grunt) {
       }
     },
     concat: {
-      dev: {
+      all: {
         src: [
           'src/js/app.js',
           'src/js/locator.js',
@@ -99,11 +99,19 @@ module.exports = function (grunt) {
         stopOnError: false,
         collections: [
           {
-            name: 'user',
+            name: 'users',
             type: 'json',
             file: 'db/seeds/users.json',
             jsonArray: true,
-            upsert: true,
+            upsertFields: "_id",
+            drop: true
+          },
+          {
+            name: 'posts',
+            type: 'json',
+            file: 'db/seeds/posts.json',
+            jsonArray: true,
+            //upsertFields: "_id",
             drop: true
           }
         ]
@@ -118,6 +126,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-mongoimport');
   grunt.loadNpmTasks('grunt-express-server');
   grunt.loadNpmTasks('grunt-simple-mocha');
-  grunt.registerTask('default', ['express:dev', 'watch', 'env:dev']);
+  grunt.registerTask('default', ['mongoimport', 'express:dev', 'watch', 'env:dev']);
   grunt.registerTask('test', [ 'env:test', 'mongoimport', 'express:test', 'casper:all', 'simplemocha:all']);
+  grunt.registerTask('build', ['sass:build', 'concat:all']);
 };
