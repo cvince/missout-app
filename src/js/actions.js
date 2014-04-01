@@ -1,3 +1,5 @@
+//global stuff
+
 var messageOut = document.getElementById('message-out');
 var posts = document.getElementById('post-display');
 var submit = document.getElementById('submit-post');
@@ -27,4 +29,8 @@ App.locator.getLoc(function (loc) {
 
 });
 
+App.output = {};
 
+App.postman.fetch(function(endpoint){
+  App.output = endpoint;
+});
