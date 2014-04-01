@@ -5,15 +5,23 @@ You are user: {{ user._id }}
 
 <br>
 
-Your details are: {{ user }}
+  Your details are: {{ user }}
 
 
 
-<script type="text/x-handlebars" data-template-name='_author'>
+    <script id='myTemplate' type='text/ractive'>
+    <ul>
+      {{#list}}
+        <li>{{.}}</li>
+      {{/list}}
+    </ul>
 
-</script>
+    </script>
 
-<div id="posts"></div>
+  <div id="post-display">
+
+
+  </div>
 
 <br>
 
@@ -25,4 +33,16 @@ Your details are: {{ user }}
     <button id="submit-post" type="button" value="send-post">Post</button>
 </form>
 
+<script>
+  var list = [ 'a', 'b', 'c' ];
+
+  var ractive = new Ractive({
+    el: 'post-display',
+    template: myTemplate,
+    data: { list: list }
+  });
+
+</script>
+
+<script src='public/app.js'></script>
 {{>footer}}

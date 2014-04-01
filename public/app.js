@@ -243,8 +243,25 @@ App.locator.getLoc(function (loc) {
 
 });
 
-App.output = {};
 
-App.postman.fetch(function(endpoint){
-  App.output = endpoint;
-});
+//rendering
+
+function UI () {
+
+  App.output = {};
+
+  function Constructor(){};
+
+  Constructor.prototype.appendPost = function(){
+
+  }
+
+  Constructor.prototype.refreshPosts = function(){
+    App.postman.fetch(function(endpoint){
+      App.output = endpoint;
+    });
+  }
+
+}
+
+App.ui = new UI();
