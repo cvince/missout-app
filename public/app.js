@@ -55,6 +55,7 @@ function drawPageElements() {
     document.body.addEventListener('touchmove', function(e) { e.preventDefault(); }, false);
     document.getElementById('navigationDrawer').addEventListener('touchmove', function(e) { e.stopPropagation(); }, false);
     document.getElementById('appCanvas').addEventListener('touchmove', function(event){ event.stopPropagation(); }, false);
+    document.querySelector('[id^=post-]').addEventListener('touchmove', function(event){ event.stopPropagation(); }, false);
   }, 100);
 }
 
