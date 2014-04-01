@@ -3,9 +3,12 @@
 /* Import node modules */
 var express = require('express'),
     mongoose = require('mongoose'),
+<<<<<<< HEAD
     cons = require('consolidate'),
     passport = require('passport'),
     flash = require('connect-flash'),
+=======
+>>>>>>> david
     app = express();
 
 /* Configuration */
@@ -56,9 +59,6 @@ routeFactory('/api/v1/posts', '../models/post', app);
 // app.get('/', function (req, res) {
 //   res.sendfile('app/views/index.html');
 // });
-
-
-
 
 ///* Save a new geoMessage from form */
 //app.post('/', function (req, res) {

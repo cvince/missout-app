@@ -1,0 +1,34 @@
+.postTrayClosed {
+	position:absolute;
+	top:562px;
+	width:100%;
+	height:333px;
+	transition:all 0.7s cubic-bezier(.16,.68,.43,.99);
+}
+
+.postTrayOpen {
+	position:absolute;
+	top:215px;
+	width:100%;
+	height:333px;
+	transition:all 0.7s cubic-bezier(.16,.68,.43,.99);
+}
+
+.postTrayBackground {
+	width:320px;
+	height:333px;
+}
+
+.postDismissAreaDown {
+	position:absolute;
+	top:562px;
+	width:100%;
+	height:0px;
+}
+
+.postDismissAreaUp {
+	position:absolute;
+	top:-229px;
+	width:100%;
+	height:232px;
+}
