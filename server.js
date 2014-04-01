@@ -1,6 +1,6 @@
 /* Import node modules */
 var express = require('express'),
-    mongoose = require('mongoose'), 
+    mongoose = require('mongoose'),
     app = express();
 
 /* Configuration */
@@ -16,9 +16,6 @@ mongoose.connect('localhost', 'missout');
 app.get('/', function (req, res) {
   res.sendfile('app/views/index.html');
 });
-
-
-
 
 ///* Save a new geoMessage from form */
 //app.post('/', function (req, res) {

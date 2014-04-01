@@ -1,0 +1,8 @@
+alertsconsole {
+  padding-top: 10rem;
+}
+alertsconsole h2 {
+  padding: 10rem;
+  color: #555;
+  font: 20rem bold 'Dosis', sans-serif;
+}

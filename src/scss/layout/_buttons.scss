@@ -1,0 +1,51 @@
+button {
+  padding: 10rem;
+  border: none;
+  background: #fff url(/public/images/x.png) no-repeat center;
+  background-size: contain;
+  outline: none;
+  cursor: pointer;
+}
+.button {
+  padding: 10rem;
+  font-size: 20rem;
+  color: #06192e;
+  text-shadow: 1rem 3rem 1rem rgba(0,0,0,.25);
+  text-align: center;
+  outline: none;
+  border-radius: 3rem 3rem 5rem 5rem;
+  box-shadow: inset 0rem 0rem 10rem rgba(0,0,0, .15);
+  background: #d2ff52; /* Old browsers */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d2ff52), color-stop(100%,#91e842)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #d2ff52 0%,#91e842 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #d2ff52 0%,#91e842 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #d2ff52 0%,#91e842 100%); /* IE10+ */
+  background: linear-gradient(to bottom, #d2ff52 0%,#91e842 100%); /* W3C */
+  box-shadow: 0 6rem #3f8401;
+  transition: none;
+}
+.button:after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  transition: all 0.3s;
+}
+.button:before {
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+}
+.button:hover {
+  box-shadow: 0 4rem #3f8401;
+  top: 2rem;
+}
+
+.button:active {
+  box-shadow: 0 0 #3f8401;
+  top: 2rem;
+}

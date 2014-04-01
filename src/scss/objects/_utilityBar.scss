@@ -1,0 +1,38 @@
+#utilityBar {
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  width:100%;
+  height: 40rem;
+  border-bottom: 1rem solid #eaeaea;
+  background: #fff;
+}
+
+#utilityBar h1 {
+  margin-left: 10rem;
+  float: left;
+  text-align: center;
+  font: 16rem normal 'Dosis', sans-serif;
+  text-align:center;
+}
+
+.utilityBarDrawerButton .image {
+  position:absolute;
+  width:40rem;
+  height:40rem;
+
+}
+
+.utilityBar .button {
+  position:absolute;
+  width:50rem;
+  height:20rem;
+  font-size:18rem;
+}
+
+.utilityBar .buttonClicked {
+  position:absolute;
+  display:block-inline;
+  height:20rem;
+  font-size:18rem;
+}
