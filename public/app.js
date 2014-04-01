@@ -229,15 +229,17 @@ App.locator.getLoc(function (loc) {
   submit.addEventListener('click', function() {
     var data = {};
     data.body = messageOut.value.toString();
-<<<<<<< HEAD
-      data.loc = loc;
-      App.postman.post(data, function (res) {
-        console.log('post ok, contents - ' + JSON.stringify(res));
-      })
-
+    data.loc = { type: "Point", coordinates: [ loc.lon, loc.lat ] };
+    App.postman.post(data, function (res) {
+      console.log('post ok, contents - ' + JSON.stringify(res));
+    })
   }, false);
 
 });
+
+
+
+
 
 
 //rendering
@@ -278,14 +280,3 @@ var ractive = new Ractive({
 });
 
 console.log(App.output);
-
-
-=======
-    data.loc = { type: "Point", coordinates: [ loc.lon, loc.lat ] };
-    App.postman.post(data, function (res) {
-      console.log('post ok, contents - ' + JSON.stringify(res));
-    })
-  }, false);
-
-});
->>>>>>> geofetch
