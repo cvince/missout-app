@@ -49,10 +49,8 @@ function drawPageElements() {
   splashImage = document.createElement("img");
   splashImage.setAttribute("class", "splashOpen");
   splashImage.setAttribute("src", "/public/images/splash.png");
-  setTimeout(function(){
-    page.appendChild(this.splashImage);
-    setTimeout(splashFadeOut, 1500);
-  }, 10);
+  page.appendChild(this.splashImage);
+  setTimeout(splashFadeOut, 500);
 }
 
 function addElementToDict(element, jsObject) {
@@ -262,8 +260,7 @@ BrowserDetect.init();
 
 isChromeOrSafari = BrowserDetect.browser == "Safari" || BrowserDetect.browser == "Chrome";
 
-
-setTimeout(function() {
+setTimeout(function(){
   var elem = document.querySelector('[id^=post-]');
   window.mySwipe = Swipe(elem, {
     startSlide: 1,
@@ -288,9 +285,7 @@ setTimeout(function() {
       bullets[pos].className = 'on';
     }
   });
-}, 1500);
-
-
+}, 1200);
 
 /*
 -- App.locator --
