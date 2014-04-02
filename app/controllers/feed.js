@@ -1,5 +1,6 @@
 'use strict';
 
+
 var Post = require('../models/post.js'),
   mongoose = require('mongoose');
 
@@ -8,6 +9,7 @@ module.exports = function (app) {
    Feed update: expects a coordinate pair in the
    format { lon: 123, lat: 123 } in the request body
    */
+
   app.post('/api/v1/feed', function (req, res) {
     console.log('hit feed endpoint' + JSON.stringify(req.body));
 //    if (!req.isAuthenticated()) {

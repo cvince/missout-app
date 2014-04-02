@@ -1,3 +1,5 @@
+'use strict';
+
 var postPage;
 PostPage.prototype = new ContentPage();
 

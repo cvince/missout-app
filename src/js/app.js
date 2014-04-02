@@ -1,3 +1,4 @@
+/******************************start app.js******************************/
 'use strict';
 
 var App = {};
@@ -292,3 +293,4 @@ setTimeout(function(){
 document.body.addEventListener('touchmove', function(e) { e.preventDefault(); }, false);
 //document.getElementById('navigationDrawer').addEventListener('touchmove', function(e) { e.stopPropagation(); }, false);
 //document.getElementById('appCanvas').addEventListener('touchmove', function(event){ event.stopPropagation(); }, false);
+/******************************end app.js******************************/

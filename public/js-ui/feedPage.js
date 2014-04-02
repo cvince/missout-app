@@ -1,3 +1,5 @@
+'use strict';
+
 FeedPage.prototype = new ContentPage();
 
 function FeedPage() {

@@ -1,3 +1,4 @@
+'use strict';
 var ajax = new Ajax();
 
 function Ajax(){}

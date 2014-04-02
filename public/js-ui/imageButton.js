@@ -1,3 +1,5 @@
+'use strict';
+
 ImageButton.prototype = new Button();
 ImageButton.prototype.constructor = ImageButton;
 

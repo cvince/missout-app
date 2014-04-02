@@ -1,3 +1,5 @@
+'use strict';
+
 function ContentPage(title) {
 	this.element = document.createElement('div');
 	this.element.setAttribute('class', 'contentPage');

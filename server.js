@@ -17,7 +17,7 @@ app.configure(function () {
   app.use('/public', express.static(__dirname + '/public'));
 
   //handlebars engine
-  app.engine('html', cons.handlebars);
+  app.engine('html', cons.ractive);
   app.set('view engine', 'html');
 
   //authentication uses
@@ -50,9 +50,13 @@ require('./app/routes/authenticate')(app, passport);
 /* Feed update API route */
 require('./app/controllers/feed.js')(app);
 
+/* Get Routes */
+require('./app/controllers/feed')(app, passport) ;
+
 var routeFactory = require('./app/routes/routeGenerator').routeFactory;
 routeFactory('/api/v1/users', '../models/user', app);
 routeFactory('/api/v1/posts', '../models/post', app);
+routeFactory('/api/v1/feed', '../controllers/feed', app);
 
 
 /* Render the index */

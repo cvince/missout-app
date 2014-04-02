@@ -1,3 +1,4 @@
+'use strict';
 function AppBar() {
 	this.element = document.createElement('div');
 	this.element.setAttribute('class', 'appBar');
