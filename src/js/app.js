@@ -65,6 +65,7 @@ function initialize() {
   elements = new Object();
   elementCount = 0;
   drawPageElements();
+  setTouchListeners();
 }
 
 function splashFadeOut() {
@@ -289,10 +290,11 @@ setTimeout(function(){
   });
 }, 1200);
 
-document.body.addEventListener('touchmove', function(e) { e.preventDefault(); }, false);
-document.getElementById('navigationDrawer').addEventListener('touchmove', function(e) { e.stopPropagation(); }, false);
-document.getElementById('appCanvas').addEventListener('touchmove', function(event){ event.stopPropagation(); }, false);
-
+function setTouchListeners() {
+  document.body.addEventListener('touchmove', function(e) { e.preventDefault(); }, false);
+  document.getElementById('navigationDrawer').addEventListener('touchmove', function(e) { e.stopPropagation(); }, false);
+  document.getElementById('appCanvas').addEventListener('touchmove', function(event){ event.stopPropagation(); }, false);
+}
 
 /*
 -- App.locator --
