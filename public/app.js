@@ -246,8 +246,22 @@ function UI () {
 
   Constructor.prototype.refreshPosts = function(){
     var diffList = [];
-    (App.output > 0) ? diffList = _.difference(App.output, App.postman.showFeed()) : App.ui.showPosts();
-    outList.unshift(diffList);
+    oldFeed = App.output;
+    (App.output > 0) ? diffList = _.difference(App.postman.newFeed(App.locator.showLoc().lastGoodLoc);, oldFeed) : App.ui.showPosts();
+
+    console.log(diffList);
+
+    for(var i = 0; i<diffList.length; i++){
+
+      var outObj = {
+        title: diffList[i].title,
+        tempname: diffList[i].tempname,
+        body: diffList[i].body,
+        loc: diffList[i].loc
+      }
+
+      outList.unshift(outObj)
+    }
   };
 
   return new Constructor();
