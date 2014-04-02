@@ -63,9 +63,9 @@ function Postman (endpoint) {
   Constructor.prototype.newFeed = function (loc) {
     console.log('data to newFeed function: ' + JSON.stringify(loc));
     var req = new XMLHttpRequest(),
-        url = 'http://localhost:3000/api/v1/feed';
-    req.open('POST', url, true);
-    req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        feedUrl = App.host + '/api/v1/feed';
+    req.open('POST', feedUrl, true);
+    req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     req.onload = function (d) {
       feed = JSON.parse(d.currentTarget.responseText);
       var event = new CustomEvent('feedJSON', feed);
@@ -76,8 +76,6 @@ function Postman (endpoint) {
     req.onerror = function (err) {
       console.log(err)
     };
-//    loc.lon = -122;
-//    loc.lat = 47;
     var params = "lon="+loc.lon+"&lat="+loc.lat;
     console.log(params);
     req.send(params);
@@ -89,7 +87,7 @@ function Postman (endpoint) {
 
   return new Constructor();
 }
-App.postman = new Postman('http://localhost:3000/api/v1/posts');
+App.postman = new Postman(App.host + '/api/v1/posts');
 // Receive the DOM event 'feed-location' and query the
 // feed endpoint
 document.addEventListener('new-location', function (e) {
