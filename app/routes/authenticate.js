@@ -1,7 +1,8 @@
 'use strict';
 
 var fs = require('fs');
-var indexSource = fs.readFileSync(__dirname + "/../views/layout.html");
+var indexSource = fs.readFileSync(__dirname + "/../views/index.html");
+//var indexSource = fs.readFileSync(__dirname + "/../views/layout.html");
 
 module.exports = function(app, passport) {
 
