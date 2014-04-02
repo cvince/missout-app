@@ -1,46 +1,39 @@
-<!DOCTYPE html>
-<html lang="en-US">
-  <head>
-    <meta charset="utf-8">
+{{>header}}
 
-    <link href="data:image/x-icon;base64,AAABAAEAEBAAAAAAAABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAABAQGvCAgI/wEBAf8BAQH/AQEB/wEBAf8BAQH/AQEB/wEBAf8BAQH/AQEB/wEBAf8BAQH/AQEB/w0NDf8BAQGvAQEB/ysqKv+urq3/r66u/5CPjv96eXn/AQEB/wEBAf8BAQH/AQEB/3p5ef+ampj/srKx/66trf8oKCj/AQEB/wEBAf8zMzP/h4aG//j49//t7ez/397c/9TU0/8aGhr/Ghoa/83NzP/o5+b/5OPh/9/e3P9/f37/MzMz/wEBAf8BAQH/Ghoa/xoaGv8aGhr/jY2M/7q5uf/m5eT/7u3s//Lx8f/s6+r/rq6t/xoaGv8aGhr/Ghoa/xoaGv8BAQH/AQEB/w0NDf8aGhr/Ghoa/x4dHf+VlZT/8vLx/+Tj4//R0c//3dza/5ybmv8bGxv/Ghoa/xoaGv8NDQ3/AQEB/wEBAf8BAQH/AQEB/w8PD/+9vbz/7u7t/3p6ev8NDQ3/DQ0N/3x8e//r6un/wsLB/x8fH/8BAQH/AQEB/wEBAf8EBAT/AwMD/w8PD/+4t7b/2dnX/zw8PP8BAQH/AQEB/wEBAf8BAQH/UlJS/+np6P/k5OT/Hx8e/wEBAf8BAQH/DQ0N/w4ODv+2tbP/09PR/y4uLv8CAgL/gYGA/8zLyv/e3tz/RkVF/wEBAf8tLCz/3t7d/76+vf8PDw//AQEB/xYWFv9vb27/09LQ/zo6Of8PDw//DAwM/xgYGP87Ozr/Ozo6/xoaGv8AAAD/AQEB/ygoKP/W1tT/YmFg/wEBAf8gICD/srGw/1NTUv8gICD/HBwc/w8PD/98e3v/8O/v//Hx8P92dXX/DAwM/wMDA/8CAgL/QkJC/6Sjov8BAQH/KSkp/1VVVf8wMDD/LCws/ykpKf/AwL//7+/u/+rp6f9HR0f/8fHw/8HAv/8PDw//CwsL/wcHB/85OTn/AgIC/zMzM/9AQED/PT09/zk5Of81NTX/ubm4/0NDQ/+vrq3/sbCw/0VERP+2tbT/Gxsb/xgYGP8UFBT/EBAQ/woKCv88PDz/TU1N/0lJSf9GRkb/QkJC/+Xk4/92dXX/7u3s//Hw7/92dnX/5uXk/ygoKP8kJCT/ISEh/x0dHf8TExP/RkZG/1paWv9WVlb/UlJS/09PT//JyMf/5+fl/+rp6P/q6ej/5+bl/8TEw/81NTX/MTEx/y0tLf8qKir/HR0d/09PT/9mZmb/Y2Nj/19fX/9bW1v/YWFh/7e3tv/a2tn/0dHQ/6ysq/9PT0//QUFB/z4+Pv86Ojr/NjY2/yYmJv8/Pz+vW1tb/19fX/9iYmL/Z2dn/2tra/9ra2v/aWlp/2RkZP9dXV3/VVVV/0xMTP9DQ0P/PDw8/zQ0NP8hISGvAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==" rel="icon" type="image/x-icon">
+<body id="body" onLoad="initialize();">
 
-    <title>Stay geoLo-key | Spacelab Forever</title>
+  You are user: {{ user._id }}
 
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="-1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="translucent">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <br>
 
-    <meta name="description" content="SpaceLab Forever">
-    <meta name="keywords" content="SpaceLab Forever">
-    <meta name="author" content="SpaceLab Forever">
+    Your details are: {{ user }}
 
-    <link rel="stylesheet" href="public/styles.css" />
 
-    <script src="/public/js-ui/prefixfree.min.js"></script>
-    <script src="/public/js-ui/swipe.js"></script>
-    <script src="/public/js-ui/ajax.js"></script>
-    <script src="/public/js-ui/contentPage.js"></script>
-    <script src="/public/js-ui/appBar.js"></script>
-    <script src="/public/js-ui/utilityBar.js"></script>
-    <script src="/public/js-ui/appCanvas.js"></script>
-    <script src="/public/js-ui/button.js"></script>
-    <script src="/public/js-ui/imageButton.js"></script>
-    <script src="/public/js-ui/navigationDrawer.js"></script>
-    <script src="/public/js-ui/feedPage.js"></script>
-    <script src="/public/js-ui/postPage.js"></script>
-    <script src="/public/js-ui/companion.js"></script>
-    <script src="/public/js-ui/controller.js"></script>
+    <div id="post-display">
 
-  </head>
-  <body id="body" onLoad="initialize();">
 
-  </body>
+    </div>
+
+  <div id="container">
+      foo
+  </div>
+
+  <br>
+
+  <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+
+  <form>
+      <label>Submit</label>
+      <textarea id="message-out"></textarea>
+      <button id="submit-post" type="button" value="send-post">Post</button>
+  </form>
+
   <!--<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script> -->
 
-    <script src="/public/app.js"></script>
 
-</html>
+  <script src='public/app.js'></script>
+
+</body>
+
+{{>footer}}

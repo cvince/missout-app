@@ -32,3 +32,47 @@ var submit = document.getElementById('submit-post');
 //   }, false);
 
 // });
+
+
+
+
+
+
+// //rendering
+
+// function UI () {
+
+//   App.output = {};
+
+//   function Constructor(){};
+
+//   Constructor.prototype.appendPost = function(){
+
+//   }
+
+//   Constructor.prototype.refreshPosts = function(endpoint){
+//     App.postman.fetch(function(endpoint){
+//       App.output = endpoint;
+//     });
+//   }
+
+//   return new Constructor();
+
+// }
+
+// App.ui = new UI();
+
+// App.ui.refreshPosts('api/v1/posts');
+
+// var fooTemp = "Im a template \
+//     {{#list}} \
+//         {{.}} \
+//     {{/list}}";
+
+// var ractive = new Ractive({
+//     el: "#container",
+//     template: fooTemp,
+//     data: { list: ['a', 'b', 'c'] }
+// });
+
+// console.log(App.output);

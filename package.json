@@ -26,7 +26,8 @@
     "passport-local": "^1.0.0",
     "passport-facebook": "^1.0.3",
     "passport-twitter": "^1.0.2",
-    "bcrypt-nodejs": "0.0.3"
+    "bcrypt-nodejs": "0.0.3",
+    "ractive": "^0.4.0-pre2"
   },
   "devDependencies": {
     "grunt": "^0.4.4",
