@@ -1,3 +1,5 @@
+'use strict';
+
 TextButton.prototype = new Button();
 TextButton.prototype.constructor = TextButton;
 TextButton.prototype.textSpan;

@@ -1,8 +1,0 @@
-appCanvas {
-  position: absolute;
-  border-left: 1rem solid #eaeaea;
-  border-right: 1rem solid #eaeaea;
-  background: #fff;
-  box-shadow: 0rem 0rem 15rem 0rem rgba(0, 0, 0, 0.15);
-  overflow: hidden;
-}

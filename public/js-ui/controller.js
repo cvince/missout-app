@@ -1,3 +1,5 @@
+'use strict';
+
 var controller;
 Controller.prototype.name = 'controller';
 

@@ -1,3 +1,5 @@
+'use strict';
+
 AppCanvas.prototype.contentA;
 AppCanvas.prototype.contentB;
 AppCanvas.prototype.currentContentArea;

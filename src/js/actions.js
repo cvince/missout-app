@@ -1,3 +1,4 @@
+/******************************actions.js start******************************/
 'use strict';
 
 var messageOut = document.getElementById('message-out');
@@ -32,3 +33,4 @@ var submit = document.getElementById('submit-post');
 //   }, false);
 
 // });
+/******************************actions.js end******************************/

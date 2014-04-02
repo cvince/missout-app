@@ -1,9 +1,0 @@
-utilitybar {
-  position: fixed;
-  bottom: 0rem;
-  z-index: 9999;
-  width: 100%;
-  padding: 10rem;
-  border-top: 1rem solid #eaeaea;
-  background: #fff;
-}

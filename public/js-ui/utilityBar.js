@@ -1,3 +1,5 @@
+'use strict';
+
 UtilityBar.prototype.drawerOpen = false;
 
 function UtilityBar() {

@@ -1,3 +1,5 @@
+'use strict';
+
 function NavigationDrawer() {
 	this.element = document.createElement('div');
 	this.element.setAttribute('id', 'navigationDrawer');

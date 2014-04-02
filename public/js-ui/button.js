@@ -1,3 +1,5 @@
+'use strict';
+
 Button.prototype.normalStyle = 'button';
 Button.prototype.mouseDownStyle = 'buttonClicked';
 Button.prototype.onClicked;

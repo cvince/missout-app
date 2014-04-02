@@ -1,3 +1,5 @@
+'use strict';
+
 var companion;
 Companion.prototype = new ContentPage();
 
