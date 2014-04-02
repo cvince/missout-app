@@ -17,4 +17,4 @@ npm-debug.log
 node_modules
 test/casper/results.xml
 .idea/
-public/
+public/app.js
