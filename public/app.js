@@ -207,6 +207,7 @@ document.addEventListener('new-location', function (e) {
 //global stuff
 
 var messageOut = document.getElementById('message-out');
+var titleOut = document.getElementById('title-out');
 var submit = document.getElementById('submit-post');
 
 submit.addEventListener(function (e) {
@@ -226,16 +227,19 @@ function UI () {
   };
 
   Constructor.prototype.showPosts = function(){
-
+    for (var post in outList) {
+      outList.pop();
+    }
     App.output = App.postman.showFeed();
     for(var i = 0; i<App.output.length; i++){
 
       //temp assignment of unschematized vals
-      App.output[i].tempname = 'battery horse';
+      //App.output[i].tempname = 'battery horse';
       App.output[i].title = 'Your sister ate my lunch';
       //remove above when changing schema
 
       outList.push({
+        date : App.output[i].timestamp,
         title : App.output[i].title,
         tempname: App.output[i].tempname,
         body: App.output[i].body,
@@ -245,23 +249,10 @@ function UI () {
   };
 
   Constructor.prototype.refreshPosts = function(){
-    var diffList = [];
-    oldFeed = App.output;
-    (App.output > 0) ? diffList = _.difference(App.postman.newFeed(App.locator.showLoc().lastGoodLoc);, oldFeed) : App.ui.showPosts();
-
-    console.log(diffList);
-
-    for(var i = 0; i<diffList.length; i++){
-
-      var outObj = {
-        title: diffList[i].title,
-        tempname: diffList[i].tempname,
-        body: diffList[i].body,
-        loc: diffList[i].loc
-      }
-
-      outList.unshift(outObj)
+    for (var post in outList) {
+      outList.pop();
     }
+    App.locator.getLoc();
   };
 
   return new Constructor();
@@ -290,10 +281,11 @@ App.locator.getLoc(function (loc) {
 
   submit.addEventListener('click', function() {
     var data = { timestamp : new Date() };
+    data.title = titleOut.value.toString();
     data.body = messageOut.value.toString();
     data.loc = { type: 'Point', coordinates: [ loc.lon, loc.lat ] };
     App.postman.post(data, function (res) {
-      //App.ui.appendPost(data);
+      App.ui.appendPost(data);
       console.log('post ok, contents - ' + JSON.stringify(res));
     });
   }, false);
@@ -306,22 +298,23 @@ document.addEventListener('feedJSON', function(e){
 
 //ractive
 
-var fooTemp = "Im a template \
-  <ul> \
-  {{#list.length}} \
-      {{#list:i}} \
-      <li> \
-        <h2>{{ title }}</h2> \
-        {{ body }} \
-        By: {{ tempname }} \
-        At: {{ loc }} \
-      </li> \
-      {{/list}} \
-  {{/list.length}}";
+// var fooTemp = "Im a template \
+//   <ul> \
+//   {{#list.length}} \
+//       {{#list:i}} \
+//       <li> \
+//         <h2>{{ title }}</h2> \
+//         Time Since Posted: {{ date }} \
+//         {{ body }} \
+//         By: {{ tempname }} \
+//         At: {{ loc }} \
+//       </li> \
+//       {{/list}} \
+//   {{/list.length}}";
 
 var ractive = new Ractive({
   el: '#container',
-  template: fooTemp,
+  template: '#ractive-template',
   data: { list: outList }
 });
 

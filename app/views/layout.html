@@ -1,0 +1,55 @@
+<html>
+<head>
+  <script src='public/lib/Ractive.min.js'></script>
+  <script src='public/lib/underscore-min.js'></script>
+</head>
+  <body>
+    <div id="post-display"></div>
+
+    <div id="container">foo</div>
+
+    <br>
+
+    <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+
+    <form>
+      <label>Submit</label>
+      <input id="title-out" type="text" placeholder="title">
+      <br>
+      <textarea id="message-out"></textarea>
+      <button id="submit-post" type="button" value="send-post">Post</button>
+    </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script id="ractive-template" type="text/ractive">
+    Im a template
+    <ul>
+    {{#list.length}}
+      {{#list:i}}
+      <li>
+        <h2>{{ title }}</h2>
+        Time Since Posted: {{ date }}
+        {{ body }}
+        By: {{ tempname }}
+        At: {{ loc }}
+      </li>
+      {{/list}}
+    {{/list.length}}
+    </script>
+
+    <script src='public/app.js'></script>
+
+  </body>
+</html>

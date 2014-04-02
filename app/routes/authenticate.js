@@ -1,18 +1,16 @@
 'use strict';
 
+var fs = require('fs');
+var indexSource = fs.readFileSync(__dirname + "/../views/layout.html");
+
 module.exports = function(app, passport) {
 
 // normal routes ===============================================================
 
   // APP SECTION =========================
   app.get('/', isLoggedIn, function(req, res) {
-    res.render('index.html', {
-      user : req.user,
-      partials: {
-        header: 'partials/header',
-        footer: 'partials/footer'
-      }
-    });
+    res.set('Content-Type', 'text/html');
+    return res.send(indexSource);
   });
 
   // LOGOUT ==============================

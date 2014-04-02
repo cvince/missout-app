@@ -27,6 +27,7 @@ var PostSchema = new Schema({
 
 PostSchema.methods.makeAuthor = function(id){
   this.author = id;
+  this.tempname = 'battery horse temp'; //post-specific temp-name generator output here
 };
 
 PostSchema.index({ loc: '2dsphere' });
