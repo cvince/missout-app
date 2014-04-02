@@ -68,7 +68,7 @@ function Postman (endpoint) {
     req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     req.onload = function (d) {
       feed = JSON.parse(d.currentTarget.responseText);
-      var event = new CustomEvent('feedJSON', feed);
+      var event = new CustomEvent('feedJSON', {detail: feed});
       document.dispatchEvent(event);
       console.log('got a feed, check it:');
       console.log(App.postman.showFeed());
@@ -96,5 +96,3 @@ document.addEventListener('new-location', function (e) {
   console.log('data to new loc event ' + JSON.stringify(e.detail));
   App.postman.newFeed(e.detail);
 });
-
-

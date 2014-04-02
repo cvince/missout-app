@@ -78,7 +78,9 @@ App.locator.getLoc(function (loc) {
 
 });
 
-
+document.addEventListener('feedJSON', function(e){
+  App.ui.showPosts();
+});
 
 //ractive
 
