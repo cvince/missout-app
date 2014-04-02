@@ -64,15 +64,15 @@ App.locator.getLoc(function (loc) {
 
 // App.ui.refreshPosts('api/v1/posts');
 
-var fooTemp = "Im a template \
-    {{#list}} \
-        {{.}} \
-    {{/list}}";
+// var fooTemp = "Im a template \
+//     {{#list}} \
+//         {{.}} \
+//     {{/list}}";
 
-var ractive = new Ractive({
-    el: "#container",
-    template: fooTemp,
-    data: { list: ['a', 'b', 'c'] }
-});
+// var ractive = new Ractive({
+//     el: "#container",
+//     template: fooTemp,
+//     data: { list: ['a', 'b', 'c'] }
+// });
 
-console.log(App.output);
+// console.log(App.output);
