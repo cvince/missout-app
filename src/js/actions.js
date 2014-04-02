@@ -38,31 +38,31 @@ App.locator.getLoc(function (loc) {
 
 
 
-//rendering
+// //rendering
 
-function UI () {
+// function UI () {
 
-  App.output = {};
+//   App.output = {};
 
-  function Constructor(){};
+//   function Constructor(){};
 
-  Constructor.prototype.appendPost = function(){
+//   Constructor.prototype.appendPost = function(){
 
-  }
+//   }
 
-  Constructor.prototype.refreshPosts = function(endpoint){
-    App.postman.fetch(function(endpoint){
-      App.output = endpoint;
-    });
-  }
+//   Constructor.prototype.refreshPosts = function(endpoint){
+//     App.postman.fetch(function(endpoint){
+//       App.output = endpoint;
+//     });
+//   }
 
-  return new Constructor();
+//   return new Constructor();
 
-}
+// }
 
-App.ui = new UI();
+// App.ui = new UI();
 
-App.ui.refreshPosts('api/v1/posts');
+// App.ui.refreshPosts('api/v1/posts');
 
 var fooTemp = "Im a template \
     {{#list}} \
