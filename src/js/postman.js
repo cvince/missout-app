@@ -1,4 +1,4 @@
-/******************************postman.js start******************************/
+/*******************postman.js start***********************/
 'use strict';
 /*global App*/
 
@@ -98,4 +98,4 @@ document.addEventListener('new-location', function (e) {
   App.postman.newFeed(e.detail);
 });
 
-/******************************postman.js end******************************/
+/**************************postman.js end****************************/
