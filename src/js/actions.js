@@ -1,5 +1,4 @@
 'use strict';
-
 /* src/js/actions */
 /*global App*/
 
@@ -14,8 +13,6 @@ submit.addEventListener(function (e) {
 
 App.output = {};
 var outList = [];
-var diffList = [];
-
 //rendering
 
 function UI () {
@@ -46,11 +43,9 @@ function UI () {
   };
 
   Constructor.prototype.refreshPosts = function(){
-
-    if(App.output.length > 0){
-      console.log(App.output);
-      console.log(App.postman.showFeed());
-    }
+    var diffList = [];
+    (App.output > 0) ? diffList = _.difference(App.output, App.postman.showFeed()) : App.ui.showPosts();
+    outList.unshift(diffList);
   };
 
   return new Constructor();
