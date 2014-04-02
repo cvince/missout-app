@@ -26,8 +26,8 @@ var isChromeOrSafari;
 var feedPage;
 
 function drawPageElements() {
-  scrollViewRegister = new Array();
-  activeScrollViews = new Array();
+  scrollViewRegister = [];
+  activeScrollViews = [];
   appBar = new AppBar();
   appCanvas = new AppCanvas();
   navigationDrawer = new NavigationDrawer();
