@@ -1,10 +1,12 @@
+'use strict';
+
 module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     watch: {
       js: {
-        files: [ 'src/js/**' ],
-        tasks: ['concat:dev'],
+        files: [ 'src/js/**', 'app/**/*.js' ],
+        tasks: ['concat:all'],
         options: {
           livereload: true
         }
@@ -48,11 +50,13 @@ module.exports = function (grunt) {
       }
     },
     concat: {
-      dev: {
+      all: {
         src: [
           'src/js/app.js',
           'src/js/locator.js',
-          'src/js/postman.js'
+          'src/js/postman.js',
+          'src/js/actions.js',
+          'src/js/heartbeat.js'
         ],
         dest: 'public/app.js'
       }
@@ -81,14 +85,39 @@ module.exports = function (grunt) {
       }
     },
     simplemocha: {
-      test: {
-        src: ['test/mocha/**'],
-        options: {
-          reporter: 'spec',
-          slow: 200,
-          timeout: 1000,
-          node_env: 'test'
-        }
+      options: {
+        reporter: 'spec',
+        slow: 200,
+        timeout: 1000,
+        node_env: 'test'
+      },
+      all: {
+        src: ['test/mocha/*.js']
+      }
+    },
+    mongoimport: {
+      options: {
+        db: 'missout-test',
+        host: 'localhost',
+        stopOnError: false,
+        collections: [
+          {
+            name: 'users',
+            type: 'json',
+            file: 'db/seeds/users.json',
+            jsonArray: true,
+            upsertFields: "_id",
+            drop: true
+          },
+          {
+            name: 'posts',
+            type: 'json',
+            file: 'db/seeds/posts.json',
+            jsonArray: true,
+            //upsertFields: "_id",
+            drop: true
+          }
+        ]
       }
     }
   });
@@ -97,8 +126,10 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-casper');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-mongoimport');
   grunt.loadNpmTasks('grunt-express-server');
   grunt.loadNpmTasks('grunt-simple-mocha');
-  grunt.registerTask('default', ['express:dev', 'watch', 'env:dev']);
-  grunt.registerTask('test', ['env:test', 'express:test', 'casper:all']);
+  grunt.registerTask('default', ['mongoimport', 'express:dev', 'watch', 'env:dev']);
+  grunt.registerTask('test', [ 'env:test', 'mongoimport', 'express:test', 'casper:all', 'simplemocha:all']);
+  grunt.registerTask('build', ['sass:build', 'concat:all']);
 };
