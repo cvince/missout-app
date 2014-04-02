@@ -33,6 +33,9 @@ var submit = document.getElementById('submit-post');
 //   }, false);
 
 // });
+<<<<<<< HEAD
+/******************************actions.js end******************************/
+=======
 
 
 
@@ -77,5 +80,4 @@ var submit = document.getElementById('submit-post');
 // });
 
 // console.log(App.output);
-
-/******************************actions.js end******************************/
+>>>>>>> 691e59bd40faf081a2f120321b394de98c4d32f9
