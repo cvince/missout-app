@@ -66,6 +66,7 @@ function initialize() {
   elements = new Object();
   elementCount = 0;
   drawPageElements();
+  setTouchListeners();
 }
 
 function splashFadeOut() {
@@ -290,9 +291,12 @@ setTimeout(function(){
   });
 }, 1200);
 
-document.body.addEventListener('touchmove', function(e) { e.preventDefault(); }, false);
-//document.getElementById('navigationDrawer').addEventListener('touchmove', function(e) { e.stopPropagation(); }, false);
-//document.getElementById('appCanvas').addEventListener('touchmove', function(event){ event.stopPropagation(); }, false);
+function setTouchListeners() {
+  document.body.addEventListener('touchmove', function(e) { e.preventDefault(); }, false);
+  document.getElementById('navigationDrawer').addEventListener('touchmove', function(e) { e.stopPropagation(); }, false);
+  document.getElementById('appCanvas').addEventListener('touchmove', function(event){ event.stopPropagation(); }, false);
+}
+
 /******************************end app.js******************************/
 /******************************locator.js start******************************/
 'use strict';
@@ -560,6 +564,51 @@ var submit = document.getElementById('submit-post');
 //   }, false);
 
 // });
+
+
+
+
+
+
+// //rendering
+
+// function UI () {
+
+//   App.output = {};
+
+//   function Constructor(){};
+
+//   Constructor.prototype.appendPost = function(){
+
+//   }
+
+//   Constructor.prototype.refreshPosts = function(endpoint){
+//     App.postman.fetch(function(endpoint){
+//       App.output = endpoint;
+//     });
+//   }
+
+//   return new Constructor();
+
+// }
+
+// App.ui = new UI();
+
+// App.ui.refreshPosts('api/v1/posts');
+
+// var fooTemp = "Im a template \
+//     {{#list}} \
+//         {{.}} \
+//     {{/list}}";
+
+// var ractive = new Ractive({
+//     el: "#container",
+//     template: fooTemp,
+//     data: { list: ['a', 'b', 'c'] }
+// });
+
+// console.log(App.output);
+
 /******************************actions.js end******************************/
 /******************************heartbeat.js start******************************/
 'use strict';
