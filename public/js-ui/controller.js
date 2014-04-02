@@ -8,7 +8,7 @@ function Controller() {
 	this.element.setAttribute('class', 'controller');
 	this.drawerOpen = false;
 	this.getContentItems();
-	this.displayContentItems();
+	//this.displayContentItems();
 }
 
 Controller.prototype.getContentItems = function() {
