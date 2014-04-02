@@ -400,10 +400,22 @@ App.locator.getLoc();
 Handles the fetching, storing and rendering of
 all posts. The REST endpoint is passed as an
 argument when it is initialized.
+Events:
+  * listens for 'new-location' and fetches a new
+    feed
+  * dispatches 'feedJSON' once the data for the
+    new feed is obtained
+Functions:
+  * newFeed(loc) expects a point in the format
+    { lon: Num, lat: Num } and sends the request
+    to the feed endpoint
+  * post(data, cb) creates a new post with the
+    JSON in data param, and takes a callback
  */
 function Postman (endpoint) {
-  var url = document.URL + endpoint,
-    models;
+  var url = endpoint,
+      models,
+      feed;
   function Constructor () { }
   Constructor.prototype.XHR = function (method, data, url, async, cb) {
     var req = new XMLHttpRequest();
@@ -412,207 +424,182 @@ function Postman (endpoint) {
     //req.responseType = '';
     req.onload = function () {
       if (req.status >= 200 && req.status < 400) {
-        if (req.responseText) {
-          cb(req.responseText);
-        } else {
-          cb();
-        }
+        models = JSON.parse(req.responseText);
+        cb(models);
       } else {
         return false;
       }
     };
+    req.onerror = function (err) {
+      console.log('XHR Error: ' + JSON.stringify(err));
+    };
     if (data) {
+      console.log("bad data: " + JSON.stringify(data));
       req.send(JSON.stringify(data));
     } else {
       req.send();
     }
   };
 
-  Constructor.prototype.fetch = function () {
-    return this.XHR('GET', null, url, true, function (data) {
-      models = JSON.parse(data);
-    });
+  Constructor.prototype.fetch = function (cb) {
+    return this.XHR('GET', null, url, true, cb);
   };
 
   Constructor.prototype.show = function () {
     return models;
   };
 
+  Constructor.prototype.post = function (data, cb) {
+    /* location functionality */
+    return this.XHR('POST', data, url, true, cb);
+  };
+
+  Constructor.prototype.newFeed = function (loc) {
+    console.log('data to newFeed function: ' + JSON.stringify(loc));
+    var req = new XMLHttpRequest(),
+        url = 'http://localhost:3000/api/v1/feed';
+    req.open('POST', url, true);
+    req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    req.onload = function (d) {
+      feed = JSON.parse(d.currentTarget.responseText);
+      var event = new CustomEvent('feedJSON', {detail: feed});
+      document.dispatchEvent(event);
+      console.log('got a feed, check it:');
+      console.log(App.postman.showFeed());
+    };
+    req.onerror = function (err) {
+      console.log(err)
+    };
+//    loc.lon = -122;
+//    loc.lat = 47;
+    var params = "lon="+loc.lon+"&lat="+loc.lat;
+    console.log(params);
+    req.send(params);
+  };
+
+  Constructor.prototype.showFeed = function () {
+    return feed;
+  };
+
   return new Constructor();
 }
-App.postman = new Postman('api/v1/posts');
+App.postman = new Postman('http://localhost:3000/api/v1/posts');
+// Receive the DOM event 'feed-location' and query the
+// feed endpoint
+document.addEventListener('new-location', function (e) {
+  console.log('data to new loc event ' + JSON.stringify(e.detail));
+  App.postman.newFeed(e.detail);
+});
 
-App.foo = function() {
-  var url = document.URL + 'api/v1/posts';
-  var req = new XMLHttpRequest();
-  var cb = function(data){
-    console.log(JSON.parse(data));
-    return JSON.parse(data);
-  };
-  req.open('POST', url, true);
-  req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-  req.send(JSON.stringify({name:'John Rambo', time:'2pm'}));
-  req.onload = function () {
-    if (req.status >= 200 && req.status < 400) {
-      if (req.responseText) {
-        cb(req.responseText);
-      } else {
-        cb();
-      }
-    } else {
-      return false;
-    }
-  };
-};
-
-
-// function microAjax(url, callbackFunction)
-// {
-//   this.bindFunction = function (caller, object) {
-//     return function() {
-//       return caller.apply(object, [object]);
-//     };
-//   };
-
-//   this.stateChange = function (object) {
-//     if (this.request.readyState==4)
-//       this.callbackFunction(this.request.responseText);
-//   };
-
-//   this.getRequest = function() {
-//     if (window.ActiveXObject)
-//       return new ActiveXObject('Microsoft.XMLHTTP');
-//     else if (window.XMLHttpRequest)
-//       return new XMLHttpRequest();
-//     return false;
-//   };
-
-//   this.postBody = (arguments[2] || "");
-
-//   this.callbackFunction=callbackFunction;
-//   this.url=url;
-//   this.request = this.getRequest();
-
-//   if(this.request) {
-//     var req = this.request;
-//     req.onreadystatechange = this.bindFunction(this.stateChange, this);
-
-//     if (this.postBody!=="") {
-//       req.open("POST", url, true);
-//       req.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-//       req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-//       req.setRequestHeader('Connection', 'close');
-//     } else {
-//       req.open("GET", url, true);
-//     }
-
-//     req.send(this.postBody);
-//   }
-
-
-
-
-// request = new XMLHttpRequest();
-// request.open('GET', '/my/url', true);
-
-// request.onload = function() {
-//   if (request.status >= 200 && request.status < 400){
-//     // Success!
-//     data = JSON.parse(request.responseText);
-//   } else {
-//     // We reached our target server, but it returned an error
-
-//   }
-// };
-
-// request.onerror = function() {
-//   // There was a connection error of some sort
-// };
-
-// request.send();
-// }
 /******************************postman.js end******************************/
-/******************************actions.js start******************************/
+//global stuff
+/*jslint unused: false*/
+/*global App*/
 'use strict';
 
 var messageOut = document.getElementById('message-out');
 var posts = document.getElementById('post-display');
 var submit = document.getElementById('submit-post');
 
-// submit.addEventListener(function (e) {
-//   console.log(e);
-// });
+submit.addEventListener(function (e) {
+	console.log(e);
+});
 
-// var data =  {
-//   timestamp : new Date()
-//   // author    : { type: Schema.ObjectId },
-//   // body      : {  },
-//   // comments  : [ Comment ],
-//   // tempname  : { type: String },
-//   // tempnames : [{ type: String }]
-// };
+App.output = {};
+var outList = [];
 
-// submit.disabled = true;
+//rendering
 
-// App.locator.getLoc(function (loc) {
-//   console.log('data to page: ' + JSON.stringify(loc));
-//   submit.disabled = false;
-//   submit.addEventListener('click', function() {
-//     var data = {};
-//     data.body = messageOut.value.toString();
-//     data.loc = { type: "Point", coordinates: [ loc.lon, loc.lat ] };
-//     App.postman.post(data, function (res) {
-//       console.log('post ok, contents - ' + JSON.stringify(res));
-//     })
-//   }, false);
+function UI () {
 
-// });
+	function Constructor(){}
+
+	Constructor.prototype.appendPost = function(data){
+		outList.unshift(data);
+	};
+
+	Constructor.prototype.showPosts = function(){
+
+		App.output = App.postman.showFeed();
+		for(var i = 0; i<App.output.length; i++){
+
+			//temp assignment of unschematized vals
+			App.output[i].tempname = 'battery horse';
+			App.output[i].title = 'Your sister ate my lunch';
+			//remove above when changing schema
+
+			outList.push({
+				title : App.output[i].title,
+				tempname: App.output[i].tempname,
+				body: App.output[i].body,
+				loc: App.output[i].loc
+			});
+		}
+	};
+
+	return new Constructor();
+
+}
+
+App.ui = new UI();
+
+
+var data =  {
+	timestamp : new Date()
+	// author    : { type: Schema.ObjectId },
+	// body      : {  },
+	// comments  : [ Comment ],
+	// tempname  : { type: String },
+	// tempnames : [{ type: String }]
+};
+
+submit.disabled = true;
+
+App.locator.getLoc(function (loc) {
+	console.log('data to page: ' + JSON.stringify(loc));
+	submit.disabled = false;
 
 
 
+	submit.addEventListener('click', function() {
+		var data = {};
+		data.body = messageOut.value.toString();
+		data.loc = { type: "Point", coordinates: [ loc.lon, loc.lat ] };
+		App.postman.post(data, function (res) {
+			App.ui.appendPost(data);
+			console.log('post ok, contents - ' + JSON.stringify(res));
+		})
+	}, false);
 
+});
 
+document.addEventListener('feedJSON', function(e){
+	App.ui.showPosts();
+});
 
-// //rendering
+//ractive
 
-// function UI () {
+var fooTemp = "Im a template \
+		<ul> \
+		{{#list.length}} \
+				{{#list:i}} \
+				<li> \
+					<h2>{{ title }}</h2> \
+					{{ body }} \
+					By: {{ tempname }} \
+					At: {{ loc }} \
+				</li> \
+				{{/list}} \
+		{{/list.length}}";
 
-//   App.output = {};
-
-//   function Constructor(){};
-
-//   Constructor.prototype.appendPost = function(){
-
-//   }
-
-//   Constructor.prototype.refreshPosts = function(endpoint){
-//     App.postman.fetch(function(endpoint){
-//       App.output = endpoint;
-//     });
-//   }
-
-//   return new Constructor();
-
-// }
-
-// App.ui = new UI();
-
-// App.ui.refreshPosts('api/v1/posts');
-
-// var fooTemp = "Im a template \
-//     {{#list}} \
-//         {{.}} \
-//     {{/list}}";
-
-// var ractive = new Ractive({
-//     el: "#container",
-//     template: fooTemp,
-//     data: { list: ['a', 'b', 'c'] }
-// });
+var ractive = new Ractive({
+		el: "#container",
+		template: fooTemp,
+		data: { list: outList }
+});
 
 // console.log(App.output);
 
-/******************************actions.js end******************************/
 /******************************heartbeat.js start******************************/
 'use strict';
 /*global App*/
