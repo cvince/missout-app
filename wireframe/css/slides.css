@@ -1,0 +1,18 @@
+
+slides {
+  overflow: hidden;
+  position: relative;
+}
+slides > slide {
+  float: left;
+  position: relative;
+}
+slide {
+  padding: 10rem;
+  font: 16rem/24rem normal 'Dosis', sans-serif;
+}
+slide h2 {
+  margin-bottom: 10rem;
+  font-size: 18rem;
+  font-style: bold;
+}

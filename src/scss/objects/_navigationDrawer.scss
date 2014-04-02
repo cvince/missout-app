@@ -1,0 +1,48 @@
+.navigationDrawerClosed {
+	position:fixed;
+  left: -260rem;
+	width: 260rem;
+  height:100%;
+	transition:all 0.2s cubic-bezier(.16,.68,.43,.99);
+}
+
+.navigationDrawerOpen {
+	position:fixed;
+  left:0rem;
+	width:260rem;
+  height:100%;
+	transition:all 0.2s cubic-bezier(.16,.68,.43,.99);
+}
+
+.navigationDrawerButton {
+	position:absolute;
+	top:69rem;
+	width:69rem; height:69rem;
+}
+
+.navigationDrawerOpen h2, .navigationDrawerClosed h2 {
+  padding: 10rem;
+  color: #555;
+  font: 20rem bold 'Dosis', sans-serif;
+}
+
+.box-effect{
+  position: relative;
+  background: #fafafa;
+  border: 1rem solid #eee;
+}
+
+.box-effect:after {
+  position: absolute;
+  z-index: -1;
+  content: "";
+  top: 65%;
+  right: 16rem;
+  bottom: 15rem;
+  left: auto;
+  width: 45%;
+  max-width: 300rem;
+  height: 1rem;
+  box-shadow: 15rem 13rem 7rem #000;
+  transform: rotate(3deg);
+}

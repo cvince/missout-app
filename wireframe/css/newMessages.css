@@ -1,0 +1,7 @@
+message {
+  padding: 10rem;
+  font: 16rem/24rem normal 'Dosis', sans-serif;
+}
+message p:first-child {
+  color: #777;
+}

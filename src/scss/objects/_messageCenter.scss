@@ -1,0 +1,12 @@
+#messageCenter {
+  position: relative;
+  top: 10rem;
+}
+
+#messageCenter ul li {
+  padding: 10rem;
+  font: 16rem/24rem normal 'Dosis', sans-serif;
+}
+#messageCenter ul li p:first-child {
+  color: #777;
+}
