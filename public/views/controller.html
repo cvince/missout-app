@@ -1,11 +1,28 @@
 <div style="padding:40px; background: white; border:10rem solid red; margin:40px;">
-
-<h1>POST CONSOLE</h1>
-
-<form method="POST">
-  <input style="margin-bottom: 10rem;" type="text" placeholder="Type your shit here." />
-  <br />
-  <textarea style="width: 90%; height: 100rem;" placeholder="Type shit up to your hearts' desire muthafuhkuhz!!!"></textarea>
-</form>
-
+  <h1>POST CONSOLE</h1>
+  <div id="post-display"></div>
+    <div id="container">foo</div>
+    <br>
+    <a href="/logout">Logout</a>
+    <form>
+      <label>Submit</label>
+      <input id="title-out" type="text" placeholder="title">
+      <br>
+      <textarea id="message-out"></textarea>
+      <button id="submit-post" type="button" value="send-post">Post</button>
+    </form>
 </div>
+<script id="ractive-template" type="text/ractive">
+<ul>
+{{#list.length}}
+  {{#list:i}}
+  <li>
+  <h2>{{ title }}</h2>
+  Time Since Posted: {{ date }}
+  {{ body }}
+  By: {{ tempname }}
+  At: {{ loc }}
+  </li>
+  {{/list}}
+{{/list.length}}
+</script>
