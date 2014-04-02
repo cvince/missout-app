@@ -1,0 +1,50 @@
+{
+  "name": "mongoose-geolocation-example",
+  "version": "0.0.1",
+  "description": "Nearby search example with MongoDB",
+  "main": "server.js",
+  "scripts": {
+    "test": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tmlbl/mongoose-geolocation-example.git"
+  },
+  "author": "Tim Lebel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tmlbl/mongoose-geolocation-example/issues"
+  },
+  "dependencies": {
+    "express": "~3.4.8",
+    "mongoose": "^3.8.8",
+    "superagent": "^0.17.0",
+    "connect-flash": "^0.1.1",
+    "consolidate": "^0.10.0",
+    "passport": "^0.2.0",
+    "handlebars": "^2.0.0-alpha.2",
+    "passport-local": "^1.0.0",
+    "passport-facebook": "^1.0.3",
+    "passport-twitter": "^1.0.2",
+    "bcrypt-nodejs": "0.0.3"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.4",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-env": "^0.4.1",
+    "grunt-sass": "^0.12.0",
+    "grunt-express-server": "^0.4.13",
+    "grunt-contrib-concat": "^0.3.0",
+    "grunt-casper": "^0.3.5",
+    "grunt-simple-mocha": "^0.4.0",
+    "chai": "^1.9.1",
+<<<<<<< HEAD
+    "grunt-mongoimport": "^0.1.3",
+    "grunt-mongo-drop": "^0.1.1"
+=======
+    "foreman": "^0.2.1",
+    "grunt-mongoimport": "^0.1.3",
+    "mocha": "^1.18.2"
+>>>>>>> auth
+  }
+}

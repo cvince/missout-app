@@ -26,8 +26,8 @@ function Postman (endpoint) {
   Constructor.prototype.XHR = function (method, data, url, async, cb) {
     var req = new XMLHttpRequest();
     req.open(method, url, async);
-    req.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
-    req.responseType = '';
+    req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    //req.responseType = '';
     req.onload = function () {
       if (req.status >= 200 && req.status < 400) {
         models = JSON.parse(req.responseText);
