@@ -19,11 +19,12 @@
 
   <script src='public/lib/Ractive.min.js'></script>
   <script src='public/lib/underscore-min.js'></script>
-</head>
+  </head>
+
   <body>
     <div id="post-display"></div>
 
-    <div id="container">foo</div>
+    <div id="container"></div>
 
     <br>
 
@@ -37,21 +38,7 @@
       <button id="submit-post" type="button" value="send-post">Post</button>
     </form>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <script id="ractive-template" type="text/ractive">
-    Im a template
+    <script id="post-template" type="text/ractive">
     <ul>
     {{#list.length}}
       {{#list:i}}
@@ -64,6 +51,7 @@
       </li>
       {{/list}}
     {{/list.length}}
+    </ul>
     </script>
 
     <script src='public/app.js'></script>

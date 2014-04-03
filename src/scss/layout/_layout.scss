@@ -1,0 +1,59 @@
+/* Set the width of the grid */
+.line:before,.line:after{height:0; line-height:0; overflow:hidden;content:"";display:table;}
+.line:after{clear:both;}
+.line{*zoom:1;}
+
+/* Bullshit */
+[class*='unit-'] {
+  float: left;
+  display: inline;
+  padding: 5rem;
+}
+
+[class*='unit-']:last-of-type {
+  float: right
+}
+
+/* Suck it */
+.lastUnit{float:none;display:block;display:table-cell;width:9999rem;*width:auto;*zoom:1;_position:relative;_left:-3rem;_margin-right:-3rem;}
+
+/* Yay we suck at life! Bootstrap Baby, Twit Tattoos! */
+.size1of1{float:none;}
+.size1of2{width:50%;}
+.size1of3{width:33.33333%;}
+.size2of3{width:66.66666%;}
+.size1of4{width:25%;}
+.size3of4{width:75%;}
+.size1of5{width:20%;}
+.size2of5{width:40%;}
+.size3of5{width:60%;}
+.size4of5{width:80%;}
+
+.hidden{display: none;}
+.invisible{visiblity: hidden;}
+
+.scrollable {
+  overflow: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  transition-property: top, bottom;
+  transition-duration: .2s, .2s;
+  transition-timing-function: linear, linear;
+}
+
+.splashOpen {
+  position: absolute;
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+}
+
+.splashHide {
+  position: absolute;
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: all .7s linear;
+}

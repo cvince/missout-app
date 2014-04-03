@@ -201,16 +201,24 @@ document.addEventListener('new-location', function (e) {
 });
 
 'use strict';
-/* src/js/actions */
+/* src/js/ui */
 /*global App*/
 
-//global stuff
+
+/*
+-- App.ui --
+Passes data into helper functions that
+initiate UI render/redraw events.
+
+*/
+
+//global selectors
 
 var messageOut = document.getElementById('message-out');
 var titleOut = document.getElementById('title-out');
-var submit = document.getElementById('submit-post');
+var postSubmit = document.getElementById('submit-post');
 
-submit.addEventListener(function (e) {
+postSubmit.addEventListener(function (e) {
   console.log(e);
 });
 
@@ -222,11 +230,9 @@ function UI () {
 
   function Constructor(){}
 
-  Constructor.prototype.appendPost = function(data){
-    outList.unshift(data);
-  };
+  // ui feed display functions
 
-  Constructor.prototype.showPosts = function(){
+  Constructor.prototype.showFeed = function(){
     for (var post in outList) {
       outList.pop();
     }
@@ -248,12 +254,54 @@ function UI () {
     }
   };
 
-  Constructor.prototype.refreshPosts = function(){
+  Constructor.prototype.appendFeed = function(data){
+    outList.unshift(data);
+  };
+
+  Constructor.prototype.refreshFeed = function(){
     for (var post in outList) {
       outList.pop();
     }
     App.locator.getLoc();
   };
+
+
+  // ui comment display functions
+
+
+  Constructor.prototype.showComment = function(postId){
+
+  }
+
+  Constructor.prototype.appendComment = function(postId){
+
+  }
+
+  Constructor.prototype.refreshComment = function(postId){
+
+  }
+
+  // ui posting functions
+
+  Constructor.prototype.makePost = function(){
+    var data = { timestamp : new Date() };
+    data.title = titleOut.value.toString();
+    data.body = messageOut.value.toString();
+    data.loc = { type: 'Point', coordinates: [ loc.lon, loc.lat ] };
+    App.postman.post(data, function (res) {
+      App.ui.appendFeed(data);
+      console.log('post ok, contents - ' + JSON.stringify(res));
+    });
+  }
+
+  Constructor.prototype.makeComment = function(postId){
+    var data = { timestamp : new Date() };
+    data.body = document.getElementById('post-'+postId.toString()).value.toString();
+    // App.postman.postComment(data, function (res) {
+    //   App.ui.appendComment(postId);
+    //   console.log('content ok, contents - ' + JSON.stringify(res));
+    // });
+  }
 
   return new Constructor();
 
@@ -262,63 +310,7 @@ function UI () {
 
 App.ui = new UI();
 
-
-// var data = {
-
-//   // author    : { type: Schema.ObjectId },
-//   // body      : {  },
-//   // comments  : [ Comment ],
-//   // tempname  : { type: String },
-//   // tempnames : [{ type: String }]
-// };
-
-submit.disabled = true;
-
-App.locator.getLoc(function (loc) {
-
-  console.log('data to page: ' + JSON.stringify(loc));
-  submit.disabled = false;
-
-  submit.addEventListener('click', function() {
-    var data = { timestamp : new Date() };
-    data.title = titleOut.value.toString();
-    data.body = messageOut.value.toString();
-    data.loc = { type: 'Point', coordinates: [ loc.lon, loc.lat ] };
-    App.postman.post(data, function (res) {
-      App.ui.appendPost(data);
-      console.log('post ok, contents - ' + JSON.stringify(res));
-    });
-  }, false);
-
-});
-
-document.addEventListener('feedJSON', function(e){
-  App.ui.showPosts();
-});
-
-//ractive
-
-// var fooTemp = "Im a template \
-//   <ul> \
-//   {{#list.length}} \
-//       {{#list:i}} \
-//       <li> \
-//         <h2>{{ title }}</h2> \
-//         Time Since Posted: {{ date }} \
-//         {{ body }} \
-//         By: {{ tempname }} \
-//         At: {{ loc }} \
-//       </li> \
-//       {{/list}} \
-//   {{/list.length}}";
-
-var ractive = new Ractive({
-  el: '#container',
-  template: '#ractive-template',
-  data: { list: outList }
-});
-
-// console.log(App.output);
+/* App.ui end */
 
 'use strict';
 /*global App*/
@@ -374,3 +366,100 @@ function Heartbeat () {
 
 App.heartbeat = new Heartbeat();
 App.heartbeat.startBeat();
+'use strict';
+/* src/js/start */
+/*global App*/
+/*global postSubmit*/
+/*global Ractive*/
+
+/*
+
+-- App start --
+Initialization for the app
+
+ ---- STILL NEED TO ADD DOM READY FUNCTION BELOW ---
+
+var whenReady = (function() { // This function returns the whenReady() function
+    var funcs = [];    // The functions to run when we get an event
+    var ready = false; // Switches to true when the handler is triggered
+
+    // The event handler invoked when the document becomes ready
+    function handler(e) {
+        // If we've already run once, just return
+        if (ready) return;
+
+        // If this was a readystatechange event where the state changed to
+        // something other than "complete", then we're not ready yet
+        if (e.type === "readystatechange" && document.readyState !== "complete")
+            return;
+
+        // Run all registered functions.
+        // Note that we look up funcs.length each time, in case calling
+        // one of these functions causes more functions to be registered.
+        for(var i = 0; i < funcs.length; i++)
+            funcs[i].call(document);
+
+        // Now set the ready flag to true and forget the functions
+        ready = true;
+        funcs = null;
+    }
+
+    // Register the handler for any event we might receive
+    if (document.addEventListener) {
+        document.addEventListener("DOMContentLoaded", handler, false);
+        document.addEventListener("readystatechange", handler, false);
+        window.addEventListener("load", handler, false);
+    }
+    else if (document.attachEvent) {
+        document.attachEvent("onreadystatechange", handler);
+        window.attachEvent("onload", handler);
+    }
+
+    // Return the whenReady function
+    return function whenReady(f) {
+        if (ready) f.call(document); // If already ready, just run it
+        else funcs.push(f);          // Otherwise, queue it for later.
+    }
+}());
+
+*/
+
+
+var listeners = function(){
+
+  //custom event listeners
+  document.addEventListener('feedJSON', function (e) {
+    App.ui.showFeed();
+  });
+
+  //user event listeners
+  postSubmit.addEventListener('click', function() {
+    App.ui.makePost();
+  }, false);
+}
+
+
+var initialize = function(){
+  //getting location at app launch
+  postSubmit.disabled = true;
+  App.locator.getLoc(function (loc) {
+    console.log('data to page: ' + JSON.stringify(loc));
+    postSubmit.disabled = false;
+  });
+
+  listeners();
+}
+
+
+window.onload = function(){
+  initialize();
+}
+
+
+//view controllers
+
+var ractive = new Ractive({
+  el: '#container',
+  template: '#post-template',
+  data: { list: outList }
+});

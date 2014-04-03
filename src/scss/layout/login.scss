@@ -1,0 +1,69 @@
+section.forms{
+  font-family: 'Dosis', sans-serif;
+  font-size: 24rem;
+}
+
+section.forms .logo img{
+  margin-top: 10rem;
+  width: 100%;
+}
+
+.form-section{
+  font-size: 18rem;
+  box-shadow: 0 25rem 25rem rgba(0,0,0,0.25);
+  background: #fff;
+}
+
+.form-section form{
+  width: 100%;
+}
+
+.form-section input{
+  width: 100%;
+  padding: 10rem 20rem;
+  border: 0;
+  border-bottom: 1px solid #ddd;
+  background: #fff;
+  font-size: 24rem;
+}
+
+.signup, .form-section button{
+  font-size: 24rem;
+  padding: 10rem;
+  color: #6b737f;
+}
+
+.signup{
+  margin-top: 40rem;
+}
+
+  .signup a{
+    color: #000;
+  }
+
+.form-section button{
+  position: relative;
+  background: #eee;
+  border: none;
+  line-height: 40rem;
+  width: 100%;
+  margin-bottom: 0;
+  margin-top: 30rem;
+}
+
+.sm-signup{
+  display: inline-block;
+  padding: 10rem;
+  border-radius: 3rem;
+  margin-top: 30rem;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.sm-signup.fb{ background: #306199; }
+.sm-signup.twtr{   background: #26c4f1; }
+
+.sm-signup .text{
+  font-size: 16rem;
+  margin: 0 10rem;
+}

@@ -55,8 +55,9 @@ module.exports = function (grunt) {
           'src/js/app.js',
           'src/js/locator.js',
           'src/js/postman.js',
-          'src/js/actions.js',
-          'src/js/heartbeat.js'
+          'src/js/ui.js',
+          'src/js/heartbeat.js',
+          'src/js/start.js'
         ],
         dest: 'public/app.js'
       }

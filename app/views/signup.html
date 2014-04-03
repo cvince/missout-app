@@ -11,13 +11,14 @@
   </div>
 
   <!-- LOGIN FORM -->
-  <form action="/signup" method="post">
+  <form id="signup-form" action="/signup" method="post">
       <label>Email</label>
       <input type="text" name="email">
       <label>Password</label>
       <input type="password" name="password">
-    <button type="submit">Signup</button>
   </form>
+
+  <button type="submit" form="signup-form">Signup</button>
 
   <hr>
 

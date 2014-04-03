@@ -1,0 +1,27 @@
+body {
+  font-family: 'Dosis', sans-serif;
+  background: #aaa;
+}
+
+input, button{
+  font-family: 'Dosis', sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #6b737f;
+}
+
+span.message{
+  font-size: 24rem;
+  line-height: 28rem;
+}
+
+span.alert{
+  background: #fdd;
+  color:#f00;
+}
+
+.center-content{
+  text-align: center;
+}
