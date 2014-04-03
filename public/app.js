@@ -148,34 +148,7 @@ function onMouseOver(element)
 
 // document.addEventListener( 'touchstart' , function stopScrolling( touchEvent ) { touchEvent.preventDefault(); } , false );
 // document.addEventListener( 'touchmove' , function stopScrolling( touchEvent ) { touchEvent.preventDefault(); } , false );
-/*
-setTimeout(function(){
-	var elem = document.querySelector('[id^=post-]');
-	window.mySwipe = Swipe(elem, {
-		startSlide: 1,
-		//auto: 3000,
-		continuous: false,
-		disableScroll: false,
-		stopPropagation: true,
-		callback: function(index, element) {},
-		transitionEnd: function(index, element) {}
-	});
 
-	var elem = document.querySelector('[id^=post-]');
-	var bullets = document.querySelector('[id^=pagination-]').getElementsByTagName('li');
-
-	window.mySwipe = Swipe(elem, {
-		continuous: true,
-		callback: function(pos) {
-			var i = bullets.length;
-			while (i--) {
-				bullets[i].className = ' ';
-			}
-			bullets[pos].className = 'on';
-		}
-	});
-}, 1200);
-*/
 function setTouchListeners() {
 	document.body.addEventListener('touchmove', function(e) { e.preventDefault(); }, false);
 	document.getElementById('navigationDrawer').addEventListener('touchmove', function(e) { e.stopPropagation(); }, false);
