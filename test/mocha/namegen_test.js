@@ -24,5 +24,33 @@ describe('Tempname Generator', function () {
   it('should generate a temp name', function () {
     expect(namegen()).to.be.a('string');
   });
+  it('should generate 100 unique names', function () {
+    var usedNames = [];
+    for (var i = 0; i <= 100; i++) {
+      usedNames.push(namegen());
+    }
+    var testName = namegen(usedNames),
+        testBool = false;
+    for (var name in usedNames) {
+      if (testName == name) {
+        testBool = true;
+      }
+    }
+    expect(testBool).to.eql(false);
+  });
+  it('should generate 1000 unique names', function () {
+    var usedNames = [];
+    for (var i = 0; i <= 1000; i++) {
+      usedNames.push(namegen());
+    }
+    var testName = namegen(usedNames),
+      testBool = false;
+    for (var name in usedNames) {
+      if (testName == name) {
+        testBool = true;
+      }
+    }
+    expect(testBool).to.eql(false);
+  });
 });
 
