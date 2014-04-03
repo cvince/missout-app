@@ -1,5 +1,3 @@
-<div id="container"></div>
-
 
 <article class="missedConnection line">
   <h2 class="title line">{{ title }}</h2>
@@ -81,6 +79,11 @@ var ractive = new Ractive({
 </script>
 
 <script id="ractive-template" type="text/ractive">
+<article class="missedConnection line">
+  <h2 class="title line">{{ title }}</h2>
+  <section id="post-{{ id }}" class="post line">
+
+
   <ul>
   {{#list.length}}
     {{#list:i}}
