@@ -5,8 +5,13 @@ FeedPage.prototype = new ContentPage();
 function FeedPage() {
 	ContentPage.call(this);
 	this.element.setAttribute("class", "feedPage");
-	// request the data and place in _element_
-	ajax.makeRequest("/public/views/feedPage.html", this);
+	this.getContentItems();
+}
+
+FeedPage.prototype.getContentItems = function() {
+	// the request for the content to display the contents of the navigation drawer
+	ajax.makeRequest('/public/views/feedPage.html', this);
+
 }
 
 FeedPage.prototype.displayContentItems = function(innerHTML) {

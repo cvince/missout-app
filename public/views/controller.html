@@ -12,17 +12,4 @@
       <button id="submit-post" type="button" value="send-post">Post</button>
     </form>
 </div>
-<script id="ractive-template" type="text/ractive">
-<ul>
-{{#list.length}}
-  {{#list:i}}
-  <li>
-  <h2>{{ title }}</h2>
-  Time Since Posted: {{ date }}
-  {{ body }}
-  By: {{ tempname }}
-  At: {{ loc }}
-  </li>
-  {{/list}}
-{{/list.length}}
-</script>
+
