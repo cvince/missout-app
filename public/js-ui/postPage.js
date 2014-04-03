@@ -1,6 +1,9 @@
 'use strict';
 
 var postPage;
+var postCompanion;
+var postDeeper;
+
 PostPage.prototype = new ContentPage();
 
 function PostPage() {
