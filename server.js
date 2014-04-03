@@ -33,7 +33,7 @@ app.configure('production', function(){
   mongoose.connect('localhost', 'missout');
 });
 app.configure('development', function(){
-  mongoose.connect('localhost', 'missout-dev');
+  mongoose.connect('localhost', 'missout-test');
   app.use(express.logger('dev'));
   app.use(express.errorHandler());
 });

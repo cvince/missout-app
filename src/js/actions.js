@@ -52,7 +52,6 @@ function UI () {
 
 }
 
-
 App.ui = new UI();
 
 
@@ -86,12 +85,6 @@ document.addEventListener('feedJSON', function(e){
 //       </li> \
 //       {{/list}} \
 //   {{/list.length}}";
-
-var ractive = new Ractive({
-  el: '#container',
-  template: '#ractive-template',
-  data: { list: outList }
-});
 
 // console.log(App.output);
 /**************************actions.js end****************************/
