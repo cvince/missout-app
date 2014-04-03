@@ -2,57 +2,54 @@
 /*global casper*/
 /*global App*/
 
-casper.test.begin('User Authentication', 3, function suite (test) {
+casper.test.begin('Acceptance Test', 5, function suite (test) {
 
-  casper.start('http://localhost:3000', function () {
-    test.assertHttpStatus(200, 'Page exists');
-  });
-
-  casper.wait(500, function () {
-    return true;
+  casper.start('http://localhost:3000/signup', function () {
+    test.assertHttpStatus(200, 'Signup page is accessible');
   });
 
   casper.then(function () {
     test.assertEval(function () {
-      if (App.locator) {
-        return true;
-      }
-      return false;
-    }, 'App.locator is present');
+      var inputs = document.getElementsByTagName('input');
+      return (inputs.length === 2);
+    }, 'Inputs are present');
   });
-  /*
-   Attempting to spoof the geolocation but to no avail.
-   Further study this example:
-   http://jeanphix.me/2011/11/16/faking-geolocation-javascript-api-using-casperjs/
-   */
-  casper.evaluate(function () {
-    navigator.geolocation.getCurrentPosition = function (pos) {
+
+  casper.then(function () {
+    casper.evaluate(function () {
+      var inputs = document.getElementsByTagName('input');
+      inputs[0].value = 'test@mail.gov';
+      inputs[1].value = 'test-test';
+      var form = document.getElementsByTagName('form');
+      form[0].submit();
+    });
+  });
+
+  casper.wait(500);
+
+  casper.then(function () {
+    test.assertEval(function () {
+      return (typeof App.locator.getLoc === 'function');
+    }, 'App object is present');
+  });
+
+  casper.then(function () {
+    test.assertExists('#message-out', 'User made it to main page');
+  });
+
+  casper.then(function () {
+    casper.evaluate(function () {
       var position = {
-        coords: {
-          longitude: -122,
-          latitude: 47
-        }
+        lat: 47,
+        lon: -122,
+        accuracy: 30,
+        timestamp: Date.now()
       };
-      pos(position);
-    };
-    App.locator.getLoc();
-  });
-
-  casper.wait(500, function () {
-    return true;
-  });
-  /*
-   Coordinates object is empty - ideally, this
-   test should fail
-   */
-  casper.then(function () {
-    test.assertEval(function () {
-      var position = App.locator.showLoc();
-      if (position) {
-        return true;
-      }
-      return false;
-    }, 'Locator returns valid coordinates');
+      App.locator.setLoc(position);
+      App.postman.newFeed(position);
+    });
+    casper.wait(500);
+    test.assertExists('ul', 'Feed is generated');
   });
 
   casper.run(function () {

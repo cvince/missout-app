@@ -11,7 +11,6 @@ module.exports = function (app) {
    */
 
   app.post('/api/v1/feed', function (req, res) {
-    console.log('hit feed endpoint' + JSON.stringify(req.body));
 //    if (!req.isAuthenticated()) {
 //      res.send(403);
 //    }

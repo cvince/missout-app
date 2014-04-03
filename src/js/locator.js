@@ -1,3 +1,4 @@
+/******************************locator.js start******************************/
 'use strict';
 /*global alert*/
 /*global App*/
@@ -9,13 +10,10 @@ Coordinates are stored in an array as follows:
 [ longitude, latitude ]
 A timestamp is also kept denoting the last
 time a geolocation was successfully fetched.
-Events:
-  * dispatches 'new-location' when a new geo
-    object is received
 Functions:
   * getLoc(cb) Updates the user's geolocation
-    and fires the DOM event 'new-location' with
-    user's location
+    and takes a callback function which receives
+    the coordinates
   * locAge() Returns time since last lookup in
     seconds
   * showLoc() Simply returns the stored
@@ -35,21 +33,15 @@ function Locator () {
   var maximumAccuracy = 1000;
   var positionOptions = {
     enableHighAccuracy: false,
-    timeout: 10000,
+    timeout: 3000,
     maximumAge: 10000
   };
 
   function Constructor () { }
 
-  Constructor.prototype.getLoc = function (maxAge, maxAccuracy, cb) {
-    if (typeof arguments[0] === "function") {
-      cb = arguments[0];
-      maxAccuracy = 5000;
-      maxAge = 600000;
-    }
-    if (maxAge) {
-      positionOptions.maximumAge = maxAge;
-    }
+  Constructor.prototype.getLoc = function (cb, maxAge, maxAccuracy) {
+    if(maxAge){ positionOptions.maximumAge = maxAge; }
+    if(maxAccuracy){ maximumAccuracy = maxAccuracy; }
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(getPositionData, getPositionError, positionOptions);
@@ -57,17 +49,15 @@ function Locator () {
       alert('Your browser does not support geolocation.');
     }
 
-    function getPositionData (position) {
+    function getPositionData (position){
+      console.log(position);
       userLoc = {
-        lat: position.coords.latitude,
+        lat: position.coords.lattitude,
         lon: position.coords.longitude,
         accuracy: position.coords.accuracy,
         timestamp: position.timestamp
       };
-      var event = new CustomEvent('new-location', { detail: userLoc });
-      document.dispatchEvent(event);
-      console.log(position);
-      if(userLoc.accuracy < maxAccuracy){
+      if(userLoc.accuracy < maximumAccuracy){
         //cache the last userLoc of sufficient accuracy
         lastGoodLoc = userLoc;
       }
@@ -92,7 +82,15 @@ function Locator () {
     };
   };
 
+  // Allows Casper to set the user's location for testing
+  Constructor.prototype.setLoc = function (loc) {
+    userLoc = loc;
+    lastGoodLoc = loc;
+  };
+
   return new Constructor();
 }
 
 App.locator = new Locator();
+App.locator.getLoc();
+/******************************locator.js end******************************/
