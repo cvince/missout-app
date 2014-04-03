@@ -392,6 +392,7 @@ function UI () {
       //remove above when changing schema
 
       outList.push({
+        id : App.output[i]._id,
         date : App.output[i].timestamp,
         title : App.output[i].title,
         tempname: App.output[i].tempname,
