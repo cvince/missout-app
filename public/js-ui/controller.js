@@ -62,6 +62,7 @@ Controller.prototype.displayContentItems = function(innerHTML) {
 			data.body = this.value.toString();
 			console.log(data);
 			console.log('hola');
+			App.commentman.update(data, function(res){ console.log('comment posted, contents - ' + JSON.stringify(res)) });
 		})
 
 
