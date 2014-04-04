@@ -114,7 +114,7 @@ module.exports = function (grunt) {
             type: 'json',
             file: 'db/seeds/test.json',
             jsonArray: true,
-            upsertFields: "_id",
+            upsertFields: '_id',
             drop: true
           }
         ]
@@ -129,7 +129,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-mongoimport');
   grunt.loadNpmTasks('grunt-express-server');
   grunt.loadNpmTasks('grunt-simple-mocha');
-  grunt.registerTask('default', [/*'mongoimport',*/ 'express:dev', 'watch', 'env:dev']);
+  grunt.registerTask('default', [/*'mongoimport',*/ 'express:test', 'watch', 'env:test']);
   grunt.registerTask('test', [ 'env:test', 'mongoimport', 'express:test', 'casper:all', 'simplemocha:all']);
   grunt.registerTask('build', ['sass:build', 'concat:all']);
 };

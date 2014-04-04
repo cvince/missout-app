@@ -174,7 +174,7 @@ FeedPage.prototype.postPageButtonClicked = function() {
 var buildSlider = function(){
 
 	var sliders = document.querySelectorAll('[id^=post-]');
-	var bullets = document.querySelectorAll('[id^=pagination-] ul li');
+	var bullets = document.querySelector('[id^=pagination-]').getElementsByTagName('li');
 	for(var i=0;i<sliders.length;i++) {
 		window.mySwipe = Swipe(sliders[i], {
 			startSlide: 0,
