@@ -42,34 +42,32 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 					'id':'pagination-${_id}',
 					'class':'line',
 					'children':[
-  				{
-  					'tag':'ul',
-  					'children': [ ]
-  				}
-  				]
-  			},
-        {
-          'tag':'div',
-          'class':'comments line',
-          'html':
-            '<form class="comment-box" method="post">'+
-              '<label>Submit a comment</label>'+
-              '<textarea class="comment-out"></textarea>'+
-              '<button data-id=${_id} class="submit-comment" type="button" value="send-comment">Submit A Comment</button>'+
-            '</form>'
-          ,
-          'children' : [
-          {
-            'tag' : 'ul',
-            'children' : [
-            {
-              'tag' : 'li',
-              'html' : '${comments}'
-            }
-            ]
-          }
-          ]
-        },
+						{
+							'tag':'ul',
+							'children': [ ]
+						}
+					]
+				},
+				{
+					'tag':'div',
+					'class':'comments line',
+					'html':
+						'<form class="comment-box" method="post">'+
+							'<label>Submit a comment</label>'+
+							'<textarea class="comment-out"></textarea>'+
+							'<button data-id=${_id} class="submit-comment" type="button" value="send-comment">Submit A Comment</button>'+ '</form>',
+					'children' : [
+						{
+							'tag' : 'ul',
+							'children' : [
+								{
+									'tag' : 'li',
+									'html' : '${comments}'
+								}
+							]
+						}
+					]
+				},
 				{
 					'tag':'footer',
 					'class':'gesturebar line',
@@ -114,7 +112,7 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 	//feed.innerHTML = html;
 
 	document.addEventListener('feedJSON', function (e) {
-    feed.innerHTML = '';
+		feed.innerHTML = '';
 		var feedData = e.detail;
 		console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
 		console.log('feedData');
@@ -141,10 +139,12 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 					tag: 'li',
 					html: '${body' + rep + '}'
 				});
-				template.children[2].children[0].children.push({
+				var tempBullet = {
 					tag: 'li',
 					html: ''
-				});
+				};
+				if(rep === 0){tempBullet.class = 'on';}
+				template.children[2].children[0].children.push(tempBullet);
 				elem['body' + rep] = wordsTo300[rep];
 			}
 			console.log(template.children[1].children[0]);
