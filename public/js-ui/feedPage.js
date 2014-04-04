@@ -114,6 +114,7 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 	//feed.innerHTML = html;
 
 	document.addEventListener('feedJSON', function (e) {
+    feed.innerHTML = '';
 		var feedData = e.detail;
 		console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
 		console.log('feedData');
