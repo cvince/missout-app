@@ -7,7 +7,7 @@ module.exports = function (app) {
     Post.findById(postId, function (err, post) {
       post.comments.push(req.body);
       post.save(function (err, post) {
-        res.send(post);
+        res.redirect('/');
       });
       if (err) {
         res.send(err);
@@ -21,7 +21,7 @@ module.exports = function (app) {
       if (err) {
         res.send(err);
       }
-      res.send(post.comments)
+      res.redirect('/')
     });
   });
 };
