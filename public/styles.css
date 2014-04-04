@@ -374,7 +374,6 @@ button {
 .post {
   position: relative;
   overflow: hidden;
-  visibility: hidden;
   position: relative;
   border-top: 1rem solid #f3f3f3;
   /*font-smoothing: subpixel-antialiased;*/
