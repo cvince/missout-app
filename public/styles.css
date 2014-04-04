@@ -362,7 +362,8 @@ button {
   margin: 0 auto;
   margin-bottom: 20rem;
   width: 95%;
-  border: 1rem solid #eaeaea; }
+  border: 1rem solid #eaeaea;
+  overflow: hidden; }
 
 .missedConnection h2 {
   background: #fafafa;
@@ -394,6 +395,9 @@ button {
 .post-wrap > li p {
   margin-bottom: 10rem;
   font-size: 16rem; }
+
+.post .comments {
+  font-size: 18rem; }
 
 .gesturebar {
   padding: 10rem;

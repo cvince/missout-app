@@ -61,6 +61,10 @@ function Postman (endpoint) {
     return this.XHR('POST', data, url, true, cb);
   };
 
+  Constructor.prototype.put = function (data, cb) {
+    return this.XHR('PUT', data, url, true, cb);
+  }
+
   Constructor.prototype.newFeed = function (loc) {
     console.log('data to newFeed function: ' + JSON.stringify(loc));
     var req = new XMLHttpRequest(),
@@ -91,6 +95,10 @@ function Postman (endpoint) {
   return new Constructor();
 }
 App.postman = new Postman('http://localhost:3000/api/v1/posts');
+
+//for hookup to the comments API
+App.commentman = new Postman('http://localhost:3000/api/v1/comments');
+
 // Receive the DOM event 'feed-location' and query the
 // feed endpoint
 document.addEventListener('new-location', function (e) {
