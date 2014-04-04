@@ -127,7 +127,7 @@ function convertList(){
         }
       };
       for(var rep3 = 0;rep3 < 5;rep3 ++){
-        tempObject.comments.push(meatIpsum());
+        tempObject.comments.push({body: meatIpsum()});
       }
       objectList.push(tempObject);
     }
