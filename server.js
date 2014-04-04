@@ -58,7 +58,6 @@ routeFactory('/api/v1/users', '../models/user', app);
 routeFactory('/api/v1/posts', '../models/post', app);
 routeFactory('/api/v1/feed', '../controllers/feed', app);
 
-
 /* Render the index */
 // app.get('/', function (req, res) {
 //   res.sendfile('app/views/index.html');
@@ -98,7 +97,7 @@ routeFactory('/api/v1/feed', '../controllers/feed', app);
 //});
 
 /* Hey! Listen! */
-var port = process.env.PORT || process.argv[2] || 5000;
+var port = process.env.PORT || process.argv[2] || 3000;
 app.listen(port, function () {
   console.log('Listening on ' + port);
 });

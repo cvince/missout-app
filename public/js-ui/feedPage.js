@@ -48,6 +48,7 @@ var feed = document.getElementById('feed');
 //feed.innerHTML = html;
 
 document.addEventListener('feedJSON', function (e) {
+  feed.innerHTML = '';
 	var feedData = e.detail;
 	console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
 	console.log('feedData');
@@ -80,27 +81,27 @@ document.addEventListener('feedJSON', function (e) {
 		console.log(json2html.transform(elem, template));
 		feed.innerHTML = feed.innerHTML + json2html.transform(elem, template);
 	})
-		// if (elem.body.length > 0) {
-		// 	var pageTemp = {'tag':'li','html':''};
-		// 	var bodyArray = elem.body.split(' ');
-		// 	console.log(bodyArray);
-		// 	var numPages = elem.body.length / 300;
-		// 	numPages = Math.floor(numPages);
-		// 	console.log(numPages);
-		// 	for (var i = 0; i <= numPages; i++) {
-		// 		pageTemp.html = '${body'+i+'}';
-		// 		template.children[1].children[0].children.push(pageTemp);
-		// 		var thisPage = '';
-		// 		while (bodyArray && thisPage.length < 300) {
-		// 			thisPage += ' ' + bodyArray.shift();
-		// 		}
-		// 		elem['body'+i] = thisPage;
-		// 		console.log(elem);
-		// 	};
-		// 	console.log(JSON.stringify(template));
-		// }
-		//feed.innerHTML = feed.innerHTML + json2html.transform(elem, template);
-	//});
+  // if (elem.body.length > 0) {
+  // 	var pageTemp = {'tag':'li','html':''};
+  // 	var bodyArray = elem.body.split(' ');
+  // 	console.log(bodyArray);
+  // 	var numPages = elem.body.length / 300;
+  // 	numPages = Math.floor(numPages);
+  // 	console.log(numPages);
+  // 	for (var i = 0; i <= numPages; i++) {
+  // 		pageTemp.html = '${body'+i+'}';
+  // 		template.children[1].children[0].children.push(pageTemp);
+  // 		var thisPage = '';
+  // 		while (bodyArray && thisPage.length < 300) {
+  // 			thisPage += ' ' + bodyArray.shift();
+  // 		}
+  // 		elem['body'+i] = thisPage;
+  // 		console.log(elem);
+  // 	};
+  // 	console.log(JSON.stringify(template));
+  // }
+  //feed.innerHTML = feed.innerHTML + json2html.transform(elem, template);
+  //});
 });
 };
 	/*

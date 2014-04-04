@@ -106,7 +106,7 @@ module.exports = function (grunt) {
             type: 'json',
             file: 'db/seeds/users.json',
             jsonArray: true,
-            upsertFields: '_id',
+            //upsertFields: '_id',
             drop: true
           },
           {
@@ -114,7 +114,7 @@ module.exports = function (grunt) {
             type: 'json',
             file: 'db/seeds/posts.json',
             jsonArray: true,
-            //upsertFields: "_id",
+            upsertFields: "_id",
             drop: true
           }
         ]
