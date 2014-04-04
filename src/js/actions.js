@@ -31,6 +31,7 @@ function UI () {
       //remove above when changing schema
 
       outList.push({
+        id : App.output[i]._id,
         date : App.output[i].timestamp,
         title : App.output[i].title,
         tempname: App.output[i].tempname,
@@ -51,46 +52,7 @@ function UI () {
 
 }
 
-
 App.ui = new UI();
 
 
-// var data = {
-
-//   // author    : { type: Schema.ObjectId },
-//   // body      : {  },
-//   // comments  : [ Comment ],
-//   // tempname  : { type: String },
-//   // tempnames : [{ type: String }]
-// };
-
-
-
-document.addEventListener('feedJSON', function(e){
-  App.ui.showPosts();
-});
-
-//ractive
-
-// var fooTemp = "Im a template \
-//   <ul> \
-//   {{#list.length}} \
-//       {{#list:i}} \
-//       <li> \
-//         <h2>{{ title }}</h2> \
-//         Time Since Posted: {{ date }} \
-//         {{ body }} \
-//         By: {{ tempname }} \
-//         At: {{ loc }} \
-//       </li> \
-//       {{/list}} \
-//   {{/list.length}}";
-
-var ractive = new Ractive({
-  el: '#container',
-  template: '#ractive-template',
-  data: { list: outList }
-});
-
-// console.log(App.output);
 /**************************actions.js end****************************/

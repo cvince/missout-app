@@ -374,7 +374,6 @@ button {
 .post {
   position: relative;
   overflow: hidden;
-  visibility: hidden;
   position: relative;
   border-top: 1rem solid #f3f3f3;
   /*font-smoothing: subpixel-antialiased;*/
@@ -388,6 +387,7 @@ button {
   float: left;
   width: 100%;
   position: relative;
+  margin-bottom: 10rem;
   padding: 10rem;
   font: 16rem/24rem normal 'Dosis', sans-serif; }
 

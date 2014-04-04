@@ -1,6 +1,3 @@
-<div id="container"></div>
-
-
 <article class="missedConnection line">
   <h2 class="title line">{{ title }}</h2>
   <section id="post-1" class="post line">
@@ -71,26 +68,3 @@
     <button class="comment" title="comment"></button>
   </footer>
 </article><!-- /article -->
-
-<script type="text/javascript">
-var ractive = new Ractive({
-    el: '#container',
-    template: '#ractive-template',
-    data: { list: outList }
-  });
-</script>
-
-<script id="ractive-template" type="text/ractive">
-  <ul>
-  {{#list.length}}
-    {{#list:i}}
-    <li>
-    <h2>{{ title }}</h2>
-    Time Since Posted: {{ date }}
-    {{ body }}
-    By: {{ tempname }}
-    At: {{ loc }}
-    </li>
-    {{/list}}
-  {{/list.length}}
-</script>

@@ -64,6 +64,7 @@ function addElementToDict(element, jsObject) {
 }
 
 function initialize() {
+	App.locator.getLoc();
 	elements = new Object();
 	elementCount = 0;
 	drawPageElements();
@@ -148,152 +149,6 @@ function onMouseOver(element)
 // document.addEventListener( 'touchstart' , function stopScrolling( touchEvent ) { touchEvent.preventDefault(); } , false );
 // document.addEventListener( 'touchmove' , function stopScrolling( touchEvent ) { touchEvent.preventDefault(); } , false );
 
-var BrowserDetect = {
-	init: function () {
-		this.browser = this.searchString(this.dataBrowser) || 'An unknown browser';
-		this.version = this.searchVersion(navigator.userAgent)
-			|| this.searchVersion(navigator.appVersion)
-			|| 'an unknown version';
-		this.OS = this.searchString(this.dataOS) || 'an unknown OS';
-	},
-	searchString: function (data) {
-		for (var i=0;i<data.length;i++) {
-			var dataString = data[i].string;
-			var dataProp = data[i].prop;
-			this.versionSearchString = data[i].versionSearch || data[i].identity;
-			if (dataString) {
-				if (dataString.indexOf(data[i].subString) != -1)
-					return data[i].identity;
-			}
-			else if (dataProp)
-				return data[i].identity;
-		}
-	},
-	searchVersion: function (dataString) {
-		var index = dataString.indexOf(this.versionSearchString);
-		if (index == -1) return;
-		return parseFloat(dataString.substring(index+this.versionSearchString.length+1));
-	},
-	dataBrowser: [
-		{
-			string: navigator.userAgent,
-			subString: 'Chrome',
-			identity: 'Chrome'
-		},
-		{   string: navigator.userAgent,
-			subString: 'OmniWeb',
-			versionSearch: 'OmniWeb/',
-			identity: 'OmniWeb'
-		},
-		{
-			string: navigator.vendor,
-			subString: 'Apple',
-			identity: 'Safari',
-			versionSearch: 'Version'
-		},
-		{
-			prop: window.opera,
-			identity: 'Opera',
-			versionSearch: 'Version'
-		},
-		{
-			string: navigator.vendor,
-			subString: 'iCab',
-			identity: 'iCab'
-		},
-		{
-			string: navigator.vendor,
-			subString: 'KDE',
-			identity: 'Konqueror'
-		},
-		{
-			string: navigator.userAgent,
-			subString: 'Firefox',
-			identity: 'Firefox'
-		},
-		{
-			string: navigator.vendor,
-			subString: 'Camino',
-			identity: 'Camino'
-		},
-		{   // for newer Netscapes (6+)
-			string: navigator.userAgent,
-			subString: 'Netscape',
-			identity: 'Netscape'
-		},
-		{
-			string: navigator.userAgent,
-			subString: 'MSIE',
-			identity: 'Explorer',
-			versionSearch: 'MSIE'
-		},
-		{
-			string: navigator.userAgent,
-			subString: 'Gecko',
-			identity: 'Mozilla',
-			versionSearch: 'rv'
-		},
-		{     // for older Netscapes (4-)
-			string: navigator.userAgent,
-			subString: 'Mozilla',
-			identity: 'Netscape',
-			versionSearch: 'Mozilla'
-		}
-	],
-	dataOS : [
-		{
-			string: navigator.platform,
-			subString: 'Win',
-			identity: 'Windows'
-		},
-		{
-			string: navigator.platform,
-			subString: 'Mac',
-			identity: 'Mac'
-		},
-		{
-				 string: navigator.userAgent,
-				 subString: 'iPhone',
-				 identity: 'iPhone/iPod'
-			},
-		{
-			string: navigator.platform,
-			subString: 'Linux',
-			identity: 'Linux'
-		}
-	]
-};
-BrowserDetect.init();
-
-isChromeOrSafari = BrowserDetect.browser == 'Safari' || BrowserDetect.browser == 'Chrome';
-
-setTimeout(function(){
-	var elem = document.querySelector('[id^=post-]');
-	window.mySwipe = Swipe(elem, {
-		startSlide: 1,
-		//auto: 3000,
-		continuous: false,
-		disableScroll: false,
-		stopPropagation: true,
-		callback: function(index, element) {},
-		transitionEnd: function(index, element) {}
-	});
-
-	var elem = document.querySelector('[id^=post-]');
-	var bullets = document.querySelector('[id^=pagination-]').getElementsByTagName('li');
-
-	window.mySwipe = Swipe(elem, {
-		continuous: true,
-		callback: function(pos) {
-			var i = bullets.length;
-			while (i--) {
-				bullets[i].className = ' ';
-			}
-			bullets[pos].className = 'on';
-		}
-	});
-}, 1200);
-
 function setTouchListeners() {
 	document.body.addEventListener('touchmove', function(e) { e.preventDefault(); }, false);
 	document.getElementById('navigationDrawer').addEventListener('touchmove', function(e) { e.stopPropagation(); }, false);
@@ -301,6 +156,7 @@ function setTouchListeners() {
 }
 
 /******************************end app.js******************************/
+
 /*******************locator.js start***********************/
 'use strict';
 /*global alert*/
@@ -536,6 +392,7 @@ function UI () {
       //remove above when changing schema
 
       outList.push({
+        id : App.output[i]._id,
         date : App.output[i].timestamp,
         title : App.output[i].title,
         tempname: App.output[i].tempname,
@@ -556,48 +413,9 @@ function UI () {
 
 }
 
-
 App.ui = new UI();
 
 
-// var data = {
-
-//   // author    : { type: Schema.ObjectId },
-//   // body      : {  },
-//   // comments  : [ Comment ],
-//   // tempname  : { type: String },
-//   // tempnames : [{ type: String }]
-// };
-
-
-
-document.addEventListener('feedJSON', function(e){
-  App.ui.showPosts();
-});
-
-//ractive
-
-// var fooTemp = "Im a template \
-//   <ul> \
-//   {{#list.length}} \
-//       {{#list:i}} \
-//       <li> \
-//         <h2>{{ title }}</h2> \
-//         Time Since Posted: {{ date }} \
-//         {{ body }} \
-//         By: {{ tempname }} \
-//         At: {{ loc }} \
-//       </li> \
-//       {{/list}} \
-//   {{/list.length}}";
-
-var ractive = new Ractive({
-  el: '#container',
-  template: '#ractive-template',
-  data: { list: outList }
-});
-
-// console.log(App.output);
 /**************************actions.js end****************************/
 
 /*******************heartbeat.js start***********************/

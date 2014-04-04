@@ -34,10 +34,12 @@ exports.routeFactory = function(route, objectPath, app, methodArray){
     }
     res.setHeader('Content-Type', 'application/json');
     var id = req.params.id;
-    DbObject.findOne({'_id': String(id)}, function(err, retObject){
+    console.log(id);
+    DbObject.findOne({_id: String(id)}, function (err, retObject){
       if(err){
         res.send(500, {'error': err});
       } else {
+        console.log(retObject);
         res.send(retObject);
       }
     });
