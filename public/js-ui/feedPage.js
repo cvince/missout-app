@@ -141,10 +141,12 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 					tag: 'li',
 					html: '${body' + rep + '}'
 				});
-				template.children[2].children[0].children.push({
+				var tempBullet = {
 					tag: 'li',
 					html: ''
-				});
+				};
+				if(rep === 0){tempBullet.class = 'on';}
+				template.children[2].children[0].children.push(tempBullet);
 				elem['body' + rep] = wordsTo300[rep];
 			}
 			console.log(template.children[1].children[0]);
