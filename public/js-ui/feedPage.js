@@ -19,7 +19,7 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 	function generateTemplate(){
 		return {
 			'tag':'article',
-			'class':'missedConnection line',
+			'class':'missedConnection line post',
 			'children' : [
 				{
 				'tag':'h2',
@@ -42,12 +42,34 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 					'id':'pagination-${_id}',
 					'class':'line',
 					'children':[
-    				{
-    					'tag':'ul',
-    					'children': [ ]
-    				}
+  				{
+  					'tag':'ul',
+  					'children': [ ]
+  				}
   				]
   			},
+        {
+          'tag':'div',
+          'class':'comments',
+          'html':
+            '<form>'+
+              '<label>Submit a comment</label>'+
+              '<textarea class="comment-out"></textarea>'+
+              '<button data-id=${_id} class="submit-comment" type="button" value="send-comment">Comment</button>'+
+            '</form>'
+          ,
+          'children' : [
+          {
+            'tag' : 'ul',
+            'children' : [
+            {
+              'tag' : 'li',
+              'html' : '${comments}'
+            }
+            ]
+          }
+          ]
+        },
 				{
 					'tag':'footer',
 					'class':'gesturebar line',
@@ -71,6 +93,7 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
       	]},
     		{
     			'tag':'button',
+          'id' : 'comment-${_id}',
     			'class':'comment',
     			'title':'comment',
     			'html':''
@@ -79,6 +102,8 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 			]
 		};
 	}
+
+
 
 	var data = [
 		{ _id: 400, title: 'My Post', body: 'The redhead: damn'}
@@ -93,6 +118,7 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 		console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
 		console.log('feedData');
 		console.log(feedData);
+
 		feedData.forEach(function (elem) {
 			var wordArray = [];
 			var wordsTo300 = [];
@@ -146,6 +172,7 @@ FeedPage.prototype.postPageButtonClicked = function() {
 
 
 var buildSlider = function(){
+
 	var sliders = document.querySelectorAll('[id^=post-]');
 	var bullets = document.querySelector('[id^=pagination-]').getElementsByTagName('li');
 	for(var i=0;i<sliders.length;i++) {

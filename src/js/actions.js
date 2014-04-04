@@ -55,36 +55,4 @@ function UI () {
 App.ui = new UI();
 
 
-// var data = {
-
-//   // author    : { type: Schema.ObjectId },
-//   // body      : {  },
-//   // comments  : [ Comment ],
-//   // tempname  : { type: String },
-//   // tempnames : [{ type: String }]
-// };
-
-
-
-document.addEventListener('feedJSON', function(e){
-  App.ui.showPosts();
-});
-
-//ractive
-
-// var fooTemp = "Im a template \
-//   <ul> \
-//   {{#list.length}} \
-//       {{#list:i}} \
-//       <li> \
-//         <h2>{{ title }}</h2> \
-//         Time Since Posted: {{ date }} \
-//         {{ body }} \
-//         By: {{ tempname }} \
-//         At: {{ loc }} \
-//       </li> \
-//       {{/list}} \
-//   {{/list.length}}";
-
-// console.log(App.output);
 /**************************actions.js end****************************/

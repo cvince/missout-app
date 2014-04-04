@@ -321,6 +321,10 @@ function Postman (endpoint) {
     return this.XHR('POST', data, url, true, cb);
   };
 
+  Constructor.prototype.put = function (data, cb) {
+    return this.XHR('PUT', data, url, true, cb);
+  }
+
   Constructor.prototype.newFeed = function (loc) {
     console.log('data to newFeed function: ' + JSON.stringify(loc));
     var req = new XMLHttpRequest(),
@@ -351,6 +355,10 @@ function Postman (endpoint) {
   return new Constructor();
 }
 App.postman = new Postman('http://localhost:3000/api/v1/posts');
+
+//for hookup to the comments API
+App.commentman = new Postman('http://localhost:3000/api/v1/comments');
+
 // Receive the DOM event 'feed-location' and query the
 // feed endpoint
 document.addEventListener('new-location', function (e) {
@@ -359,6 +367,7 @@ document.addEventListener('new-location', function (e) {
 });
 
 /**************************postman.js end****************************/
+
 /*******************actions.js start***********************/
 'use strict';
 /* src/js/actions */
@@ -416,38 +425,6 @@ function UI () {
 App.ui = new UI();
 
 
-// var data = {
-
-//   // author    : { type: Schema.ObjectId },
-//   // body      : {  },
-//   // comments  : [ Comment ],
-//   // tempname  : { type: String },
-//   // tempnames : [{ type: String }]
-// };
-
-
-
-document.addEventListener('feedJSON', function(e){
-  App.ui.showPosts();
-});
-
-//ractive
-
-// var fooTemp = "Im a template \
-//   <ul> \
-//   {{#list.length}} \
-//       {{#list:i}} \
-//       <li> \
-//         <h2>{{ title }}</h2> \
-//         Time Since Posted: {{ date }} \
-//         {{ body }} \
-//         By: {{ tempname }} \
-//         At: {{ loc }} \
-//       </li> \
-//       {{/list}} \
-//   {{/list.length}}";
-
-// console.log(App.output);
 /**************************actions.js end****************************/
 
 /*******************heartbeat.js start***********************/
