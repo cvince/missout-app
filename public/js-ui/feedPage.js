@@ -22,19 +22,19 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 			'class':'missedConnection line post',
 			'children' : [
 				{
-				'tag':'h2',
-				'html':'${title}',
-				'class':'title line'
+					'tag':'h2',
+					'html':'${title}',
+					'class':'title line'
 				},
 				{
-				'tag':'section',
-				'id':'post-${_id}',
-				'children': [
-					{
-						'tag':'ul',
-						'class':'post-wrap line',
-						'children': [ ]
-					}
+					'tag':'section',
+					'id':'post-${_id}',
+					'children': [
+						{
+							'tag':'ul',
+							'class':'post-wrap line',
+							'children': [ ]
+						}
 					],
 				},
 				{
@@ -74,31 +74,31 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 					'tag':'footer',
 					'class':'gesturebar line',
 					'children': [
-    				{
-    					'tag':'div',
-    					'class':'vote',
-    					'children': [
-        		{
-        			'tag':'button',
-        			'class':'upVote',
-        			'title':'up vote',
-        			'html':''
-        		},
-        		{
-        			'tag':'button',
-        			'class': 'downvote',
-        			'title':'down vote',
-        			'html':''
-        		}
-      	]},
-    		{
-    			'tag':'button',
-          'id' : 'comment-${_id}',
-    			'class':'comment',
-    			'title':'comment',
-    			'html':''
-    		}
-  		]}
+						{
+							'tag':'div',
+							'class':'vote',
+							'children': [
+								{
+									'tag':'button',
+									'class':'upVote',
+									'title':'up vote',
+									'html':''
+								},
+								{
+									'tag':'button',
+									'class': 'downvote',
+									'title':'down vote',
+									'html':''
+								}
+							]},
+						{
+							'tag':'button',
+							'id' : 'comment-${_id}',
+							'class':'comment',
+							'title':'comment',
+							'html':''
+						}
+					]}
 			]
 		};
 	}
@@ -175,7 +175,6 @@ FeedPage.prototype.postPageButtonClicked = function() {
 var buildSlider = function(){
 
 	var sliders = document.querySelectorAll('[id^=post-]');
-	var bullets = document.querySelector('[id^=pagination-]').getElementsByTagName('li');
 	for(var i=0;i<sliders.length;i++) {
 		window.mySwipe = Swipe(sliders[i], {
 			startSlide: 0,
@@ -183,14 +182,14 @@ var buildSlider = function(){
 			continuous: false,
 			disableScroll: false,
 			stopPropagation: true,
-			callback: function(pos) {
-
+			callback: function(pos, elem) {
+				var _id = elem.parentElement.parentElement.id.replace('post-', '');
+				var bullets = document.querySelector('[id^=pagination-' + _id +']').getElementsByTagName('li');
 				var j = bullets.length;
 				while (j--) {
 					bullets[j].className = ' ';
 				}
 				bullets[pos].className = 'on';
-
 			},
 			transitionEnd: function(index, element) {}
 		});
