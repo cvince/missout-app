@@ -21,7 +21,7 @@ app.configure(function () {
   app.set('view engine', 'html');
 
   //authentication uses
-  app.use(express.session({secret: process.env.CHAT_APP_SECRET}));
+  app.use(express.session({secret: 'secretfuckingsecret'}));
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(flash());
