@@ -68,7 +68,7 @@ function Postman (endpoint) {
   Constructor.prototype.newFeed = function (loc) {
     console.log('data to newFeed function: ' + JSON.stringify(loc));
     var req = new XMLHttpRequest(),
-        url = 'http://localhost:3000/api/v1/feed';
+        url = document.URL + 'api/v1/feed';
     req.open('POST', url, true);
     req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     req.onload = function (d) {
@@ -94,10 +94,10 @@ function Postman (endpoint) {
 
   return new Constructor();
 }
-App.postman = new Postman('http://localhost:3000/api/v1/posts');
+App.postman = new Postman(document.URL + 'api/v1/posts');
 
 //for hookup to the comments API
-App.commentman = new Postman('http://localhost:3000/api/v1/comments');
+App.commentman = new Postman(document.URL + 'api/v1/comments');
 
 // Receive the DOM event 'feed-location' and query the
 // feed endpoint
