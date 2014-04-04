@@ -103,6 +103,23 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 		};
 	}
 
+  function commentMicroTemplate () {
+    return {
+      'tag':'div',
+      'id':'${_id}',
+      'children': [
+        {
+          'tag':'h5',
+          'html':'${tempname}'
+        },
+        {
+          'tag':'p',
+          'html':'${body}'
+        }
+      ]
+    }
+  }
+
 
 
 	var data = [
@@ -116,11 +133,9 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 	document.addEventListener('feedJSON', function (e) {
     feed.innerHTML = '';
 		var feedData = e.detail;
-		console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-		console.log('feedData');
-		console.log(feedData);
 
 		feedData.forEach(function (elem) {
+      console.log(elem.comments);
 			var wordArray = [];
 			var wordsTo300 = [];
 			var template = generateTemplate();
@@ -132,9 +147,6 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 				} while (tempTo300.length <= 300 && wordArray.length > 0);
 				wordsTo300.push(tempTo300);
 			} while (wordArray.length > 0);
-			console.log('******************************');
-			console.log(wordsTo300.length);
-			console.log(wordsTo300);
 
 			for(var rep = 0;rep < wordsTo300.length;rep ++){
 				template.children[1].children[0].children.push({
@@ -147,9 +159,6 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 				});
 				elem['body' + rep] = wordsTo300[rep];
 			}
-			console.log(template.children[1].children[0]);
-			console.log(elem);
-			console.log(json2html.transform(elem, template));
 			feed.innerHTML = feed.innerHTML + json2html.transform(elem, template);
 		});
 		buildSlider();

@@ -19,9 +19,14 @@ var PostSchema = new Schema({
   loc       : { type: { type: String, default: "Point" }, coordinates: [] },
   author    : { type: Object },
   body      : { type: String },
-  comments  : [ Comment ],
-  tempname  : { type: String }
-  //tempnames : [{ type: String }]
+  comments  : [{
+    author    : { type: Object },
+    body      : { type: String },
+    timestamp : { type: Date },
+    tempname  : { type: String }
+  }],
+    tempname  : { type: String }
+    //tempnames : [{ type: String }]
 });
 
 

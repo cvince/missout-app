@@ -44,6 +44,9 @@ require('./app/controllers/feed.js')(app);
 /* Get Routes */
 require('./app/controllers/feed')(app, passport) ;
 
+/* Comment route */
+require('./app/controllers/comments')(app);
+
 var routeFactory = require('./app/routes/routeGenerator').routeFactory;
 routeFactory('/api/v1/users', '../models/user', app);
 routeFactory('/api/v1/posts', '../models/post', app);
