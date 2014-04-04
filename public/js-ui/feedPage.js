@@ -88,7 +88,8 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 									'title':'down vote',
 									'html':''
 								}
-							]},
+							]
+						},
 						{
 							'tag':'button',
 							'id' : 'comment-${_id}',
@@ -96,18 +97,12 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 							'title':'comment',
 							'html':''
 						}
-					]}
+					]
+				}
 			]
 		};
 	}
 
-
-
-	var data = [
-		{ _id: 400, title: 'My Post', body: 'The redhead: damn'}
-	];
-
-	//var html = json2html.transform(data, template);
 	var feed = document.getElementById('feed');
 	//feed.innerHTML = html;
 
