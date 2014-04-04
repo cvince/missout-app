@@ -1,3 +1,4 @@
+/*******************locator.js start***********************/
 'use strict';
 /*global alert*/
 /*global App*/
@@ -96,3 +97,5 @@ function Locator () {
 }
 
 App.locator = new Locator();
+
+/**************************locator.js end****************************/

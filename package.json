@@ -27,7 +27,9 @@
     "passport-facebook": "^1.0.3",
     "passport-twitter": "^1.0.2",
     "bcrypt-nodejs": "0.0.3",
-    "ractive": "^0.4.0-pre2"
+    "ractive": "^0.4.0-pre2",
+    "request": "^2.34.0",
+    "cheerio": "^0.14.0"
   },
   "devDependencies": {
     "grunt": "^0.4.4",

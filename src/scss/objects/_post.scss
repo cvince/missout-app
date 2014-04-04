@@ -1,0 +1,41 @@
+.missedConnection {
+  margin: 0 auto;
+  margin-bottom: 20rem;
+  width: 95%;
+  border: 1rem solid #eaeaea;
+}
+.missedConnection h2 {
+  background: #fafafa;
+  padding: 5rem;
+  font-size: 18rem;
+  font-style: bold;
+  border-bottom: 1rem solid #fff;
+}
+.post {
+  position: relative;
+  overflow: hidden;
+  position: relative;
+  border-top: 1rem solid #f3f3f3;
+  /*font-smoothing: subpixel-antialiased;*/
+  transform: translate3d(0,0,0);
+}
+.post-wrap {
+  position: relative;
+  overflow: hidden;
+}
+.post-wrap > li {
+  float: left;
+  width: 100%;
+  position: relative;
+  margin-bottom: 10rem;
+  padding: 10rem;
+  font: 16rem/24rem normal 'Dosis', sans-serif;
+}
+.post-wrap > li p {
+  margin-bottom: 10rem;
+  font-size: 16rem;
+}
+
+.post .comments{
+  font-size: 18rem;
+}

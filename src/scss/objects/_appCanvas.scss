@@ -1,0 +1,132 @@
+.appCanvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+}
+
+.contentAreaCurrent {
+  position: absolute;
+  display: block;
+  top: 0rem;
+  left: 0rem;
+  width: 100%;
+  height: 100%;
+  padding-top: 40rem;
+  opacity: 1;
+  transform: scale(1.0,1.0);
+  transition-property: opacity, transform;
+  transition-duration: 0.4s, 0.66s;
+  transition-delay: 0.66s;
+  transition-timing-function: cubic-bezier(0.16,1,0.29,0.99);
+}
+
+.contentAreaQueueForward {
+  position: absolute;
+  top: 0rem;
+  left: 0rem;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transform: scale(0.6,0.6);
+}
+
+.contentAreaQueueBackward {
+  position: absolute;
+  top: 0rem;
+  left: 0rem;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transform: scale(1.06,1.06);
+}
+
+.contentAreaBackOut {
+  position: absolute;
+  top: 0rem;
+  left: 0rem;
+  width: 100%;
+  height: 100%;
+  opacity: 0.0;
+  transform: scale(0.8,0.8);
+  transition-property: opacity, transform;
+  transition-duration: 0.4s, 0.66s;
+  transition-timing-function: cubic-bezier(0.16,1,0.29,0.99);
+}
+
+.contentAreaForwardOut {
+  position: absolute;
+  top: 0rem;
+  left: 0rem;
+  width: 100%;
+  height: 100%;
+  opacity: 0.0;
+  transform: scale(1.06,1.06);
+  transition-property: opacity, transform;
+  transition-duration: 0.4s, 0.66s;
+  transition-timing-function: cubic-bezier(0.16,1,0.29,0.99);
+}
+
+.contentAreaOffScreen {
+  position: absolute;
+  top: 1000rem;
+  left: 0rem;
+  width: 100%;
+  height: 100%;
+  opacity: 0.0;
+  transform: scale(1.06,1.06);
+  transition-property: opacity, transform;
+  transition-duration: 0.4s, 0.66s;
+  transition-timing-function: cubic-bezier(0.16,1,0.29,0.99);
+}
+
+.contentAreaModalDown {
+  position: absolute;
+  top: 562rem;
+  height: 498rem;
+  width: 100%;
+  transition-property: opacity, transform;
+  transition-duration: 0.4s, 0.66s;
+  transition-timing-function: cubic-bezier(0.16,1,0.29,0.99);
+}
+
+.contentAreaModalUp {
+  position: absolute;
+  top: 0rem;
+  width: 100%;
+  height: 498rem;
+  background: rgba(255, 255, 255, .75);
+  transition-property: opacity, transform;
+  transition-duration: 0.4s, 0.66s;
+  transition-timing-function: cubic-bezier(0.16,1,0.29,0.99);
+}
+
+#mainContentContainer {
+  transition: all 0.2s cubic-bezier(.16,.68,.43,.99);
+}
+
+#mainContentContainerSwiping {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+#mainContentContainerWithDrawerOpen {
+  position: fixed;
+  left: 163rem;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+}
+
+.myDash {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.myDashBackground {
+  position: absolute;
+  width: 100%;
+  height: 460rem;
+}

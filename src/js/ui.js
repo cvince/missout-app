@@ -1,3 +1,4 @@
+/*******************actions.js start***********************/
 'use strict';
 /* src/js/ui */
 /*global App*/
@@ -11,14 +12,6 @@ initiate UI render/redraw events.
 */
 
 //global selectors
-
-var messageOut = document.getElementById('message-out');
-var titleOut = document.getElementById('title-out');
-var postSubmit = document.getElementById('submit-post');
-
-postSubmit.addEventListener(function (e) {
-  console.log(e);
-});
 
 App.output = {};
 var outList = [];
@@ -43,6 +36,7 @@ function UI () {
       //remove above when changing schema
 
       outList.push({
+        id : App.output[i]._id,
         date : App.output[i].timestamp,
         title : App.output[i].title,
         tempname: App.output[i].tempname,
@@ -66,7 +60,6 @@ function UI () {
 
   // ui comment display functions
 
-
   Constructor.prototype.showComment = function(postId){
 
   }
@@ -81,26 +74,6 @@ function UI () {
 
   // ui posting functions
 
-  Constructor.prototype.makePost = function(){
-    var data = { timestamp : new Date() };
-    data.title = titleOut.value.toString();
-    data.body = messageOut.value.toString();
-    data.loc = { type: 'Point', coordinates: [ loc.lon, loc.lat ] };
-    App.postman.post(data, function (res) {
-      App.ui.appendFeed(data);
-      console.log('post ok, contents - ' + JSON.stringify(res));
-    });
-  }
-
-  Constructor.prototype.makeComment = function(postId){
-    var data = { timestamp : new Date() };
-    data.body = document.getElementById('post-'+postId.toString()).value.toString();
-    // App.postman.postComment(data, function (res) {
-    //   App.ui.appendComment(postId);
-    //   console.log('content ok, contents - ' + JSON.stringify(res));
-    // });
-  }
-
   return new Constructor();
 
 }
@@ -108,4 +81,5 @@ function UI () {
 
 App.ui = new UI();
 
-/* App.ui end */
+/**************************actions.js end****************************/
+

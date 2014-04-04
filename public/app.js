@@ -1,7 +1,163 @@
+/******************************start app.js******************************/
 'use strict';
+/*jslint unused: false*/
 
 var App = {};
 
+var page;
+var splashImage;
+var scrollView;
+var panel;
+var elementCount;
+var elements;
+
+var appBar;
+var appCanvas;
+var utilityBar;
+var navigationDrawer;
+var mainContentContainer;
+
+var scrolling = false;
+var listeningForScrolling = false;
+var scrollViewRegister;
+var activeScrollViews;
+var isMouseDown;
+
+var isChromeOrSafari;
+var feedPage;
+
+function drawPageElements() {
+	scrollViewRegister = [];
+	activeScrollViews = [];
+	appBar = new AppBar();
+	appCanvas = new AppCanvas();
+	navigationDrawer = new NavigationDrawer();
+
+	page = document.getElementById('body');
+	mainContentContainer = document.createElement('div');
+	mainContentContainer.setAttribute('id', 'mainContentContainer');
+	page.appendChild(mainContentContainer);
+
+	utilityBar = new UtilityBar();
+	mainContentContainer.appendChild(utilityBar.element);
+	mainContentContainer.appendChild(appCanvas.element);
+	mainContentContainer.appendChild(appBar.element);
+	page.appendChild(navigationDrawer.element);
+
+	//add feed page
+	feedPage = new FeedPage();
+	appCanvas.pushContent(feedPage);
+
+	splashImage = document.createElement('img');
+	splashImage.setAttribute('class', 'splashOpen');
+	splashImage.setAttribute('src', '/public/images/splash.png');
+	setTimeout(function(){
+		page.appendChild(this.splashImage);
+		setTimeout(splashFadeOut, 1500);
+	}, 100);
+}
+
+function addElementToDict(element, jsObject) {
+	element.setAttribute('guid', elementCount);
+	elements[elementCount] = jsObject;
+	elementCount++;
+}
+
+function initialize() {
+	App.locator.getLoc();
+	elements = new Object();
+	elementCount = 0;
+	drawPageElements();
+	setTouchListeners();
+}
+
+function splashFadeOut() {
+	splashImage.setAttribute('class', 'splashHide');
+	setTimeout(splashKill, 700);
+}
+
+function splashKill() {
+	page.removeChild(splashImage);
+}
+
+function clicked(element) {
+	elements[element.getAttribute('guid')].clicked();
+}
+
+function onMouseDown(that, event) {
+	var element = that.element;
+	if (element != document) {
+		if (elements[element.getAttribute('guid')] !== null) {
+			elements[element.getAttribute('guid')].onMouseDown(element, event);
+		}
+	}
+	else {
+
+	}
+}
+
+function onMouseUp(that, event)
+{
+	var element = that.element;
+	if (element == document) {
+		scrollView.onMouseUp(event);
+	}
+	else {
+		elements[element.getAttribute('guid')].onMouseUp(event);
+	}
+
+	for (var item in elements) {
+		if (elements[item] instanceof Button && !elements[item].multiSelect) {
+			elements[item].isMouseDown = false;
+		}
+	}
+	for (var scrollV in scrollViewRegister) {
+		scrollViewRegister[scrollV].onMouseUp(event);
+	}
+
+	scrollViewRegister = new Array();
+	activeScrollViews = new Array();
+	activeButton = null;
+}
+
+function onMouseMove(element, event) {
+	if (element == document) {
+		for (var scrollV in activeScrollViews) {
+			activeScrollViews[scrollV].onMouseMove(event);
+		}
+	}
+	else {
+		elements[element.getAttribute('guid')].onMouseMove(event);
+	}
+}
+
+function onMouseOut(element)
+{
+	elements[element.getAttribute('guid')].onMouseOut();
+}
+
+function transitionCompleted()
+{
+	elements[this.getAttribute('guid')].transitionCompleted();
+}
+
+function onMouseOver(element)
+{
+	elements[element.getAttribute('guid')].onMouseOver();
+}
+
+// document.addEventListener( 'touchstart' , function stopScrolling( touchEvent ) { touchEvent.preventDefault(); } , false );
+// document.addEventListener( 'touchmove' , function stopScrolling( touchEvent ) { touchEvent.preventDefault(); } , false );
+
+function setTouchListeners() {
+	document.body.addEventListener('touchmove', function(e) { e.preventDefault(); }, false);
+	document.getElementById('navigationDrawer').addEventListener('touchmove', function(e) { e.stopPropagation(); }, false);
+	document.getElementById('appCanvas').addEventListener('touchmove', function(event){ event.stopPropagation(); }, false);
+}
+
+/******************************end app.js******************************/
+
+/*******************locator.js start***********************/
 'use strict';
 /*global alert*/
 /*global App*/
@@ -101,6 +257,8 @@ function Locator () {
 
 App.locator = new Locator();
 
+/**************************locator.js end****************************/
+/*******************postman.js start***********************/
 'use strict';
 /*global App*/
 
@@ -163,6 +321,10 @@ function Postman (endpoint) {
     return this.XHR('POST', data, url, true, cb);
   };
 
+  Constructor.prototype.put = function (data, cb) {
+    return this.XHR('PUT', data, url, true, cb);
+  }
+
   Constructor.prototype.newFeed = function (loc) {
     console.log('data to newFeed function: ' + JSON.stringify(loc));
     var req = new XMLHttpRequest(),
@@ -193,6 +355,10 @@ function Postman (endpoint) {
   return new Constructor();
 }
 App.postman = new Postman('http://localhost:3000/api/v1/posts');
+
+//for hookup to the comments API
+App.commentman = new Postman('http://localhost:3000/api/v1/comments');
+
 // Receive the DOM event 'feed-location' and query the
 // feed endpoint
 document.addEventListener('new-location', function (e) {
@@ -200,6 +366,9 @@ document.addEventListener('new-location', function (e) {
   App.postman.newFeed(e.detail);
 });
 
+/**************************postman.js end****************************/
+
+/*******************actions.js start***********************/
 'use strict';
 /* src/js/ui */
 /*global App*/
@@ -213,14 +382,6 @@ initiate UI render/redraw events.
 */
 
 //global selectors
-
-var messageOut = document.getElementById('message-out');
-var titleOut = document.getElementById('title-out');
-var postSubmit = document.getElementById('submit-post');
-
-postSubmit.addEventListener(function (e) {
-  console.log(e);
-});
 
 App.output = {};
 var outList = [];
@@ -245,6 +406,7 @@ function UI () {
       //remove above when changing schema
 
       outList.push({
+        id : App.output[i]._id,
         date : App.output[i].timestamp,
         title : App.output[i].title,
         tempname: App.output[i].tempname,
@@ -268,7 +430,6 @@ function UI () {
 
   // ui comment display functions
 
-
   Constructor.prototype.showComment = function(postId){
 
   }
@@ -283,26 +444,6 @@ function UI () {
 
   // ui posting functions
 
-  Constructor.prototype.makePost = function(){
-    var data = { timestamp : new Date() };
-    data.title = titleOut.value.toString();
-    data.body = messageOut.value.toString();
-    data.loc = { type: 'Point', coordinates: [ loc.lon, loc.lat ] };
-    App.postman.post(data, function (res) {
-      App.ui.appendFeed(data);
-      console.log('post ok, contents - ' + JSON.stringify(res));
-    });
-  }
-
-  Constructor.prototype.makeComment = function(postId){
-    var data = { timestamp : new Date() };
-    data.body = document.getElementById('post-'+postId.toString()).value.toString();
-    // App.postman.postComment(data, function (res) {
-    //   App.ui.appendComment(postId);
-    //   console.log('content ok, contents - ' + JSON.stringify(res));
-    // });
-  }
-
   return new Constructor();
 
 }
@@ -310,8 +451,10 @@ function UI () {
 
 App.ui = new UI();
 
-/* App.ui end */
+/**************************actions.js end****************************/
 
+
+/*******************heartbeat.js start***********************/
 'use strict';
 /*global App*/
 
@@ -366,100 +509,4 @@ function Heartbeat () {
 
 App.heartbeat = new Heartbeat();
 App.heartbeat.startBeat();
-'use strict';
-/* src/js/start */
-/*global App*/
-/*global postSubmit*/
-/*global Ractive*/
-
-/*
-
--- App start --
-Initialization for the app
-
- ---- STILL NEED TO ADD DOM READY FUNCTION BELOW ---
-
-var whenReady = (function() { // This function returns the whenReady() function
-    var funcs = [];    // The functions to run when we get an event
-    var ready = false; // Switches to true when the handler is triggered
-
-    // The event handler invoked when the document becomes ready
-    function handler(e) {
-        // If we've already run once, just return
-        if (ready) return;
-
-        // If this was a readystatechange event where the state changed to
-        // something other than "complete", then we're not ready yet
-        if (e.type === "readystatechange" && document.readyState !== "complete")
-            return;
-
-        // Run all registered functions.
-        // Note that we look up funcs.length each time, in case calling
-        // one of these functions causes more functions to be registered.
-        for(var i = 0; i < funcs.length; i++)
-            funcs[i].call(document);
-
-        // Now set the ready flag to true and forget the functions
-        ready = true;
-        funcs = null;
-    }
-
-    // Register the handler for any event we might receive
-    if (document.addEventListener) {
-        document.addEventListener("DOMContentLoaded", handler, false);
-        document.addEventListener("readystatechange", handler, false);
-        window.addEventListener("load", handler, false);
-    }
-    else if (document.attachEvent) {
-        document.attachEvent("onreadystatechange", handler);
-        window.attachEvent("onload", handler);
-    }
-
-    // Return the whenReady function
-    return function whenReady(f) {
-        if (ready) f.call(document); // If already ready, just run it
-        else funcs.push(f);          // Otherwise, queue it for later.
-    }
-}());
-
-*/
-
-
-var listeners = function(){
-
-  //custom event listeners
-  document.addEventListener('feedJSON', function (e) {
-    App.ui.showFeed();
-  });
-
-  //user event listeners
-  postSubmit.addEventListener('click', function() {
-    App.ui.makePost();
-  }, false);
-}
-
-
-var initialize = function(){
-  //getting location at app launch
-  postSubmit.disabled = true;
-  App.locator.getLoc(function (loc) {
-    console.log('data to page: ' + JSON.stringify(loc));
-    postSubmit.disabled = false;
-  });
-
-  listeners();
-}
-
-
-window.onload = function(){
-  initialize();
-}
-
-
-//view controllers
-
-var ractive = new Ractive({
-  el: '#container',
-  template: '#post-template',
-  data: { list: outList }
-});
+/**************************heartbeat.js end****************************/
