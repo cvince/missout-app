@@ -618,6 +618,7 @@ button {
 
 .contentAreaCurrent {
   position: absolute;
+  z-index: 100;
   display: block;
   top: 0rem;
   left: 0rem;
@@ -675,6 +676,7 @@ button {
 
 .contentAreaOffScreen {
   position: absolute;
+  z-index: -1;
   top: 1000rem;
   left: 0rem;
   width: 100%;
