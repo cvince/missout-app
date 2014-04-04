@@ -44,7 +44,7 @@ AppCanvas.prototype.presentModal = function(content) {
     this.modal = content;
     this.hasModal = true;
   }
-}
+};
 
 AppCanvas.prototype.dismissModal = function() {
   if (this.readyForChange) {
@@ -53,7 +53,7 @@ AppCanvas.prototype.dismissModal = function() {
     setTimeout(appCanvas.modalChange, 650);
     this.hasModal = false;
   }
-}
+};
 
 AppCanvas.prototype.modalChange = function() {
   if (appCanvas.hasModal) {
@@ -66,7 +66,7 @@ AppCanvas.prototype.modalChange = function() {
     appCanvas.topContent.updateAppBar();
   }
   appCanvas.readyForChange = true;
-}
+};
 
 AppCanvas.prototype.pushContent = function(content) {
   if (this.readyForChange) {
@@ -83,7 +83,7 @@ AppCanvas.prototype.pushContent = function(content) {
 
     setTimeout(appCanvas.internalPushContent, 100);
   }
-}
+};
 
 AppCanvas.prototype.internalPushContent = function() {
   var content = appCanvas.stack[appCanvas.stackCount - 1];
@@ -104,7 +104,7 @@ AppCanvas.prototype.internalPushContent = function() {
   }
 
   setTimeout(contentChanged, 660);
-}
+};
 
 AppCanvas.prototype.popContent = function() {
   if (this.readyForChange &&  appCanvas.stackCount > 1) {
@@ -118,7 +118,7 @@ AppCanvas.prototype.popContent = function() {
 
     setTimeout(appCanvas.internalPopContent, 100);
   }
-}
+};
 
 
 AppCanvas.prototype.popToHome = function() {
@@ -134,7 +134,7 @@ AppCanvas.prototype.popToHome = function() {
 
     setTimeout(appCanvas.internalPopContent, 100);
   }
-}
+};
 
 
 AppCanvas.prototype.internalPopContent = function() {
