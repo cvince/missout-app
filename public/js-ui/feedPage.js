@@ -90,7 +90,8 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 									'title':'down vote',
 									'html':''
 								}
-							]},
+							]
+						},
 						{
 							'tag':'button',
 							'id' : 'comment-${_id}',
@@ -98,7 +99,8 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 							'title':'comment',
 							'html':''
 						}
-					]}
+					]
+				}
 			]
 		};
 	}
@@ -131,7 +133,7 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 	//feed.innerHTML = html;
 
 	document.addEventListener('feedJSON', function (e) {
-    feed.innerHTML = '';
+		feed.innerHTML = '';
 		var feedData = e.detail;
 
 		feedData.forEach(function (elem) {
@@ -153,10 +155,12 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 					tag: 'li',
 					html: '${body' + rep + '}'
 				});
-				template.children[2].children[0].children.push({
+				var tempBullet = {
 					tag: 'li',
 					html: ''
-				});
+				};
+				if(rep === 0){tempBullet.class = 'on';}
+				template.children[2].children[0].children.push(tempBullet);
 				elem['body' + rep] = wordsTo300[rep];
 			}
 			feed.innerHTML = feed.innerHTML + json2html.transform(elem, template);
