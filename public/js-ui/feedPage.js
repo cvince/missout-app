@@ -42,34 +42,32 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 					'id':'pagination-${_id}',
 					'class':'line',
 					'children':[
-  				{
-  					'tag':'ul',
-  					'children': [ ]
-  				}
-  				]
-  			},
-        {
-          'tag':'div',
-          'class':'comments line',
-          'html':
-            '<form class="comment-box" method="post">'+
-              '<label>Submit a comment</label>'+
-              '<textarea class="comment-out"></textarea>'+
-              '<button data-id=${_id} class="submit-comment" type="button" value="send-comment">Submit A Comment</button>'+
-            '</form>'
-          ,
-          'children' : [
-          {
-            'tag' : 'ul',
-            'children' : [
-            {
-              'tag' : 'li',
-              'html' : '${comments}'
-            }
-            ]
-          }
-          ]
-        },
+						{
+							'tag':'ul',
+							'children': [ ]
+						}
+					]
+				},
+				{
+					'tag':'div',
+					'class':'comments line',
+					'html':
+						'<form class="comment-box" method="post">'+
+							'<label>Submit a comment</label>'+
+							'<textarea class="comment-out"></textarea>'+
+							'<button data-id=${_id} class="submit-comment" type="button" value="send-comment">Submit A Comment</button>'+ '</form>',
+					'children' : [
+						{
+							'tag' : 'ul',
+							'children' : [
+								{
+									'tag' : 'li',
+									'html' : '${comments}'
+								}
+							]
+						}
+					]
+				},
 				{
 					'tag':'footer',
 					'class':'gesturebar line',
@@ -114,7 +112,7 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 	//feed.innerHTML = html;
 
 	document.addEventListener('feedJSON', function (e) {
-    feed.innerHTML = '';
+		feed.innerHTML = '';
 		var feedData = e.detail;
 		console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
 		console.log('feedData');
