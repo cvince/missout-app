@@ -20,6 +20,13 @@ Controller.prototype.displayContentItems = function(innerHTML) {
 	// navigation drawer content response from the above ajax.makeRequest();
 	this.element.innerHTML = innerHTML;
 
+
+	/*The following is intended to be a bunch of event listeners that track
+	post submit click events --comment click event listeners are below,
+	and has nothing to do with displayContentItems.
+
+	Please move this, because its location is unintuitive */
+
 	var messageOut = document.getElementById('message-out');
 	var titleOut = document.getElementById('title-out');
 	var submit = document.getElementById('submit-post');
@@ -44,6 +51,19 @@ Controller.prototype.displayContentItems = function(innerHTML) {
 	      console.log('post ok, contents - ' + JSON.stringify(res));
 	    });
 	  }, false);
+
+		var comment = document.getElementsByClassName('submit-comment');
+
+		//THIS BUTTON does not click.
+
+		comment.addEventListener('click', function() {
+			var data = { timestamp : new Date() };
+			data._id = this.getAttribute('data-id');
+			data.body = this.value.toString();
+			console.log(data);
+			console.log('hola');
+		})
+
 
 	});
 
