@@ -768,7 +768,24 @@ button {
   font-size: 16rem; }
 
 .post .comments {
+  padding: 10rem;
   font-size: 18rem; }
+
+
+
+.comment-box textarea {
+  margin: 0 auto;
+  padding: 5rem;
+  width: 100%;
+  height: 80rem;
+  border: 1rem solid #cccccc;
+  font: 16rem/24rem normal 'Dosis', sans-serif; }
+
+.comment-box button.submit-comment {
+  background: none;
+  font-size: 16rem;
+  float: right;
+  border: 1rem solid black; }
 
 .gesturebar {
   padding: 10rem;

@@ -50,12 +50,12 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
   			},
         {
           'tag':'div',
-          'class':'comments',
+          'class':'comments line',
           'html':
-            '<form>'+
+            '<form class="comment-box" method="post">'+
               '<label>Submit a comment</label>'+
               '<textarea class="comment-out"></textarea>'+
-              '<button data-id=${_id} class="submit-comment" type="button" value="send-comment">Comment</button>'+
+              '<button data-id=${_id} class="submit-comment" type="button" value="send-comment">Submit A Comment</button>'+
             '</form>'
           ,
           'children' : [
