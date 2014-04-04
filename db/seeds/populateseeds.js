@@ -116,15 +116,20 @@ function convertList(){
   for(var rep = 0;rep < cities.length;rep ++){
     for(var rep2 = 0;rep2 < cities[rep].scrapes.length;rep2 ++){
       var tempScrape = cities[rep].scrapes[rep2];
-      objectList.push({
+      var tempObject = {
         body: tempScrape.body,
         title: tempScrape.title,
         tempname: nameGenerator(),
+        comments:[],
         loc:{
           type: 'Point',
           coordinates: [tempScrape.lon, tempScrape.lat]
         }
-      });
+      };
+      for(var rep3 = 0;rep3 < 5;rep3 ++){
+        tempObject.comments.push(meatIpsum());
+      }
+      objectList.push(tempObject);
     }
   }
   console.log(objectList);
@@ -157,8 +162,10 @@ function meatIpsum(){
   var length = (Math.random() * 10) <<0;
   var tempString = '';
   for(var rep=0;rep<length;rep++){
-    //tempString += arraySelector(meatArray) += arraySelector(fillerArray);
+    tempString += arraySelector(meatArray) + ' ';
+    tempString+= arraySelector(fillerArray) + ' ';
   }
+  return tempString;
 }
 
 var meatArray = ['beef',
