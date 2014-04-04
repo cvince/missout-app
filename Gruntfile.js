@@ -112,7 +112,7 @@ module.exports = function (grunt) {
           {
             name: 'posts',
             type: 'json',
-            file: 'db/seeds/posts.json',
+            file: 'db/seeds/test.json',
             jsonArray: true,
             upsertFields: "_id",
             drop: true
