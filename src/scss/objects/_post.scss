@@ -47,7 +47,7 @@
 }
 
 .comment-box label {
-
+  color: #666;
 }
 .comment-box textarea {
   margin: 0 auto;
@@ -58,8 +58,10 @@
   font: 16rem/24rem normal 'Dosis', sans-serif;
 }
 .comment-box button.submit-comment {
-  background: none;
+  background: #fafafa;
+  background-image: none;
   font-size: 16rem;
   float: right;
-  border: 1rem solid black;
+  border: 1rem solid #ccc;
+  color: #666;
 }
