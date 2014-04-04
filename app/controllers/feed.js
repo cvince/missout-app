@@ -21,13 +21,15 @@ module.exports = function (app) {
                     type: 'Point',
                     coordinates: [ req.body.lon, req.body.lat ]
                   },
-                  $maxDistance: 10000000
+                  $maxDistance: 10000
                 }
               },
     function (err, docs) {
       if (err) {
+        //console.log(err);
         res.send(err);
       }
+      //console.log(docs);
       res.send(docs);
     });
   });

@@ -122,7 +122,7 @@ function convertList(){
         tempname: nameGenerator(),
         loc:{
           type: 'Point',
-          coordinates: [tempScrape.lat, tempScrape.lon]
+          coordinates: [tempScrape.lon, tempScrape.lat]
         }
       });
     }
@@ -135,11 +135,12 @@ function writeList(objectList){
   fs.writeFileSync(__dirname + '/test.json', JSON.stringify(objectList));
 }
 
+function arraySelector(array){
+  var rndIndex = (Math.random() * array.length) << 0;
+  return array[rndIndex];
+}
+
 function nameGenerator(){
-  function arraySelector(array){
-    var rndIndex = (Math.random() * array.length) << 0;
-    return array[rndIndex];
-  }
   var first = ['battery', 'anchor', 'thermos', 'tent', 'spoon', 'nut', 'fork'];
   var second = ['peanut', 'horse', 'aardvark', 'echidna', 'kiwi', 'carrot', 'cabbage'];
   var third = ['runner', 'peeper', 'rider', 'washer', 'eater', 'flyer', 'hider'];
@@ -151,3 +152,142 @@ function nameGenerator(){
 // for(var rep=0;rep<20;rep++){
 //   nameGenerator();
 // }
+
+function meatIpsum(){
+  var length = (Math.random() * 10) <<0;
+  var tempString = '';
+  for(var rep=0;rep<length;rep++){
+    //tempString += arraySelector(meatArray) += arraySelector(fillerArray);
+  }
+}
+
+var meatArray = ['beef',
+  'chicken',
+  'pork',
+  'bacon',
+  'chuck',
+  'short loin',
+  'sirloin',
+  'shank',
+  'flank',
+  'sausage',
+  'pork belly',
+  'shoulder',
+  'cow',
+  'pig',
+  'ground round',
+  'hamburger',
+  'meatball',
+  'tenderloin',
+  'strip steak',
+  't-bone',
+  'ribeye',
+  'shankle',
+  'tongue',
+  'tail',
+  'pork chop',
+  'pastrami',
+  'corned beef',
+  'jerky',
+  'ham',
+  'fatback',
+  'ham hock',
+  'pancetta',
+  'pork loin',
+  'short ribs',
+  'spare ribs',
+  'beef ribs',
+  'drumstick',
+  'tri-tip',
+  'ball tip',
+  'venison',
+  'turkey',
+  'biltong',
+  'rump',
+  'jowl',
+  'salami',
+  'bresaola',
+  'meatloaf',
+  'brisket',
+  'boudin',
+  'andouille',
+  'capicola',
+  'swine',
+  'kielbasa',
+  'frankfurter',
+  'prosciutto',
+  'filet mignon',
+  'leberkas',
+  'turducken',
+  'doner',
+  'kevin',
+  'landjaeger',
+  'porchetta'
+];
+
+var fillerArray = [
+  'consectetur',
+  'adipisicing',
+  'elit',
+  'sed',
+  'do',
+  'eiusmod',
+  'tempor',
+  'incididunt',
+  'ut',
+  'labore',
+  'et',
+  'dolore',
+  'magna',
+  'aliqua',
+  'ut',
+  'enim',
+  'ad',
+  'minim',
+  'veniam',
+  'quis',
+  'nostrud',
+  'exercitation',
+  'ullamco',
+  'laboris',
+  'nisi',
+  'ut',
+  'aliquip',
+  'ex',
+  'ea',
+  'commodo',
+  'consequat',
+  'duis',
+  'aute',
+  'irure',
+  'dolor',
+  'in',
+  'reprehenderit',
+  'in',
+  'voluptate',
+  'velit',
+  'esse',
+  'cillum',
+  'dolore',
+  'eu',
+  'fugiat',
+  'nulla',
+  'pariatur',
+  'excepteur',
+  'sint',
+  'occaecat',
+  'cupidatat',
+  'non',
+  'proident',
+  'sunt',
+  'in',
+  'culpa',
+  'qui',
+  'officia',
+  'deserunt',
+  'mollit',
+  'anim',
+  'id',
+  'est',
+  'laborum'
+];
