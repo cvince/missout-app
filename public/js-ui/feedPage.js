@@ -41,17 +41,17 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 					'tag':'nav',
 					'id':'pagination-${_id}',
 					'class':'line',
-					'children':[
+					'children' : [
   				{
-  					'tag':'ul',
-  					'children': [ ]
+  					'tag' : 'ul',
+  					'children' : [ ]
   				}
   				]
   			},
         {
-          'tag':'div',
-          'class':'comments line',
-          'html':
+          'tag' : 'div',
+          'class' :'comments line',
+          'html' :
             '<form class="comment-box" method="post" action="api/v1/comments/${_id}">'+
               '<label>Submit a comment</label>'+
               '<textarea class="comment-out" name="body"></textarea>'+
@@ -64,7 +64,9 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
             'children' : [
             {
               'tag' : 'li',
-              'html' : '${comments}'
+              'children' : function(){
+                return(json2html.transform(this.comments, commentMicroTemplate()));
+              }
             }
             ]
           }
@@ -100,7 +102,8 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 							'html':''
 						}
 					]
-				}
+
+        }
 			]
 		};
 	}
@@ -121,12 +124,6 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
       ]
     }
   }
-
-
-
-	var data = [
-		{ _id: 400, title: 'My Post', body: 'The redhead: damn'}
-	];
 
 	//var html = json2html.transform(data, template);
 	var feed = document.getElementById('feed');
@@ -160,9 +157,20 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 					html: ''
 				};
 				if(rep === 0){tempBullet.class = 'on';}
-				template.children[2].children[0].children.push(tempBullet);
+        template.children[2].children[0].children.push(tempBullet);
 				elem['body' + rep] = wordsTo300[rep];
 			}
+
+      // these are the comments
+      // var commentsData = elem.comments;
+      // console.log(commentsData);
+
+      // for (var k = 0; k < commentsData.length; k++) {
+      //   var microTemplate = commentMicroTemplate();
+
+      //   template.children[4].children[0].children.push(commentsData[k]);
+      // }
+
 			feed.innerHTML = feed.innerHTML + json2html.transform(elem, template);
 		});
 		buildSlider();
