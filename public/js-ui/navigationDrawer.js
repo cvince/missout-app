@@ -11,17 +11,17 @@ function NavigationDrawer() {
 NavigationDrawer.prototype.getContentItems = function() {
 	// the request for the content to display the contents of the navigation drawer
 	ajax.makeRequest('/public/views/navigationDrawer.html', this);
-}
+};
 
 NavigationDrawer.prototype.displayContentItems = function(innerHTML) {
 	// navigation drawer content response from the above ajax.makeRequest();
 	this.element.innerHTML = innerHTML;
-}
+};
 
 NavigationDrawer.prototype.homeButtonClicked = function() {
 	navigationDrawer.close();
 	appCanvas.pushContent(feedPage);
-}
+};
 
 NavigationDrawer.prototype.open = function()
 {
@@ -30,7 +30,7 @@ NavigationDrawer.prototype.open = function()
 	navigationDrawer.element.setAttribute('class', 'navigationDrawerOpen scrollable');
 	mainContentContainer.setAttribute('id', 'mainContentContainerWithDrawerOpen');
 	this.drawerOpen = true;
-}
+};
 
 NavigationDrawer.prototype.close = function()
 {
@@ -39,4 +39,4 @@ NavigationDrawer.prototype.close = function()
 	navigationDrawer.element.setAttribute('class', 'navigationDrawerClosed');
 	mainContentContainer.setAttribute('id', 'mainContentContainer');
 	this.drawerOpen = false;
-}
+};

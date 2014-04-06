@@ -1,4 +1,5 @@
 'use strict';
+/*global json2html*/
 
 FeedPage.prototype = new ContentPage();
 
@@ -33,7 +34,9 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 						{
 							'tag':'ul',
 							'class':'post-wrap line',
-							'children': [ ]
+							'children' : function(){
+								return(json2html.transform(this.pages, pageMicroTemplate()));
+							}
 						}
 					],
 				},
@@ -42,36 +45,40 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 					'id':'pagination-${_id}',
 					'class':'line',
 					'children' : [
-  				{
-  					'tag' : 'ul',
-  					'children' : [ ]
-  				}
-  				]
-  			},
-        {
-          'tag' : 'div',
-          'class' :'comments line',
-          'html' :
-            '<form class="comment-box" method="post" action="api/v1/comments/${_id}">'+
-              '<label>Submit a comment</label>'+
-              '<textarea class="comment-out" name="body"></textarea>'+
-              '<button data-id=${_id} class="submit-comment" type="submit" value="send-comment">Submit A Comment</button>'+
-            '</form>'
-          ,
-          'children' : [
-          {
-            'tag' : 'ul',
-            'children' : [
-            {
-              'tag' : 'li',
-              'children' : function(){
-                return(json2html.transform(this.comments, commentMicroTemplate()));
-              }
-            }
-            ]
-          }
-          ]
-        },
+						{
+							'tag' : 'ul',
+							'children' : function(){
+								var out = [];
+								for(var rep=0;rep<this.pages.length;rep++){
+									out.push(rep === 0 ? {class: 'on'} : {});
+								}
+								return(json2html.transform(out, bulletMicroTemplate()));
+							}
+						}
+					]
+				},
+				{
+					'tag' : 'div',
+					'class' :'comments line',
+					'html' :
+						'<form class="comment-box" method="post" action="api/v1/comments/${_id}">'+
+							'<label>Submit a comment</label>'+
+							'<textarea class="comment-out" name="body"></textarea>'+
+							'<button data-id=${_id} class="submit-comment" type="submit" value="send-comment">Submit A Comment</button>'+'</form>',
+					'children' : [
+						{
+							'tag' : 'ul',
+							'children' : [
+								{
+									'tag' : 'li',
+									'children' : function(){
+										return(json2html.transform(this.comments, commentMicroTemplate()));
+									}
+								}
+							]
+						}
+					]
+				},
 				{
 					'tag':'footer',
 					'class':'gesturebar line',
@@ -103,27 +110,41 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 						}
 					]
 
-        }
+				}
 			]
 		};
 	}
 
-  function commentMicroTemplate () {
-    return {
-      'tag':'div',
-      'id':'${_id}',
-      'children': [
-        {
-          'tag':'h5',
-          'html':'${tempname}'
-        },
-        {
-          'tag':'p',
-          'html':'${body}'
-        }
-      ]
-    }
-  }
+	function commentMicroTemplate () {
+		return {
+			'tag':'div',
+			'id':'${_id}',
+			'children': [
+				{
+					'tag':'h5',
+					'html':'${tempname}'
+				},
+				{
+					'tag':'p',
+					'html':'${body}'
+				}
+			]
+		};
+	}
+
+	function pageMicroTemplate(){
+		return {
+			tag: 'li',
+			html: '${body}'
+		};
+	}
+
+	function bulletMicroTemplate(){
+		return{
+			tag: 'li',
+			class: '${class}'
+		};
+	}
 
 	//var html = json2html.transform(data, template);
 	var feed = document.getElementById('feed');
@@ -134,7 +155,8 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 		var feedData = e.detail;
 
 		feedData.forEach(function (elem) {
-      console.log(elem.comments);
+			//console.log(elem.comments);
+			elem.pages = [];
 			var wordArray = [];
 			var wordsTo300 = [];
 			var template = generateTemplate();
@@ -148,29 +170,8 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 			} while (wordArray.length > 0);
 
 			for(var rep = 0;rep < wordsTo300.length;rep ++){
-				template.children[1].children[0].children.push({
-					tag: 'li',
-					html: '${body' + rep + '}'
-				});
-				var tempBullet = {
-					tag: 'li',
-					html: ''
-				};
-				if(rep === 0){tempBullet.class = 'on';}
-        template.children[2].children[0].children.push(tempBullet);
-				elem['body' + rep] = wordsTo300[rep];
+				elem.pages.push({body: wordsTo300[rep]});
 			}
-
-      // these are the comments
-      // var commentsData = elem.comments;
-      // console.log(commentsData);
-
-      // for (var k = 0; k < commentsData.length; k++) {
-      //   var microTemplate = commentMicroTemplate();
-
-      //   template.children[4].children[0].children.push(commentsData[k]);
-      // }
-
 			feed.innerHTML = feed.innerHTML + json2html.transform(elem, template);
 		});
 		buildSlider();
@@ -215,4 +216,4 @@ var buildSlider = function(){
 			transitionEnd: function(index, element) {}
 		});
 	}
-}
+};
