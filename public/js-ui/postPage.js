@@ -4,8 +4,8 @@
 PostPage.prototype.displayContentItems = function() { // removed `innerHTML` parameter
 	// postPage content response from the above ajax.makeRequest();
 	//this.element.innerHTML = innerHTML;
-	function generateTemplate(){
-		console.log('generateTemplate');
+	function generateMainTemplate(){
+		console.log('generateMainTemplate');
 		return {
 			'tag':'article',
 			'class':'missedConnection line post',
@@ -97,9 +97,10 @@ PostPage.prototype.displayContentItems = function() { // removed `innerHTML` par
 		};
 	}
 
-	document.addEventListener('feedJSON', function (e) {
+	document.addEventListener('postExpanded', function (e) {
 			var fullPost = document.getElementById('fullPost');
 			var feedData = e.detail;
+			var template = generateMainTemplate();
 			fullPost.innerHTML = '';
 			feedData.forEach(function (elem) {
 				fullPost.innerHTML = fullPost.innerHTML + json2html.transform(elem, template);
