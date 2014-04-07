@@ -3,9 +3,9 @@
 FeedPage.prototype = new ContentPage();
 
 function FeedPage() {
-	ContentPage.call(this);
-	this.element.setAttribute('class', 'feedPage');
-	this.displayContentItems();
+  ContentPage.call(this);
+  this.element.setAttribute('class', 'feedPage');
+  this.displayContentItems();
 }
 
 FeedPage.prototype.getContentItems = function() {
@@ -56,8 +56,7 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
               '<label>Submit a comment</label>'+
               '<textarea class="comment-out" name="body"></textarea>'+
               '<button data-id=${_id} class="submit-comment" type="submit" value="send-comment">Submit A Comment</button>'+
-            '</form>'
-          ,
+            '</form>',
           'children' : [
           {
             'tag' : 'ul',
@@ -111,7 +110,6 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
   function commentMicroTemplate () {
     return {
       'tag':'div',
-      'id':'${_id}',
       'children': [
         {
           'tag':'h5',
@@ -126,13 +124,12 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
   }
 
 	//var html = json2html.transform(data, template);
-	var feed = document.getElementById('feed');
 	//feed.innerHTML = html;
 
 	document.addEventListener('feedJSON', function (e) {
+    var feed = document.getElementById('feed');
 		feed.innerHTML = '';
 		var feedData = e.detail;
-
 		feedData.forEach(function (elem) {
       console.log(elem.comments);
 			var wordArray = [];
@@ -160,30 +157,14 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
         template.children[2].children[0].children.push(tempBullet);
 				elem['body' + rep] = wordsTo300[rep];
 			}
-
-      // these are the comments
-      // var commentsData = elem.comments;
-      // console.log(commentsData);
-
-      // for (var k = 0; k < commentsData.length; k++) {
-      //   var microTemplate = commentMicroTemplate();
-
-      //   template.children[4].children[0].children.push(commentsData[k]);
-      // }
-
 			feed.innerHTML = feed.innerHTML + json2html.transform(elem, template);
 		});
-		buildSlider();
+		feedPage.buildSlider();
 	});
 };
 
 FeedPage.prototype.updateUtilityBar = function() {
 	utilityBar.showDrawerButton();
-};
-
-FeedPage.prototype.bottomButtonClicked = function() {
-	catalog = new Catalog();
-	appCanvas.pushContent(catalog);
 };
 
 FeedPage.prototype.postPageButtonClicked = function() {
@@ -192,12 +173,10 @@ FeedPage.prototype.postPageButtonClicked = function() {
 	appCanvas.pushContent(postPage);
 };
 
-
-var buildSlider = function(){
-
+FeedPage.prototype.buildSlider = function(){
 	var sliders = document.querySelectorAll('[id^=post-]');
 	for(var i=0;i<sliders.length;i++) {
-		window.mySwipe = Swipe(sliders[i], {
+		window.mySwipe = new Swipe(sliders[i], {
 			startSlide: 0,
 			//auto: 3000,
 			continuous: false,
@@ -215,4 +194,4 @@ var buildSlider = function(){
 			transitionEnd: function(index, element) {}
 		});
 	}
-}
+};

@@ -66,6 +66,10 @@
   transition-property: opacity, transform;
   transition-duration: 0.4s, 0.66s;
   transition-timing-function: cubic-bezier(0.16,1,0.29,0.99);
+  -webkit-transform: scale(1.06,1.06);
+  -webkit-transition-property: opacity, transform;
+  -webkit-transition-duration: 0.4s, 0.66s;
+  -webkit-transition-timing-function: cubic-bezier(0.16,1,0.29,0.99);
 }
 
 .contentAreaOffScreen {
@@ -79,55 +83,27 @@
   transition-property: opacity, transform;
   transition-duration: 0.4s, 0.66s;
   transition-timing-function: cubic-bezier(0.16,1,0.29,0.99);
+  -webkit-transform: scale(1.06,1.06);
+  -webkit-transition-property: opacity, transform;
+  -webkit-transition-duration: 0.4s, 0.66s;
+  -webkit-transition-timing-function: cubic-bezier(0.16,1,0.29,0.99);
 }
 
 .contentAreaModalDown {
   position: absolute;
+  z-index: 200;
   top: 562rem;
   height: 498rem;
   width: 100%;
-  transition-property: opacity, transform;
-  transition-duration: 0.4s, 0.66s;
-  transition-timing-function: cubic-bezier(0.16,1,0.29,0.99);
+  transition: all 0.2s linear;
 }
 
 .contentAreaModalUp {
   position: absolute;
+  z-index: 200;
   top: 0rem;
   width: 100%;
   height: 498rem;
   background: rgba(255, 255, 255, .75);
-  transition-property: opacity, transform;
-  transition-duration: 0.4s, 0.66s;
-  transition-timing-function: cubic-bezier(0.16,1,0.29,0.99);
-}
-
-#mainContentContainer {
-  transition: all 0.2s cubic-bezier(.16,.68,.43,.99);
-}
-
-#mainContentContainerSwiping {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
-#mainContentContainerWithDrawerOpen {
-  position: fixed;
-  left: 163rem;
-  z-index: 100;
-  width: 100%;
-  height: 100%;
-}
-
-.myDash {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-}
-
-.myDashBackground {
-  position: absolute;
-  width: 100%;
-  height: 460rem;
+  transition: all 0.2s linear;
 }

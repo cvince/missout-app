@@ -17,6 +17,10 @@ var utilityBar;
 var navigationDrawer;
 var mainContentContainer;
 
+var postPage;
+var postCompanion;
+var postDeeper;
+
 var scrolling = false;
 var listeningForScrolling = false;
 var scrollViewRegister;
