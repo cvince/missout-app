@@ -51,10 +51,10 @@ function UI () {
   };
 
   Constructor.prototype.refreshFeed = function(){
-    for (var post in outList) {
-      outList.pop();
-    }
-    App.locator.getLoc();
+    App.locator.getLoc(function(userLoc){
+      var event = new CustomEvent('start-feed', { detail: userLoc });
+      document.dispatchEvent(event);
+    });
   };
 
 

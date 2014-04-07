@@ -43,7 +43,7 @@ function Locator () {
   function Constructor () { }
 
   Constructor.prototype.getLoc = function (maxAge, maxAccuracy, cb) {
-    if (typeof arguments[0] === "function") {
+    if (typeof arguments[0] === 'function') {
       cb = arguments[0];
       maxAccuracy = 5000;
       maxAge = 600000;

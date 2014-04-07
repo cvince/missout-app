@@ -5,18 +5,15 @@
 FeedPage.prototype = new ContentPage();
 
 function FeedPage() {
-  ContentPage.call(this);
-  this.element.setAttribute('class', 'feedPage');
-  this.displayContentItems();
+	ContentPage.call(this);
+	this.element.setAttribute('class', 'feedPage');
+	this.displayContentItems();
 }
 
 FeedPage.prototype.getContentItems = function() {
 	// the request for the content to display the contents of the navigation drawer
 	//ajax.makeRequest('/public/views/feedPage.html', this);
 };
-
-
-
 
 FeedPage.prototype.displayContentItems = function() { //removed innerHTML from parameter
 	//the data response from the above request
@@ -196,16 +193,24 @@ FeedPage.prototype.updateUtilityBar = function() {
 	utilityBar.showDrawerButton();
 };
 
+FeedPage.prototype.bottomButtonClicked = function() {
+	catalog = new Catalog();
+	appCanvas.pushContent(catalog);
+};
+
 FeedPage.prototype.postPageButtonClicked = function() {
 	navigationDrawer.close();
 	postPage = new PostPage();
 	appCanvas.pushContent(postPage);
 };
 
+
+
 var buildSlider = function(){
+
 	var sliders = document.querySelectorAll('[id^=post-]');
 	for(var i=0;i<sliders.length;i++) {
-		window.mySwipe = new Swipe(sliders[i], {
+		window.mySwipe = Swipe(sliders[i], {
 			startSlide: 0,
 			//auto: 3000,
 			continuous: false,

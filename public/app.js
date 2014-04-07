@@ -63,9 +63,16 @@ function addElementToDict(element, jsObject) {
 	elementCount++;
 }
 
+function refreshFeed() {
+  App.locator.getLoc(function(userLoc){
+    var event = new CustomEvent('start-feed', { detail: userLoc });
+    document.dispatchEvent(event);
+  });
+}
+
 function initialize() {
-	App.locator.getLoc();
-	elements = new Object();
+	refreshFeed();
+	elements = {};
 	elementCount = 0;
 	drawPageElements();
 	setTouchListeners();
@@ -202,7 +209,7 @@ function Locator () {
   function Constructor () { }
 
   Constructor.prototype.getLoc = function (maxAge, maxAccuracy, cb) {
-    if (typeof arguments[0] === "function") {
+    if (typeof arguments[0] === 'function') {
       cb = arguments[0];
       maxAccuracy = 5000;
       maxAge = 600000;
@@ -301,7 +308,7 @@ function Postman (endpoint) {
       console.log('XHR Error: ' + JSON.stringify(err));
     };
     if (data) {
-      console.log("bad data: " + JSON.stringify(data));
+      console.log('bad data: ' + JSON.stringify(data));
       req.send(JSON.stringify(data));
     } else {
       req.send();
@@ -318,19 +325,19 @@ function Postman (endpoint) {
 
   Constructor.prototype.post = function (data, cb) {
     /* location functionality */
-    return this.XHR('POST', data, url, true, cb);
+    return this.XHR('POST', data, url, false, cb);
   };
 
   Constructor.prototype.comment = function (data, id, cb) {
     return this.XHR('POST', data, document.URL + 'api/v1/comments/' + id, true, cb);
-  }
+  };
 
   Constructor.prototype.newFeed = function (loc) {
     console.log('data to newFeed function: ' + JSON.stringify(loc));
     var req = new XMLHttpRequest(),
         url = document.URL + 'api/v1/feed';
     req.open('POST', url, true);
-    req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     req.onload = function (d) {
       feed = JSON.parse(d.currentTarget.responseText);
       var event = new CustomEvent('feedJSON', {detail: feed});
@@ -339,11 +346,11 @@ function Postman (endpoint) {
       //console.log(App.postman.showFeed());
     };
     req.onerror = function (err) {
-      console.log(err)
+      console.log(err);
     };
 //    loc.lon = -122;
 //    loc.lat = 47;
-    var params = "lon="+loc.lon+"&lat="+loc.lat;
+    var params = 'lon='+loc.lon+'&lat='+loc.lat;
     console.log(params);
     req.send(params);
   };
@@ -360,99 +367,12 @@ App.postman = new Postman(document.URL + 'api/v1/posts');
 
 // Receive the DOM event 'feed-location' and query the
 // feed endpoint
-document.addEventListener('new-location', function (e) {
+document.addEventListener('start-feed', function (e) {
   console.log('data to new loc event ' + JSON.stringify(e.detail));
   App.postman.newFeed(e.detail);
 });
 
 /**************************postman.js end****************************/
-
-/*******************actions.js start***********************/
-'use strict';
-/* src/js/ui */
-/*global App*/
-
-
-/*
--- App.ui --
-Passes data into helper functions that
-initiate UI render/redraw events.
-
-*/
-
-//global selectors
-
-App.output = {};
-var outList = [];
-//rendering
-
-function UI () {
-
-  function Constructor(){}
-
-  // ui feed display functions
-
-  Constructor.prototype.showFeed = function(){
-    for (var post in outList) {
-      outList.pop();
-    }
-    App.output = App.postman.showFeed();
-    for(var i = 0; i<App.output.length; i++){
-
-      //temp assignment of unschematized vals
-      //App.output[i].tempname = 'battery horse';
-      App.output[i].title = 'Your sister ate my lunch';
-      //remove above when changing schema
-
-      outList.push({
-        id : App.output[i]._id,
-        date : App.output[i].timestamp,
-        title : App.output[i].title,
-        tempname: App.output[i].tempname,
-        body: App.output[i].body,
-        loc: App.output[i].loc
-      });
-    }
-  };
-
-  Constructor.prototype.appendFeed = function(data){
-    outList.unshift(data);
-  };
-
-  Constructor.prototype.refreshFeed = function(){
-    for (var post in outList) {
-      outList.pop();
-    }
-    App.locator.getLoc();
-  };
-
-
-  // ui comment display functions
-
-  Constructor.prototype.showComment = function(postId){
-
-  }
-
-  Constructor.prototype.appendComment = function(postId){
-
-  }
-
-  Constructor.prototype.refreshComment = function(postId){
-
-  }
-
-  // ui posting functions
-
-  return new Constructor();
-
-}
-
-
-App.ui = new UI();
-
-
-/**************************actions.js end****************************/
-
 
 /*******************heartbeat.js start***********************/
 'use strict';

@@ -414,11 +414,8 @@ section.forms .logo img {
   -webkit-transition-duration: 0.4s, 0.66s;
   -webkit-transition-timing-function: cubic-bezier(0.16, 1, 0.29, 0.99); }
 
-[class^="contentAreaModal"] > * {
-  transform: translate3d(0, 0, 0); }
-
 .contentAreaModalDown {
-  position: absolute;
+  position: fixed;
   z-index: 200;
   top: 562rem;
   height: 498rem;
@@ -426,7 +423,7 @@ section.forms .logo img {
   transition: all 0.5s ease-in; }
 
 .contentAreaModalUp {
-  position: absolute;
+  position: fixed;
   z-index: 200;
   top: 0rem;
   width: 100%;

@@ -44,6 +44,15 @@ AppCanvas.prototype.presentModal = function(content) {
     this.modal = content;
     this.hasModal = true;
   }
+
+  document.ontouchmove = function(e) {
+    e.preventDefault();
+  };
+
+  document.onmousewheel = function(e) {
+    e.preventDefault();
+  };
+
 };
 
 AppCanvas.prototype.dismissModal = function() {
@@ -52,7 +61,17 @@ AppCanvas.prototype.dismissModal = function() {
     this.modalContentA.setAttribute('class', 'contentAreaModalDown');
     setTimeout(appCanvas.modalChange, 650);
     this.hasModal = false;
+
   }
+
+  document.ontouchmove = function(e) {
+    return true;
+  };
+
+  document.onmousewheel = function(e) {
+    return true;
+  };
+
 };
 
 AppCanvas.prototype.modalChange = function() {
