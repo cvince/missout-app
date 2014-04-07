@@ -21,52 +21,38 @@ Controller.prototype.displayContentItems = function(innerHTML) {
 	this.element.innerHTML = innerHTML;
 
 
-	/*The following is intended to be a bunch of event listeners that track
-	post submit click events --comment click event listeners are below,
-	and has nothing to do with displayContentItems.
+  /*The following is intended to be a bunch of event listeners that track
+  post submit click events --comment click event listeners are below,
+  and has nothing to do with displayContentItems.
 
-	Please move this, because its location is unintuitive */
+  Please move this, because its location is unintuitive */
 
-	var messageOut = document.getElementById('message-out');
-	var titleOut = document.getElementById('title-out');
-	var submit = document.getElementById('submit-post');
-	submit.disabled = true;
+  var messageOut = document.getElementById('message-out');
+  var titleOut = document.getElementById('title-out');
+  var submit = document.getElementById('submit-post');
 
-	App.locator.getLoc(function (loc) {
+  submit.addEventListener(function (e) {
+    console.log(e);
+  });
 
-	  submit.addEventListener(function (e) {
-	    console.log(e);
-	  });
-
-	  console.log('data to page: ' + JSON.stringify(loc));
-	  submit.disabled = false;
-
-	  submit.addEventListener('click', function() {
-	    var data = { timestamp : new Date() };
-	    data.title = titleOut.value.toString();
-	    data.body = messageOut.value.toString();
-	    data.loc = { type: 'Point', coordinates: [ loc.lon, loc.lat ] };
-	    App.postman.post(data, function (res) {
-	      App.ui.appendPost(data);
-	      console.log('post ok, contents - ' + JSON.stringify(res));
-	    });
-	  }, false);
-
-		var comment = document.getElementsByClassName('submit-comment');
-
-		//THIS BUTTON does not click.
-
-		comment.addEventListener('click', function() {
-			var data = { timestamp : new Date() };
-			data._id = this.getAttribute('data-id');
-			data.body = this.value.toString();
-			console.log(data);
-			console.log('hola');
-			App.commentman.update(data, function(res){ console.log('comment posted, contents - ' + JSON.stringify(res)) });
-		})
+  App.locator.getLoc(function (loc) {
+    submit.addEventListener('click', function() {
 
 
-	});
+  		console.log('data to page: ' + JSON.stringify(loc));
+
+      appCanvas.dismissModal();
+
+      var data = { timestamp : new Date() };
+      data.title = titleOut.value.toString();
+      data.body = messageOut.value.toString();
+      data.loc = { type: 'Point', coordinates: [ loc.lon, loc.lat ] };
+      App.postman.post(data, function (res) {
+        console.log('post ok, contents - ' + JSON.stringify(res));
+      });
+    }, false);
+  });
+
 
 }
 
@@ -97,3 +83,5 @@ Controller.prototype.switcherButtonClicked = function() {
 Controller.prototype.closeButtonClicked = function() {
 	appCanvas.dismissModal();
 }
+
+

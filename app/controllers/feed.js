@@ -21,7 +21,7 @@ module.exports = function (app) {
                     type: 'Point',
                     coordinates: [ req.body.lon, req.body.lat ]
                   },
-                  $maxDistance: 10000
+                  $maxDistance: 100000
                 }
               },
     function (err, docs) {

@@ -7,7 +7,7 @@ module.exports = function (app) {
     Post.findById(postId, function (err, post) {
       post.comments.push(req.body);
       post.save(function (err, post) {
-        res.redirect('/');
+        console.log(post);
       });
       if (err) {
         res.send(err);

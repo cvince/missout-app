@@ -151,6 +151,9 @@ a {
   opacity: 0;
   transition: all 0.7s linear; }
 
+.contentAreaModalUp {
+  z-index: 99999; }
+
 h1 {
   font: 16rem/24rem normal 'Dosis', sans-serif; }
 

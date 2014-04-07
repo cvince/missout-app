@@ -13,6 +13,9 @@ FeedPage.prototype.getContentItems = function() {
 	//ajax.makeRequest('/public/views/feedPage.html', this);
 };
 
+
+
+
 FeedPage.prototype.displayContentItems = function() { //removed innerHTML from parameter
 	//the data response from the above request
 	//this.element.innerHTML = innerHTML;
@@ -129,12 +132,21 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 	var feed = document.getElementById('feed');
 	//feed.innerHTML = html;
 
+	//THIS BUTTON does not click.
+
+	// comment.addEventListener('click', function(e) {
+	// 	var data = { timestamp : new Date() };
+	// 	data._id = this.getAttribute('data-id');
+	// 	data.body = this.value.toString();
+	// 	console.log(data);
+	// });
+
 	document.addEventListener('feedJSON', function (e) {
 		feed.innerHTML = '';
 		var feedData = e.detail;
 
 		feedData.forEach(function (elem) {
-      console.log(elem.comments);
+      //console.log(elem.comments);
 			var wordArray = [];
 			var wordsTo300 = [];
 			var template = generateTemplate();
@@ -159,6 +171,7 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 				if(rep === 0){tempBullet.class = 'on';}
         template.children[2].children[0].children.push(tempBullet);
 				elem['body' + rep] = wordsTo300[rep];
+
 			}
 
       // these are the comments
