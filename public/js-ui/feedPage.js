@@ -1,5 +1,6 @@
 'use strict';
 /*global json2html*/
+/*global Swipe*/
 
 FeedPage.prototype = new ContentPage();
 
@@ -17,7 +18,7 @@ FeedPage.prototype.getContentItems = function() {
 FeedPage.prototype.displayContentItems = function() { //removed innerHTML from parameter
 	//the data response from the above request
 	//this.element.innerHTML = innerHTML;
-	function generateTemplate(){
+	function generateMainTemplate(){
 		return {
 			'tag':'article',
 			'class':'missedConnection line post',
@@ -159,7 +160,7 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 			elem.pages = [];
 			var wordArray = [];
 			var wordsTo300 = [];
-			var template = generateTemplate();
+			var template = generateMainTemplate();
 			wordArray = elem.body.split(' ');
 			do{
 				var tempTo300 = '';
@@ -172,9 +173,10 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 			for(var rep = 0;rep < wordsTo300.length;rep ++){
 				elem.pages.push({body: wordsTo300[rep]});
 			}
-			feed.innerHTML = feed.innerHTML + json2html.transform(elem, template);
+			feed.innerHTML += json2html.transform(elem, template);
 		});
 		buildSlider();
+		fakeBuildNavDrawer(feedData);
 	});
 };
 
@@ -216,4 +218,20 @@ var buildSlider = function(){
 			transitionEnd: function(index, element) {}
 		});
 	}
+};
+
+var fakeBuildNavDrawer = function(template){
+	var numAlerts, numTracked, rep;
+	var alerts = [];
+	var tracked = [];
+	var templateLength = template.length;
+	numAlerts = ((Math.random() * 3) << 0) + 2;
+	numTracked = ((Math.random() * 3) << 0) + 2;
+	for(rep = 0;rep < numAlerts;rep ++){
+		alerts.push(template[(Math.random() * templateLength) <<0]);
+	}
+	for(rep = 0;rep < numTracked;rep ++){
+		tracked.push(template[(Math.random() * templateLength) <<0]);
+	}
+	navigationDrawer.displayContentItems(alerts, tracked);
 };
