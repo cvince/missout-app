@@ -11,7 +11,7 @@
   overflow-x: hidden;
   padding-top: 20rem;
   box-shadow: 5rem 5rem 10rem 7rem rgba(0,0,0,.25);
-  transition:all 0.2s cubic-bezier(.16,.68,.43,.99);
+  transition:all 0.5s cubic-bezier(.16,.68,.43,.99);
 }
 
 #mainContentContainerWithDrawerOpen {
@@ -21,7 +21,7 @@
   width: 100%;
   height: 100%;
   box-shadow: 5rem 5rem 10rem 7rem rgba(0,0,0,.25);
-  transition: all 0.2s cubic-bezier(.16,.68,.43,.99);
+  transition: all 0.5s cubic-bezier(.16,.68,.43,.99);
 }
 
 .contentPageBackground {

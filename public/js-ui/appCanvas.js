@@ -14,11 +14,11 @@ function AppCanvas() {
   this.element.setAttribute('id', 'appCanvas');
   this.element.setAttribute('class', 'appCanvas scrollable');
   this.contentA = document.createElement('div');
+  this.contentA.setAttribute('id', 'feed');
   this.contentB = document.createElement('div');
   this.modalContentA = document.createElement('div');
 
   this.contentA.setAttribute('class', 'contentAreaCurrent scrollable');
-  this.contentA.setAttribute('id', 'feed');
   this.contentB.setAttribute('class', 'contentArea');
   this.modalContentA.setAttribute('class', 'contentAreaModalDown');
 
