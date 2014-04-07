@@ -20,7 +20,6 @@ Controller.prototype.displayContentItems = function(innerHTML) {
 	// navigation drawer content response from the above ajax.makeRequest();
 	this.element.innerHTML = innerHTML;
 
-
   /*The following is intended to be a bunch of event listeners that track
   post submit click events --comment click event listeners are below,
   and has nothing to do with displayContentItems.
@@ -35,13 +34,11 @@ Controller.prototype.displayContentItems = function(innerHTML) {
     console.log(e);
   });
 
-  App.locator.getLoc(function (loc) {
-    submit.addEventListener('click', function() {
+  submit.addEventListener('click', function() {
 
+		App.locator.getLoc(function (loc) {
 
-  		console.log('data to page: ' + JSON.stringify(loc));
-
-      appCanvas.dismissModal();
+			console.log('data to page: ' + JSON.stringify(loc));
 
       var data = { timestamp : new Date() };
       data.title = titleOut.value.toString();
@@ -49,10 +46,12 @@ Controller.prototype.displayContentItems = function(innerHTML) {
       data.loc = { type: 'Point', coordinates: [ loc.lon, loc.lat ] };
       App.postman.post(data, function (res) {
         console.log('post ok, contents - ' + JSON.stringify(res));
+				appCanvas.dismissModal();
       });
-    }, false);
-  });
 
+		});
+
+  }, false);
 
 }
 

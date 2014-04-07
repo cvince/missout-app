@@ -17,10 +17,6 @@ var utilityBar;
 var navigationDrawer;
 var mainContentContainer;
 
-var postPage;
-var postCompanion;
-var postDeeper;
-
 var scrolling = false;
 var listeningForScrolling = false;
 var scrollViewRegister;
@@ -57,7 +53,7 @@ function drawPageElements() {
 	splashImage.setAttribute('src', '/public/images/splash.png');
 	setTimeout(function(){
 		page.appendChild(this.splashImage);
-		setTimeout(splashFadeOut, 1500);
+		setTimeout(splashFadeOut, 1000);
 	}, 100);
 }
 
@@ -340,7 +336,7 @@ function Postman (endpoint) {
       var event = new CustomEvent('feedJSON', {detail: feed});
       document.dispatchEvent(event);
       console.log('got a feed, check it:');
-      console.log(App.postman.showFeed());
+      //console.log(App.postman.showFeed());
     };
     req.onerror = function (err) {
       console.log(err)

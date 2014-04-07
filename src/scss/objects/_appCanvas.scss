@@ -89,13 +89,17 @@
   -webkit-transition-timing-function: cubic-bezier(0.16,1,0.29,0.99);
 }
 
+[class^="contentAreaModal"] > * {
+  transform: translate3d(0, 0, 0);
+}
+
 .contentAreaModalDown {
   position: absolute;
   z-index: 200;
   top: 562rem;
   height: 498rem;
   width: 100%;
-  transition: all 0.2s linear;
+  transition: all 0.5s ease-in;
 }
 
 .contentAreaModalUp {
@@ -105,5 +109,6 @@
   width: 100%;
   height: 498rem;
   background: rgba(255, 255, 255, .75);
-  transition: all 0.2s linear;
+  transition: all 0.5s ease-out;
 }
+

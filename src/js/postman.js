@@ -76,7 +76,7 @@ function Postman (endpoint) {
       var event = new CustomEvent('feedJSON', {detail: feed});
       document.dispatchEvent(event);
       console.log('got a feed, check it:');
-      console.log(App.postman.showFeed());
+      //console.log(App.postman.showFeed());
     };
     req.onerror = function (err) {
       console.log(err)

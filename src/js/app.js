@@ -53,7 +53,7 @@ function drawPageElements() {
 	splashImage.setAttribute('src', '/public/images/splash.png');
 	setTimeout(function(){
 		page.appendChild(this.splashImage);
-		setTimeout(splashFadeOut, 1500);
+		setTimeout(splashFadeOut, 1000);
 	}, 100);
 }
 

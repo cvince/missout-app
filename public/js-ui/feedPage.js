@@ -1,4 +1,6 @@
 'use strict';
+/*global json2html*/
+/*global Swipe*/
 
 FeedPage.prototype = new ContentPage();
 
@@ -19,7 +21,7 @@ FeedPage.prototype.getContentItems = function() {
 FeedPage.prototype.displayContentItems = function() { //removed innerHTML from parameter
 	//the data response from the above request
 	//this.element.innerHTML = innerHTML;
-	function generateTemplate(){
+	function generateMainTemplate(){
 		return {
 			'tag':'article',
 			'class':'missedConnection line post',
@@ -36,7 +38,9 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 						{
 							'tag':'ul',
 							'class':'post-wrap line',
-							'children': [ ]
+							'children' : function(){
+								return(json2html.transform(this.pages, pageMicroTemplate()));
+							}
 						}
 					],
 				},
@@ -45,35 +49,40 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 					'id':'pagination-${_id}',
 					'class':'line',
 					'children' : [
-  				{
-  					'tag' : 'ul',
-  					'children' : [ ]
-  				}
-  				]
-  			},
-        {
-          'tag' : 'div',
-          'class' :'comments line',
-          'html' :
-            '<form class="comment-box" method="post" action="api/v1/comments/${_id}">'+
-              '<label>Submit a comment</label>'+
-              '<textarea class="comment-out" name="body"></textarea>'+
-              '<button data-id=${_id} class="submit-comment" type="submit" value="send-comment">Submit A Comment</button>'+
-            '</form>',
-          'children' : [
-          {
-            'tag' : 'ul',
-            'children' : [
-            {
-              'tag' : 'li',
-              'children' : function(){
-                return(json2html.transform(this.comments, commentMicroTemplate()));
-              }
-            }
-            ]
-          }
-          ]
-        },
+						{
+							'tag' : 'ul',
+							'children' : function(){
+								var out = [];
+								for(var rep=0;rep<this.pages.length;rep++){
+									out.push(rep === 0 ? {class: 'on'} : {});
+								}
+								return(json2html.transform(out, bulletMicroTemplate()));
+							}
+						}
+					]
+				},
+				{
+					'tag' : 'div',
+					'class' :'comments line',
+					'html' :
+						'<form class="comment-box" method="post" action="api/v1/comments/${_id}">'+
+							'<label>Submit a comment</label>'+
+							'<textarea class="comment-out" name="body"></textarea>'+
+							'<button data-id=${_id} class="submit-comment" type="submit" value="send-comment">Submit A Comment</button>'+'</form>',
+					'children' : [
+						{
+							'tag' : 'ul',
+							'children' : [
+								{
+									'tag' : 'li',
+									'children' : function(){
+										return(json2html.transform(this.comments, commentMicroTemplate()));
+									}
+								}
+							]
+						}
+					]
+				},
 				{
 					'tag':'footer',
 					'class':'gesturebar line',
@@ -105,26 +114,42 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 						}
 					]
 
-        }
+				}
 			]
 		};
 	}
 
-  function commentMicroTemplate () {
-    return {
-      'tag':'div',
-      'children': [
-        {
-          'tag':'h5',
-          'html':'${tempname}'
-        },
-        {
-          'tag':'p',
-          'html':'${body}'
-        }
-      ]
-    }
-  }
+	function commentMicroTemplate () {
+		return {
+			'tag':'div',
+			'id':'${_id}',
+			'children': [
+				{
+					'tag':'h5',
+					'html':'${tempname}'
+				},
+				{
+					'tag':'p',
+					'html':'${body}'
+				}
+			]
+		};
+	}
+
+	function pageMicroTemplate(){
+		return {
+			tag: 'li',
+			html: '${body}'
+		};
+	}
+
+	function bulletMicroTemplate(){
+		return{
+			tag: 'li',
+			class: '${class}'
+		};
+	}
+
 
 	//var html = json2html.transform(data, template);
 	//feed.innerHTML = html;
@@ -143,10 +168,11 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 		feed.innerHTML = '';
 		var feedData = e.detail;
 		feedData.forEach(function (elem) {
-      //console.log(elem.comments);
+			//console.log(elem.comments);
+			elem.pages = [];
 			var wordArray = [];
 			var wordsTo300 = [];
-			var template = generateTemplate();
+			var template = generateMainTemplate();
 			wordArray = elem.body.split(' ');
 			do{
 				var tempTo300 = '';
@@ -157,22 +183,12 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 			} while (wordArray.length > 0);
 
 			for(var rep = 0;rep < wordsTo300.length;rep ++){
-				template.children[1].children[0].children.push({
-					tag: 'li',
-					html: '${body' + rep + '}'
-				});
-				var tempBullet = {
-					tag: 'li',
-					html: ''
-				};
-				if(rep === 0){tempBullet.class = 'on';}
-        template.children[2].children[0].children.push(tempBullet);
-				elem['body' + rep] = wordsTo300[rep];
-
+				elem.pages.push({body: wordsTo300[rep]});
 			}
-			feed.innerHTML = feed.innerHTML + json2html.transform(elem, template);
+			feed.innerHTML += json2html.transform(elem, template);
 		});
-		feedPage.buildSlider();
+		buildSlider();
+		fakeBuildNavDrawer(feedData);
 	});
 };
 
@@ -186,7 +202,7 @@ FeedPage.prototype.postPageButtonClicked = function() {
 	appCanvas.pushContent(postPage);
 };
 
-FeedPage.prototype.buildSlider = function(){
+var buildSlider = function(){
 	var sliders = document.querySelectorAll('[id^=post-]');
 	for(var i=0;i<sliders.length;i++) {
 		window.mySwipe = new Swipe(sliders[i], {
@@ -207,4 +223,20 @@ FeedPage.prototype.buildSlider = function(){
 			transitionEnd: function(index, element) {}
 		});
 	}
+};
+
+var fakeBuildNavDrawer = function(template){
+	var numAlerts, numTracked, rep;
+	var alerts = [];
+	var tracked = [];
+	var templateLength = template.length;
+	numAlerts = ((Math.random() * 3) << 0) + 2;
+	numTracked = ((Math.random() * 3) << 0) + 2;
+	for(rep = 0;rep < numAlerts;rep ++){
+		alerts.push(template[(Math.random() * templateLength) <<0]);
+	}
+	for(rep = 0;rep < numTracked;rep ++){
+		tracked.push(template[(Math.random() * templateLength) <<0]);
+	}
+	navigationDrawer.displayContentItems(alerts, tracked);
 };
