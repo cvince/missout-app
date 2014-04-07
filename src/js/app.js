@@ -64,8 +64,11 @@ function addElementToDict(element, jsObject) {
 }
 
 function initialize() {
-	App.locator.getLoc();
-	elements = new Object();
+	App.locator.getLoc(function(userLoc){
+			var event = new CustomEvent('start-feed', { detail: userLoc });
+			document.dispatchEvent(event);
+		});
+	elements = {};
 	elementCount = 0;
 	drawPageElements();
 	setTouchListeners();

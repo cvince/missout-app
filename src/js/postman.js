@@ -41,7 +41,7 @@ function Postman (endpoint) {
       console.log('XHR Error: ' + JSON.stringify(err));
     };
     if (data) {
-      console.log("bad data: " + JSON.stringify(data));
+      console.log('bad data: ' + JSON.stringify(data));
       req.send(JSON.stringify(data));
     } else {
       req.send();
@@ -63,14 +63,14 @@ function Postman (endpoint) {
 
   Constructor.prototype.comment = function (data, id, cb) {
     return this.XHR('POST', data, document.URL + 'api/v1/comments/' + id, true, cb);
-  }
+  };
 
   Constructor.prototype.newFeed = function (loc) {
     console.log('data to newFeed function: ' + JSON.stringify(loc));
     var req = new XMLHttpRequest(),
         url = document.URL + 'api/v1/feed';
     req.open('POST', url, true);
-    req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     req.onload = function (d) {
       feed = JSON.parse(d.currentTarget.responseText);
       var event = new CustomEvent('feedJSON', {detail: feed});
@@ -79,11 +79,11 @@ function Postman (endpoint) {
       //console.log(App.postman.showFeed());
     };
     req.onerror = function (err) {
-      console.log(err)
+      console.log(err);
     };
 //    loc.lon = -122;
 //    loc.lat = 47;
-    var params = "lon="+loc.lon+"&lat="+loc.lat;
+    var params = 'lon='+loc.lon+'&lat='+loc.lat;
     console.log(params);
     req.send(params);
   };
@@ -100,7 +100,7 @@ App.postman = new Postman(document.URL + 'api/v1/posts');
 
 // Receive the DOM event 'feed-location' and query the
 // feed endpoint
-document.addEventListener('new-location', function (e) {
+document.addEventListener('start-feed', function (e) {
   console.log('data to new loc event ' + JSON.stringify(e.detail));
   App.postman.newFeed(e.detail);
 });

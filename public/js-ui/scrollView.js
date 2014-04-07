@@ -22,19 +22,17 @@ ScrollView.prototype.enabled = true;
 ScrollView.prototype.dropsScrollThrough = true;
 ScrollView.prototype.didScroll = false;
 
-function ScrollView()
-{
+function ScrollView() {
 	this.didScroll = false;
 }
 
-ScrollView.prototype.initScrollView = function()
-{
+ScrollView.prototype.initScrollView = function() {
 	addElementToDict(this.element, this);
-	
+
 	// this.element.addEventListener('MSPointerDown', function (e) { e.preventManipulation(); onMouseDown(this, e); }, false);
 	// this.element.addEventListener('MSPointerUp', function (e) { onMouseUp(this, e); }, false);
 	// this.element.addEventListener('mousemove', function (e) { onMouseMove(this, e); }, false);
-	
+
 	this.element.addEventListener( 'touchstart' , function touchStart( e ) { onMouseDown(this, e); } , true );
 	this.element.addEventListener( 'touchmove', function touchMove ( e ) { onMouseMove(this, e)  }, true);
 	this.element.addEventListener( 'touchend', function touchEnd ( e ) { onMouseUp(this, e)  }, true);
@@ -45,25 +43,20 @@ ScrollView.prototype.initScrollView = function()
 	// }
 }
 
-ScrollView.prototype.scrollViewAlreadyRegistered = function(s)
-{
-	for (var i = 0; i < scrollViewRegister.length; i++)
-	{
-		if (scrollViewRegister[i] == s)
-		{
+ScrollView.prototype.scrollViewAlreadyRegistered = function(s) {
+	for (var i = 0; i < scrollViewRegister.length; i++) {
+		if (scrollViewRegister[i] == s) {
 			return true;
 		}
 	}
 	return false;
 }
 
-ScrollView.prototype.onMouseDown = function(e)
-{
+ScrollView.prototype.onMouseDown = function(e) {
 	this.didScroll = false;
-	if (this.enabled)
-	{
-	    this.isMouseDown = true;
-        this.originalPoint = { "x": e.changedTouches[0].pageX, "y": e.changedTouches[0].pageY };
+	if (this.enabled) {
+	  this.isMouseDown = true;
+    this.originalPoint = { "x": e.changedTouches[0].pageX, "y": e.changedTouches[0].pageY };
 		this.originalOffset = {"x":this.contentView.x, "y":this.contentView.y};
 		this.positionDict = new Array();
 		this.inc = 0;
@@ -74,77 +67,56 @@ ScrollView.prototype.onMouseDown = function(e)
 		this.contentView.element.setAttribute("class", this.normalStyle);
 		scrollView = this;
 
-		if (!this.scrollViewAlreadyRegistered(this))
-		{	
+		if (!this.scrollViewAlreadyRegistered(this)) {
 			scrollViewRegister[scrollViewRegister.length] = this;
 		}
 	}
 }
 
-function scrollTimer()
-{
-	if (!scrolling)
-	{
-		for (var item in scrollViewRegister)
-		{
-			if (scrollViewRegister[item].scrollViewNotActive(scrollViewRegister[item]))
-			{
+function scrollTimer() {
+	if (!scrolling) {
+		for (var item in scrollViewRegister) {
+			if (scrollViewRegister[item].scrollViewNotActive(scrollViewRegister[item])) {
 				scrollViewRegister[item].isMouseDown = false;
 			}
 		}
 	}
 }
 
-ScrollView.prototype.onMouseMove = function(e)
-{
-	if (this.isMouseDown)
-	{	
-	    var point;
-	    
-        point = { "x": e.changedTouches[0].pageX, "y": e.changedTouches[0].pageY };
-		
-		// log.innerHTML = point.x + " " + point.y;        
-		
+ScrollView.prototype.onMouseMove = function(e) {
+	if (this.isMouseDown) {
+	  var point;
+    point = { "x": e.changedTouches[0].pageX, "y": e.changedTouches[0].pageY };
+		// log.innerHTML = point.x + " " + point.y;
 		var axis;
-		if (this.scrollingDirection == "horizontal")
-		{
+		if (this.scrollingDirection == "horizontal") {
 			axis = "x";
 		}
 		else
 		{
 			axis = "y";
 		}
-		
 		change = (point[axis] - this.originalPoint[axis]);
-		if (Math.abs(change) > this.scrollDeadZone || this.scrolling)
-		{
+		if (Math.abs(change) > this.scrollDeadZone || this.scrolling) {
 			this.didScroll = true;
 			this.scrolling = true;
-			if (listeningForScrolling)
-			{
+			if (listeningForScrolling) {
 				scrolling = true;
 				listeningForScrolling = false;
-				for (var item in elements)
-				{
-					if (elements[item] instanceof Button)
-					{
+				for (var item in elements) {
+					if (elements[item] instanceof Button) {
 						elements[item].onMouseOut();
 						elements[item].isMouseDown = false;
 					}
 				}
-				for (var item in scrollViewRegister)
-				{
-					if (scrollViewRegister[item] != this)
-					{
-						if (this.scrollViewNotActive(scrollViewRegister[item]))
-						{
+				for (var item in scrollViewRegister) {
+					if (scrollViewRegister[item] != this) {
+						if (this.scrollViewNotActive(scrollViewRegister[item])) {
 							scrollViewRegister[item].isMouseDown = false;
 						}
 					}
-					else
-					{
-						if (this.scrollViewNotActive(this))
-						{
+					else {
+						if (this.scrollViewNotActive(this)) {
 							activeScrollViews[activeScrollViews.length] = this;
 						}
 					}
@@ -220,7 +192,7 @@ ScrollView.prototype.onMouseMove = function(e)
 							}
 						}
 					}
-					
+
 					if (this.multiselectScroll)
 					{
 						value = -this.contentView.size.width + this.size.width + this.edgeThreshold;
@@ -238,7 +210,7 @@ ScrollView.prototype.onMouseMove = function(e)
 					}
 
 				}
-				
+
 				if (this.multiselectScroll)
 				{
 					this.checkmarkContainer.setAttribute("class", "checkmarkContainer");
@@ -246,7 +218,7 @@ ScrollView.prototype.onMouseMove = function(e)
 					if (value < 0) //show checkmark on the right
 					{
 						this.checkmarkContainer.style.width =  -value - 10 + "px";
-						this.checkmarkContainer.style.left = this.contentView.size.width - 40 + value + "px";	
+						this.checkmarkContainer.style.left = this.contentView.size.width - 40 + value + "px";
 						this.checkmarkContainer.childNodes[0].style.left = -30 - value + "px";
 					}
 					else
@@ -256,7 +228,7 @@ ScrollView.prototype.onMouseMove = function(e)
 						this.checkmarkContainer.childNodes[0].style.left = "0px";
 					}
 				}
-				
+
 				this.contentView.setLeft(value);
 			}
 			else
@@ -287,7 +259,7 @@ ScrollView.prototype.onMouseMove = function(e)
  				this.contentView.setTop(value);
 			}
 			this.positionDict[this.inc] = {"point":point[axis], "time":new Date().getTime()};
-			this.inc = ((this.inc + 1) % 10);			
+			this.inc = ((this.inc + 1) % 10);
 		}
 	}
 }
@@ -300,7 +272,7 @@ ScrollView.prototype.scrollViewNotActive = function(s)
 		{
 			return false;
 		}
-	}	
+	}
 	return true;
 }
 
@@ -314,7 +286,7 @@ ScrollView.prototype.onMouseUp = function(e)
 		}
 	    var point;
         point = { "x": e.changedTouches[0].clientX, "y": e.changedTouches[0].clientY };
-		
+
 		var axis;
 		if (this.scrollingDirection == "horizontal")
 		{
@@ -324,7 +296,7 @@ ScrollView.prototype.onMouseUp = function(e)
 		{
 			axis = "y";
 		}
-	
+
 		var diff = 0;
 		var dur = 0;
 		for (var i = this.positionDict.length - 1; i > 0; i--)
@@ -333,9 +305,9 @@ ScrollView.prototype.onMouseUp = function(e)
 			var pointA = (i - (this.positionDict.length - this.inc) + this.positionDict.length) % this.positionDict.length;
 			var dataPointB = this.positionDict[pointB];
 			var dataPointA = this.positionDict[pointA];
-		
+
 			if (diff == 0)
-			{	
+			{
 				diff = dataPointB.point - dataPointA.point;
 				dur = dataPointB.time - dataPointA.time;
 			}
@@ -393,7 +365,7 @@ ScrollView.prototype.onMouseUp = function(e)
 			this.originalOffset[axis] = (this.originalOffset[axis] + (point[axis] - this.originalPoint[axis]));
 			this.contentView.element.setAttribute("class", this.animatingStyle);
 			if (!isNaN(this.speed + this.originalOffset[axis]))
-			{	
+			{
 				if (this.scrollingDirection == "horizontal")
 				{
 					var value = this.speed + this.originalOffset[axis];
@@ -405,22 +377,22 @@ ScrollView.prototype.onMouseUp = function(e)
 					{
 						value = -this.contentView.size.width + this.size.width;
 					}
-				
+
 					if (this.multiselectScroll)
 					{
 						this.checkmarkContainer.setAttribute("class", "checkmarkContainerAnimated");
 						this.checkmarkContainer.childNodes[0].setAttribute("class", "checkmarkImageAnimated");
 						if (this.contentView.x < 0) //show checkmark on the right
-						{					
-							if (this.contentView.x == -30)		
+						{
+							if (this.contentView.x == -30)
 							{
 								this.checkmarkContainer.style.width = -value - 10 + "px";
-								this.checkmarkContainer.style.left = this.contentView.size.width - 30 + value + "px";	
+								this.checkmarkContainer.style.left = this.contentView.size.width - 30 + value + "px";
 							}
 							else
 							{
 								this.checkmarkContainer.style.width =  -value - 10 + "px";
-								this.checkmarkContainer.style.left = this.contentView.size.width - 40 + value + "px";	
+								this.checkmarkContainer.style.left = this.contentView.size.width - 40 + value + "px";
 								this.checkmarkContainer.childNodes[0].style.left = -30 - value + "px";
 							}
 						}
@@ -454,10 +426,10 @@ ScrollView.prototype.onMouseUp = function(e)
 					{
 
 						value = -this.contentView.size.height + this.size.height;
-					}	
+					}
 
 					this.contentView.setTop(value);
-				}			
+				}
 			}
 		}
 	}

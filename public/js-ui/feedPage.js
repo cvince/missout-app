@@ -148,13 +148,21 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 	}
 
 	//var html = json2html.transform(data, template);
-	var feed = document.getElementById('feed');
 	//feed.innerHTML = html;
 
+	//THIS BUTTON does not click.
+
+	// comment.addEventListener('click', function(e) {
+	// 	var data = { timestamp : new Date() };
+	// 	data._id = this.getAttribute('data-id');
+	// 	data.body = this.value.toString();
+	// 	console.log(data);
+	// });
+
 	document.addEventListener('feedJSON', function (e) {
+    var feed = document.getElementById('feed');
 		feed.innerHTML = '';
 		var feedData = e.detail;
-
 		feedData.forEach(function (elem) {
 			//console.log(elem.comments);
 			elem.pages = [];

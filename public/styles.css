@@ -151,6 +151,9 @@ a {
   opacity: 0;
   transition: all 0.7s linear; }
 
+.contentAreaModalUp {
+  z-index: 99999; }
+
 h1 {
   font: 16rem/24rem normal 'Dosis', sans-serif; }
 
@@ -389,7 +392,11 @@ section.forms .logo img {
   transform: scale(1.06, 1.06);
   transition-property: opacity, transform;
   transition-duration: 0.4s, 0.66s;
-  transition-timing-function: cubic-bezier(0.16, 1, 0.29, 0.99); }
+  transition-timing-function: cubic-bezier(0.16, 1, 0.29, 0.99);
+  -webkit-transform: scale(1.06, 1.06);
+  -webkit-transition-property: opacity, transform;
+  -webkit-transition-duration: 0.4s, 0.66s;
+  -webkit-transition-timing-function: cubic-bezier(0.16, 1, 0.29, 0.99); }
 
 .contentAreaOffScreen {
   position: absolute;
@@ -401,51 +408,28 @@ section.forms .logo img {
   transform: scale(1.06, 1.06);
   transition-property: opacity, transform;
   transition-duration: 0.4s, 0.66s;
-  transition-timing-function: cubic-bezier(0.16, 1, 0.29, 0.99); }
+  transition-timing-function: cubic-bezier(0.16, 1, 0.29, 0.99);
+  -webkit-transform: scale(1.06, 1.06);
+  -webkit-transition-property: opacity, transform;
+  -webkit-transition-duration: 0.4s, 0.66s;
+  -webkit-transition-timing-function: cubic-bezier(0.16, 1, 0.29, 0.99); }
 
 .contentAreaModalDown {
   position: absolute;
+  z-index: 200;
   top: 562rem;
   height: 498rem;
   width: 100%;
-  transition-property: opacity, transform;
-  transition-duration: 0.4s, 0.66s;
-  transition-timing-function: cubic-bezier(0.16, 1, 0.29, 0.99); }
+  transition: all 0.2s linear; }
 
 .contentAreaModalUp {
   position: absolute;
+  z-index: 200;
   top: 0rem;
   width: 100%;
   height: 498rem;
   background: rgba(255, 255, 255, 0.75);
-  transition-property: opacity, transform;
-  transition-duration: 0.4s, 0.66s;
-  transition-timing-function: cubic-bezier(0.16, 1, 0.29, 0.99); }
-
-#mainContentContainer {
-  transition: all 0.2s cubic-bezier(0.16, 0.68, 0.43, 0.99); }
-
-#mainContentContainerSwiping {
-  position: absolute;
-  width: 100%;
-  height: 100%; }
-
-#mainContentContainerWithDrawerOpen {
-  position: fixed;
-  left: 163rem;
-  z-index: 100;
-  width: 100%;
-  height: 100%; }
-
-.myDash {
-  position: absolute;
-  height: 100%;
-  width: 100%; }
-
-.myDashBackground {
-  position: absolute;
-  width: 100%;
-  height: 460rem; }
+  transition: all 0.2s linear; }
 
 .missedConnection {
   margin: 0 auto;
@@ -528,14 +512,14 @@ section.forms .logo img {
   left: -260rem;
   width: 260rem;
   height: 100%;
-  transition: all 0.2s cubic-bezier(0.16, 0.68, 0.43, 0.99); }
+  transition: all 0.5s cubic-bezier(0.16, 0.68, 0.43, 0.99); }
 
 .navigationDrawerOpen {
   position: fixed;
   left: 0rem;
   width: 260rem;
   height: 100%;
-  transition: all 0.2s cubic-bezier(0.16, 0.68, 0.43, 0.99); }
+  transition: all 0.5s cubic-bezier(0.16, 0.68, 0.43, 0.99); }
 
 .navigationDrawerButton {
   position: absolute;
@@ -579,7 +563,7 @@ section.forms .logo img {
   overflow-x: hidden;
   padding-top: 20rem;
   box-shadow: 5rem 5rem 10rem 7rem rgba(0, 0, 0, 0.25);
-  transition: all 0.2s cubic-bezier(0.16, 0.68, 0.43, 0.99); }
+  transition: all 0.5s cubic-bezier(0.16, 0.68, 0.43, 0.99); }
 
 #mainContentContainerWithDrawerOpen {
   position: fixed;
@@ -588,7 +572,7 @@ section.forms .logo img {
   width: 100%;
   height: 100%;
   box-shadow: 5rem 5rem 10rem 7rem rgba(0, 0, 0, 0.25);
-  transition: all 0.2s cubic-bezier(0.16, 0.68, 0.43, 0.99); }
+  transition: all 0.5s cubic-bezier(0.16, 0.68, 0.43, 0.99); }
 
 .contentPageBackground {
   position: absolute;
