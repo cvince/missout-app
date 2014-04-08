@@ -37,12 +37,14 @@ button.comments {
   box-shadow: 0 6rem #3f8401;
   transition: none;
 }
+
 .button:after {
   content: '';
   position: absolute;
   z-index: -1;
   transition: all 0.3s;
 }
+
 .button:before {
   speak: none;
   font-style: normal;
@@ -53,6 +55,7 @@ button.comments {
   position: relative;
   -webkit-font-smoothing: antialiased;
 }
+
 .button:hover {
   box-shadow: 0 4rem #3f8401;
   top: 2rem;

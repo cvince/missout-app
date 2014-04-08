@@ -55,7 +55,7 @@ exports.routeFactory = function(route, objectPath, app, methodArray){
     //needs validation
     var dbObject = new DbObject(req.body);
 
-    dbObject.makeAuthor(req.sessionStore);
+    dbObject.makeAuthor(req.user._id);
 
     dbObject.save(function(err, retObject){
       if(err){
