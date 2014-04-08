@@ -63,7 +63,10 @@ var skeletonMainTemplate = {
 				class: 'image',
 				draggable: 'false',
 				src: '/public/images/x.png'}
-			]}
+			]},
+			{tag: 'img',
+			class: 'logo',
+			src: '/public/images/ui-logo.png'}
 		]},
 		{tag: 'div',
 		id: 'appCanvas',
