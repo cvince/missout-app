@@ -9,10 +9,13 @@ button {
 
 button.upvote{
   background: url(/public/images/appbar.thumbs.up.png) no-repeat center;
+  background-size: cover;
+
 }
 
 button.downvote{
   background: url(/public/images/appbar.thumbs.down.png) no-repeat center;
+  background-size: cover;
 }
 
 button.comments, button.comment {
