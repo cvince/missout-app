@@ -43,8 +43,8 @@ UI.Skeleton = function(){
 		});
 
 		getID('returnToFeedButton').addEventListener('click', function(){
-			var toggleNavDrawer = new CustomEvent('toggleNavDrawer', {});
-			document.dispatchEvent(toggleNavDrawer);
+			// var toggleNavDrawer = new CustomEvent('toggleNavDrawer', {});
+			// document.dispatchEvent(toggleNavDrawer);
 			var feedMode = new CustomEvent('feedMode', {});
 			document.dispatchEvent(feedMode);
 		});

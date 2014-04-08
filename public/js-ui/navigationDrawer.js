@@ -41,6 +41,9 @@ UI.NavigationDrawer = function(elem) {
 
 		var postExpanded = new CustomEvent('postExpanded', {detail: thisPost});
 		document.dispatchEvent(postExpanded);
+
+		var toggleNavDrawer = new CustomEvent('toggleNavDrawer', {});
+		document.dispatchEvent(toggleNavDrawer);
 	};
 
 	var mainTemplate = {
