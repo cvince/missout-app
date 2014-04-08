@@ -112,7 +112,6 @@ UI.Skeleton = function(){
 				children: [
 					{tag: 'div',
 					class: 'appBarButton',
-					style: 'left: 108rem;',
 					id: 'optionsButton',
 					children: [
 						{tag: 'img',
@@ -122,7 +121,6 @@ UI.Skeleton = function(){
 					]},
 					{tag: 'div',
 					class: 'appBarButton',
-					style: 'left: 168rem;',
 					id: 'newPostButton',
 					children: [
 						{tag: 'img',
