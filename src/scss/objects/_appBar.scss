@@ -20,6 +20,8 @@
   display: block;
   height: 30rem;
   width: 30rem;
+  left: 50%;
+  margin-left: -30rem;
 }
 
 #optionsButton {
@@ -27,8 +29,13 @@
 }
 
 #newPostButton {
-  left: 50%;
-  margin-left: -15rem;
+  background: #eee;
+  cursor: pointer;
+  transition: background 250ms linear;
+}
+
+#newPostButton:hover{
+  background: #666;
 }
 
 .appBarButton .image {
@@ -43,7 +50,6 @@
   position: absolute;
   height: 100%;
   width: 100%;
-  background: #eee;
 }
 
 #logoutButton{
