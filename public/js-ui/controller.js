@@ -52,9 +52,7 @@ Controller.prototype.displayContentItems = function(innerHTML) {
       });
     }, false);
   });
-
-
-}
+};
 
 Controller.prototype.updateAppBar = function() {
 	//home button
@@ -74,14 +72,14 @@ Controller.prototype.updateAppBar = function() {
 	addElementToDict(this.closeButton.element, this.closeButton);
 	this.closeButton.element.style.left = '168rem';
 	appBar.setButtons(new Array(this.switcherButton, this.closeButton));
-}
+};
 
 Controller.prototype.switcherButtonClicked = function() {
 
-}
+};
 
 Controller.prototype.closeButtonClicked = function() {
 	appCanvas.dismissModal();
-}
+};
 
 

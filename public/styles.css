@@ -298,7 +298,7 @@ section.forms .logo img {
   font-size: 16rem;
   margin: 0 10rem; }
 
-.appBar {
+#appBar {
   position: fixed;
   bottom: 0rem;
   z-index: 100;
@@ -551,10 +551,10 @@ section.forms .logo img {
   box-shadow: 15rem 13rem 7rem #000;
   transform: rotate(3deg); }
 
-#mainContentContainer > *, #mainContentContainerWithDrawerOpen > * {
+.mainContentContainer > *, .mainContentContainerWithDrawerOpen > * {
   transform: translate3d(0, 0, 0); }
 
-#mainContentContainer {
+.mainContentContainer {
   position: absolute;
   z-index: 100;
   top: 0rem;
@@ -565,7 +565,7 @@ section.forms .logo img {
   box-shadow: 5rem 5rem 10rem 7rem rgba(0, 0, 0, 0.25);
   transition: all 0.5s cubic-bezier(0.16, 0.68, 0.43, 0.99); }
 
-#mainContentContainerWithDrawerOpen {
+.mainContentContainerWithDrawerOpen {
   position: fixed;
   left: 270rem;
   z-index: 100;
@@ -634,6 +634,12 @@ nav[id^="pagination"] ul li.on {
   text-align: center;
   font: 16rem normal 'Dosis', sans-serif;
   text-align: center; }
+
+.utilityBarDrawerButton {
+  position: absolute;
+  display: block;
+  height: 30rem;
+  width: 30rem; }
 
 .utilityBarDrawerButton .image {
   position: absolute;

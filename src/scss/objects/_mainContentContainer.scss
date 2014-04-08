@@ -1,8 +1,8 @@
-#mainContentContainer > *, #mainContentContainerWithDrawerOpen > * {
+.mainContentContainer > *, .mainContentContainerWithDrawerOpen > * {
   transform: translate3d(0, 0, 0);
 }
 
-#mainContentContainer {
+.mainContentContainer {
   position: absolute;
   z-index: 100;
   top: 0rem;
@@ -14,7 +14,7 @@
   transition:all 0.5s cubic-bezier(.16,.68,.43,.99);
 }
 
-#mainContentContainerWithDrawerOpen {
+.mainContentContainerWithDrawerOpen {
   position: fixed;
   left: 270rem;
   z-index: 100;
