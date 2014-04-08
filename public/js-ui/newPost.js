@@ -30,6 +30,7 @@ UI.NewPost = function(elem){
     data.body = messageOut.value.toString();
     data.loc = { type: 'Point', coordinates: [ loc.lon, loc.lat ] };
     App.postman.post(data, function (res) {
+      App.postman.insert(data);
       console.log('post ok, contents - ' + JSON.stringify(res));
       var postModal = document.getElementById('postModal');
       postModal.setAttribute('class', '');

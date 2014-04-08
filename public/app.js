@@ -419,6 +419,10 @@ function Postman (endpoint) {
     return feed;
   };
 
+  Constructor.prototype.insert = function (post) {
+    models.unshift(post);
+  };
+
   return new Constructor();
 }
 App.postman = new Postman(document.URL + 'api/v1/posts');
