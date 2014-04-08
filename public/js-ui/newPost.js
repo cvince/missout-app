@@ -44,3 +44,12 @@ UI.NewPost = function(elem){
     });
   };
 };
+
+document.addEventListener('feedJSON', function(){
+
+})
+
+UI.NewComment = function(){
+
+  //App.postman.comment(data, )
+}

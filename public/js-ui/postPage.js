@@ -1,6 +1,9 @@
 'use strict';
 /*global json2html*/
 /*global UI*/
+/*global App*/
+/*global getID*/
+/*global getClass*/
 
 UI.PostPage = function(elem) {
 	var element = elem;
@@ -18,6 +21,7 @@ UI.PostPage = function(elem) {
 	var mainTemplate = {
 		'tag':'article',
 		'class':'missedConnection line post',
+		'html':'<div class="line post-meta"><span class="tempname">from: ${tempname}</span></div>',
 		'children' : [
 			{
 				'tag':'h2',
@@ -26,7 +30,7 @@ UI.PostPage = function(elem) {
 			},
 			{
 				'tag':'section',
-				'id':'post-${_id}',
+				'id':'singlePost-${_id}',
 				'children': [
 					{
 						'tag':'p',
@@ -36,7 +40,8 @@ UI.PostPage = function(elem) {
 			},
 			{
 				'tag' : 'div',
-				'class' :'comments line',
+				id: 'singlePostComments-${_id}',
+				'class' :'comments line active',
 				'html' :
 					'<form class="comment-box" method="post" action="api/v1/comments/${_id}">'+
 						'<label>Submit a comment</label>'+
@@ -77,13 +82,6 @@ UI.PostPage = function(elem) {
 								'html':''
 							}
 						]
-					},
-					{
-						'tag':'button',
-						'id' : 'comment-${_id}',
-						'class':'comment',
-						'title':'comment',
-						'html':''
 					}
 				]
 			}
@@ -92,6 +90,7 @@ UI.PostPage = function(elem) {
 
 	var commentMicroTemplate = {
 		'tag':'div',
+		'data-id':'${_id}',
 		'children': [
 			{
 				'tag':'h5',

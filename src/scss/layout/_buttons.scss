@@ -1,10 +1,18 @@
 button {
   padding: 10rem;
   border: none;
-  background: #fff url(/public/images/x.png) no-repeat center;
   background-size: contain;
   outline: none;
   cursor: pointer;
+  background-size: 100%
+}
+
+button.upvote{
+  background: url(/public/images/appbar.thumbs.up.png) no-repeat center;
+}
+
+button.downvote{
+  background: url(/public/images/appbar.thumbs.down.png) no-repeat center;
 }
 
 button.comments, button.comment {
@@ -29,12 +37,14 @@ button.comments, button.comment {
   box-shadow: 0 6rem #3f8401;
   transition: none;
 }
+
 .button:after {
   content: '';
   position: absolute;
   z-index: -1;
   transition: all 0.3s;
 }
+
 .button:before {
   speak: none;
   font-style: normal;
@@ -45,6 +55,7 @@ button.comments, button.comment {
   position: relative;
   -webkit-font-smoothing: antialiased;
 }
+
 .button:hover {
   box-shadow: 0 4rem #3f8401;
   top: 2rem;

@@ -103,27 +103,32 @@ UI.Skeleton = function(){
 			]},
 			{tag: 'div',
 			id: 'appBar',
+			children: [
+				// {tag: 'img',
+				// class: 'appBarBackground',
+				// src: '/public/images/close_button.png'},
+				{tag: 'div',
+				class: 'appBarButtonContainer',
+				id: 'newPostButton',
 				children: [
+					// {tag: 'div',
+					// class: 'appBarButton',
+					// id: 'optionsButton',
+					// children: [
+					// 	{tag: 'img',
+					// 	class: 'image',
+					// 	draggable: 'false',
+					// 	src: '/public/images/feed_button.png'}
+					// ]},
 					{tag: 'div',
 					class: 'appBarButton',
-					style: 'left: 108rem;',
-					id: 'optionsButton',
-					children: [
-						{tag: 'img',
-						class: 'image',
-						draggable: 'false',
-						src: '/public/images/feed_button.png'}
-					]},
-					{tag: 'div',
-					class: 'appBarButton',
-					style: 'left: 168rem;',
-					id: 'newPostButton',
 					children: [
 						{tag: 'img',
 						class: 'image',
 						draggable: 'false',
 						src: '/public/images/controller_button.png'}
 					]}
+				]}
 			]}
 		]
 	};
@@ -185,3 +190,5 @@ UI.Skeleton = function(){
 		]
 	};
 };
+
+

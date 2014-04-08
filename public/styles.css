@@ -168,10 +168,16 @@ p {
 button {
   padding: 10rem;
   border: none;
-  background: #fff url(/public/images/x.png) no-repeat center;
   background-size: contain;
   outline: none;
-  cursor: pointer; }
+  cursor: pointer;
+  background-size: 100%; }
+
+button.upvote {
+  background: url(/public/images/appbar.thumbs.up.png) no-repeat center; }
+
+button.downvote {
+  background: url(/public/images/appbar.thumbs.down.png) no-repeat center; }
 
 button.comments, button.comment {
   float: right; }
@@ -360,6 +366,8 @@ section.forms .logo img {
   cursor: pointer;
   transition: background 250ms linear; }
 
+#newPostButton:hover {
+  background: #777; }
 
 .appBarButton .image {
   position: absolute;
