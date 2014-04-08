@@ -367,7 +367,13 @@ section.forms .logo img {
   transition: background 250ms linear; }
 
 #newPostButton:hover {
-  background: #777; }
+  background: #666; }
+
+.appBarButtonContainer {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: #eee; }
 
 .appBarButton .image {
   position: absolute;
