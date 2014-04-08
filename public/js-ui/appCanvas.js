@@ -20,7 +20,6 @@ function AppCanvas() {
 
   this.contentA.setAttribute('class', 'contentAreaCurrent scrollable');
   this.contentB.setAttribute('class', 'contentArea');
-  this.modalContentA.setAttribute('class', 'contentAreaModalDown');
 
   this.element.appendChild(this.contentA);
   this.element.appendChild(this.contentB);
@@ -35,44 +34,48 @@ function AppCanvas() {
   }
 }
 
-AppCanvas.prototype.presentModal = function(content) {
-  if (this.readyForChange) {
-    this.readyForChange = false;
-    this.modalContentA.appendChild(content.element);
-    this.modalContentA.setAttribute('class', 'contentAreaModalUp');
-    setTimeout(appCanvas.modalChange, 650);
-    this.modal = content;
-    this.hasModal = true;
-  }
+AppCanvas.prototype.toggleModal = function(element){
+  var modal = document.getElementById(element);
+  console.log(modal);
+}
 
-  document.ontouchmove = function(e) {
-    e.preventDefault();
-  };
+// AppCanvas.prototype.presentModal = function(content) {
+//   if (this.readyForChange) {
+//     this.readyForChange = false;
+//     this.modalContentA.appendChild(content.element);
+//     this.modalContentA.setAttribute('class', 'contentAreaModalUp');
+//     setTimeout(appCanvas.modalChange, 650);
+//     this.modal = content;
+//     this.hasModal = true;
+//   }
 
-  document.onmousewheel = function(e) {
-    e.preventDefault();
-  };
+//   document.ontouchmove = function(e) {
+//     e.preventDefault();
+//   };
 
-};
+//   document.onmousewheel = function(e) {
+//     e.preventDefault();
+//   };
 
-AppCanvas.prototype.dismissModal = function() {
-  if (this.readyForChange) {
-    this.readyForChange = false;
-    this.modalContentA.setAttribute('class', 'contentAreaModalDown');
-    setTimeout(appCanvas.modalChange, 650);
-    this.hasModal = false;
+// };
 
-  }
+// AppCanvas.prototype.dismissModal = function() {
+//   if (this.readyForChange) {
+//     this.readyForChange = false;
+//     setTimeout(appCanvas.modalChange, 650);
+//     this.hasModal = false;
 
-  document.ontouchmove = function(e) {
-    return true;
-  };
+//   }
 
-  document.onmousewheel = function(e) {
-    return true;
-  };
+//   document.ontouchmove = function(e) {
+//     return true;
+//   };
 
-};
+//   document.onmousewheel = function(e) {
+//     return true;
+//   };
+
+// };
 
 AppCanvas.prototype.modalChange = function() {
   if (appCanvas.hasModal) {

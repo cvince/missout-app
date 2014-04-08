@@ -55,6 +55,7 @@ function drawPageElements() {
 		page.appendChild(this.splashImage);
 		setTimeout(splashFadeOut, 1000);
 	}, 100);
+
 }
 
 function addElementToDict(element, jsObject) {
@@ -76,6 +77,36 @@ function initialize() {
 	elementCount = 0;
 	drawPageElements();
 	setTouchListeners();
+
+
+  var messageOut = document.getElementById('message-out');
+  var titleOut = document.getElementById('title-out');
+  var submit = document.getElementById('submit-post');
+
+  submit.addEventListener(function (e) {
+    console.log(e);
+  });
+
+  submit.addEventListener('click', function() {
+
+		App.locator.getLoc(function (loc) {
+
+			console.log('data to page: ' + JSON.stringify(loc));
+
+      var data = { timestamp : new Date() };
+      data.title = titleOut.value.toString();
+      data.body = messageOut.value.toString();
+      data.loc = { type: 'Point', coordinates: [ loc.lon, loc.lat ] };
+      App.postman.post(data, function (res) {
+        console.log('post ok, contents - ' + JSON.stringify(res));
+				appCanvas.dismissModal();
+				refreshFeed();
+      });
+
+		});
+
+  }, false);
+
 }
 
 function splashFadeOut() {

@@ -414,20 +414,22 @@ section.forms .logo img {
   -webkit-transition-duration: 0.4s, 0.66s;
   -webkit-transition-timing-function: cubic-bezier(0.16, 1, 0.29, 0.99); }
 
-.contentAreaModalDown {
+.contentAreaModalUp {
   position: fixed;
   z-index: 200;
-  top: 562rem;
-  height: 498rem;
+  top: -100%;
   width: 100%;
-  transition: all 0.5s ease-in; }
+  height: 100%;
+  background: rgba(255, 255, 255, 0.75);
+  transition: all 0.5s ease-out; }
 
-.contentAreaModalUp {
+.contentAreaModalDown {
   position: fixed;
   z-index: 200;
   top: 0rem;
   width: 100%;
-  height: 498rem;
+  height: 100%;
+  margin-top: -40rem;
   background: rgba(255, 255, 255, 0.75);
   transition: all 0.5s ease-out; }
 
