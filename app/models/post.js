@@ -1,6 +1,7 @@
 'use strict';
 
 var mongoose    = require('mongoose');
+var nameGen     = require ('../tempName.js');
 var Schema      = mongoose.Schema;
 
 
@@ -30,10 +31,13 @@ var PostSchema = new Schema({
 });
 
 
+
 PostSchema.methods.makeAuthor = function(id){
   this.author = id;
-  this.tempname = 'battery horse temp'; //post-specific temp-name generator output here
+  this.tempname = nameGen(); //post-specific temp-name generator output here
 };
+
+
 
 PostSchema.index({ loc: '2dsphere' });
 

@@ -168,9 +168,17 @@ button {
   padding: 10rem;
   border: none;
   background: #fff url(/public/images/x.png) no-repeat center;
-  background-size: contain;
+  background-size: cover;
   outline: none;
   cursor: pointer; }
+
+button.viewComment {
+  background: url("http://localhost:3000/public/images/comments-sprite.png") no-repeat;
+  background-size: cover;
+  background-position-x: 0; }
+
+button.viewComment:hover {
+  background-position-x: -20px; }
 
 .button {
   padding: 10rem;
