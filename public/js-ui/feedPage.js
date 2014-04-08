@@ -42,6 +42,16 @@ UI.FeedPage= function(elem){
 	};
 
 	var buildSlider = function(){
+		function sliderCallback(pos, elem){
+			var _id = elem.parentElement.parentElement.id.replace('post-', '');
+			var bullets = document.querySelector('[id^=pagination-' + _id +']').getElementsByTagName('li');
+			var j = bullets.length;
+			while (j--) {
+				bullets[j].className = ' ';
+			}
+			bullets[pos].className = 'on';
+		}
+
 		var sliders = document.querySelectorAll('[id^=post-]');
 		for(var i=0;i<sliders.length;i++) {
 			window.mySwipe = Swipe(sliders[i], {
@@ -50,15 +60,7 @@ UI.FeedPage= function(elem){
 				continuous: false,
 				disableScroll: false,
 				stopPropagation: true,
-				callback: function(pos, elem) {
-					var _id = elem.parentElement.parentElement.id.replace('post-', '');
-					var bullets = document.querySelector('[id^=pagination-' + _id +']').getElementsByTagName('li');
-					var j = bullets.length;
-					while (j--) {
-						bullets[j].className = ' ';
-					}
-					bullets[pos].className = 'on';
-				},
+				callback: sliderCallback,
 				transitionEnd: function(index, element) {}
 			});
 		}
@@ -66,6 +68,7 @@ UI.FeedPage= function(elem){
 
 	var commentHandlers = function(){
 		function switchButtonClasses(id){
+			if(!id){return;}
 			var tempComments = getID('comments-' + id);
 			if(tempComments.className === 'comments line'){
 				tempComments.className = 'comments line active';
