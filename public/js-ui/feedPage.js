@@ -101,6 +101,7 @@ UI.FeedPage= function(elem){
 	var mainTemplate = {
 		'tag':'article',
 		'class':'missedConnection line post',
+		'html':'<div class="line post-meta"><span class="tempname">from: ${tempname}</span></div>',
 		'children' : [
 			{
 				'tag':'h2',
