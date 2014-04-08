@@ -172,7 +172,7 @@ UI.FeedPage= function(elem){
 						'children': [
 							{
 								'tag':'button',
-								'class':'upVote',
+								'class':'upvote',
 								'title':'up vote',
 								'html':''
 							},
