@@ -2,6 +2,8 @@
 'use strict';
 /*jslint unused: false*/
 
+window.getID = function(id){return document.getElementById(id);};
+
 var App = {};
 
 var page;
@@ -62,7 +64,7 @@ function drawPageElements() {
 	splashImage.setAttribute('src', '/public/images/splash.png');
 	setTimeout(function(){
 		page.appendChild(this.splashImage);
-		setTimeout(splashFadeOut, 1000);
+		setTimeout(splashFadeOut, 500);
 	}, 100);
 
 }

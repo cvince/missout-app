@@ -2,6 +2,8 @@
 'use strict';
 /*jslint unused: false*/
 
+window.getID = function(id){return document.getElementById(id);};
+
 var App = {};
 
 var page;
@@ -62,7 +64,7 @@ function drawPageElements() {
 	splashImage.setAttribute('src', '/public/images/splash.png');
 	setTimeout(function(){
 		page.appendChild(this.splashImage);
-		setTimeout(splashFadeOut, 1000);
+		setTimeout(splashFadeOut, 500);
 	}, 100);
 
 }
@@ -355,7 +357,7 @@ function Postman (endpoint) {
     //req.responseType = '';
     req.onload = function () {
       if (req.status >= 200 && req.status < 400) {
-        models = JSON.parse(req.responseText);
+        //models = JSON.parse(req.responseText);
         cb(models);
       } else {
         return false;
@@ -400,6 +402,7 @@ function Postman (endpoint) {
       var event = new CustomEvent('feedJSON', {detail: feed});
       document.dispatchEvent(event);
       console.log('got a feed, check it:');
+      models = feed;
       //console.log(App.postman.showFeed());
     };
     req.onerror = function (err) {

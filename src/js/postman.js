@@ -31,7 +31,7 @@ function Postman (endpoint) {
     //req.responseType = '';
     req.onload = function () {
       if (req.status >= 200 && req.status < 400) {
-        models = JSON.parse(req.responseText);
+        //models = JSON.parse(req.responseText);
         cb(models);
       } else {
         return false;
@@ -76,6 +76,7 @@ function Postman (endpoint) {
       var event = new CustomEvent('feedJSON', {detail: feed});
       document.dispatchEvent(event);
       console.log('got a feed, check it:');
+      models = feed;
       //console.log(App.postman.showFeed());
     };
     req.onerror = function (err) {
