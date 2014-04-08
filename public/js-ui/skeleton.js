@@ -64,9 +64,12 @@ var skeletonMainTemplate = {
 				draggable: 'false',
 				src: '/public/images/x.png'}
 			]},
-			{tag: 'img',
+			{tag: 'div',
 			class: 'logo',
-			src: '/public/images/ui-logo.png'}
+			children: [
+				{tag: 'img',
+				src: '/public/images/ui-logo.png'}
+			]}
 		]},
 		{tag: 'div',
 		id: 'appCanvas',
