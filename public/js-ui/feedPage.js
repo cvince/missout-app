@@ -6,8 +6,6 @@
 /*global getID*/
 /*global getClass*/
 
-//FeedPage.prototype = new ContentPage();
-
 UI.FeedPage= function(elem){
 	var element = elem;
 	document.addEventListener('reloadFeed', function(e){displayContentItems(e);});
@@ -67,17 +65,17 @@ UI.FeedPage= function(elem){
 	};
 
 	var commentHandlers = function(){
-		var commentButtons = getClass('viewComment');
-		for(var rep=0;rep<commentButtons.length;rep++){
-			commentButtons[rep].addEventListener('click', function(e){
-				var tempComments = getID('comments-' + e.currentTarget.dataset.id);
-				if(tempComments.className === 'comments line'){
-					tempComments.className = 'comments line active';
-				} else {
-					tempComments.className = 'comments line';
-				}
-			});
+		function switchButtonClasses(id){
+			var tempComments = getID('comments-' + id);
+			if(tempComments.className === 'comments line'){
+				tempComments.className = 'comments line active';
+			} else {
+				tempComments.className = 'comments line';
+			}
 		}
+		element.addEventListener('click', function(e){
+			switchButtonClasses(e.target.dataset.id);
+		});
 	};
 
 	var fakeBuildNavDrawer = function(template){
@@ -197,7 +195,7 @@ UI.FeedPage= function(elem){
 
 	var commentMicroTemplate = {
 		'tag':'div',
-		'id':'${_id}',
+		'data-id':'${_id}',
 		'children': [
 			{
 				'tag':'h5',

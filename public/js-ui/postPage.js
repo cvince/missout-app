@@ -1,6 +1,9 @@
 'use strict';
 /*global json2html*/
 /*global UI*/
+/*global App*/
+/*global getID*/
+/*global getClass*/
 
 UI.PostPage = function(elem) {
 	var element = elem;
@@ -10,13 +13,29 @@ UI.PostPage = function(elem) {
 
 	var displayContentItems = function(data) {
 			element.innerHTML = json2html.transform(data, mainTemplate);
+			commentHandler();
 			var postMode = new CustomEvent('postMode', {});
 			document.dispatchEvent(postMode);
 		};
 
+	var commentHandler = function(){
+		function switchButtonClasses(id){
+			var tempComments = getID('singlePostComments-' + id);
+			if(tempComments.className === 'comments line'){
+				tempComments.className = 'comments line active';
+			} else {
+				tempComments.className = 'comments line';
+			}
+		}
+		element.addEventListener('click', function(e){
+			switchButtonClasses(e.target.dataset.id);
+		});
+	};
+
 	var mainTemplate = {
 		'tag':'article',
 		'class':'missedConnection line post',
+		'html':'<div class="line post-meta"><span class="tempname">from: ${tempname}</span></div>',
 		'children' : [
 			{
 				'tag':'h2',
@@ -25,7 +44,7 @@ UI.PostPage = function(elem) {
 			},
 			{
 				'tag':'section',
-				'id':'post-${_id}',
+				'id':'singlePost-${_id}',
 				'children': [
 					{
 						'tag':'p',
@@ -35,6 +54,7 @@ UI.PostPage = function(elem) {
 			},
 			{
 				'tag' : 'div',
+				id: 'singlePostComments-${_id}',
 				'class' :'comments line',
 				'html' :
 					'<form class="comment-box" method="post" action="api/v1/comments/${_id}">'+
@@ -79,8 +99,8 @@ UI.PostPage = function(elem) {
 					},
 					{
 						'tag':'button',
-						'id' : 'comment-${_id}',
-						'class':'comment',
+						'class':'viewComment',
+						'data-id': '${_id}',
 						'title':'comment',
 						'html':''
 					}
@@ -91,6 +111,7 @@ UI.PostPage = function(elem) {
 
 	var commentMicroTemplate = {
 		'tag':'div',
+		'data-id':'${_id}',
 		'children': [
 			{
 				'tag':'h5',
