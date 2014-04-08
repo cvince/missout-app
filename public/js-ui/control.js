@@ -63,9 +63,18 @@ UI.Control = function(){
 		chatDrawer.style.display = '';
 	};
 
-	document.addEventListener('showModal', function(){showModal();});
+	document.addEventListener('toggleModal', function(){toggleModal();});
 
-	var showModal = function(){
-		getID('postModal').className = 'contentAreaModalDown';
+	var toggleModal = function(){
+		if(getID('postModal').className === 'contentAreaModalUp'){
+			getID('postModal').className = 'contentAreaModalDown';
+		} else {
+			getID('postModal').className = 'contentAreaModalUp';
+		}
 	};
+
+	document.addEventListener('feedJSON', function(e){
+		var reloadFeed = new CustomEvent('reloadFeed', {});
+		document.dispatchEvent(reloadFeed);
+	});
 };

@@ -19,10 +19,12 @@ UI.Skeleton = function(){
 	var displayContentItems = function() {
 		elem.innerHTML += json2html.transform({}, skeletonMainTemplate);
 		elem.innerHTML += json2html.transform({}, skeletonNavTemplate);
+		elem.innerHTML += json2html.transform({}, newPostTemplate);
 
 		var feedPage = new UI.FeedPage(getID('feedDrawer'));
 		var navigationDrawer = new UI.NavigationDrawer(getID('navigationDrawer'));
 		var postPage = new UI.PostPage(getID('postDrawer'));
+		var newPost = new UI.NewPost(getID('postModal'));
 
 		eventHandlers();
 
@@ -48,8 +50,8 @@ UI.Skeleton = function(){
 		});
 
 		getID('newPostButton').addEventListener('click', function(){
-			var showModal = new CustomEvent('showModal', {});
-			document.dispatchEvent(showModal);
+			var toggleModal = new CustomEvent('toggleModal', {});
+			document.dispatchEvent(toggleModal);
 		});
 	}
 
@@ -156,4 +158,37 @@ UI.Skeleton = function(){
 		]
 	};
 
+	var newPostTemplate = {
+		tag: 'div',
+		id: 'postModal',
+		class: 'contentAreaModalUp',
+		children: [
+			{tag: 'div',
+			id: 'controller',
+			children: [
+				{tag: 'form',
+				id: 'submit-post-form',
+				children: [
+					{tag: 'label',
+					html: 'Submit'},
+					{tag: 'input',
+					id: 'title-out',
+					type: 'text',
+					placeholder: 'Title'},
+					{tag: 'br'},
+					{tag: 'textarea',
+					id: 'message-out',
+					type: 'button',
+					value: 'send-post',
+					placeholder: 'Type your post here!'},
+					{tag: 'button',
+					id: 'submit-post',
+					type: 'button',
+					value: 'send-post',
+					disabled: 'true',
+					html: 'Post'}
+				]}
+			]}
+		]
+	};
 };

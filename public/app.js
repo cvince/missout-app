@@ -399,10 +399,10 @@ function Postman (endpoint) {
     req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     req.onload = function (d) {
       feed = JSON.parse(d.currentTarget.responseText);
-      var event = new CustomEvent('feedJSON', {detail: feed});
-      document.dispatchEvent(event);
       console.log('got a feed, check it:');
       models = feed;
+      var event = new CustomEvent('feedJSON', {detail: feed});
+      document.dispatchEvent(event);
       //console.log(App.postman.showFeed());
     };
     req.onerror = function (err) {

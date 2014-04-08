@@ -2,16 +2,18 @@
 /*global json2html*/
 /*global Swipe*/
 /*global UI*/
+/*global App*/
 
 //FeedPage.prototype = new ContentPage();
 
 UI.FeedPage= function(elem){
 	var element = elem;
-	document.addEventListener('feedJSON', function(e){displayContentItems(e);});
+	document.addEventListener('reloadFeed', function(e){displayContentItems(e);});
 
 	var displayContentItems = function(e) {
 		var tempHTML = '';
-		var feedData = e.detail;
+		//var feedData = e.detail;
+		var feedData = App.postman.show();
 		feedData.forEach(function (elem) {
 			//console.log(elem.comments);
 			elem.pages = [];
@@ -216,4 +218,4 @@ UI.FeedPage= function(elem){
 		tag: 'li',
 		class: '${class}'
 	};
-}
+};
