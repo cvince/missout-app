@@ -18,6 +18,7 @@ ContentPage.prototype.updateAppBar = function() {
 	//home button
 	this.homeButton = new ImageButton('/public/images/feed_button.png');
 	this.homeButton.element.setAttribute('class', 'appBarButton');
+	this.homeButton.element.setAttribute('id', 'logoutButton');
 	this.homeButton.onClicked = this.homeButtonClicked;
 	this.homeButton.normalStyle = 'appBarButton';
 	this.homeButton.mouseDownStyle = 'appBarButton';
@@ -42,7 +43,7 @@ ContentPage.prototype.updateUtilityBar = function() {
 }
 
 ContentPage.prototype.homeButtonClicked = function() {
-	appCanvas.popToHome();
+	window.location = '/logout';
 }
 
 // ContentPage.prototype.controllerButtonClicked = function() {

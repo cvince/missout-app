@@ -5,7 +5,8 @@
   width:100%;
   height: 40rem;
   border-bottom: 1rem solid #eaeaea;
-  background: #fff;
+  background: #c00;
+  text-align: center;
 }
 
 #utilityBar h1 {
@@ -36,4 +37,8 @@
   display:block-inline;
   height: 20rem;
   font-size: 18rem;
+}
+
+#utilityBar .logo img{
+  max-height:40rem;
 }

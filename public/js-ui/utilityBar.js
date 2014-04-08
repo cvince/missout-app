@@ -17,6 +17,11 @@ UtilityBar.prototype.displayContentItems = function() {
 	this.drawerButton.normalStyle = 'utilityBarDrawerButton';
 	this.drawerButton.mouseDownStyle = 'utilityBarDrawerButton';
 	this.drawerButton.onClicked = this.drawerButtonClicked;
+
+	this.logo = new ImageButton('/public/images/ui-logo.png');
+	this.logo.element.setAttribute('class', 'logo');
+	this.element.appendChild(this.logo.element);
+
 	addElementToDict(this.drawerButton.element, this.drawerButton);
 
 }

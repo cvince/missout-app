@@ -1,5 +1,6 @@
 body.login{
   background: #ccc;
+  border-top: 5px solid #c00;
 }
 
 span.message{
@@ -37,10 +38,11 @@ section.forms .logo img{
 .form-section{
   font-size: 18rem;
   background: #fff;
+  text-align: center;
 }
 
   .signup-page .form-section{
-    background:#ddd;
+    background:#eee;
   }
 
 .form-section form{

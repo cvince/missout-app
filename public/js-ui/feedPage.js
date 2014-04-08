@@ -22,6 +22,7 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 		return {
 			'tag':'article',
 			'class':'missedConnection line post',
+			'html':'<div class="line post-meta"><span class="tempname">from: ${tempname}</span></div>',
 			'children' : [
 				{
 					'tag':'h2',
@@ -186,6 +187,25 @@ FeedPage.prototype.displayContentItems = function() { //removed innerHTML from p
 		});
 		buildSlider();
 		fakeBuildNavDrawer(feedData);
+
+		var _showHideComments = function(){
+			var commentsListeners = getClass('comment');
+			console.log(commentsListeners);
+			for(var i = 0; i<commentsListeners.length; i++){
+			 commentsListeners[i].addEventListener('click', function(){
+				var traverse = this.parentNode.parentNode.getElementsByClassName('comments')[0]
+				if(traverse.className!=='comments line'){
+					traverse.setAttribute('class', 'comments line');
+				}else{
+					traverse.setAttribute('class', 'comments line active');
+				}
+			 })
+			}
+		}
+
+
+		_showHideComments();
+
 	});
 };
 

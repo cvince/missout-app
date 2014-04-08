@@ -5,7 +5,8 @@
   width: 100%;
   height: 40rem;
   background: #fff;
-  box-shadow: 0rem 0rem 3rem 0rem rgba(0, 0, 0, 0.15);
+  margin-top: #ccc;
+  border-top: #ddd 1px solid;
 }
 
 .appBarBackground {
@@ -33,4 +34,21 @@
   position: absolute;
   height: 100%;
   width: 100%;
+  background: #eee;
+}
+
+#logoutButton{
+  color: #777;
+}
+
+#logoutButton:hover{
+  color:#c00;
+}
+
+#logoutButton:after{
+  content: "logout";
+  font-size: 14rem;
+  line-height: 40rem;
+  text-transform: uppercase;
+  margin-left: 45rem;
 }

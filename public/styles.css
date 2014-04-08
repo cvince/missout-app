@@ -1,4 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=Dosis:300,400);
+@import url(http://fonts.googleapis.com/css?family=Lato);
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
   margin: 0;
   padding: 0;
@@ -220,7 +221,8 @@ button {
   top: 2rem; }
 
 body.login {
-  background: #ccc; }
+  background: #ccc;
+  border-top: 5px solid #c00; }
 
 span.message {
   font-size: 24rem;
@@ -250,10 +252,11 @@ section.forms .logo img {
 
 .form-section {
   font-size: 18rem;
-  background: #fff; }
+  background: #fff;
+  text-align: center; }
 
 .signup-page .form-section {
-  background: #ddd; }
+  background: #eee; }
 
 .form-section form {
   width: 100%; }
@@ -328,7 +331,8 @@ section.forms .logo img {
   width: 100%;
   height: 40rem;
   background: #fff;
-  box-shadow: 0rem 0rem 3rem 0rem rgba(0, 0, 0, 0.15); }
+  margin-top: #ccc;
+  border-top: #ddd 1px solid; }
 
 .appBarBackground {
   position: absolute;
@@ -351,13 +355,29 @@ section.forms .logo img {
 .appBarButtonContainer {
   position: absolute;
   height: 100%;
-  width: 100%; }
+  width: 100%;
+  background: #eee; }
+
+#logoutButton {
+  color: #777; }
+
+#logoutButton:hover {
+  color: #c00; }
+
+#logoutButton:after {
+  content: "logout";
+  font-size: 14rem;
+  line-height: 40rem;
+  text-transform: uppercase;
+  margin-left: 45rem; }
 
 .appCanvas {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: #fff; }
+  background: #fff;
+  top: 40rem;
+  margin-bottom: 40rem; }
 
 .contentAreaCurrent {
   position: absolute;
@@ -367,7 +387,7 @@ section.forms .logo img {
   left: 0rem;
   width: 100%;
   height: 100%;
-  padding-top: 40rem;
+  padding-top: 0;
   opacity: 1;
   transform: scale(1, 1);
   transition-property: opacity, transform;
@@ -459,25 +479,30 @@ section.forms .logo img {
 
 .missedConnection {
   margin: 0 auto;
-  margin-bottom: 20rem;
-  width: 95%;
-  border: 1rem solid #eaeaea;
+  padding-top: 10rem;
+  width: 100%;
+  border-bottom: 1rem solid #eaeaea;
   overflow: hidden; }
 
 .missedConnection h2 {
-  background: #fafafa;
   padding: 5rem;
-  font-size: 18rem;
-  font-style: bold;
-  border-bottom: 1rem solid #fff; }
+  font-size: 24rem;
+  font-weight: bold;
+  color: #6b737f;
+  border-bottom: 1rem solid #fff;
+  text-align: center; }
 
 .post {
   position: relative;
   overflow: hidden;
   position: relative;
-  border-top: 1rem solid #f3f3f3;
   /*font-smoothing: subpixel-antialiased;*/
   transform: translate3d(0, 0, 0); }
+
+.post .post-meta {
+  margin-bottom: 10rem;
+  color: #c00;
+  text-transform: uppercase; }
 
 .post-wrap {
   position: relative;
@@ -489,7 +514,9 @@ section.forms .logo img {
   position: relative;
   margin-bottom: 10rem;
   padding: 10rem;
-  font: 16rem/24rem normal 'Dosis', sans-serif; }
+  color: #4b515b;
+  font: 16rem/24rem normal 'Lato', sans-serif;
+  text-align: center; }
 
 .post-wrap > li p {
   margin-bottom: 10rem;
@@ -497,7 +524,11 @@ section.forms .logo img {
 
 .post .comments {
   padding: 10rem;
-  font-size: 18rem; }
+  font-size: 18rem;
+  display: none; }
+
+.post .comments.active {
+  display: block; }
 
 
 .comment-box label {
@@ -519,9 +550,12 @@ section.forms .logo img {
   border: 1rem solid #ccc;
   color: #666; }
 
+.tempname {
+  font-size: 12rem;
+  margin-left: 10rem; }
+
 .gesturebar {
-  padding: 10rem;
-  border-top: 1rem solid #eaeaea; }
+  padding: 10rem; }
 
 .gesturebar .vote {
   display: inline;
@@ -623,26 +657,22 @@ section.forms .logo img {
   color: #777; }
 
 nav[id^="pagination"] {
-  margin: 0 auto 20rem;
   padding: 10rem;
   text-align: center; }
 
 nav[id^="pagination"] ul li {
   display: inline-block;
-  float: left;
   width: 10rem;
   height: 10rem;
   border-radius: 10rem;
-  background: #666;
-  box-shadow: inset 0 1rem 3rem rgba(0, 0, 0, 0.25), 0 0 1rem 1rem #202020;
+  background: #eee;
   margin: 0 2rem;
   cursor: pointer;
   font: 14rem normal 'Dosis', sans-serif;
   text-align: center; }
 
 nav[id^="pagination"] ul li.on {
-  box-shadow: inset 0 1rem 3rem -1rem #eee, 0 1rem 2rem rgba(0, 0, 0, 0.5);
-  background-color: #eee;
+  background-color: #6b737f;
   background-image: linear-gradient(top, #eee, #f1f1f1); }
 
 #utilityBar {
@@ -652,7 +682,8 @@ nav[id^="pagination"] ul li.on {
   width: 100%;
   height: 40rem;
   border-bottom: 1rem solid #eaeaea;
-  background: #fff; }
+  background: #c00;
+  text-align: center; }
 
 #utilityBar h1 {
   margin-left: 10rem;
@@ -679,6 +710,9 @@ nav[id^="pagination"] ul li.on {
   display: block-inline;
   height: 20rem;
   font-size: 18rem; }
+
+#utilityBar .logo img {
+  max-height: 40rem; }
 
 .ani {
   animation-duration: 0.5s; }
