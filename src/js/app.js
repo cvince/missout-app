@@ -121,14 +121,8 @@ function initialize() {
         console.log('post ok, contents - ' + JSON.stringify(res));
 
 			  var postModal = document.getElementById('contentModal');
-
-		    if(postModal.className === 'contentAreaModalUp'){
-		      postModal.setAttribute('class', '');
-		      postModal.setAttribute('class', 'contentAreaModalDown');
-		    }else if(postModal.className === 'contentAreaModalDown'){
-		      postModal.setAttribute('class', '');
-		      postModal.setAttribute('class', 'contentAreaModalUp');
-		    }
+	      postModal.setAttribute('class', '');
+	      postModal.setAttribute('class', 'contentAreaModalUp');
 
       });
 
