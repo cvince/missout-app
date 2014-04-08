@@ -219,9 +219,15 @@ button {
   box-shadow: 0 0 #3f8401;
   top: 2rem; }
 
+body.login {
+  background: #ccc; }
+
 span.message {
   font-size: 24rem;
   line-height: 28rem; }
+
+#alert {
+  text-align: center; }
 
 span.alert {
   background: #fdd;
@@ -234,7 +240,8 @@ section.forms {
 section.forms .logo img {
   margin-top: 10rem;
   width: 100%;
-  padding: 20rem; }
+  padding: 20rem;
+  max-width: 500rem; }
 
 .oauth-entry {
   margin: 0 auto;
@@ -244,6 +251,9 @@ section.forms .logo img {
 .form-section {
   font-size: 18rem;
   background: #fff; }
+
+.signup-page .form-section {
+  background: #ddd; }
 
 .form-section form {
   width: 100%; }
@@ -256,17 +266,26 @@ section.forms .logo img {
   background: #fff;
   font-size: 24rem; }
 
+.signup-page .form-section input {
+  background: #eee;
+  color: #666; }
+
+.form-section .logo {
+  text-align: center; }
+
 .signup, .form-section button {
   font-size: 24rem;
   padding: 10rem;
   color: #6b737f; }
 
+.signup-page .form-section button {
+  background: #fff; }
+
 .sign-up {
-  background: #aaa;
   padding: 40rem;
   margin: 0 auto;
   text-align: center;
-  box-shadow: 0 25rem 25rem rgba(0, 0, 0, 0.25) inset; }
+  box-shadow: inset 0 25px 25px -25px rgba(0, 0, 0, 0.25); }
 
 .sign-up a {
   font-size: 24rem; }
@@ -279,6 +298,10 @@ section.forms .logo img {
   width: 100%;
   margin-bottom: 0;
   margin-top: 30rem; }
+
+.form-section button:hover {
+  background: #6b737f;
+  color: #fff; }
 
 .sm-signup {
   display: inline-block;
@@ -657,32 +680,46 @@ nav[id^="pagination"] ul li.on {
   height: 20rem;
   font-size: 18rem; }
 
-.postTrayClosed {
-  position: absolute;
-  top: 562px;
-  width: 100%;
-  height: 333px;
-  transition: all 0.7s cubic-bezier(0.16, 0.68, 0.43, 0.99); }
+#postModal {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 0 25%;
+  background: #333; }
 
-.postTrayOpen {
-  position: absolute;
-  top: 215px;
-  width: 100%;
-  height: 333px;
-  transition: all 0.7s cubic-bezier(0.16, 0.68, 0.43, 0.99); }
+#controller {
+  width: 100%; }
 
-.postTrayBackground {
-  width: 320px;
-  height: 333px; }
+#postModal input, #postModal textarea {
+  padding: 10rem;
+  outline: none;
+  border: none; }
 
-.postDismissAreaDown {
-  position: absolute;
-  top: 562px;
-  width: 100%;
-  height: 0px; }
+#postModal input {
+  border-bottom: 1rem dotted #666;
+  background: none;
+  color: #ccc;
+  font-size: 28rem;
+  width: 100%; }
 
-.postDismissAreaUp {
-  position: absolute;
-  top: -229px;
+#postModal textarea {
   width: 100%;
-  height: 232px; }
+  background: none;
+  color: #ef8e4d;
+  resize: none;
+  height: 150rem;
+  font: 24rem normal 'Dosis', sans-serif; }
+
+#postModal button {
+  font-size: 18rem; }
+
+#postModal button:disabled {
+  color: #333; }
+
+#postModal button {
+  background: none;
+  color: #fff; }
+
+@media (max-width: 600px) {
+  #postModal textarea {
+    font: 18rem; } }

@@ -1,11 +1,19 @@
+body.login{
+  background: #ccc;
+}
+
 span.message{
   font-size: 24rem;
   line-height: 28rem;
 }
 
+#alert{
+  text-align: center;
+}
+
 span.alert{
   background: #fdd;
-  color:#f00;
+  color: #f00;
 }
 
 section.forms{
@@ -17,6 +25,7 @@ section.forms .logo img{
   margin-top: 10rem;
   width: 100%;
   padding: 20rem;
+  max-width: 500rem;
 }
 
 .oauth-entry {
@@ -29,6 +38,10 @@ section.forms .logo img{
   font-size: 18rem;
   background: #fff;
 }
+
+  .signup-page .form-section{
+    background:#ddd;
+  }
 
 .form-section form{
   width: 100%;
@@ -43,18 +56,31 @@ section.forms .logo img{
   font-size: 24rem;
 }
 
+  .signup-page .form-section input{
+    background: #eee;
+    color: #666;
+  }
+
+
+.form-section .logo{
+  text-align: center;
+}
+
 .signup, .form-section button{
   font-size: 24rem;
   padding: 10rem;
   color: #6b737f;
 }
 
+  .signup-page .form-section button{
+    background: #fff;
+  }
+
 .sign-up {
-  background: #aaa;
   padding: 40rem;
   margin: 0 auto;
   text-align: center;
-  box-shadow: 0 25rem 25rem rgba(0,0,0,0.25) inset;
+  box-shadow: inset 0 25px 25px -25px rgba(0,0,0,0.25);
 }
 
 .sign-up a {
@@ -69,6 +95,11 @@ section.forms .logo img{
   width: 100%;
   margin-bottom: 0;
   margin-top: 30rem;
+}
+
+.form-section button:hover{
+  background:#6b737f;
+  color:#fff;
 }
 
 .sm-signup {

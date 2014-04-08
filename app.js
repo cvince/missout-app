@@ -99,6 +99,7 @@ function initialize() {
   messageOut.onkeyup = function(){
 
   	if(messageOut.value.length>0){
+  		console.log('submit disable false');
   		submit.removeAttribute('disabled');
   	}else{
   		submit.setAttribute('disabled', true);
@@ -119,11 +120,9 @@ function initialize() {
       App.postman.post(data, function (res) {
         console.log('post ok, contents - ' + JSON.stringify(res));
 
-			  var postModal = document.getElementById('postModal');
+			  var postModal = document.getElementById('contentModal');
 	      postModal.setAttribute('class', '');
 	      postModal.setAttribute('class', 'contentAreaModalUp');
-
-	      refreshFeed();
 
       });
 

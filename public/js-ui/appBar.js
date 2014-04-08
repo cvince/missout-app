@@ -25,7 +25,7 @@ AppBar.prototype.setButtons = function(buttons) {
   }
 
   var postButton = document.getElementById('postButton');
-  var postModal = document.getElementById('contentModal');
+  var postModal = document.getElementById('postModal');
 
   postButton.addEventListener('click', function(){
     if(postModal.className === 'contentAreaModalUp'){
