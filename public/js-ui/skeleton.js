@@ -103,21 +103,28 @@ UI.Skeleton = function(){
 			]},
 			{tag: 'div',
 			id: 'appBar',
+<<<<<<< HEAD
+=======
+			children: [
+				// {tag: 'img',
+				// class: 'appBarBackground',
+				// src: '/public/images/close_button.png'},
+				{tag: 'div',
+				class: 'appBarButtonContainer',
+				id: 'newPostButton',
+>>>>>>> 4ab658ec7ebc3ca4540e622c3bf4078f1d5e1bb4
 				children: [
+					// {tag: 'div',
+					// class: 'appBarButton',
+					// id: 'optionsButton',
+					// children: [
+					// 	{tag: 'img',
+					// 	class: 'image',
+					// 	draggable: 'false',
+					// 	src: '/public/images/feed_button.png'}
+					// ]},
 					{tag: 'div',
 					class: 'appBarButton',
-					style: 'left: 108rem;',
-					id: 'optionsButton',
-					children: [
-						{tag: 'img',
-						class: 'image',
-						draggable: 'false',
-						src: '/public/images/feed_button.png'}
-					]},
-					{tag: 'div',
-					class: 'appBarButton',
-					style: 'left: 168rem;',
-					id: 'newPostButton',
 					children: [
 						{tag: 'img',
 						class: 'image',
@@ -185,3 +192,8 @@ UI.Skeleton = function(){
 		]
 	};
 };
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 4ab658ec7ebc3ca4540e622c3bf4078f1d5e1bb4

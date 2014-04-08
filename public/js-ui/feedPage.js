@@ -3,6 +3,8 @@
 /*global Swipe*/
 /*global UI*/
 /*global App*/
+/*global getID*/
+/*global getClass*/
 
 //FeedPage.prototype = new ContentPage();
 
@@ -35,27 +37,11 @@ UI.FeedPage= function(elem){
 		});
 		element.innerHTML = tempHTML;
 		buildSlider();
+		commentHandlers();
 		fakeBuildNavDrawer(feedData);
 		var feedMode = new CustomEvent('feedMode', {});
 		document.dispatchEvent(feedMode);
 	};
-
-	// var _showHideComments = function(){
-	// 	var commentsListeners = getClass('comment');
-	// 	console.log(commentsListeners);
-	// 	for(var i = 0; i<commentsListeners.length; i++){
-	// 	 commentsListeners[i].addEventListener('click', function(){
-	// 		var traverse = this.parentNode.parentNode.getElementsByClassName('comments')[0]
-	// 		if(traverse.className!=='comments line'){
-	// 			traverse.setAttribute('class', 'comments line');
-	// 		}else{
-	// 			traverse.setAttribute('class', 'comments line active');
-	// 		}
-	// 	 })
-	// 	}
-	// };
-
-	// _showHideComments();
 
 	var buildSlider = function(){
 		var sliders = document.querySelectorAll('[id^=post-]');
@@ -76,6 +62,20 @@ UI.FeedPage= function(elem){
 					bullets[pos].className = 'on';
 				},
 				transitionEnd: function(index, element) {}
+			});
+		}
+	};
+
+	var commentHandlers = function(){
+		var commentButtons = getClass('viewComment');
+		for(var rep=0;rep<commentButtons.length;rep++){
+			commentButtons[rep].addEventListener('click', function(e){
+				var tempComments = getID('comments-' + e.currentTarget.dataset.id);
+				if(tempComments.className === 'comments line'){
+					tempComments.className = 'comments line active';
+				} else {
+					tempComments.className = 'comments line';
+				}
 			});
 		}
 	};
@@ -140,6 +140,7 @@ UI.FeedPage= function(elem){
 			},
 			{
 				'tag' : 'div',
+				id: 'comments-${_id}',
 				'class' :'comments line',
 				'html' :
 					'<form class="comment-box" method="post" action="api/v1/comments/${_id}">'+
@@ -184,13 +185,12 @@ UI.FeedPage= function(elem){
 					},
 					{
 						'tag':'button',
-						'id' : 'comment-${_id}',
-						'class':'comment',
+						'class':'viewComment',
+						'data-id': '${_id}',
 						'title':'comment',
 						'html':''
 					}
 				]
-
 			}
 		]
 	};

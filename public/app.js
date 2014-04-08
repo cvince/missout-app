@@ -3,6 +3,7 @@
 /*jslint unused: false*/
 
 window.getID = function(id){return document.getElementById(id);};
+window.getClass = function(cl){return document.getElementsByClassName(cl);};
 
 var App = {};
 
@@ -27,14 +28,6 @@ var isMouseDown;
 
 var isChromeOrSafari;
 var feedPage;
-
-var getID = function(id){
-  return document.getElementById(id);
-}
-
-var getClass = function(cl){
-  return document.getElementsByClassName(cl);
-}
 
 function drawPageElements() {
 
@@ -417,6 +410,10 @@ function Postman (endpoint) {
 
   Constructor.prototype.showFeed = function () {
     return feed;
+  };
+
+  Constructor.prototype.insert = function (post) {
+    models.unshift(post);
   };
 
   return new Constructor();
