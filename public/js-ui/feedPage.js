@@ -6,8 +6,6 @@
 /*global getID*/
 /*global getClass*/
 
-//FeedPage.prototype = new ContentPage();
-
 UI.FeedPage= function(elem){
 	var element = elem;
 	document.addEventListener('reloadFeed', function(e){displayContentItems(e);});
@@ -44,6 +42,16 @@ UI.FeedPage= function(elem){
 	};
 
 	var buildSlider = function(){
+		function sliderCallback(pos, elem){
+			var _id = elem.parentElement.parentElement.id.replace('post-', '');
+			var bullets = document.querySelector('[id^=pagination-' + _id +']').getElementsByTagName('li');
+			var j = bullets.length;
+			while (j--) {
+				bullets[j].className = ' ';
+			}
+			bullets[pos].className = 'on';
+		}
+
 		var sliders = document.querySelectorAll('[id^=post-]');
 		for(var i=0;i<sliders.length;i++) {
 			window.mySwipe = Swipe(sliders[i], {
@@ -52,32 +60,25 @@ UI.FeedPage= function(elem){
 				continuous: false,
 				disableScroll: false,
 				stopPropagation: true,
-				callback: function(pos, elem) {
-					var _id = elem.parentElement.parentElement.id.replace('post-', '');
-					var bullets = document.querySelector('[id^=pagination-' + _id +']').getElementsByTagName('li');
-					var j = bullets.length;
-					while (j--) {
-						bullets[j].className = ' ';
-					}
-					bullets[pos].className = 'on';
-				},
+				callback: sliderCallback,
 				transitionEnd: function(index, element) {}
 			});
 		}
 	};
 
 	var commentHandlers = function(){
-		var commentButtons = getClass('viewComment');
-		for(var rep=0;rep<commentButtons.length;rep++){
-			commentButtons[rep].addEventListener('click', function(e){
-				var tempComments = getID('comments-' + e.currentTarget.dataset.id);
-				if(tempComments.className === 'comments line'){
-					tempComments.className = 'comments line active';
-				} else {
-					tempComments.className = 'comments line';
-				}
-			});
+		function switchButtonClasses(id){
+			if(!id){return;}
+			var tempComments = getID('comments-' + id);
+			if(tempComments.className === 'comments line'){
+				tempComments.className = 'comments line active';
+			} else {
+				tempComments.className = 'comments line';
+			}
 		}
+		element.addEventListener('click', function(e){
+			switchButtonClasses(e.target.dataset.id);
+		});
 	};
 
 	var fakeBuildNavDrawer = function(template){
@@ -197,7 +198,7 @@ UI.FeedPage= function(elem){
 
 	var commentMicroTemplate = {
 		'tag':'div',
-		'id':'${_id}',
+		'data-id':'${_id}',
 		'children': [
 			{
 				'tag':'h5',
