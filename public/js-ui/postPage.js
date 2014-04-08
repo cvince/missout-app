@@ -14,24 +14,9 @@ UI.PostPage = function(elem) {
 	var displayContentItems = function(data) {
 			//element.className = 'hidden';
 			element.innerHTML = json2html.transform(data, mainTemplate);
-			commentHandler();
 			var postMode = new CustomEvent('postMode', {});
 			document.dispatchEvent(postMode);
 		};
-
-	var commentHandler = function(){
-		function switchButtonClasses(id){
-			var tempComments = getID('singlePostComments-' + id);
-			if(tempComments.className === 'comments line'){
-				tempComments.className = 'comments line active';
-			} else {
-				tempComments.className = 'comments line';
-			}
-		}
-		element.addEventListener('click', function(e){
-			switchButtonClasses(e.target.dataset.id);
-		});
-	};
 
 	var mainTemplate = {
 		'tag':'article',
@@ -56,7 +41,7 @@ UI.PostPage = function(elem) {
 			{
 				'tag' : 'div',
 				id: 'singlePostComments-${_id}',
-				'class' :'comments line',
+				'class' :'comments line active',
 				'html' :
 					'<form class="comment-box" method="post" action="api/v1/comments/${_id}">'+
 						'<label>Submit a comment</label>'+
@@ -97,13 +82,6 @@ UI.PostPage = function(elem) {
 								'html':''
 							}
 						]
-					},
-					{
-						'tag':'button',
-						'class':'viewComment',
-						'data-id': '${_id}',
-						'title':'comment',
-						'html':''
 					}
 				]
 			}
