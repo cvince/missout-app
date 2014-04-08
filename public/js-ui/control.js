@@ -62,4 +62,10 @@ UI.Control = function(){
 		postDrawer.style.display = 'none';
 		chatDrawer.style.display = '';
 	};
+
+	document.addEventListener('showModal', function(){showModal();});
+
+	var showModal = function(){
+		getID('postModal').className = 'contentAreaModalDown';
+	};
 };

@@ -13,6 +13,9 @@ function UIInitialize(){
 		});
 
 	UI.Skeleton();
+	var buildSkeleton = new CustomEvent('buildSkeleton', {});
+	document.dispatchEvent(buildSkeleton);
+
 	UI.Control();
 	document.body.addEventListener('touchmove', function(e) { e.preventDefault(); }, false);
 }
