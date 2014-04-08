@@ -1,11 +1,3 @@
-getID.prototype.function(id){
-  return document.getElementById(id);
-}
-
-getClass.prototype.function(cl){
-  return document.getElementsByClassName(cl);
-}
-
 'use strict';
 function AppBar() {
   this.element = document.createElement('div');
@@ -35,18 +27,16 @@ AppBar.prototype.setButtons = function(buttons) {
   var postButton = document.getElementById('postButton');
   var postModal = document.getElementById('contentModal');
 
-  var togg = 0;
-
   postButton.addEventListener('click', function(){
-    if(togg === 0){
+    if(postModal.className === 'contentAreaModalUp'){
       postModal.setAttribute('class', '');
       postModal.setAttribute('class', 'contentAreaModalDown');
-      togg = 1;
-    }else if(togg === 1){
+    }else if(postModal.className === 'contentAreaModalDown'){
       postModal.setAttribute('class', '');
       postModal.setAttribute('class', 'contentAreaModalUp');
-      togg = 0;
     }
   });
+
+
 
 };

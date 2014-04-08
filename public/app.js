@@ -26,6 +26,14 @@ var isMouseDown;
 var isChromeOrSafari;
 var feedPage;
 
+var getID = function(id){
+  return document.getElementById(id);
+}
+
+var getClass = function(cl){
+  return document.getElementsByClassName(cl);
+}
+
 function drawPageElements() {
 	scrollViewRegister = [];
 	activeScrollViews = [];
@@ -78,7 +86,6 @@ function initialize() {
 	drawPageElements();
 	setTouchListeners();
 
-
   var messageOut = document.getElementById('message-out');
   var titleOut = document.getElementById('title-out');
   var submit = document.getElementById('submit-post');
@@ -86,6 +93,19 @@ function initialize() {
   submit.addEventListener(function (e) {
     console.log(e);
   });
+
+  submit.setAttribute('disabled', true);
+
+  messageOut.onkeyup = function(){
+
+  	if(messageOut.value.length>0){
+  		console.log('submit disable false');
+  		submit.removeAttribute('disabled');
+  	}else{
+  		submit.setAttribute('disabled', true);
+  	}
+
+  };
 
   submit.addEventListener('click', function() {
 
@@ -99,8 +119,17 @@ function initialize() {
       data.loc = { type: 'Point', coordinates: [ loc.lon, loc.lat ] };
       App.postman.post(data, function (res) {
         console.log('post ok, contents - ' + JSON.stringify(res));
-				appCanvas.dismissModal();
-				refreshFeed();
+
+			  var postModal = document.getElementById('contentModal');
+
+		    if(postModal.className === 'contentAreaModalUp'){
+		      postModal.setAttribute('class', '');
+		      postModal.setAttribute('class', 'contentAreaModalDown');
+		    }else if(postModal.className === 'contentAreaModalDown'){
+		      postModal.setAttribute('class', '');
+		      postModal.setAttribute('class', 'contentAreaModalUp');
+		    }
+
       });
 
 		});

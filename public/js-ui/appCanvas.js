@@ -158,7 +158,6 @@ AppCanvas.prototype.popToHome = function() {
   }
 };
 
-
 AppCanvas.prototype.internalPopContent = function() {
   if (appCanvas.stackCount > 1) {
     var contentToShow;
