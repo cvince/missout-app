@@ -172,6 +172,9 @@ button {
   outline: none;
   cursor: pointer; }
 
+button.comments {
+  float: right; }
+
 .button {
   padding: 10rem;
   font-size: 20rem;
@@ -327,10 +330,10 @@ section.forms .logo img {
 #appBar {
   position: fixed;
   bottom: 0rem;
-  z-index: 100;
+  z-index: 300;
   width: 100%;
   height: 40rem;
-  background: #fff;
+  background: #eee;
   margin-top: #ccc;
   border-top: #ddd 1px solid; }
 
@@ -355,8 +358,6 @@ section.forms .logo img {
   cursor: pointer;
   transition: background 250ms linear; }
 
-#newPostButton:hover {
-  background: #666; }
 
 .appBarButton .image {
   position: absolute;
@@ -364,11 +365,6 @@ section.forms .logo img {
   left: 5rem;
   height: 30rem;
   width: 30rem; }
-
-.appBarButtonContainer {
-  position: absolute;
-  height: 100%;
-  width: 100%; }
 
 #logoutButton {
   color: #777; }
@@ -489,20 +485,41 @@ section.forms .logo img {
   background: #fff;
   transition: all 0.5s ease-out; }
 
-.missedConnection {
+#feedDrawer .missedConnection:first-child {
+  padding-top: 20rem; }
+
+#feedDrawer .missedConnection {
   margin: 0 auto;
+  margin-bottom: 20rem;
   padding-top: 10rem;
   width: 100%;
-  border-bottom: 1rem solid #eaeaea;
   overflow: hidden; }
 
-.missedConnection h2 {
-  padding: 5rem;
-  font-size: 24rem;
-  font-weight: bold;
-  color: #6b737f;
-  border-bottom: 1rem solid #fff;
-  text-align: center; }
+#postDrawer {
+  margin: 0 auto;
+  margin-bottom: 20rem;
+  padding-top: 10rem;
+  width: 100%;
+  overflow: hidden; }
+
+
+#postDrawer article {
+  animation-duration: 1s;
+  animation-name: slidein; }
+
+@keyframes slidein {
+  from {
+    margin-right: -102%; }
+
+  to {
+    margin-right: 0%; } }
+
+@keyframes slideout {
+  from {
+    right: 0%; }
+
+  to {
+    right: -102%; } }
 
 .post {
   position: relative;
@@ -510,6 +527,30 @@ section.forms .logo img {
   position: relative;
   /*font-smoothing: subpixel-antialiased;*/
   transform: translate3d(0, 0, 0); }
+
+h1 {
+  animation-duration: 3s;
+  animation-name: slidein; }
+
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%; }
+
+  to {
+    margin-left: 0%;
+    width: 100%; } }
+
+.post section p {
+  padding: 20rem; }
+
+.post h2 {
+  padding: 5rem;
+  font-size: 24rem;
+  font-weight: bold;
+  color: #6b737f;
+  border-bottom: 1rem solid #fff;
+  text-align: center; }
 
 .post .post-meta {
   margin-bottom: 10rem;
@@ -567,7 +608,9 @@ section.forms .logo img {
   margin-left: 10rem; }
 
 .gesturebar {
-  padding: 10rem; }
+  padding: 10rem;
+  border-top: 1rem solid #eaeaea;
+  border-bottom: 1rem solid #eaeaea; }
 
 .gesturebar .vote {
   display: inline;
@@ -630,6 +673,7 @@ section.forms .logo img {
   position: absolute;
   z-index: 100;
   top: 0rem;
+  left: 0rem;
   width: 100%;
   height: 100%;
   overflow-x: hidden;
@@ -669,7 +713,8 @@ section.forms .logo img {
 
 nav[id^="pagination"] {
   padding: 10rem;
-  text-align: center; }
+  text-align: center;
+  border-bottom: 1rem solid #eaeaea; }
 
 nav[id^="pagination"] ul li {
   display: inline-block;
@@ -688,7 +733,7 @@ nav[id^="pagination"] ul li.on {
 
 #utilityBar {
   position: fixed;
-  z-index: 9999;
+  z-index: 300;
   top: 0;
   width: 100%;
   height: 40rem;

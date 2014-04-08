@@ -6,6 +6,11 @@ button {
   outline: none;
   cursor: pointer;
 }
+
+button.comments {
+  float: right;
+}
+
 .button {
   padding: 10rem;
   font-size: 20rem;
