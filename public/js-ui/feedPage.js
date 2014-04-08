@@ -69,6 +69,7 @@ UI.FeedPage= function(elem){
 	var commentHandlers = function(){
 		function switchButtonClasses(id){
 			if(!id){return;}
+			//get all the comment buttons
 			var tempComments = getID('comments-' + id);
 			if(tempComments.className === 'comments line'){
 				tempComments.className = 'comments line active';
@@ -107,6 +108,7 @@ UI.FeedPage= function(elem){
 			{
 				'tag':'h2',
 				'html':'${title}',
+				'data-id': '${_id}',
 				'class':'title line'
 			},
 			{
