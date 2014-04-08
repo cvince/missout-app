@@ -9,6 +9,7 @@ UI.PostPage = function(elem) {
 	});
 
 	var displayContentItems = function(data) {
+			//element.className = 'hidden';
 			element.innerHTML = json2html.transform(data, mainTemplate);
 			var postMode = new CustomEvent('postMode', {});
 			document.dispatchEvent(postMode);

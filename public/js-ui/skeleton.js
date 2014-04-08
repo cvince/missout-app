@@ -103,12 +103,6 @@ UI.Skeleton = function(){
 			]},
 			{tag: 'div',
 			id: 'appBar',
-			children: [
-				// {tag: 'img',
-				// class: 'appBarBackground',
-				// src: '/public/images/close_button.png'},
-				{tag: 'div',
-				class: 'appBarButtonContainer',
 				children: [
 					{tag: 'div',
 					class: 'appBarButton',
@@ -130,7 +124,6 @@ UI.Skeleton = function(){
 						draggable: 'false',
 						src: '/public/images/controller_button.png'}
 					]}
-				]}
 			]}
 		]
 	};

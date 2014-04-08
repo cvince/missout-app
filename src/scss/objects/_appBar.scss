@@ -1,10 +1,10 @@
 #appBar {
   position: fixed;
   bottom: 0rem;
-  z-index: 100;
+  z-index: 300;
   width: 100%;
   height: 40rem;
-  background: #fff;
+  background: #eee;
   margin-top: #ccc;
   border-top: #ddd 1px solid;
 }
@@ -28,13 +28,6 @@
   left: 5rem;
   height: 30rem;
   width: 30rem;
-}
-
-.appBarButtonContainer {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  background: #eee;
 }
 
 #logoutButton{
