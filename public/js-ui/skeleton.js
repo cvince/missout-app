@@ -71,7 +71,7 @@ UI.Skeleton = function(){
 					{tag: 'img',
 					class: 'image',
 					draggable: 'false',
-					src: '/public/images/appbar.book.list.png'}
+					src: '/public/images/x.png'}
 				]},
 				{tag: 'div',
 				class: 'utilityBarDrawerButton',
@@ -81,7 +81,7 @@ UI.Skeleton = function(){
 					{tag: 'img',
 					class: 'image',
 					draggable: 'false',
-					src: '/public/images/appbar.home.garage.png'}
+					src: '/public/images/x.png'}
 				]},
 				{tag: 'div',
 				class: 'logo',
@@ -122,13 +122,11 @@ UI.Skeleton = function(){
 					// ]},
 					{tag: 'div',
 					class: 'appBarButton',
-					style: 'left: 108rem;',
-					id: 'optionsButton',
 					children: [
 						{tag: 'img',
 						class: 'image',
 						draggable: 'false',
-						src: '/public/images/appbar.draw.pen.reflection.png'}
+						src: '/public/images/controller_button.png'}
 					]}
 				]}
 			]}
@@ -192,3 +190,5 @@ UI.Skeleton = function(){
 		]
 	};
 };
+
+
