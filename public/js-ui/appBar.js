@@ -26,8 +26,10 @@ AppBar.prototype.setButtons = function(buttons) {
 
   var postButton = document.getElementById('postButton');
   var postModal = document.getElementById('postModal');
+  var preload = document.getElementsByClassName('preloader');
 
   postButton.addEventListener('click', function(){
+
     if(postModal.className === 'contentAreaModalUp'){
       postModal.setAttribute('class', '');
       postModal.setAttribute('class', 'contentAreaModalDown');

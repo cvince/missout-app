@@ -35,6 +35,7 @@ var getClass = function(cl){
 }
 
 function drawPageElements() {
+
 	scrollViewRegister = [];
 	activeScrollViews = [];
 	appBar = new AppBar();
@@ -123,8 +124,9 @@ function initialize() {
 	      postModal.setAttribute('class', '');
 	      postModal.setAttribute('class', 'contentAreaModalUp');
 
-	      refreshFeed();
+				document.getElementById('submit-post-form').reset();
 
+	      setTimeout(refreshFeed, 1000);
       });
 
 		});

@@ -1,4 +1,19 @@
-#postModal {
+.ani{
+	animation-duration: 0.5s;
+}
+
+.preloader{
+	background: url("images/preloader.gif");
+	background-size: cover;
+	height: 50rem;
+	width: 50rem;
+	margin-top: -43rem;
+	-webkit-transform: rotate(-45deg);
+	margin-left: 0;
+	opacity: 0.5;
+}
+
+#postModal{
 	display: flex;
 	align-items: center;
 	text-align: center;
@@ -17,7 +32,7 @@
 }
 
 #postModal input{
-	border-bottom: 1rem dotted #666;
+	border-bottom: 1rem solid #555;
 	background: none;
 	color: #ccc;
 	font-size: 28rem;
@@ -38,16 +53,27 @@
 }
 
 #postModal button:disabled{
-	color:#333
+	color:#333;
+	border: none;
 }
 
-#postModal button{
-	background: none;
-	color: #fff;
+	#postModal button{
+		background: none;
+		color: #fff;
+		border-bottom: 1rem #666 solid;
+	}
+
+	#postModal button:hover{
+		background: #666;
+	}
+
+.preloader.invis{
+	opacity: 0;
 }
+
 
 @media (max-width: 600px) {
 	#postModal textarea{
-		font: 18rem;
+		font-size: 18rem;
 	}
 }
