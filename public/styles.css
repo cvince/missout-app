@@ -173,6 +173,14 @@ button {
   cursor: pointer;
   background-size: 100%; }
 
+button.viewComment {
+  background: url("/public/images/comments-sprite.png") no-repeat;
+  background-size: cover;
+  background-position-x: 0; }
+
+button.viewComment:hover {
+  background-position-x: -20px; }
+
 button.upvote {
   background: url(/public/images/appbar.thumbs.up.png) no-repeat center; }
 
