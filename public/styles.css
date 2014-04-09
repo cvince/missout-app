@@ -507,12 +507,12 @@ button.home {
   transition: all 0.5s ease-out; }
 
 #feedDrawer .missedConnection:first-child {
-  padding-top: 20rem; }
+  padding-top: 40rem; }
 
 #feedDrawer .missedConnection {
   margin: 0 auto;
   margin-bottom: 20rem;
-  padding-top: 10rem;
+  padding-top: 20rem;
   width: 100%;
   overflow: hidden; }
 
@@ -688,7 +688,7 @@ h1 {
 .gesturebar {
   padding: 10rem;
   border-top: 1rem solid #eaeaea;
-  border-bottom: 1rem solid #eaeaea; }
+  border-bottom: 1rem solid #666; }
 
 .gesturebar .vote {
   display: inline;
