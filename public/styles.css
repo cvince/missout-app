@@ -671,6 +671,9 @@ h1 {
 .gesturebar button.viewComment {
   float: right; }
 
+#navigationDrawer {
+  background: #290606; }
+
 .navigationDrawerClosed {
   position: fixed;
   left: -260rem;
@@ -701,7 +704,7 @@ h1 {
 
 .box-effect {
   position: relative;
-  background: #fafafa;
+  background: #DAD5D5;
   border: 1rem solid #eee; }
 
 .box-effect:after {
@@ -790,11 +793,11 @@ nav[id^="pagination"] ul li.on {
 #utilityBar {
   position: absolute;
   z-index: 300;
-  top: 0;
+  padding-top: 5rem;
   width: 100%;
-  height: 40rem;
+  height: 45rem;
   border-bottom: 1rem solid #eaeaea;
-  background: #111111;
+  background: #290606;
   text-align: center; }
 
 #utilityBar h1 {
