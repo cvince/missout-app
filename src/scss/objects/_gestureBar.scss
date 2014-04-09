@@ -3,13 +3,16 @@
   border-top: 1rem solid #eaeaea;
   border-bottom: 1rem solid #666;
 }
+
 .gesturebar .vote {
   display: inline;
   float: left;
 }
+
 .gesturebar .vote button:first-child {
   margin-right: 10rem;
 }
+
 .gesturebar button.viewComment {
   float: right;
 }
@@ -37,6 +40,7 @@ button.viewComment {
 
 button.viewComment:hover {
   background-position-x: -32rem;
+  padding: 16rem;
 }
 
 button.upvote{

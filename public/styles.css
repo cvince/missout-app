@@ -369,7 +369,7 @@ button.home {
   transition: background 250ms linear; }
 
 #newPostButton:hover {
-  background: #666; }
+  background: #444; }
 
 .appBarButtonContainer {
   position: absolute;
@@ -719,7 +719,8 @@ button.viewComment {
   padding: 16rem; }
 
 button.viewComment:hover {
-  background-position-x: -32rem; }
+  background-position-x: -32rem;
+  padding: 16rem; }
 
 button.upvote {
   background: url(/public/images/appbar.thumbs.up.png) no-repeat center;
@@ -744,6 +745,8 @@ button.upvote {
 button.comments, button.comment {
   float: right; }
 
+#navigationDrawer {
+  background: #DAD5D5; }
 
 .navigationDrawerClosed {
   position: fixed;
@@ -775,8 +778,7 @@ button.comments, button.comment {
 
 .box-effect {
   position: relative;
-  left: -1rem;
-  background: #fefefe;
+  background: #290606;
   border: 1rem solid #eee; }
 
 .box-effect:after {
