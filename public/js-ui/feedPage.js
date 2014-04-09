@@ -36,6 +36,7 @@ UI.FeedPage= function(elem){
 		element.innerHTML = tempHTML;
 		buildSlider();
 		commentHandlers();
+		upDownVoteHandlers();
 		fakeBuildNavDrawer(feedData);
 		var feedMode = new CustomEvent('feedMode', {});
 		document.dispatchEvent(feedMode);
@@ -67,7 +68,8 @@ UI.FeedPage= function(elem){
 	};
 
 	var commentHandlers = function(){
-		function switchButtonClasses(id){
+		element.addEventListener('click', function(e){
+			var id = e.target.dataset.id;
 			if(!id){return;}
 			//get all the comment buttons
 			var tempComments = getID('comments-' + id);
@@ -76,10 +78,11 @@ UI.FeedPage= function(elem){
 			} else {
 				tempComments.className = 'comments line';
 			}
-		}
-		element.addEventListener('click', function(e){
-			switchButtonClasses(e.target.dataset.id);
 		});
+	};
+
+	var upDownVoteHandlers = function(){
+
 	};
 
 	var fakeBuildNavDrawer = function(template){
@@ -107,9 +110,12 @@ UI.FeedPage= function(elem){
 		'children' : [
 			{
 				'tag':'h2',
-				'html':'${title}',
-				'data-id': '${_id}',
-				'class':'title line'
+				children:[
+					{tag: 'span',
+					'html':'${title}',
+					'data-id': '${_id}',
+					'class':'title line'}
+				]
 			},
 			{
 				'tag':'section',
