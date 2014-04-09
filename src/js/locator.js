@@ -93,6 +93,12 @@ function Locator () {
     };
   };
 
+  // Allows Casper to set the user's location for testing
+  Constructor.prototype.setLoc = function (loc) {
+    userLoc = loc;
+    lastGoodLoc = loc;
+  };
+
   return new Constructor();
 }
 

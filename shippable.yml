@@ -11,5 +11,9 @@ services:
 
 # Running npm test to run your test cases
 script:
- - grunt build
- - npm test
+  - grunt mongoimport
+  - grunt build
+  - npm test
+
+after_success :
+  - git push  git@heroku.com:postmanapp.git master
