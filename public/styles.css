@@ -369,7 +369,7 @@ button.home {
   transition: background 250ms linear; }
 
 #newPostButton:hover {
-  background: #666; }
+  background: #444; }
 
 .appBarButtonContainer {
   position: absolute;
