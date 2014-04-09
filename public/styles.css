@@ -745,9 +745,6 @@ button.upvote {
 button.comments, button.comment {
   float: right; }
 
-#navigationDrawer {
-  background: #DAD5D5; }
-
 .navigationDrawerClosed {
   position: fixed;
   left: -260rem;
@@ -778,7 +775,7 @@ button.comments, button.comment {
 
 .box-effect {
   position: relative;
-  background: #290606;
+  background: #eee;
   border: 1rem solid #eee; }
 
 .box-effect:after {

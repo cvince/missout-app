@@ -126,7 +126,7 @@ UI.Skeleton = function(){
 						{tag: 'img',
 						class: 'image',
 						draggable: 'false',
-						src: '/public/images/appbar.draw.pen.reflection.png'}
+						src: '/public/images/appbar.draw.pen.reflection-lighter.png'}
 					]}
 				]}
 			]}
