@@ -92,13 +92,6 @@ UI.PostPage = function(elem) {
 
 						]
 
-					},
-					{
-					'tag':'button',
-					'class':'viewComment',
-					'data-id': '${_id}',
-					'title':'comment',
-					'html':''
 					}
 				]
 			}
