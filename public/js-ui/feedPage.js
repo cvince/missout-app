@@ -67,7 +67,8 @@ UI.FeedPage= function(elem){
 	};
 
 	var commentHandlers = function(){
-		function switchButtonClasses(id){
+		element.addEventListener('click', function(e){
+			var id = e.targetdataset.id;
 			if(!id){return;}
 			//get all the comment buttons
 			var tempComments = getID('comments-' + id);
@@ -76,9 +77,6 @@ UI.FeedPage= function(elem){
 			} else {
 				tempComments.className = 'comments line';
 			}
-		}
-		element.addEventListener('click', function(e){
-			switchButtonClasses(e.target.dataset.id);
 		});
 	};
 
