@@ -147,9 +147,8 @@ UI.FeedPage= function(elem){
 				'class' :'comments line',
 				'html' :
 					'<form class="comment-box" method="post" action="api/v1/comments/${_id}">'+
-						'<label>Submit a comment</label>'+
-						'<textarea class="comment-out" name="body"></textarea>'+
-						'<button data-id=${_id} class="submit-comment" type="submit" value="send-comment" onclick="App.postman.comment(this.parentElement.children[1].value, this.dataset.id)">Submit A Comment</button>'+'</form>',
+						'<textarea placeholder="Write a message..." class="comment-out" name="body"></textarea>'+
+						'<button data-id=${_id} class="submit-comment" type="submit" value="send-comment" onclick="App.postman.comment(this.parentElement.children[1].value, this.dataset.id)">Submit</button>'+'</form>',
 				'children' : [
 					{
 						'tag' : 'ul',
@@ -212,7 +211,7 @@ UI.FeedPage= function(elem){
 		'children': [
 			{
 				'tag':'h5',
-				'html':'${tempname}'
+				'html':'${tempname} says:'
 			},
 			{
 				'tag':'p',
