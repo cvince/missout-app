@@ -4,7 +4,7 @@
   "description": "Nearby search example with MongoDB",
   "main": "server.js",
   "scripts": {
-    "test": "nodemon server.js"
+    "test": "grunt test"
   },
   "repository": {
     "type": "git",
