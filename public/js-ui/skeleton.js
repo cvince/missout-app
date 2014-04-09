@@ -68,21 +68,21 @@ UI.Skeleton = function(){
 				class: 'utilityBarDrawerButton',
 				id: 'navTemplateToggleButton',
 				children: [
-					{tag: 'img',
-					class: 'image',
+					{tag: 'button',
+					class: 'drawer',
 					draggable: 'false',
-					src: '/public/images/inv.appbar.book.list.png'}
+					}
 				]},
 				{tag: 'div',
-				class: 'utilityBarDrawerButton',
-				id: 'returnToFeedButton',
-				style: 'left: 50rem; display: none;',
-				children: [
-					{tag: 'img',
-					class: 'image',
-					draggable: 'false',
-					src: '/public/images/x.png'}
-				]},
+					class: 'utilityBarDrawerButton',
+					id: 'returnToFeedButton',
+					style: 'right: 10rem; display: none;',
+					children: [
+						{tag: 'button',
+						class: 'home',
+						draggable: 'false',
+						}
+					]},
 				{tag: 'div',
 				class: 'logo',
 				children: [
