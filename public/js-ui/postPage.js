@@ -45,7 +45,7 @@ UI.PostPage = function(elem) {
 				'html' :
 					'<form class="comment-box" method="post" action="api/v1/comments/${_id}">'+
 						'<textarea placeholder="Write a comment..." class="comment-out" name="body"></textarea>'+
-						'<button data-id=${_id} class="submit-comment" type="submit" value="send-comment">Submit A Comment</button>' + '</form>',
+						'<button data-id=${_id} class="submit-comment" type="submit" value="send-comment">Submit</button>' + '</form>',
 				'children' : [
 					{
 						'tag' : 'ul',
