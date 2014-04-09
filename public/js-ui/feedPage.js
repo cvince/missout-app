@@ -172,16 +172,24 @@ UI.FeedPage= function(elem){
 						'class':'vote',
 						'children': [
 							{
-								'tag':'button',
-								'class':'upvote',
-								'title':'up vote',
-								'html':''
+								'tag':'input',
+								'type':'checkbox',
+								'id':'downVote-${_id}',
+								'name':'voteUpDown',
+								'value':'disliked',
+								'class':'downvote',
+								'title':'down vote',
+								'html':'<label for="downVote-${_id}"></label>'
 							},
 							{
-								'tag':'button',
-								'class': 'downvote',
-								'title':'down vote',
-								'html':''
+								'tag':'input',
+								'type':'checkbox',
+								'id':'upVote-${_id}',
+								'name':'voteUpDown',
+								'value':'liked',
+								'class':'upvote',
+								'title':'up vote',
+								'html':'<label for="upVote-${_id}"></label>'
 							}
 						]
 					},

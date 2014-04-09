@@ -36,7 +36,7 @@ UI.NewPost = function(elem){
       postModal.setAttribute('class', '');
       postModal.setAttribute('class', 'contentAreaModalUp');
       document.getElementById('submit-post-form').reset();
-
+      location.reload();
       setTimeout(function(){
         var reloadFeed = new CustomEvent('reloadFeed', {});
         document.dispatchEvent(reloadFeed);
