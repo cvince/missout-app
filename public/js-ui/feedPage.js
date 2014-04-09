@@ -113,17 +113,18 @@ UI.FeedPage= function(elem){
 	};
 
 	var fakeBuildNavDrawer = function(template){
+    var tempFeed = template.slice(0);
 		var numAlerts, numTracked, rep;
 		var alerts = [];
 		var tracked = [];
 		var templateLength = template.length;
-		numAlerts = ((Math.random() * 3) << 0) + 2;
-		numTracked = ((Math.random() * 3) << 0) + 2;
+		numAlerts = 3;
+		numTracked = 3;
 		for(rep = 0;rep < numAlerts;rep ++){
-			alerts.push(template[(Math.random() * ((templateLength / 2 << 0))) <<0]);
+			alerts.push(tempFeed.pop());
 		}
 		for(rep = 0;rep < numTracked;rep ++){
-			tracked.push(template[(Math.random() * ((templateLength / 2 << 0)) + ((templateLength / 2) << 0)) <<0]);
+			tracked.push(tempFeed.shift());
 		}
 
 		var refillNavDrawer = new CustomEvent('refillNavDrawer', {detail: {alerts: alerts, tracked: tracked}});
