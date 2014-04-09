@@ -7,16 +7,40 @@ button {
   background-size: 100%
 }
 
-button.upvote{
-  background: url(/public/images/appbar.thumbs.up.png) no-repeat center;
-  background-size: cover;
-
+.vote input[type='checkbox'] {
+  opacity: 0;
 }
 
-button.downvote{
-  background: url(/public/images/appbar.thumbs.down.png) no-repeat center;
-  background-size: cover;
+.vote input[type='checkbox'].upvote + label {
+  background: url(/public/images/appbar.thumbs.sprite2.png) no-repeat center;
+  background-size: 600%;
+  background-position: -57rem;
+  height: 36rem;
+  width: 36rem;
+  display: inline-block;
+  float: left;
 }
+
+.vote input[type='checkbox'].downvote + label {
+  background: url(/public/images/appbar.thumbs.sprite2.png) no-repeat center;
+  background-size: 600%;
+  background-position: 6rem;
+  height: 36rem;
+  width: 36rem;
+  display: inline-block;
+  float: left;
+  margin-right: 10rem;
+}
+
+.vote input[type='checkbox'].upvote:checked + label {
+  background-position: -183rem;
+}
+
+.vote input[type='checkbox'].downvote:checked + label {
+  background-position: -120rem;
+}
+
+
 
 button.comments, button.comment {
   float: right;

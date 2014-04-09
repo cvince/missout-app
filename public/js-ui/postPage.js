@@ -69,19 +69,37 @@ UI.PostPage = function(elem) {
 						'tag':'div',
 						'class':'vote',
 						'children': [
+
 							{
-								'tag':'button',
-								'class':'upVote',
-								'title':'up vote',
-								'html':''
+								'tag':'input',
+								'type':'checkbox',
+								'id':'downVote-${_id}',
+								'name':'voteUpDown',
+								'value':'disliked',
+								'class':'downvote',
+								'title':'down vote',
+								'html':'<label for="downVote-${_id}"></label>'
 							},
 							{
-								'tag':'button',
-								'class': 'downvote',
-								'title':'down vote',
-								'html':''
-							}
+								'tag':'input',
+								'type':'checkbox',
+								'id':'upVote-${_id}',
+								'name':'voteUpDown',
+								'value':'liked',
+								'class':'upvote',
+								'title':'up vote',
+								'html':'<label for="upVote-${_id}"></label>'
+							},
+
 						]
+
+					},
+					{
+					'tag':'button',
+					'class':'viewComment',
+					'data-id': '${_id}',
+					'title':'comment',
+					'html':''
 					}
 				]
 			}
