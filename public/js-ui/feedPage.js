@@ -35,8 +35,7 @@ UI.FeedPage= function(elem){
 		});
 		element.innerHTML = tempHTML;
 		buildSlider();
-		commentHandlers();
-		upDownVoteHandlers();
+		idClickHandlers();
 		fakeBuildNavDrawer(feedData);
 		var feedMode = new CustomEvent('feedMode', {});
 		document.dispatchEvent(feedMode);
@@ -67,22 +66,50 @@ UI.FeedPage= function(elem){
 		}
 	};
 
-	var commentHandlers = function(){
+	var hasAClass = function(elem, cls){
+		return (' ' + elem.className + ' ').indexOf(' ' + cls + ' ') > -1;
+	};
+
+	var idClickHandlers = function(){
 		element.addEventListener('click', function(e){
 			var id = e.target.dataset.id;
-			if(!id){return;}
-			//get all the comment buttons
-			var tempComments = getID('comments-' + id);
-			if(tempComments.className === 'comments line'){
-				tempComments.className = 'comments line active';
-			} else {
-				tempComments.className = 'comments line';
-			}
+			if(!id){ return; }
+			if(hasAClass(e.target, 'commenthandler')) { commentHandler(id); }
+			if(hasAClass(e.target, 'updownhandler')) { upDownVoteHandler(e.target, id); }
+			if(hasAClass(e.target, 'bullethandler')) { bulletHandler(id); }
 		});
 	};
 
-	var upDownVoteHandlers = function(){
+	var commentHandler = function(id){
+		var tempComments = getID('comments-' + id);
+		if(tempComments.className === 'comments line'){
+			tempComments.className = 'comments line active';
+		} else {
+			tempComments.className = 'comments line';
+		}
+	};
 
+	var upDownVoteHandler = function(elem, id){
+		var vote;
+		var upvote = getID('upVote-' + id);
+		var downvote = getID('downVote-' + id);
+		if(elem.id === upvote.id) {vote = 'up';}
+			else {vote = 'down';}
+		if(vote === 'up'){
+			if(downvote.checked){
+				downvote.checked = false;
+			}
+		}
+		if(vote === 'down'){
+			if(upvote.checked){
+				upvote.checked = false;
+			}
+		}
+		//alert('up down');
+	};
+
+	var bulletHandler = function(id){
+		//alert('bullet');
 	};
 
 	var fakeBuildNavDrawer = function(template){
@@ -93,10 +120,10 @@ UI.FeedPage= function(elem){
 		numAlerts = ((Math.random() * 3) << 0) + 2;
 		numTracked = ((Math.random() * 3) << 0) + 2;
 		for(rep = 0;rep < numAlerts;rep ++){
-			alerts.push(template[(Math.random() * templateLength) <<0]);
+			alerts.push(template[(Math.random() * ((templateLength / 2 << 0))) <<0]);
 		}
 		for(rep = 0;rep < numTracked;rep ++){
-			tracked.push(template[(Math.random() * templateLength) <<0]);
+			tracked.push(template[(Math.random() * ((templateLength / 2 << 0)) + ((templateLength / 2) << 0)) <<0]);
 		}
 
 		var refillNavDrawer = new CustomEvent('refillNavDrawer', {detail: {alerts: alerts, tracked: tracked}});
@@ -114,7 +141,7 @@ UI.FeedPage= function(elem){
 					{tag: 'span',
 					'html':'${title}',
 					'data-id': '${_id}',
-					'class':'title line'}
+					'class':'title line commenthandler'}
 				]
 			},
 			{
@@ -140,7 +167,7 @@ UI.FeedPage= function(elem){
 						'children' : function(){
 							var out = [];
 							for(var rep=0;rep<this.pages.length;rep++){
-								out.push(rep === 0 ? {class: 'on'} : {});
+								out.push(rep === 0 ? {_id: this._id, class: 'on'} : {_id: this._id});
 							}
 							return(json2html.transform(out, bulletMicroTemplate));
 						}
@@ -153,8 +180,9 @@ UI.FeedPage= function(elem){
 				'class' :'comments line',
 				'html' :
 					'<form class="comment-box" method="post" action="api/v1/comments/${_id}">'+
-						'<textarea placeholder="Write a message..." class="comment-out" name="body"></textarea>'+
-						'<button data-id=${_id} class="submit-comment" type="submit" value="send-comment" onclick="App.postman.comment(this.parentElement.children[1].value, this.dataset.id)">Submit</button>'+'</form>',
+						'<label>Submit a comment</label>'+
+						'<textarea class="comment-out" name="body"></textarea>'+
+						'<button data-id=${_id} class="submit-comment" type="submit" value="send-comment" onclick="App.postman.comment(this.parentElement.children[1].value, this.dataset.id)">Submit A Comment</button>'+'</form>',
 				'children' : [
 					{
 						'tag' : 'ul',
@@ -181,9 +209,10 @@ UI.FeedPage= function(elem){
 								'tag':'input',
 								'type':'checkbox',
 								'id':'downVote-${_id}',
+								'data-id': '${_id}',
 								'name':'voteUpDown',
 								'value':'disliked',
-								'class':'downvote',
+								'class':'downvote updownhandler',
 								'title':'down vote',
 								'html':'<label for="downVote-${_id}"></label>'
 							},
@@ -191,9 +220,10 @@ UI.FeedPage= function(elem){
 								'tag':'input',
 								'type':'checkbox',
 								'id':'upVote-${_id}',
+								'data-id': '${_id}',
 								'name':'voteUpDown',
 								'value':'liked',
-								'class':'upvote',
+								'class':'upvote updownhandler',
 								'title':'up vote',
 								'html':'<label for="upVote-${_id}"></label>'
 							}
@@ -201,7 +231,7 @@ UI.FeedPage= function(elem){
 					},
 					{
 						'tag':'button',
-						'class':'viewComment',
+						'class':'viewComment commenthandler',
 						'data-id': '${_id}',
 						'title':'comment',
 						'html':''
@@ -233,6 +263,7 @@ UI.FeedPage= function(elem){
 
 	var bulletMicroTemplate = {
 		tag: 'li',
-		class: '${class}'
+		'data-id':'${_id}',
+		class: '${class} bullethandler'
 	};
 };

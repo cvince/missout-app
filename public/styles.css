@@ -14,10 +14,6 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, main, x-drawers, appbar, messagecenter, newmessages, readmessages, sentmessages, receivedmessages, message, chatconsole, appcanvas, post, slides, slide, pagination, bullets, bullet, gesturebar, vote, utilitybar {
   display: block; }
 
-body {
-  background-color: rgba(0, 0, 0, 0.15);
-  line-height: 1; }
-
 a {
   cursor: pointer; }
 
@@ -46,10 +42,12 @@ html {
   overflow: hidden; }
 
 body {
+  line-height: 1;
   height: 100%;
   overflow: auto;
   overflow-x: hidden;
-  font-family: 'Dosis', sans-serif; }
+  font-family: 'Dosis', sans-serif;
+  background-color: rgba(0, 0, 0, 0.025); }
 
 input, button {
   font-family: 'Dosis', sans-serif; }
@@ -157,13 +155,16 @@ a {
   z-index: 99999; }
 
 h1 {
-  font: 16rem/24rem normal 'Dosis', sans-serif; }
+  font-family: 'Dosis', sans-serif;
+  font-size: 16rem; }
 
 h2 {
-  font: 16rem/24rem normal 'Dosis', sans-serif; }
+  font-family: 'Dosis', sans-serif;
+  font-size: 16rem; }
 
 p {
-  font: 16rem/24rem normal 'Dosis', sans-serif; }
+  font-family: 'Dosis', sans-serif;
+  font-size: 16rem; }
 
 button {
   padding: 10rem;
@@ -172,25 +173,6 @@ button {
   outline: none;
   cursor: pointer;
   background-size: 100%; }
-
-button.viewComment {
-  background: url("/public/images/comments-sprite.png") no-repeat;
-  background-size: cover;
-  background-position-x: 0; }
-
-button.viewComment:hover {
-  background-position-x: -20px; }
-
-button.upvote {
-  background: url(/public/images/appbar.thumbs.up.png) no-repeat center;
-  background-size: cover; }
-
-button.downvote {
-  background: url(/public/images/appbar.thumbs.down.png) no-repeat center;
-  background-size: cover; }
-
-button.comments, button.comment {
-  float: right; }
 
 .button {
   padding: 10rem;
@@ -368,6 +350,16 @@ section.forms .logo img {
   left: 50%;
   margin-left: -30rem; }
 
+button.drawer {
+  background: url(/public/images/appbar.list.png) no-repeat center;
+  background-size: cover;
+  padding: 18rem; }
+
+button.home {
+  background: url(/public/images/appbar.home.garage.png) no-repeat center;
+  background-size: cover;
+  padding: 18rem; }
+
 #optionsButton {
   left: 0; }
 
@@ -404,6 +396,9 @@ section.forms .logo img {
   line-height: 40rem;
   text-transform: uppercase;
   margin-left: 45rem; }
+
+#navTemplateToggleButton {
+  left: 5rem; }
 
 .appCanvas {
   position: absolute;
@@ -512,12 +507,12 @@ section.forms .logo img {
   transition: all 0.5s ease-out; }
 
 #feedDrawer .missedConnection:first-child {
-  padding-top: 20rem; }
+  padding-top: 40rem; }
 
 #feedDrawer .missedConnection {
   margin: 0 auto;
   margin-bottom: 20rem;
-  padding-top: 10rem;
+  padding-top: 20rem;
   width: 100%;
   overflow: hidden; }
 
@@ -612,8 +607,9 @@ h1 {
   width: 100%;
   position: relative;
   margin-bottom: 10rem;
+  padding: 0 20rem;
   color: #4b515b;
-  font-family: 'Dosis', sans-serif;
+  font-family: 'Lato', sans-serif;
   font-size: 16rem;
   line-height: 24rem;
   text-align: center; }
@@ -623,34 +619,67 @@ h1 {
   font-size: 16rem; }
 
 .post .comments {
-  padding: 10rem;
+  background: #444;
+  position: relative;
   font-size: 18rem;
-  display: none; }
+  max-height: 0;
+  transition: all ease-out 0.5s;
+  overflow: hidden;
+  -webkit-transform: translate3d(0, 0, 0); }
 
 .post .comments.active {
-  display: block; }
+  max-height: 800rem;
+  overflow: scroll; }
+
+.post .comments ul > li > div {
+  border-bottom: 1px solid #777;
+  padding: 10rem;
+  color: #eee;
+  background: #555; }
+
+.post .comments ul > li > div > h5 {
+  font-weight: bold;
+  font-size: 12rem;
+  line-height: 14rem;
+  color: #ccc;
+  text-transform: uppercase; }
+
+.post .comments ul > li > div > p {
+  font-family: 'Lato', sans-serif;
+  font-size: 14rem;
+  line-height: 16rem; }
 
 
 .comment-box label {
   color: #666; }
 
 .comment-box textarea {
+  background: #333;
   margin: 0 auto;
-  padding: 5rem;
+  padding: 10rem;
   width: 100%;
   height: 80rem;
-  border: 1rem solid #cccccc;
+  border: none;
   font-family: 'Dosis', sans-serif;
   font-size: 16rem;
-  line-height: 24rem; }
+  line-height: 24rem;
+  border-top: 1px solid #ccc;
+  resize: none;
+  color: #eee; }
 
 .comment-box button.submit-comment {
-  background: #fafafa;
-  background-image: none;
+  position: relative;
   font-size: 16rem;
-  float: right;
-  border: 1rem solid #ccc;
-  color: #666; }
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  text-transform: uppercase;
+  background: #c00;
+  width: 150rem;
+  left: 50%;
+  margin-top: 10rem;
+  margin-bottom: 10rem;
+  margin-left: -75rem; }
 
 .tempname {
   font-size: 12rem;
@@ -659,7 +688,7 @@ h1 {
 .gesturebar {
   padding: 10rem;
   border-top: 1rem solid #eaeaea;
-  border-bottom: 1rem solid #eaeaea; }
+  border-bottom: 1rem solid #666; }
 
 .gesturebar .vote {
   display: inline;
@@ -669,6 +698,50 @@ h1 {
   margin-right: 10rem; }
 
 .gesturebar button.viewComment {
+  float: right; }
+
+.vote input[type='checkbox'] {
+  opacity: 0; }
+
+.vote input[type='checkbox'].upvote + label {
+  background: url(/public/images/appbar.thumbs.sprite2.png) no-repeat center;
+  background-size: 600%;
+  background-position: -53rem;
+  height: 32rem;
+  width: 32rem;
+  display: inline-block;
+  float: left; }
+
+button.viewComment {
+  background: url("/public/images/comments-sprite.png") no-repeat;
+  background-size: cover;
+  background-position-x: 0;
+  padding: 16rem; }
+
+button.viewComment:hover {
+  background-position-x: -32rem; }
+
+button.upvote {
+  background: url(/public/images/appbar.thumbs.up.png) no-repeat center;
+  background-size: cover; }
+
+.vote input[type='checkbox'].downvote + label {
+  background: url(/public/images/appbar.thumbs.sprite2.png) no-repeat center;
+  background-size: 600%;
+  background-position: 6rem;
+  height: 32rem;
+  width: 32rem;
+  display: inline-block;
+  float: left;
+  margin-right: 10rem; }
+
+.vote input[type='checkbox'].upvote:checked + label {
+  background-position: -165rem; }
+
+.vote input[type='checkbox'].downvote:checked + label {
+  background-position: -106rem; }
+
+button.comments, button.comment {
   float: right; }
 
 #navigationDrawer {
@@ -797,7 +870,7 @@ nav[id^="pagination"] ul li.on {
   width: 100%;
   height: 45rem;
   border-bottom: 1rem solid #eaeaea;
-  background: #290606;
+  background: #111;
   text-align: center; }
 
 #utilityBar h1 {
