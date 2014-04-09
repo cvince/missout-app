@@ -1,5 +1,6 @@
 // fonts
 @import url(http://fonts.googleapis.com/css?family=Dosis:300,400);
+@import url(http://fonts.googleapis.com/css?family=Lato);
 
 // layout
 @import "layout/reset";
@@ -8,6 +9,7 @@
 @import "layout/buttons";
 
 // object styles
+@import "objects/login";
 @import "objects/appBar";
 @import "objects/appCanvas";
 @import "objects/post";
@@ -19,4 +21,7 @@
 @import "objects/pagination";
 @import "objects/utilityBar";
 @import "objects/postTray";
+<<<<<<< HEAD
 @import "layout/login";
+=======
+>>>>>>> master

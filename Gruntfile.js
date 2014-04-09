@@ -55,7 +55,6 @@ module.exports = function (grunt) {
           'src/js/app.js',
           'src/js/locator.js',
           'src/js/postman.js',
-          'src/js/actions.js',
           'src/js/heartbeat.js'
         ],
         dest: 'public/app.js'
@@ -106,15 +105,15 @@ module.exports = function (grunt) {
             type: 'json',
             file: 'db/seeds/users.json',
             jsonArray: true,
-            upsertFields: "_id",
+            //upsertFields: '_id',
             drop: true
           },
           {
             name: 'posts',
             type: 'json',
-            file: 'db/seeds/posts.json',
+            file: 'db/seeds/test.json',
             jsonArray: true,
-            //upsertFields: "_id",
+            upsertFields: '_id',
             drop: true
           }
         ]
@@ -129,7 +128,11 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-mongoimport');
   grunt.loadNpmTasks('grunt-express-server');
   grunt.loadNpmTasks('grunt-simple-mocha');
+<<<<<<< HEAD
   grunt.registerTask('default', ['mongoimport', 'express:dev', 'watch', 'env:dev']);
+=======
+  grunt.registerTask('default', [/*'mongoimport',*/ 'express:test', 'watch', 'env:test']);
+>>>>>>> master
   grunt.registerTask('test', [ 'env:test', 'mongoimport', 'express:test', 'casper:all', 'simplemocha:all']);
   grunt.registerTask('build', ['sass:build', 'concat:all']);
 };

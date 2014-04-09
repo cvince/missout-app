@@ -1,5 +1,11 @@
 [
   { "_id" : ObjectId("5336762f5cba69531f843ded"), "loc" : { "type" : "Point", "coordinates" : [ -122, 47 ] }, "facebook" : { "email" : "nipplepets@yahoo.com", "name" : "Tim Lebel", "id" : "1581960001" }, "__v" : 0 },
   { "_id" : "533713ee9ff74e373f4e74da", "loc" : { "type" : "Point", "coordinates" : [ -122, 47 ] }, "twitter" : { "displayName" : "chill", "username" : "nodebro", "token" : "1085740004-zvOZRSLYUEttI0FmiwoQWTSRp3aJbrLC9S0gXpD", "id" : "1085740004" }, "__v" : 0 },
+<<<<<<< HEAD
   { "_id" : "5337467097e45a2512cb9bb0", "loc" : { "type" : "Point", "coordinates" : [ -122, 47 ] }, "local" : { "password" : "$2a$08$EBwbSAkEQyMY7OeZ09sUo.E.D0uLQW/VC3sQ9KYo0HT6Xf7z5O9fa", "email" : "timmy" }, "__v" : 0 }
 ]
+=======
+  { "_id" : "5337467097e45a2512cb9bb0", "loc" : { "type" : "Point", "coordinates" : [ -122, 47 ] }, "local" : { "password" : "$2a$08$EBwbSAkEQyMY7OeZ09sUo.E.D0uLQW/VC3sQ9KYo0HT6Xf7z5O9fa", "email" : "timmy" }, "__v" : 0 },
+  { "_id" : ObjectId("53362da19395851d4cdd62e0"), "local" : { "password" : "$2a$08$InC6OhwX38amsUg.CLTIcOBDmxV9GhHNc4rf3hwod7yQO5ud2aWz6", "email" : "dan.heidel@gmail.com" }, "__v" : 0 }
+]
+>>>>>>> master

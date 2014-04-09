@@ -1,11 +1,51 @@
 button {
   padding: 10rem;
   border: none;
-  background: #fff url(/public/images/x.png) no-repeat center;
   background-size: contain;
   outline: none;
   cursor: pointer;
+  background-size: 100%
 }
+
+.vote input[type='checkbox'] {
+  opacity: 0;
+}
+
+.vote input[type='checkbox'].upvote + label {
+  background: url(/public/images/appbar.thumbs.sprite2.png) no-repeat center;
+  background-size: 600%;
+  background-position: -57rem;
+  height: 36rem;
+  width: 36rem;
+  display: inline-block;
+  float: left;
+}
+
+.vote input[type='checkbox'].downvote + label {
+  background: url(/public/images/appbar.thumbs.sprite2.png) no-repeat center;
+  background-size: 600%;
+  background-position: 6rem;
+  height: 36rem;
+  width: 36rem;
+  display: inline-block;
+  float: left;
+  margin-right: 10rem;
+}
+
+.vote input[type='checkbox'].upvote:checked + label {
+  background-position: -183rem;
+}
+
+.vote input[type='checkbox'].downvote:checked + label {
+  background-position: -120rem;
+}
+
+
+
+button.comments, button.comment {
+  float: right;
+}
+
 .button {
   padding: 10rem;
   font-size: 20rem;
@@ -24,12 +64,14 @@ button {
   box-shadow: 0 6rem #3f8401;
   transition: none;
 }
+
 .button:after {
   content: '';
   position: absolute;
   z-index: -1;
   transition: all 0.3s;
 }
+
 .button:before {
   speak: none;
   font-style: normal;
@@ -40,6 +82,7 @@ button {
   position: relative;
   -webkit-font-smoothing: antialiased;
 }
+
 .button:hover {
   box-shadow: 0 4rem #3f8401;
   top: 2rem;

@@ -1,28 +1,31 @@
 <!-- views/signup.html -->
 {{>header}}
+<section class="forms signup-page">
+  <div class="form-section line">
+    <div class="form-content">
+      <div class="logo"><img src="public/img/logo.png"></div>
+        <div id="alert">
+          <span class="alert message">{{message}}</span>
+        </div>
 
+        <!-- LOGIN FORM -->
 
-  <h1>Signup</h1>
+        <h1>Plase enter information below to register: </h1>
 
-  <!-- show any messages that come back with authentication -->
+        <form id="signup-form" action="/signup" method="post">
+            <input type="text" name="email" placeholder="email" autocomplete="off">
+            <input type="password" name="password" placeholder="password" autocomplete="off">
+        </form>
 
-  <div id="alert">
-    <span class="alert message">{{message}}</span>
+      <button type="submit" form="signup-form">SIGNUP</button>
+    </div>
   </div>
-
-  <!-- LOGIN FORM -->
-  <form action="/signup" method="post">
-      <label>Email</label>
-      <input type="text" name="email">
-      <label>Password</label>
-      <input type="password" name="password">
-    <button type="submit">Signup</button>
-  </form>
-
-  <hr>
-
-  <p>Already have an account? <a href="/login">Login</a></p>
-  <p>Or go <a href="/">home</a>.</p>
+  <div class="sign-up line">
+    <p>
+      <a class="signup-link" href="/login">ALREADY SIGNED UP? LOGIN</a>
+    </p>
+  </div>
+</section>
 
 
 {{>footer}}

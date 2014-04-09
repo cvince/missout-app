@@ -29,6 +29,7 @@ slide, pagination, bullets, bullet, gesturebar, vote, utilitybar {
 display: block;
 }
 body {
+background-color: rgba(0,0,0,.15);
 line-height: 1;
 }
 a {
@@ -65,4 +66,12 @@ body {
   height: 100%;
   overflow: auto;
   overflow-x: hidden;
+  font-family: 'Dosis', sans-serif;
+}
+input, button{
+  font-family: 'Dosis', sans-serif;
+}
+a {
+  text-decoration: none;
+  color: #6b737f;
 }

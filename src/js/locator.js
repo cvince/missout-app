@@ -1,3 +1,4 @@
+/*******************locator.js start***********************/
 'use strict';
 /*global alert*/
 /*global App*/
@@ -42,7 +43,7 @@ function Locator () {
   function Constructor () { }
 
   Constructor.prototype.getLoc = function (maxAge, maxAccuracy, cb) {
-    if (typeof arguments[0] === "function") {
+    if (typeof arguments[0] === 'function') {
       cb = arguments[0];
       maxAccuracy = 5000;
       maxAge = 600000;
@@ -96,3 +97,5 @@ function Locator () {
 }
 
 App.locator = new Locator();
+
+/**************************locator.js end****************************/

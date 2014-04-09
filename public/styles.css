@@ -1,4 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=Dosis:300,400);
+@import url(http://fonts.googleapis.com/css?family=Lato);
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
   margin: 0;
   padding: 0;
@@ -14,6 +15,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block; }
 
 body {
+  background-color: rgba(0, 0, 0, 0.15);
   line-height: 1; }
 
 a {
@@ -46,7 +48,15 @@ html {
 body {
   height: 100%;
   overflow: auto;
-  overflow-x: hidden; }
+  overflow-x: hidden;
+  font-family: 'Dosis', sans-serif; }
+
+input, button {
+  font-family: 'Dosis', sans-serif; }
+
+a {
+  text-decoration: none;
+  color: #6b737f; }
 
 /* Set the width of the grid */
 .line:before, .line:after {
@@ -143,6 +153,9 @@ body {
   opacity: 0;
   transition: all 0.7s linear; }
 
+.contentAreaModalUp {
+  z-index: 99999; }
+
 h1 {
   font: 16rem/24rem normal 'Dosis', sans-serif; }
 
@@ -155,10 +168,41 @@ p {
 button {
   padding: 10rem;
   border: none;
-  background: #fff url(/public/images/x.png) no-repeat center;
   background-size: contain;
   outline: none;
-  cursor: pointer; }
+  cursor: pointer;
+  background-size: 100%; }
+
+.vote input[type='checkbox'] {
+  opacity: 0; }
+
+.vote input[type='checkbox'].upvote + label {
+  background: url(/public/images/appbar.thumbs.sprite2.png) no-repeat center;
+  background-size: 600%;
+  background-position: -57rem;
+  height: 36rem;
+  width: 36rem;
+  display: inline-block;
+  float: left; }
+
+.vote input[type='checkbox'].downvote + label {
+  background: url(/public/images/appbar.thumbs.sprite2.png) no-repeat center;
+  background-size: 600%;
+  background-position: 6rem;
+  height: 36rem;
+  width: 36rem;
+  display: inline-block;
+  float: left;
+  margin-right: 10rem; }
+
+.vote input[type='checkbox'].upvote:checked + label {
+  background-position: -183rem; }
+
+.vote input[type='checkbox'].downvote:checked + label {
+  background-position: -120rem; }
+
+button.comments, button.comment {
+  float: right; }
 
 .button {
   padding: 10rem;
@@ -208,14 +252,120 @@ button {
   box-shadow: 0 0 #3f8401;
   top: 2rem; }
 
-.appBar {
-  position: fixed;
+body.login {
+  background: #ccc;
+  border-top: 5px solid #c00; }
+
+span.message {
+  font-size: 24rem;
+  line-height: 28rem; }
+
+#alert {
+  text-align: center; }
+
+span.alert {
+  background: #fdd;
+  color: #f00; }
+
+section.forms {
+  font-family: 'Dosis', sans-serif;
+  font-size: 24rem;
+  line-height: 24rem; }
+
+section.forms .logo img {
+  margin-top: 10rem;
+  width: 100%;
+  padding: 20rem;
+  max-width: 500rem; }
+
+.oauth-entry {
+  margin: 0 auto;
+  max-width: 340rem;
+  text-align: center; }
+
+.form-section {
+  font-size: 18rem;
+  background: #fff;
+  text-align: center; }
+
+.signup-page .form-section {
+  background: #eee; }
+
+.form-section form {
+  width: 100%; }
+
+.form-section input {
+  width: 100%;
+  padding: 10rem 20rem;
+  border: 0;
+  border-bottom: 1px solid #ddd;
+  background: #fff;
+  font-size: 24rem; }
+
+.signup-page .form-section input {
+  background: #eee;
+  color: #666; }
+
+.form-section .logo {
+  text-align: center; }
+
+.signup, .form-section button {
+  font-size: 24rem;
+  padding: 10rem;
+  color: #6b737f; }
+
+.signup-page .form-section button {
+  background: #fff; }
+
+.sign-up {
+  padding: 40rem;
+  margin: 0 auto;
+  text-align: center;
+  box-shadow: inset 0 25px 25px -25px rgba(0, 0, 0, 0.25); }
+
+.sign-up a {
+  font-size: 24rem; }
+
+.form-section button {
+  position: relative;
+  background: #eee;
+  border: none;
+  line-height: 40rem;
+  width: 100%;
+  margin-bottom: 0;
+  margin-top: 30rem; }
+
+.form-section button:hover {
+  background: #6b737f;
+  color: #fff; }
+
+.sm-signup {
+  display: inline-block;
+  padding: 10rem;
+  border-radius: 3rem;
+  margin-top: 30rem;
+  color: #fff;
+  text-transform: uppercase; }
+
+.sm-signup.fb {
+  background: #306199; }
+
+.sm-signup.twtr {
+  background: #26c4f1; }
+
+.sm-signup .text {
+  font-size: 16rem;
+  margin: 0 10rem; }
+
+#appBar {
+  position: absolute;
   bottom: 0rem;
-  z-index: 100;
+  z-index: 300;
   width: 100%;
   height: 40rem;
-  background: #fff;
-  box-shadow: 0rem 0rem 3rem 0rem rgba(0, 0, 0, 0.15); }
+  background: #eee;
+  margin-top: #ccc;
+  border-top: #ddd 1px solid; }
 
 .appBarBackground {
   position: absolute;
@@ -226,7 +376,20 @@ button {
   position: absolute;
   display: block;
   height: 30rem;
-  width: 30rem; }
+  width: 30rem;
+  left: 50%;
+  margin-left: -30rem; }
+
+#optionsButton {
+  left: 0; }
+
+#newPostButton {
+  background: #eee;
+  cursor: pointer;
+  transition: background 250ms linear; }
+
+#newPostButton:hover {
+  background: #777; }
 
 .appBarButton .image {
   position: absolute;
@@ -235,24 +398,36 @@ button {
   height: 30rem;
   width: 30rem; }
 
-.appBarButtonContainer {
-  position: absolute;
-  height: 100%;
-  width: 100%; }
+#logoutButton {
+  color: #777; }
+
+#logoutButton:hover {
+  color: #c00; }
+
+#logoutButton:after {
+  content: "logout";
+  font-size: 14rem;
+  line-height: 40rem;
+  text-transform: uppercase;
+  margin-left: 45rem; }
 
 .appCanvas {
   position: absolute;
   width: 100%;
-  height: 100%; }
+  height: 100%;
+  background: #fafafa;
+  margin-top: -40rem;
+  padding-top: 80rem; }
 
 .contentAreaCurrent {
   position: absolute;
+  z-index: 100;
   display: block;
   top: 0rem;
   left: 0rem;
   width: 100%;
   height: 100%;
-  padding-top: 40rem;
+  padding-top: 0;
   opacity: 1;
   transform: scale(1, 1);
   transition-property: opacity, transform;
@@ -300,11 +475,15 @@ button {
   transform: scale(1.06, 1.06);
   transition-property: opacity, transform;
   transition-duration: 0.4s, 0.66s;
-  transition-timing-function: cubic-bezier(0.16, 1, 0.29, 0.99); }
+  transition-timing-function: cubic-bezier(0.16, 1, 0.29, 0.99);
+  -webkit-transform: scale(1.06, 1.06);
+  -webkit-transition-property: opacity, transform;
+  -webkit-transition-duration: 0.4s, 0.66s;
+  -webkit-transition-timing-function: cubic-bezier(0.16, 1, 0.29, 0.99); }
 
 .contentAreaOffScreen {
   position: absolute;
-  top: 1000rem;
+  z-index: -1;
   left: 0rem;
   width: 100%;
   height: 100%;
@@ -312,73 +491,123 @@ button {
   transform: scale(1.06, 1.06);
   transition-property: opacity, transform;
   transition-duration: 0.4s, 0.66s;
-  transition-timing-function: cubic-bezier(0.16, 1, 0.29, 0.99); }
-
-.contentAreaModalDown {
-  position: absolute;
-  top: 562rem;
-  height: 498rem;
-  width: 100%;
-  transition-property: opacity, transform;
-  transition-duration: 0.4s, 0.66s;
-  transition-timing-function: cubic-bezier(0.16, 1, 0.29, 0.99); }
+  transition-timing-function: cubic-bezier(0.16, 1, 0.29, 0.99);
+  -webkit-transform: scale(1.06, 1.06);
+  -webkit-transition-property: opacity, transform;
+  -webkit-transition-duration: 0.4s, 0.66s;
+  -webkit-transition-timing-function: cubic-bezier(0.16, 1, 0.29, 0.99); }
 
 .contentAreaModalUp {
-  position: absolute;
+  position: fixed;
+  z-index: 200;
+  top: -100%;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  transition: all 0.5s ease-out; }
+
+.contentAreaModalDown {
+  position: fixed;
+  z-index: 200;
   top: 0rem;
   width: 100%;
-  height: 498rem;
-  background: rgba(255, 255, 255, 0.75);
-  transition-property: opacity, transform;
-  transition-duration: 0.4s, 0.66s;
-  transition-timing-function: cubic-bezier(0.16, 1, 0.29, 0.99); }
-
-#mainContentContainer {
-  transition: all 0.2s cubic-bezier(0.16, 0.68, 0.43, 0.99); }
-
-#mainContentContainerSwiping {
-  position: absolute;
-  width: 100%;
-  height: 100%; }
-
-#mainContentContainerWithDrawerOpen {
-  position: fixed;
-  left: 163rem;
-  z-index: 100;
-  width: 100%;
-  height: 100%; }
-
-.myDash {
-  position: absolute;
   height: 100%;
-  width: 100%; }
+  margin-top: -40rem;
+  padding-top: 40rem;
+  background: #fff;
+  transition: all 0.5s ease-out; }
 
-.myDashBackground {
-  position: absolute;
-  width: 100%;
-  height: 460rem; }
+#feedDrawer .missedConnection:first-child {
+  padding-top: 20rem; }
 
-.missedConnection {
+#feedDrawer .missedConnection {
   margin: 0 auto;
   margin-bottom: 20rem;
-  width: 95%;
-  border: 1rem solid #eaeaea; }
+  padding-top: 10rem;
+  width: 100%;
+  overflow: hidden; }
 
-.missedConnection h2 {
-  background: #fafafa;
-  padding: 5rem;
-  font-size: 18rem;
-  font-style: bold;
-  border-bottom: 1rem solid #fff; }
+#postDrawer {
+  margin: 20rem auto;
+  width: 100%;
+  overflow: hidden; }
+
+
+#postDrawer article {
+  animation-duration: 1s, 2.2s;
+  animation-name: slidein, fadein; }
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+    visibility: hidden; }
+
+  to {
+    opacity: 1;
+    visibility: visible; } }
+
+@keyframes fadeout {
+  from {
+    opacity: 0;
+    visibility: hidden; }
+
+  to {
+    opacity: 1;
+    visibility: visible; } }
+
+@keyframes slidein {
+  from {
+    margin-right: -102%; }
+
+  to {
+    margin-right: 0%; } }
+
+@keyframes slideout {
+  from {
+    right: 0%; }
+
+  to {
+    right: -102%; } }
 
 .post {
   position: relative;
   overflow: hidden;
-  visibility: hidden;
   position: relative;
-  border-top: 1rem solid #f3f3f3;
   /*font-smoothing: subpixel-antialiased;*/
   transform: translate3d(0, 0, 0); }
+
+h1 {
+  animation-duration: 3s;
+  animation-name: slidein; }
+
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%; }
+
+  to {
+    margin-left: 0%;
+    width: 100%; } }
+
+.post section p {
+  padding: 20rem;
+  font-family: 'Dosis', sans-serif;
+  font-size: 16rem;
+  line-height: 24rem; }
+
+.post h2 {
+  margin-bottom: 10rem;
+  font-family: 'Dosis', sans-serif;
+  font-size: 24rem;
+  font-weight: bold;
+  color: #6b737f;
+  text-align: center; }
+
+.post .post-meta {
+  margin-bottom: 10rem;
+  color: #c00;
+  text-align: center;
+  text-transform: uppercase; }
 
 .post-wrap {
   position: relative;
@@ -388,16 +617,55 @@ button {
   float: left;
   width: 100%;
   position: relative;
-  padding: 10rem;
-  font: 16rem/24rem normal 'Dosis', sans-serif; }
+  margin-bottom: 10rem;
+  color: #4b515b;
+  font-family: 'Dosis', sans-serif;
+  font-size: 16rem;
+  line-height: 24rem;
+  text-align: center; }
 
 .post-wrap > li p {
   margin-bottom: 10rem;
   font-size: 16rem; }
 
+.post .comments {
+  padding: 10rem;
+  font-size: 18rem;
+  display: none; }
+
+.post .comments.active {
+  display: block; }
+
+
+.comment-box label {
+  color: #666; }
+
+.comment-box textarea {
+  margin: 0 auto;
+  padding: 5rem;
+  width: 100%;
+  height: 80rem;
+  border: 1rem solid #cccccc;
+  font-family: 'Dosis', sans-serif;
+  font-size: 16rem;
+  line-height: 24rem; }
+
+.comment-box button.submit-comment {
+  background: #fafafa;
+  background-image: none;
+  font-size: 16rem;
+  float: right;
+  border: 1rem solid #ccc;
+  color: #666; }
+
+.tempname {
+  font-size: 12rem;
+  margin-left: 10rem; }
+
 .gesturebar {
   padding: 10rem;
-  border-top: 1rem solid #eaeaea; }
+  border-top: 1rem solid #eaeaea;
+  border-bottom: 1rem solid #eaeaea; }
 
 .gesturebar .vote {
   display: inline;
@@ -406,7 +674,7 @@ button {
 .gesturebar .vote button:first-child {
   margin-right: 10rem; }
 
-.gesturebar button.comment {
+.gesturebar button.viewComment {
   float: right; }
 
 .navigationDrawerClosed {
@@ -414,14 +682,14 @@ button {
   left: -260rem;
   width: 260rem;
   height: 100%;
-  transition: all 0.2s cubic-bezier(0.16, 0.68, 0.43, 0.99); }
+  transition: all 0.5s cubic-bezier(0.16, 0.68, 0.43, 0.99); }
 
 .navigationDrawerOpen {
   position: fixed;
   left: 0rem;
   width: 260rem;
   height: 100%;
-  transition: all 0.2s cubic-bezier(0.16, 0.68, 0.43, 0.99); }
+  transition: all 0.5s cubic-bezier(0.16, 0.68, 0.43, 0.99); }
 
 .navigationDrawerButton {
   position: absolute;
@@ -432,7 +700,10 @@ button {
 .navigationDrawerOpen h2, .navigationDrawerClosed h2 {
   padding: 10rem;
   color: #555;
-  font: 20rem bold 'Dosis', sans-serif; }
+  font-family: 'Dosis', sans-serif;
+  font-size: 20rem;
+  font-weight: bold;
+  line-height: 24rem; }
 
 .box-effect {
   position: relative;
@@ -443,7 +714,7 @@ button {
   position: absolute;
   z-index: -1;
   content: "";
-  top: 65%;
+  top: 64%;
   right: 16rem;
   bottom: 15rem;
   left: auto;
@@ -453,28 +724,28 @@ button {
   box-shadow: 15rem 13rem 7rem #000;
   transform: rotate(3deg); }
 
-#mainContentContainer > *, #mainContentContainerWithDrawerOpen > * {
+.mainContentContainer > *, .mainContentContainerWithDrawerOpen > * {
   transform: translate3d(0, 0, 0); }
 
-#mainContentContainer {
+.mainContentContainer {
   position: absolute;
   z-index: 100;
   top: 0rem;
+  left: 0rem;
   width: 100%;
   height: 100%;
   overflow-x: hidden;
-  padding-top: 20rem;
-  box-shadow: 5rem 5rem 10rem 7rem rgba(0, 0, 0, 0.25);
-  transition: all 0.2s cubic-bezier(0.16, 0.68, 0.43, 0.99); }
+  box-shadow: 5rem 0rem 3rem 7rem rgba(0, 0, 0, 0.15);
+  transition: all 0.5s cubic-bezier(0.16, 0.68, 0.43, 0.99); }
 
-#mainContentContainerWithDrawerOpen {
+.mainContentContainerWithDrawerOpen {
   position: fixed;
   left: 270rem;
   z-index: 100;
   width: 100%;
   height: 100%;
-  box-shadow: 5rem 5rem 10rem 7rem rgba(0, 0, 0, 0.25);
-  transition: all 0.2s cubic-bezier(0.16, 0.68, 0.43, 0.99); }
+  box-shadow: 5rem 0rem 3rem 7rem rgba(0, 0, 0, 0.15);
+  transition: all 0.5s cubic-bezier(0.16, 0.68, 0.43, 0.99); }
 
 .contentPageBackground {
   position: absolute;
@@ -493,49 +764,59 @@ button {
 
 #messageCenter ul li {
   padding: 10rem;
-  font: 16rem/24rem normal 'Dosis', sans-serif; }
+  font-family: 'Dosis', sans-serif;
+  font-size: 16rem;
+  line-height: 24rem; }
 
 #messageCenter ul li p:first-child {
   color: #777; }
 
 nav[id^="pagination"] {
-  margin: 0 auto 20rem;
   padding: 10rem;
-  text-align: center; }
+  text-align: center;
+  border-bottom: 1rem solid #fff; }
 
 nav[id^="pagination"] ul li {
   display: inline-block;
-  float: left;
   width: 10rem;
   height: 10rem;
   border-radius: 10rem;
-  background: #666;
-  box-shadow: inset 0 1rem 3rem rgba(0, 0, 0, 0.25), 0 0 1rem 1rem #202020;
+  background: #ccc;
   margin: 0 2rem;
   cursor: pointer;
-  font: 14rem normal 'Dosis', sans-serif;
-  text-align: center; }
+  font-family: 'Dosis', sans-serif;
+  font-size: 14rem;
+  text-align: center;
+  box-shadow: inset 1px 1px 1px 0px rgba(0, 0, 0, 0.15); }
 
 nav[id^="pagination"] ul li.on {
-  box-shadow: inset 0 1rem 3rem -1rem #eee, 0 1rem 2rem rgba(0, 0, 0, 0.5);
-  background-color: #eee;
+  background-color: #6b737f;
   background-image: linear-gradient(top, #eee, #f1f1f1); }
 
 #utilityBar {
-  position: fixed;
-  z-index: 9999;
+  position: absolute;
+  z-index: 300;
   top: 0;
   width: 100%;
   height: 40rem;
   border-bottom: 1rem solid #eaeaea;
-  background: #fff; }
+  background: #111111;
+  text-align: center; }
 
 #utilityBar h1 {
   margin-left: 10rem;
   float: left;
   text-align: center;
-  font: 16rem normal 'Dosis', sans-serif;
+  font-family: 'Dosis', sans-serif;
+  font-size: 16rem;
+  line-height: 24rem;
   text-align: center; }
+
+.utilityBarDrawerButton {
+  position: absolute;
+  display: block;
+  height: 30rem;
+  width: 30rem; }
 
 .utilityBarDrawerButton .image {
   position: absolute;
@@ -556,32 +837,75 @@ nav[id^="pagination"] ul li.on {
   height: 20rem;
   font-size: 18rem; }
 
-.postTrayClosed {
-  position: absolute;
-  top: 562px;
-  width: 100%;
-  height: 333px;
-  transition: all 0.7s cubic-bezier(0.16, 0.68, 0.43, 0.99); }
+#utilityBar .logo img {
+  max-height: 40rem; }
 
-.postTrayOpen {
-  position: absolute;
-  top: 215px;
-  width: 100%;
-  height: 333px;
-  transition: all 0.7s cubic-bezier(0.16, 0.68, 0.43, 0.99); }
+.ani {
+  animation-duration: 0.5s; }
 
-.postTrayBackground {
-  width: 320px;
-  height: 333px; }
+.preloader {
+  background: url("images/preloader.gif");
+  background-size: cover;
+  height: 50rem;
+  width: 50rem;
+  margin-top: -43rem;
+  -webkit-transform: rotate(-45deg);
+  margin-left: 0;
+  opacity: 0.5; }
 
-.postDismissAreaDown {
-  position: absolute;
-  top: 562px;
-  width: 100%;
-  height: 0px; }
+#postModal {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 0 25%;
+  background: #333; }
 
-.postDismissAreaUp {
-  position: absolute;
-  top: -229px;
+#controller {
+  width: 100%; }
+
+#postModal input, #postModal textarea {
+  padding: 10rem;
+  outline: none;
+  border: none; }
+
+#postModal input {
+  border-bottom: 1rem solid #555;
+  background: none;
+  color: #ccc;
+  font-size: 28rem;
+  width: 100%; }
+
+#postModal textarea {
   width: 100%;
+<<<<<<< HEAD
   height: 232px; }
+=======
+  background: none;
+  color: #ef8e4d;
+  resize: none;
+  height: 150rem;
+  font-family: 'Dosis', sans-serif;
+  font-size: 24rem; }
+
+#postModal button {
+  font-size: 18rem; }
+
+#postModal button:disabled {
+  color: #333;
+  border: none; }
+
+#postModal button {
+  background: none;
+  color: #fff;
+  border-bottom: 1rem #666 solid; }
+
+#postModal button:hover {
+  background: #666; }
+
+.preloader.invis {
+  opacity: 0; }
+
+@media (max-width: 600px) {
+  #postModal textarea {
+    font-size: 18rem; } }
+>>>>>>> master

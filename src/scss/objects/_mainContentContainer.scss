@@ -1,27 +1,27 @@
-#mainContentContainer > *, #mainContentContainerWithDrawerOpen > * {
+.mainContentContainer > *, .mainContentContainerWithDrawerOpen > * {
   transform: translate3d(0, 0, 0);
 }
 
-#mainContentContainer {
+.mainContentContainer {
   position: absolute;
   z-index: 100;
   top: 0rem;
+  left: 0rem;
   width: 100%;
   height: 100%;
   overflow-x: hidden;
-  padding-top: 20rem;
-  box-shadow: 5rem 5rem 10rem 7rem rgba(0,0,0,.25);
-  transition:all 0.2s cubic-bezier(.16,.68,.43,.99);
+  box-shadow: 5rem 0rem 3rem 7rem rgba(0, 0, 0, 0.15);
+  transition: all 0.5s cubic-bezier(.16,.68,.43,.99);
 }
 
-#mainContentContainerWithDrawerOpen {
+.mainContentContainerWithDrawerOpen {
   position: fixed;
   left: 270rem;
   z-index: 100;
   width: 100%;
   height: 100%;
-  box-shadow: 5rem 5rem 10rem 7rem rgba(0,0,0,.25);
-  transition: all 0.2s cubic-bezier(.16,.68,.43,.99);
+  box-shadow: 5rem 0rem 3rem 7rem rgba(0, 0, 0, 0.15);
+  transition: all 0.5s cubic-bezier(.16,.68,.43,.99);
 }
 
 .contentPageBackground {

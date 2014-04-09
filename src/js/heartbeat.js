@@ -1,3 +1,4 @@
+/*******************heartbeat.js start***********************/
 'use strict';
 /*global App*/
 
@@ -52,3 +53,4 @@ function Heartbeat () {
 
 App.heartbeat = new Heartbeat();
 App.heartbeat.startBeat();
+/**************************heartbeat.js end****************************/

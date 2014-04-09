@@ -1,11 +1,12 @@
-.appBar {
-  position: fixed;
+#appBar {
+  position: absolute;
   bottom: 0rem;
-  z-index: 100;
+  z-index: 300;
   width: 100%;
   height: 40rem;
-  background: #fff;
-  box-shadow: 0rem 0rem 3rem 0rem rgba(0, 0, 0, 0.15);
+  background: #eee;
+  margin-top: #ccc;
+  border-top: #ddd 1px solid;
 }
 
 .appBarBackground {
@@ -19,6 +20,22 @@
   display: block;
   height: 30rem;
   width: 30rem;
+  left: 50%;
+  margin-left: -30rem;
+}
+
+#optionsButton {
+  left: 0;
+}
+
+#newPostButton {
+  background: #eee;
+  cursor: pointer;
+  transition: background 250ms linear;
+}
+
+#newPostButton:hover{
+  background: #777;
 }
 
 .appBarButton .image {
@@ -29,8 +46,18 @@
   width: 30rem;
 }
 
-.appBarButtonContainer {
-  position: absolute;
-  height: 100%;
-  width: 100%;
+#logoutButton{
+  color: #777;
+}
+
+#logoutButton:hover{
+  color:#c00;
+}
+
+#logoutButton:after{
+  content: "logout";
+  font-size: 14rem;
+  line-height: 40rem;
+  text-transform: uppercase;
+  margin-left: 45rem;
 }

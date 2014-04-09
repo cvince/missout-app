@@ -57,3 +57,7 @@
   opacity: 0;
   transition: all .7s linear;
 }
+
+.contentAreaModalUp {
+  z-index: 99999;
+}

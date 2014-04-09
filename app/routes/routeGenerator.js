@@ -34,10 +34,12 @@ exports.routeFactory = function(route, objectPath, app, methodArray){
     }
     res.setHeader('Content-Type', 'application/json');
     var id = req.params.id;
-    DbObject.findOne({'_id': String(id)}, function(err, retObject){
+    console.log(id);
+    DbObject.findOne({_id: String(id)}, function (err, retObject){
       if(err){
         res.send(500, {'error': err});
       } else {
+        console.log(retObject);
         res.send(retObject);
       }
     });
@@ -53,7 +55,7 @@ exports.routeFactory = function(route, objectPath, app, methodArray){
     //needs validation
     var dbObject = new DbObject(req.body);
 
-    dbObject.makeAuthor(req.sessionStore);
+    dbObject.makeAuthor(req.user._id);
 
     dbObject.save(function(err, retObject){
       if(err){

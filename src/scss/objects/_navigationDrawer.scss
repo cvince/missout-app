@@ -3,7 +3,7 @@
   left: -260rem;
 	width: 260rem;
   height:100%;
-	transition:all 0.2s cubic-bezier(.16,.68,.43,.99);
+	transition:all 0.5s cubic-bezier(.16,.68,.43,.99);
 }
 
 .navigationDrawerOpen {
@@ -11,7 +11,7 @@
   left:0rem;
 	width:260rem;
   height:100%;
-	transition:all 0.2s cubic-bezier(.16,.68,.43,.99);
+	transition:all 0.5s cubic-bezier(.16,.68,.43,.99);
 }
 
 .navigationDrawerButton {
@@ -23,7 +23,10 @@
 .navigationDrawerOpen h2, .navigationDrawerClosed h2 {
   padding: 10rem;
   color: #555;
-  font: 20rem bold 'Dosis', sans-serif;
+  font-family: 'Dosis', sans-serif;
+  font-size: 20rem;
+  font-weight: bold;
+  line-height: 24rem;
 }
 
 .box-effect{
@@ -36,7 +39,7 @@
   position: absolute;
   z-index: -1;
   content: "";
-  top: 65%;
+  top: 64%;
   right: 16rem;
   bottom: 15rem;
   left: auto;

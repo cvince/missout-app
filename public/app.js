@@ -1,5 +1,8 @@
+/******************************start app.js******************************/
 'use strict';
+/*jslint unused: false*/
 
+<<<<<<< HEAD
 var App = {};
 
 var page;
@@ -88,59 +91,16 @@ function onMouseDown(element, event) {
       }
   }
   else {
+=======
+window.getID = function(id){return document.getElementById(id);};
+window.getClass = function(cl){return document.getElementsByClassName(cl);};
+>>>>>>> master
 
-  }
-}
+var App = {};
 
-function onMouseUp(element, event)
-{
-  if (element == document) {
-      scrollView.onMouseUp(event);
-  }
-  else {
-    elements[element.getAttribute('guid')].onMouseUp(event);
-  }
+/******************************end app.js******************************/
 
-  for (var item in elements) {
-    if (elements[item] instanceof Button && !elements[item].multiSelect) {
-      elements[item].isMouseDown = false;
-    }
-  }
-  for (var scrollV in scrollViewRegister) {
-    scrollViewRegister[scrollV].onMouseUp(event);
-  }
-
-  scrollViewRegister = new Array();
-  activeScrollViews = new Array();
-  activeButton = null;
-}
-
-function onMouseMove(element, event) {
-  if (element == document) {
-    for (var scrollV in activeScrollViews) {
-      activeScrollViews[scrollV].onMouseMove(event);
-    }
-  }
-  else {
-    elements[element.getAttribute('guid')].onMouseMove(event);
-  }
-}
-
-function onMouseOut(element)
-{
-  elements[element.getAttribute('guid')].onMouseOut();
-}
-
-function transitionCompleted()
-{
-  elements[this.getAttribute('guid')].transitionCompleted();
-}
-
-function onMouseOver(element)
-{
-  elements[element.getAttribute('guid')].onMouseOver();
-}
-
+<<<<<<< HEAD
 // document.addEventListener( 'touchstart' , function stopScrolling( touchEvent ) { touchEvent.preventDefault(); } , false );
 // document.addEventListener( 'touchmove' , function stopScrolling( touchEvent ) { touchEvent.preventDefault(); } , false );
 
@@ -296,6 +256,9 @@ function setTouchListeners() {
   document.getElementById('appCanvas').addEventListener('touchmove', function(event){ event.stopPropagation(); }, false);
 }
 
+=======
+/*******************locator.js start***********************/
+>>>>>>> master
 'use strict';
 /*global alert*/
 /*global App*/
@@ -340,7 +303,7 @@ function Locator () {
   function Constructor () { }
 
   Constructor.prototype.getLoc = function (maxAge, maxAccuracy, cb) {
-    if (typeof arguments[0] === "function") {
+    if (typeof arguments[0] === 'function') {
       cb = arguments[0];
       maxAccuracy = 5000;
       maxAge = 600000;
@@ -395,6 +358,8 @@ function Locator () {
 
 App.locator = new Locator();
 
+/**************************locator.js end****************************/
+/*******************postman.js start***********************/
 'use strict';
 /*global App*/
 
@@ -427,7 +392,7 @@ function Postman (endpoint) {
     //req.responseType = '';
     req.onload = function () {
       if (req.status >= 200 && req.status < 400) {
-        models = JSON.parse(req.responseText);
+        //models = JSON.parse(req.responseText);
         cb(models);
       } else {
         return false;
@@ -437,7 +402,7 @@ function Postman (endpoint) {
       console.log('XHR Error: ' + JSON.stringify(err));
     };
     if (data) {
-      console.log("bad data: " + JSON.stringify(data));
+      console.log('bad data: ' + JSON.stringify(data));
       req.send(JSON.stringify(data));
     } else {
       req.send();
@@ -454,28 +419,33 @@ function Postman (endpoint) {
 
   Constructor.prototype.post = function (data, cb) {
     /* location functionality */
-    return this.XHR('POST', data, url, true, cb);
+    return this.XHR('POST', data, url, false, cb);
+  };
+
+  Constructor.prototype.comment = function (data, id, cb) {
+    return this.XHR('POST', data, document.URL + 'api/v1/comments/' + id, true, cb);
   };
 
   Constructor.prototype.newFeed = function (loc) {
     console.log('data to newFeed function: ' + JSON.stringify(loc));
     var req = new XMLHttpRequest(),
-        url = 'http://localhost:3000/api/v1/feed';
+        url = document.URL + 'api/v1/feed';
     req.open('POST', url, true);
-    req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     req.onload = function (d) {
       feed = JSON.parse(d.currentTarget.responseText);
+      console.log('got a feed, check it:');
+      models = feed;
       var event = new CustomEvent('feedJSON', {detail: feed});
       document.dispatchEvent(event);
-      console.log('got a feed, check it:');
-      console.log(App.postman.showFeed());
+      //console.log(App.postman.showFeed());
     };
     req.onerror = function (err) {
-      console.log(err)
+      console.log(err);
     };
 //    loc.lon = -122;
 //    loc.lat = 47;
-    var params = "lon="+loc.lon+"&lat="+loc.lat;
+    var params = 'lon='+loc.lon+'&lat='+loc.lat;
     console.log(params);
     req.send(params);
   };
@@ -484,6 +454,7 @@ function Postman (endpoint) {
     return feed;
   };
 
+<<<<<<< HEAD
   return new Constructor();
 }
 App.postman = new Postman('http://localhost:3000/api/v1/posts');
@@ -547,73 +518,28 @@ function UI () {
       outList.pop();
     }
     App.locator.getLoc();
+=======
+  Constructor.prototype.insert = function (post) {
+    models.unshift(post);
+>>>>>>> master
   };
 
   return new Constructor();
-
 }
+App.postman = new Postman(document.URL + 'api/v1/posts');
 
 
-App.ui = new UI();
 
-
-// var data = {
-
-//   // author    : { type: Schema.ObjectId },
-//   // body      : {  },
-//   // comments  : [ Comment ],
-//   // tempname  : { type: String },
-//   // tempnames : [{ type: String }]
-// };
-
-submit.disabled = true;
-
-App.locator.getLoc(function (loc) {
-
-  console.log('data to page: ' + JSON.stringify(loc));
-  submit.disabled = false;
-
-  submit.addEventListener('click', function() {
-    var data = { timestamp : new Date() };
-    data.title = titleOut.value.toString();
-    data.body = messageOut.value.toString();
-    data.loc = { type: 'Point', coordinates: [ loc.lon, loc.lat ] };
-    App.postman.post(data, function (res) {
-      App.ui.appendPost(data);
-      console.log('post ok, contents - ' + JSON.stringify(res));
-    });
-  }, false);
-
+// Receive the DOM event 'feed-location' and query the
+// feed endpoint
+document.addEventListener('start-feed', function (e) {
+  console.log('data to new loc event ' + JSON.stringify(e.detail));
+  App.postman.newFeed(e.detail);
 });
 
-document.addEventListener('feedJSON', function(e){
-  App.ui.showPosts();
-});
+/**************************postman.js end****************************/
 
-//ractive
-
-// var fooTemp = "Im a template \
-//   <ul> \
-//   {{#list.length}} \
-//       {{#list:i}} \
-//       <li> \
-//         <h2>{{ title }}</h2> \
-//         Time Since Posted: {{ date }} \
-//         {{ body }} \
-//         By: {{ tempname }} \
-//         At: {{ loc }} \
-//       </li> \
-//       {{/list}} \
-//   {{/list.length}}";
-
-var ractive = new Ractive({
-  el: '#container',
-  template: '#ractive-template',
-  data: { list: outList }
-});
-
-// console.log(App.output);
-
+/*******************heartbeat.js start***********************/
 'use strict';
 /*global App*/
 
@@ -667,4 +593,9 @@ function Heartbeat () {
 }
 
 App.heartbeat = new Heartbeat();
+<<<<<<< HEAD
 App.heartbeat.startBeat();
+=======
+App.heartbeat.startBeat();
+/**************************heartbeat.js end****************************/
+>>>>>>> master

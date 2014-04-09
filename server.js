@@ -21,7 +21,7 @@ app.configure(function () {
   app.set('view engine', 'html');
 
   //authentication uses
-  app.use(express.session({secret: process.env.CHAT_APP_SECRET}));
+  app.use(express.session({secret: 'secretfuckingsecret'}));
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(flash());
@@ -29,17 +29,8 @@ app.configure(function () {
 });
 
 /* Connect to db */
-app.configure('production', function(){
-  mongoose.connect('localhost', 'missout');
-});
-app.configure('development', function(){
-  mongoose.connect('localhost', 'missout-test');
-  app.use(express.logger('dev'));
-  app.use(express.errorHandler());
-});
-app.configure('test', function(){
-  mongoose.connect('localhost', 'missout-test');
-});
+var mongoURL = process.env.MONGOHQ_URL || 'mongodb://localhost/missout-test';
+mongoose.connect(mongoURL);
 
 /* Passport Strategies */
 require('./app/passport/passport')(passport);
@@ -53,16 +44,21 @@ require('./app/controllers/feed.js')(app);
 /* Get Routes */
 require('./app/controllers/feed')(app, passport) ;
 
+/* Comment route */
+require('./app/controllers/comments')(app);
+
 var routeFactory = require('./app/routes/routeGenerator').routeFactory;
 routeFactory('/api/v1/users', '../models/user', app);
 routeFactory('/api/v1/posts', '../models/post', app);
 routeFactory('/api/v1/feed', '../controllers/feed', app);
 
-
 /* Render the index */
 // app.get('/', function (req, res) {
 //   res.sendfile('app/views/index.html');
 // });
+
+
+
 
 ///* Save a new geoMessage from form */
 //app.post('/', function (req, res) {
@@ -95,7 +91,7 @@ routeFactory('/api/v1/feed', '../controllers/feed', app);
 //});
 
 /* Hey! Listen! */
-var port = process.env.PORT || process.argv[2] || 5000;
+var port = process.env.PORT || process.argv[2] || 3000;
 app.listen(port, function () {
   console.log('Listening on ' + port);
 });

@@ -1,5 +1,8 @@
+/******************************start app.js******************************/
 'use strict';
+/*jslint unused: false*/
 
+<<<<<<< HEAD
 var App = {};
 
 var page;
@@ -295,3 +298,11 @@ function setTouchListeners() {
   document.getElementById('navigationDrawer').addEventListener('touchmove', function(e) { e.stopPropagation(); }, false);
   document.getElementById('appCanvas').addEventListener('touchmove', function(event){ event.stopPropagation(); }, false);
 }
+=======
+window.getID = function(id){return document.getElementById(id);};
+window.getClass = function(cl){return document.getElementsByClassName(cl);};
+
+var App = {};
+
+/******************************end app.js******************************/
+>>>>>>> master

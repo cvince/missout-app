@@ -1,34 +1,81 @@
-.postTrayClosed {
-	position:absolute;
-	top:562px;
-	width:100%;
-	height:333px;
-	transition:all 0.7s cubic-bezier(.16,.68,.43,.99);
+.ani{
+	animation-duration: 0.5s;
 }
 
-.postTrayOpen {
-	position:absolute;
-	top:215px;
-	width:100%;
-	height:333px;
-	transition:all 0.7s cubic-bezier(.16,.68,.43,.99);
+.preloader{
+	background: url("images/preloader.gif");
+	background-size: cover;
+	height: 50rem;
+	width: 50rem;
+	margin-top: -43rem;
+	-webkit-transform: rotate(-45deg);
+	margin-left: 0;
+	opacity: 0.5;
 }
 
-.postTrayBackground {
-	width:320px;
-	height:333px;
+#postModal{
+	display: flex;
+	align-items: center;
+	text-align: center;
+	padding: 0 25%;
+  background: #333;
 }
 
-.postDismissAreaDown {
-	position:absolute;
-	top:562px;
-	width:100%;
-	height:0px;
+#controller{
+	width: 100%;
 }
 
-.postDismissAreaUp {
-	position:absolute;
-	top:-229px;
-	width:100%;
-	height:232px;
+#postModal input, #postModal textarea{
+	padding: 10rem;
+	outline: none;
+	border: none;
+}
+
+#postModal input{
+	border-bottom: 1rem solid #555;
+	background: none;
+	color: #ccc;
+	font-size: 28rem;
+	width: 100%;
+}
+
+#postModal textarea{
+	width: 100%;
+	background: none;
+	color: #ef8e4d;
+	resize: none;
+	height: 150rem;
+  font-family: 'Dosis', sans-serif;
+  font-size: 24rem;
+
+}
+
+#postModal button{
+	font-size: 18rem;
+}
+
+#postModal button:disabled{
+	color:#333;
+	border: none;
+}
+
+	#postModal button{
+		background: none;
+		color: #fff;
+		border-bottom: 1rem #666 solid;
+	}
+
+	#postModal button:hover{
+		background: #666;
+	}
+
+.preloader.invis{
+	opacity: 0;
+}
+
+
+@media (max-width: 600px) {
+	#postModal textarea{
+		font-size: 18rem;
+	}
 }
