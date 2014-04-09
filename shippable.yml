@@ -15,5 +15,5 @@ script:
   - grunt build
   - npm test
 
-# after_success :
-#   - git push  git@heroku.com:postmanapp.git master
+after_success :
+  - git push  git@heroku.com:postmanapp.git master
