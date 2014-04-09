@@ -182,10 +182,12 @@ button.viewComment:hover {
   background-position-x: -20px; }
 
 button.upvote {
-  background: url(/public/images/appbar.thumbs.up.png) no-repeat center; }
+  background: url(/public/images/appbar.thumbs.up.png) no-repeat center;
+  background-size: cover; }
 
 button.downvote {
-  background: url(/public/images/appbar.thumbs.down.png) no-repeat center; }
+  background: url(/public/images/appbar.thumbs.down.png) no-repeat center;
+  background-size: cover; }
 
 button.comments, button.comment {
   float: right; }
@@ -344,7 +346,7 @@ section.forms .logo img {
   margin: 0 10rem; }
 
 #appBar {
-  position: fixed;
+  position: absolute;
   bottom: 0rem;
   z-index: 300;
   width: 100%;
@@ -786,7 +788,7 @@ nav[id^="pagination"] ul li.on {
   background-image: linear-gradient(top, #eee, #f1f1f1); }
 
 #utilityBar {
-  position: fixed;
+  position: absolute;
   z-index: 300;
   top: 0;
   width: 100%;
