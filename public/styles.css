@@ -672,7 +672,7 @@ h1 {
   float: right; }
 
 #navigationDrawer {
-  background: #290606; }
+  background: #DAD5D5; }
 
 .navigationDrawerClosed {
   position: fixed;
@@ -704,7 +704,7 @@ h1 {
 
 .box-effect {
   position: relative;
-  background: #DAD5D5;
+  background: #290606;
   border: 1rem solid #eee; }
 
 .box-effect:after {
