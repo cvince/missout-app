@@ -77,7 +77,7 @@ UI.Control = function(){
 		var reloadFeed = new CustomEvent('reloadFeed', {});
 		document.dispatchEvent(reloadFeed);
 	});
-
+/*
 	var toggleCheckboxes = function() {
 		var upVote = document.querySelectorAll('.vote input[id^=upVote-]');
 		var downVote = document.querySelectorAll('.vote input[id^=downVote-]');
@@ -95,5 +95,5 @@ UI.Control = function(){
 		});
 	}
 	toggleCheckboxes();
-
+*/
 };
