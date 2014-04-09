@@ -185,6 +185,18 @@ button {
   display: inline-block;
   float: left; }
 
+button.viewComment {
+  background: url("/public/images/comments-sprite.png") no-repeat;
+  background-size: cover;
+  background-position-x: 0; }
+
+button.viewComment:hover {
+  background-position-x: -20px; }
+
+button.upvote {
+  background: url(/public/images/appbar.thumbs.up.png) no-repeat center;
+  background-size: cover; }
+
 .vote input[type='checkbox'].downvote + label {
   background: url(/public/images/appbar.thumbs.sprite2.png) no-repeat center;
   background-size: 600%;
@@ -389,7 +401,13 @@ section.forms .logo img {
   transition: background 250ms linear; }
 
 #newPostButton:hover {
-  background: #777; }
+  background: #666; }
+
+.appBarButtonContainer {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: #eee; }
 
 .appBarButton .image {
   position: absolute;
@@ -677,6 +695,9 @@ h1 {
 .gesturebar button.viewComment {
   float: right; }
 
+#navigationDrawer {
+  background: #290606; }
+
 .navigationDrawerClosed {
   position: fixed;
   left: -260rem;
@@ -707,7 +728,7 @@ h1 {
 
 .box-effect {
   position: relative;
-  background: #fafafa;
+  background: #DAD5D5;
   border: 1rem solid #eee; }
 
 .box-effect:after {
@@ -796,11 +817,11 @@ nav[id^="pagination"] ul li.on {
 #utilityBar {
   position: absolute;
   z-index: 300;
-  top: 0;
+  padding-top: 5rem;
   width: 100%;
-  height: 40rem;
+  height: 45rem;
   border-bottom: 1rem solid #eaeaea;
-  background: #111111;
+  background: #290606;
   text-align: center; }
 
 #utilityBar h1 {
