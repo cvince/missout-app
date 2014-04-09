@@ -716,14 +716,11 @@ button.viewComment {
   background: url("/public/images/comments-sprite.png") no-repeat;
   background-size: cover;
   background-position-x: 0;
-  padding: 18rem; }
-
-button.viewComment:hover {
-  background-position-x: -36rem;
   padding: 16rem; }
 
 button.viewComment:hover {
-  background-position-x: -32rem; }
+  background-position-x: -32rem;
+  padding: 16rem; }
 
 button.upvote {
   background: url(/public/images/appbar.thumbs.up.png) no-repeat center;
