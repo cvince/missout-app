@@ -77,23 +77,23 @@ UI.Control = function(){
 		var reloadFeed = new CustomEvent('reloadFeed', {});
 		document.dispatchEvent(reloadFeed);
 	});
-/*
-	var toggleCheckboxes = function() {
-		var upVote = document.querySelectorAll('.vote input[id^=upVote-]');
-		var downVote = document.querySelectorAll('.vote input[id^=downVote-]');
-		downVote.onclick(function() {
-			console.log('downVote clicked');
-			if(this.checked) {
-				document.formName.upVote.checked=false;
-			}
-		});
-		upVote.onclick(function() {
-			console.log('upVote clicked');
-			if(this.checked) {
-				document.formName.downVote.checked=false;
-			}
-		});
-	}
-	toggleCheckboxes();
-*/
+
+	// var toggleCheckboxes = function() {
+	// 	var upVote = document.querySelectorAll('.vote .upvote');
+	// 	var downVote = document.querySelectorAll('.vote .downvote');
+	// 	downVote.onclick(function() {
+	// 		console.log('downVote clicked');
+	// 		if(this.checked) {
+	// 			document.formName.upVote.checked=false;
+	// 		}
+	// 	});
+	// 	upVote.onclick(function() {
+	// 		console.log('upVote clicked');
+	// 		if(this.checked) {
+	// 			document.formName.downVote.checked=false;
+	// 		}
+	// 	});
+	// };
+	// toggleCheckboxes();
+
 };

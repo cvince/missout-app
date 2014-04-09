@@ -1,15 +1,18 @@
 .gesturebar {
   padding: 10rem;
   border-top: 1rem solid #eaeaea;
-  border-bottom: 1rem solid #eaeaea;
+  border-bottom: 1rem solid #666;
 }
+
 .gesturebar .vote {
   display: inline;
   float: left;
 }
+
 .gesturebar .vote button:first-child {
   margin-right: 10rem;
 }
+
 .gesturebar button.viewComment {
   float: right;
 }
@@ -21,9 +24,9 @@
 .vote input[type='checkbox'].upvote + label {
   background: url(/public/images/appbar.thumbs.sprite2.png) no-repeat center;
   background-size: 600%;
-  background-position: -57rem;
-  height: 36rem;
-  width: 36rem;
+  background-position: -53rem;
+  height: 32rem;
+  width: 32rem;
   display: inline-block;
   float: left;
 }
@@ -37,6 +40,11 @@ button.viewComment {
 
 button.viewComment:hover {
   background-position-x: -36rem;
+  padding: 16rem;
+}
+
+button.viewComment:hover {
+  background-position-x: -32rem;
 }
 
 button.upvote{
@@ -48,19 +56,19 @@ button.upvote{
   background: url(/public/images/appbar.thumbs.sprite2.png) no-repeat center;
   background-size: 600%;
   background-position: 6rem;
-  height: 36rem;
-  width: 36rem;
+  height: 32rem;
+  width: 32rem;
   display: inline-block;
   float: left;
   margin-right: 10rem;
 }
 
 .vote input[type='checkbox'].upvote:checked + label {
-  background-position: -183rem;
+  background-position: -165rem;
 }
 
 .vote input[type='checkbox'].downvote:checked + label {
-  background-position: -120rem;
+  background-position: -106rem;
 }
 
 button.comments, button.comment {

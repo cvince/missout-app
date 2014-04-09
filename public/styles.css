@@ -351,7 +351,7 @@ section.forms .logo img {
   margin-left: -30rem; }
 
 button.drawer {
-  background: url(/public/images/inv.appbar.book.list.png) no-repeat center;
+  background: url(/public/images/appbar.list.png) no-repeat center;
   background-size: cover;
   padding: 18rem; }
 
@@ -396,6 +396,9 @@ button.home {
   line-height: 40rem;
   text-transform: uppercase;
   margin-left: 45rem; }
+
+#navTemplateToggleButton {
+  left: 5rem; }
 
 .appCanvas {
   position: absolute;
@@ -504,12 +507,12 @@ button.home {
   transition: all 0.5s ease-out; }
 
 #feedDrawer .missedConnection:first-child {
-  padding-top: 20rem; }
+  padding-top: 40rem; }
 
 #feedDrawer .missedConnection {
   margin: 0 auto;
   margin-bottom: 20rem;
-  padding-top: 10rem;
+  padding-top: 20rem;
   width: 100%;
   overflow: hidden; }
 
@@ -616,13 +619,13 @@ h1 {
   font-size: 16rem; }
 
 .post .comments {
-  background: #555;
+  background: #444;
   position: relative;
   font-size: 18rem;
   max-height: 0;
   transition: all ease-out 0.5s;
   overflow: hidden;
-  transform: translate3d(0, 0, 0); }
+  -webkit-transform: translate3d(0, 0, 0); }
 
 .post .comments.active {
   max-height: 800rem;
@@ -631,24 +634,27 @@ h1 {
 .post .comments ul > li > div {
   border-bottom: 1px solid #777;
   padding: 10rem;
-  color: #eee; }
+  color: #eee;
+  background: #555; }
 
 .post .comments ul > li > div > h5 {
   font-weight: bold;
   font-size: 12rem;
+  line-height: 14rem;
   color: #ccc;
   text-transform: uppercase; }
 
 .post .comments ul > li > div > p {
   font-family: 'Lato', sans-serif;
-  font-size: 14rem; }
+  font-size: 14rem;
+  line-height: 16rem; }
 
 
 .comment-box label {
   color: #666; }
 
 .comment-box textarea {
-  background: #ddd;
+  background: #333;
   margin: 0 auto;
   padding: 10rem;
   width: 100%;
@@ -658,16 +664,22 @@ h1 {
   font-size: 16rem;
   line-height: 24rem;
   border-top: 1px solid #ccc;
-  resize: none; }
+  resize: none;
+  color: #eee; }
 
 .comment-box button.submit-comment {
+  position: relative;
   font-size: 16rem;
   border: none;
-  width: 100%;
   color: #fff;
   font-weight: bold;
   text-transform: uppercase;
-  background: #444; }
+  background: #c00;
+  width: 150rem;
+  left: 50%;
+  margin-top: 10rem;
+  margin-bottom: 10rem;
+  margin-left: -75rem; }
 
 .tempname {
   font-size: 12rem;
@@ -676,7 +688,7 @@ h1 {
 .gesturebar {
   padding: 10rem;
   border-top: 1rem solid #eaeaea;
-  border-bottom: 1rem solid #eaeaea; }
+  border-bottom: 1rem solid #666; }
 
 .gesturebar .vote {
   display: inline;
@@ -694,9 +706,9 @@ h1 {
 .vote input[type='checkbox'].upvote + label {
   background: url(/public/images/appbar.thumbs.sprite2.png) no-repeat center;
   background-size: 600%;
-  background-position: -57rem;
-  height: 36rem;
-  width: 36rem;
+  background-position: -53rem;
+  height: 32rem;
+  width: 32rem;
   display: inline-block;
   float: left; }
 
@@ -707,7 +719,11 @@ button.viewComment {
   padding: 18rem; }
 
 button.viewComment:hover {
-  background-position-x: -36rem; }
+  background-position-x: -36rem;
+  padding: 16rem; }
+
+button.viewComment:hover {
+  background-position-x: -32rem; }
 
 button.upvote {
   background: url(/public/images/appbar.thumbs.up.png) no-repeat center;
@@ -717,21 +733,23 @@ button.upvote {
   background: url(/public/images/appbar.thumbs.sprite2.png) no-repeat center;
   background-size: 600%;
   background-position: 6rem;
-  height: 36rem;
-  width: 36rem;
+  height: 32rem;
+  width: 32rem;
   display: inline-block;
   float: left;
   margin-right: 10rem; }
 
 .vote input[type='checkbox'].upvote:checked + label {
-  background-position: -183rem; }
+  background-position: -165rem; }
 
 .vote input[type='checkbox'].downvote:checked + label {
-  background-position: -120rem; }
+  background-position: -106rem; }
 
 button.comments, button.comment {
   float: right; }
 
+#navigationDrawer {
+  background: #DAD5D5; }
 
 .navigationDrawerClosed {
   position: fixed;
@@ -763,8 +781,7 @@ button.comments, button.comment {
 
 .box-effect {
   position: relative;
-  left: -1rem;
-  background: #fefefe;
+  background: #290606;
   border: 1rem solid #eee; }
 
 .box-effect:after {
