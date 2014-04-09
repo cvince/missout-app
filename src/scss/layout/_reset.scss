@@ -28,10 +28,6 @@ receivedmessages, message, chatconsole, appcanvas, post, slides,
 slide, pagination, bullets, bullet, gesturebar, vote, utilitybar {
 display: block;
 }
-body {
-background-color: rgba(0,0,0,.15);
-line-height: 1;
-}
 a {
   cursor: pointer;
 }
@@ -63,10 +59,13 @@ html {
   overflow: hidden;
 }
 body {
+  line-height: 1;
   height: 100%;
   overflow: auto;
   overflow-x: hidden;
   font-family: 'Dosis', sans-serif;
+  background-color: rgba(0,0,0,.025);
+
 }
 input, button{
   font-family: 'Dosis', sans-serif;
