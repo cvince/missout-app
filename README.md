@@ -1,9 +1,9 @@
-Mongoose Geolocation Example
+Missout v 0.0.1
 ============================
 
-A simple demonstration of a nearby search on a Mongo database where documents are indexed by their geolocation.
+An anonymous messaging app that allows you to post anonymous missed-connections that have a receipt radius.
 
-You know the drill.
+Uses HTML5 geolocation API, and json2html, and pure javascript.
 
 `npm install`
 
